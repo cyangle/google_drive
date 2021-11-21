@@ -1,0 +1,23 @@
+name: google_drive
+version: 3.0.0
+authors:
+  - cyangle
+description: |
+  Google Drive V3 API Client
+crystal: ">= 1, < 2"
+dependencies:
+  crest:
+    github: mamantoha/crest
+    version: ~> 1.0
+  nason:
+    github: cyangle/nason
+    version: ~> 0.3.0
+
+development_dependencies:
+  kemal:
+    github: kemalcr/kemal
+    version: ~> 1.0
+  ameba:
+    github: crystal-ameba/ameba
+
+license: MIT
