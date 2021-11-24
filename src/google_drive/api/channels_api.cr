@@ -82,22 +82,18 @@ module GoogleDrive
       # http body (model)
       post_body = channel.to_nason
 
-      # return_type
-      return_type = nil
-
       # auth_names
       auth_names = ["Oauth2"]
 
       @api_client.build_api_request(
-        :"POST",
-        local_var_path,
-        "ChannelsApi.drive_channels_stop",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "ChannelsApi.drive_channels_stop",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        query_params: query_params,
+        form_params: form_params
       )
     end
   end

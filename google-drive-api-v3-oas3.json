@@ -1610,6 +1610,195 @@
         }
       ]
     },
+    "/upload/drive/v3/files/{fileId}": {
+      "patch": {
+        "description": "Updates a file's metadata and/or content. When calling this method, only populate fields in the request that you want to modify. When updating fields, some fields might change automatically, such as modifiedDate. This method supports patch semantics.",
+        "operationId": "drive.files.update_content",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/File"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uploadType",
+            "in": "query",
+            "required": true,
+            "description": "The type of upload request to the /upload URI",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "media",
+                "multipart",
+                "resumable"
+              ],
+              "default": "media"
+            }
+          },
+          {
+            "name": "fileId",
+            "in": "path",
+            "description": "The ID of the file.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "addParents",
+            "in": "query",
+            "description": "A comma-separated list of parent IDs to add.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "enforceSingleParent",
+            "in": "query",
+            "description": "Deprecated. Adding files to multiple folders is no longer supported. Use shortcuts instead.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "includePermissionsForView",
+            "in": "query",
+            "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "keepRevisionForever",
+            "in": "query",
+            "description": "Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "ocrLanguage",
+            "in": "query",
+            "description": "A language hint for OCR processing during image import (ISO 639-1 code).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "removeParents",
+            "in": "query",
+            "description": "A comma-separated list of parent IDs to remove.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "supportsAllDrives",
+            "in": "query",
+            "description": "Whether the requesting application supports both My Drives and shared drives.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "supportsTeamDrives",
+            "in": "query",
+            "description": "Deprecated use supportsAllDrives instead.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "useContentAsIndexableText",
+            "in": "query",
+            "description": "Whether to use the uploaded content as indexable text.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive"
+            ]
+          },
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive.appdata"
+            ]
+          },
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          },
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive.metadata"
+            ]
+          },
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive.scripts"
+            ]
+          }
+        ],
+        "tags": [
+          "files"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Media": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/userIp"
+        }
+      ]
+    },
     "/upload/drive/v3/files": {
       "post": {
         "description": "Creates a new file.",
@@ -1752,7 +1941,30 @@
             }
           }
         }
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/userIp"
+        }
+      ]
     },
     "/drive/v3/files": {
       "post": {
@@ -2383,7 +2595,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/octet-stream": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/File"
               }

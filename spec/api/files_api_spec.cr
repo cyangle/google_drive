@@ -232,10 +232,46 @@ describe "FilesApi" do
     end
   end
 
+  # unit tests for drive_files_update_content
+  # Updates a file&#39;s metadata and/or content. When calling this method, only populate fields in the request that you want to modify. When updating fields, some fields might change automatically, such as modifiedDate. This method supports patch semantics.
+  # @param upload_type The type of upload request to the /upload URI
+  # @param file_id The ID of the file.
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :alt Data format for the response.
+  # @option opts [String] :fields Selector specifying which fields to include in a partial response.
+  # @option opts [String] :key API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+  # @option opts [String] :oauth_token OAuth 2.0 token for the current user.
+  # @option opts [Bool] :pretty_print Returns response with indentations and line breaks.
+  # @option opts [String] :quota_user An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+  # @option opts [String] :user_ip Deprecated. Please use quotaUser instead.
+  # @option opts [String] :add_parents A comma-separated list of parent IDs to add.
+  # @option opts [Bool] :enforce_single_parent Deprecated. Adding files to multiple folders is no longer supported. Use shortcuts instead.
+  # @option opts [String] :include_permissions_for_view Specifies which additional view&#39;s permissions to include in the response. Only &#39;published&#39; is supported.
+  # @option opts [Bool] :keep_revision_forever Whether to set the &#39;keepForever&#39; field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
+  # @option opts [String] :ocr_language A language hint for OCR processing during image import (ISO 639-1 code).
+  # @option opts [String] :remove_parents A comma-separated list of parent IDs to remove.
+  # @option opts [Bool] :supports_all_drives Whether the requesting application supports both My Drives and shared drives.
+  # @option opts [Bool] :supports_team_drives Deprecated use supportsAllDrives instead.
+  # @option opts [Bool] :use_content_as_indexable_text Whether to use the uploaded content as indexable text.
+  # @option opts [::File] :media
+  # @return [File]
+  describe "drive_files_update_content test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   # unit tests for drive_files_upload
   # Creates a new file.
   # @param upload_type The type of upload request to the /upload URI
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :alt Data format for the response.
+  # @option opts [String] :fields Selector specifying which fields to include in a partial response.
+  # @option opts [String] :key API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+  # @option opts [String] :oauth_token OAuth 2.0 token for the current user.
+  # @option opts [Bool] :pretty_print Returns response with indentations and line breaks.
+  # @option opts [String] :quota_user An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+  # @option opts [String] :user_ip Deprecated. Please use quotaUser instead.
   # @option opts [Bool] :enforce_single_parent Deprecated. Creating files in multiple folders is no longer supported.
   # @option opts [Bool] :ignore_default_visibility Whether to ignore the domain&#39;s default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.
   # @option opts [String] :include_permissions_for_view Specifies which additional view&#39;s permissions to include in the response. Only &#39;published&#39; is supported.

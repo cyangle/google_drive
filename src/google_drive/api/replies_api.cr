@@ -90,22 +90,18 @@ module GoogleDrive
       # http body (model)
       post_body = reply.to_nason
 
-      # return_type
-      return_type = "Reply"
-
       # auth_names
       auth_names = ["Oauth2"]
 
       @api_client.build_api_request(
-        :"POST",
-        local_var_path,
-        "RepliesApi.drive_replies_create",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "RepliesApi.drive_replies_create",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        query_params: query_params,
+        form_params: form_params
       )
     end
 
@@ -180,22 +176,18 @@ module GoogleDrive
       # http body (model)
       post_body = nil
 
-      # return_type
-      return_type = nil
-
       # auth_names
       auth_names = ["Oauth2"]
 
       @api_client.build_api_request(
-        :"DELETE",
-        local_var_path,
-        "RepliesApi.drive_replies_delete",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
+        http_method: :"DELETE",
+        path: local_var_path,
+        operation: "RepliesApi.drive_replies_delete",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        query_params: query_params,
+        form_params: form_params
       )
     end
 
@@ -273,22 +265,18 @@ module GoogleDrive
       # http body (model)
       post_body = nil
 
-      # return_type
-      return_type = "Reply"
-
       # auth_names
       auth_names = ["Oauth2"]
 
       @api_client.build_api_request(
-        :"GET",
-        local_var_path,
-        "RepliesApi.drive_replies_get",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
+        http_method: :"GET",
+        path: local_var_path,
+        operation: "RepliesApi.drive_replies_get",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        query_params: query_params,
+        form_params: form_params
       )
     end
 
@@ -373,22 +361,18 @@ module GoogleDrive
       # http body (model)
       post_body = nil
 
-      # return_type
-      return_type = "ReplyList"
-
       # auth_names
       auth_names = ["Oauth2"]
 
       @api_client.build_api_request(
-        :"GET",
-        local_var_path,
-        "RepliesApi.drive_replies_list",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
+        http_method: :"GET",
+        path: local_var_path,
+        operation: "RepliesApi.drive_replies_list",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        query_params: query_params,
+        form_params: form_params
       )
     end
 
@@ -467,22 +451,18 @@ module GoogleDrive
       # http body (model)
       post_body = reply.to_nason
 
-      # return_type
-      return_type = "Reply"
-
       # auth_names
       auth_names = ["Oauth2"]
 
       @api_client.build_api_request(
-        :"PATCH",
-        local_var_path,
-        "RepliesApi.drive_replies_update",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
+        http_method: :"PATCH",
+        path: local_var_path,
+        operation: "RepliesApi.drive_replies_update",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        query_params: query_params,
+        form_params: form_params
       )
     end
   end

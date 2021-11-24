@@ -1,6 +1,5 @@
 .ameba.yml
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 git_push.sh
@@ -42,7 +41,7 @@ spec/models/file_shortcut_details_spec.cr
 spec/models/file_spec.cr
 spec/models/file_video_media_metadata_spec.cr
 spec/models/generated_ids_spec.cr
-spec/models/inline_object_spec.cr
+spec/models/inline_object1_spec.cr
 spec/models/permission_list_spec.cr
 spec/models/permission_permission_details_spec.cr
 spec/models/permission_spec.cr
@@ -100,7 +99,7 @@ src/google_drive/models/file_list.cr
 src/google_drive/models/file_shortcut_details.cr
 src/google_drive/models/file_video_media_metadata.cr
 src/google_drive/models/generated_ids.cr
-src/google_drive/models/inline_object.cr
+src/google_drive/models/inline_object1.cr
 src/google_drive/models/permission.cr
 src/google_drive/models/permission_list.cr
 src/google_drive/models/permission_permission_details.cr

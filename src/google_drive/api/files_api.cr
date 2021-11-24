@@ -94,22 +94,18 @@ module GoogleDrive
       # http body (model)
       post_body = file.to_nason
 
-      # return_type
-      return_type = "File"
-
       # auth_names
       auth_names = ["Oauth2"]
 
       @api_client.build_api_request(
-        :"POST",
-        local_var_path,
-        "FilesApi.drive_files_copy",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "FilesApi.drive_files_copy",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        query_params: query_params,
+        form_params: form_params
       )
     end
 
@@ -187,22 +183,18 @@ module GoogleDrive
       # http body (model)
       post_body = file.to_nason
 
-      # return_type
-      return_type = "File"
-
       # auth_names
       auth_names = ["Oauth2"]
 
       @api_client.build_api_request(
-        :"POST",
-        local_var_path,
-        "FilesApi.drive_files_create",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "FilesApi.drive_files_create",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        query_params: query_params,
+        form_params: form_params
       )
     end
 
@@ -274,22 +266,18 @@ module GoogleDrive
       # http body (model)
       post_body = nil
 
-      # return_type
-      return_type = nil
-
       # auth_names
       auth_names = ["Oauth2"]
 
       @api_client.build_api_request(
-        :"DELETE",
-        local_var_path,
-        "FilesApi.drive_files_delete",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
+        http_method: :"DELETE",
+        path: local_var_path,
+        operation: "FilesApi.drive_files_delete",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        query_params: query_params,
+        form_params: form_params
       )
     end
 
@@ -356,22 +344,18 @@ module GoogleDrive
       # http body (model)
       post_body = nil
 
-      # return_type
-      return_type = nil
-
       # auth_names
       auth_names = ["Oauth2"]
 
       @api_client.build_api_request(
-        :"DELETE",
-        local_var_path,
-        "FilesApi.drive_files_empty_trash",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
+        http_method: :"DELETE",
+        path: local_var_path,
+        operation: "FilesApi.drive_files_empty_trash",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        query_params: query_params,
+        form_params: form_params
       )
     end
 
@@ -444,22 +428,18 @@ module GoogleDrive
       # http body (model)
       post_body = nil
 
-      # return_type
-      return_type = nil
-
       # auth_names
       auth_names = ["Oauth2"]
 
       @api_client.build_api_request(
-        :"GET",
-        local_var_path,
-        "FilesApi.drive_files_export",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
+        http_method: :"GET",
+        path: local_var_path,
+        operation: "FilesApi.drive_files_export",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        query_params: query_params,
+        form_params: form_params
       )
     end
 
@@ -538,22 +518,18 @@ module GoogleDrive
       # http body (model)
       post_body = nil
 
-      # return_type
-      return_type = "GeneratedIds"
-
       # auth_names
       auth_names = ["Oauth2"]
 
       @api_client.build_api_request(
-        :"GET",
-        local_var_path,
-        "FilesApi.drive_files_generate_ids",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
+        http_method: :"GET",
+        path: local_var_path,
+        operation: "FilesApi.drive_files_generate_ids",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        query_params: query_params,
+        form_params: form_params
       )
     end
 
@@ -628,22 +604,18 @@ module GoogleDrive
       # http body (model)
       post_body = nil
 
-      # return_type
-      return_type = "File"
-
       # auth_names
       auth_names = ["Oauth2"]
 
       @api_client.build_api_request(
-        :"GET",
-        local_var_path,
-        "FilesApi.drive_files_get",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
+        http_method: :"GET",
+        path: local_var_path,
+        operation: "FilesApi.drive_files_get",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        query_params: query_params,
+        form_params: form_params
       )
     end
 
@@ -737,22 +709,18 @@ module GoogleDrive
       # http body (model)
       post_body = nil
 
-      # return_type
-      return_type = "FileList"
-
       # auth_names
       auth_names = ["Oauth2"]
 
       @api_client.build_api_request(
-        :"GET",
-        local_var_path,
-        "FilesApi.drive_files_list",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
+        http_method: :"GET",
+        path: local_var_path,
+        operation: "FilesApi.drive_files_list",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        query_params: query_params,
+        form_params: form_params
       )
     end
 
@@ -826,7 +794,7 @@ module GoogleDrive
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["*/*"])
       # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["application/octet-stream"])
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
 
       # form parameters
       form_params = Hash(String, (String | Array(String) | ::File)).new
@@ -834,38 +802,137 @@ module GoogleDrive
       # http body (model)
       post_body = file.to_nason
 
-      # return_type
-      return_type = "File"
+      # auth_names
+      auth_names = ["Oauth2"]
+
+      @api_client.build_api_request(
+        http_method: :"PATCH",
+        path: local_var_path,
+        operation: "FilesApi.drive_files_update",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # Updates a file's metadata and/or content. When calling this method, only populate fields in the request that you want to modify. When updating fields, some fields might change automatically, such as modifiedDate. This method supports patch semantics.
+    # @param upload_type [String] The type of upload request to the /upload URI
+    # @param file_id [String] The ID of the file.
+    # @return [File]
+    def drive_files_update_content(*, upload_type : String = "media", file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, media : ::File? = nil)
+      data, _status_code, _headers = drive_files_update_content_with_http_info(upload_type: upload_type, file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, media: media)
+      data
+    end
+
+    # Updates a file&#39;s metadata and/or content. When calling this method, only populate fields in the request that you want to modify. When updating fields, some fields might change automatically, such as modifiedDate. This method supports patch semantics.
+    # @param upload_type [String] The type of upload request to the /upload URI
+    # @param file_id [String] The ID of the file.
+    # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
+    def drive_files_update_content_with_http_info(*, upload_type : String = "media", file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, media : ::File? = nil)
+      request = build_drive_files_update_content_request(upload_type: upload_type, file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, media: media)
+
+      data, status_code, headers = @api_client.execute_api_request(request)
+
+      if @api_client.config.debugging
+        Log.debug { "API called: FilesApi#drive_files_update_content\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      return File.from_nason(data), status_code, headers
+    end
+
+    # Updates a file&#39;s metadata and/or content. When calling this method, only populate fields in the request that you want to modify. When updating fields, some fields might change automatically, such as modifiedDate. This method supports patch semantics.
+    # @param upload_type [String] The type of upload request to the /upload URI
+    # @param file_id [String] The ID of the file.
+    # @return nil
+    def drive_files_update_content(*, upload_type : String = "media", file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, media : ::File? = nil, &block : Crest::Response ->)
+      request = build_drive_files_update_content_request(upload_type: upload_type, file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, media: media)
+
+      request.execute do |response|
+        block.call(response)
+      end
+    end
+
+    # @return Crest::Request
+    def build_drive_files_update_content_request(*, upload_type : String = "media", file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, media : ::File? = nil) : Crest::Request
+      if @api_client.config.debugging
+        Log.debug { "Calling API: FilesApi.drive_files_update_content ..." }
+      end
+      # verify enum value
+      allowable_values = ["media", "multipart", "resumable"]
+      if @api_client.config.client_side_validation && !allowable_values.includes?(upload_type)
+        raise ArgumentError.new("invalid value for \"upload_type\", must be one of #{allowable_values}")
+      end
+      allowable_values = ["json", "media"]
+      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
+        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+      end
+      # resource path
+      local_var_path = "/upload/drive/v3/files/{fileId}".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s))
+
+      # query parameters
+      query_params = Hash(String, String).new
+      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
+      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
+      query_params["key"] = key.to_s if !key.nil? && !key.null?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
+      query_params["uploadType"] = upload_type.to_s if !upload_type.nil? && !upload_type.null?
+      query_params["addParents"] = add_parents.to_s if !add_parents.nil? && !add_parents.null?
+      query_params["enforceSingleParent"] = enforce_single_parent.to_s if !enforce_single_parent.nil? && !enforce_single_parent.null?
+      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if !include_permissions_for_view.nil? && !include_permissions_for_view.null?
+      query_params["keepRevisionForever"] = keep_revision_forever.to_s if !keep_revision_forever.nil? && !keep_revision_forever.null?
+      query_params["ocrLanguage"] = ocr_language.to_s if !ocr_language.nil? && !ocr_language.null?
+      query_params["removeParents"] = remove_parents.to_s if !remove_parents.nil? && !remove_parents.null?
+      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil? && !supports_all_drives.null?
+      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil? && !supports_team_drives.null?
+      query_params["useContentAsIndexableText"] = use_content_as_indexable_text.to_s if !use_content_as_indexable_text.nil? && !use_content_as_indexable_text.null?
+
+      # header parameters
+      header_params = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["multipart/form-data"])
+
+      # form parameters
+      form_params = Hash(String, (String | Array(String) | ::File)).new
+      form_params["Media"] = media if !media.nil? && !media.null?
+
+      # http body (model)
+      post_body = nil
 
       # auth_names
       auth_names = ["Oauth2"]
 
       @api_client.build_api_request(
-        :"PATCH",
-        local_var_path,
-        "FilesApi.drive_files_update",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
+        http_method: :"PATCH",
+        path: local_var_path,
+        operation: "FilesApi.drive_files_update_content",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        query_params: query_params,
+        form_params: form_params
       )
     end
 
     # Creates a new file.
     # @param upload_type [String] The type of upload request to the /upload URI
     # @return [File]
-    def drive_files_upload(*, upload_type : String = "multipart", enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, metadata : ::File? = nil, media : ::File? = nil)
-      data, _status_code, _headers = drive_files_upload_with_http_info(upload_type: upload_type, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, metadata: metadata, media: media)
+    def drive_files_upload(*, upload_type : String = "multipart", alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, metadata : ::File? = nil, media : ::File? = nil)
+      data, _status_code, _headers = drive_files_upload_with_http_info(upload_type: upload_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, metadata: metadata, media: media)
       data
     end
 
     # Creates a new file.
     # @param upload_type [String] The type of upload request to the /upload URI
     # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
-    def drive_files_upload_with_http_info(*, upload_type : String = "multipart", enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, metadata : ::File? = nil, media : ::File? = nil)
-      request = build_drive_files_upload_request(upload_type: upload_type, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, metadata: metadata, media: media)
+    def drive_files_upload_with_http_info(*, upload_type : String = "multipart", alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, metadata : ::File? = nil, media : ::File? = nil)
+      request = build_drive_files_upload_request(upload_type: upload_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, metadata: metadata, media: media)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
@@ -879,8 +946,8 @@ module GoogleDrive
     # Creates a new file.
     # @param upload_type [String] The type of upload request to the /upload URI
     # @return nil
-    def drive_files_upload(*, upload_type : String = "multipart", enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, metadata : ::File? = nil, media : ::File? = nil, &block : Crest::Response ->)
-      request = build_drive_files_upload_request(upload_type: upload_type, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, metadata: metadata, media: media)
+    def drive_files_upload(*, upload_type : String = "multipart", alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, metadata : ::File? = nil, media : ::File? = nil, &block : Crest::Response ->)
+      request = build_drive_files_upload_request(upload_type: upload_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, metadata: metadata, media: media)
 
       request.execute do |response|
         block.call(response)
@@ -888,7 +955,7 @@ module GoogleDrive
     end
 
     # @return Crest::Request
-    def build_drive_files_upload_request(*, upload_type : String = "multipart", enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, metadata : ::File? = nil, media : ::File? = nil) : Crest::Request
+    def build_drive_files_upload_request(*, upload_type : String = "multipart", alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, metadata : ::File? = nil, media : ::File? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.drive_files_upload ..." }
       end
@@ -897,11 +964,22 @@ module GoogleDrive
       if @api_client.config.client_side_validation && !allowable_values.includes?(upload_type)
         raise ArgumentError.new("invalid value for \"upload_type\", must be one of #{allowable_values}")
       end
+      allowable_values = ["json", "media"]
+      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
+        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+      end
       # resource path
       local_var_path = "/upload/drive/v3/files"
 
       # query parameters
       query_params = Hash(String, String).new
+      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
+      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
+      query_params["key"] = key.to_s if !key.nil? && !key.null?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
       query_params["uploadType"] = upload_type.to_s if !upload_type.nil? && !upload_type.null?
       query_params["enforceSingleParent"] = enforce_single_parent.to_s if !enforce_single_parent.nil? && !enforce_single_parent.null?
       query_params["ignoreDefaultVisibility"] = ignore_default_visibility.to_s if !ignore_default_visibility.nil? && !ignore_default_visibility.null?
@@ -921,28 +999,24 @@ module GoogleDrive
 
       # form parameters
       form_params = Hash(String, (String | Array(String) | ::File)).new
-      form_params["Metadata"] = metadata if metadata.present?
-      form_params["Media"] = media if media.present?
+      form_params["Metadata"] = metadata if !metadata.nil? && !metadata.null?
+      form_params["Media"] = media if !media.nil? && !media.null?
 
       # http body (model)
       post_body = nil
-
-      # return_type
-      return_type = "File"
 
       # auth_names
       auth_names = ["Oauth2"]
 
       @api_client.build_api_request(
-        :"POST",
-        local_var_path,
-        "FilesApi.drive_files_upload",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "FilesApi.drive_files_upload",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        query_params: query_params,
+        form_params: form_params
       )
     end
 
@@ -1019,22 +1093,18 @@ module GoogleDrive
       # http body (model)
       post_body = channel.to_nason
 
-      # return_type
-      return_type = "Channel"
-
       # auth_names
       auth_names = ["Oauth2"]
 
       @api_client.build_api_request(
-        :"POST",
-        local_var_path,
-        "FilesApi.drive_files_watch",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "FilesApi.drive_files_watch",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        query_params: query_params,
+        form_params: form_params
       )
     end
   end

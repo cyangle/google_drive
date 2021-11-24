@@ -86,22 +86,18 @@ module GoogleDrive
       # http body (model)
       post_body = nil
 
-      # return_type
-      return_type = "StartPageToken"
-
       # auth_names
       auth_names = ["Oauth2"]
 
       @api_client.build_api_request(
-        :"GET",
-        local_var_path,
-        "ChangesApi.drive_changes_get_start_page_token",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
+        http_method: :"GET",
+        path: local_var_path,
+        operation: "ChangesApi.drive_changes_get_start_page_token",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        query_params: query_params,
+        form_params: form_params
       )
     end
 
@@ -193,22 +189,18 @@ module GoogleDrive
       # http body (model)
       post_body = nil
 
-      # return_type
-      return_type = "ChangeList"
-
       # auth_names
       auth_names = ["Oauth2"]
 
       @api_client.build_api_request(
-        :"GET",
-        local_var_path,
-        "ChangesApi.drive_changes_list",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
+        http_method: :"GET",
+        path: local_var_path,
+        operation: "ChangesApi.drive_changes_list",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        query_params: query_params,
+        form_params: form_params
       )
     end
 
@@ -302,22 +294,18 @@ module GoogleDrive
       # http body (model)
       post_body = channel.to_nason
 
-      # return_type
-      return_type = "Channel"
-
       # auth_names
       auth_names = ["Oauth2"]
 
       @api_client.build_api_request(
-        :"POST",
-        local_var_path,
-        "ChangesApi.drive_changes_watch",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "ChangesApi.drive_changes_watch",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        query_params: query_params,
+        form_params: form_params
       )
     end
   end
