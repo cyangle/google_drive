@@ -44,7 +44,7 @@ First you need to require it.
 require "google_drive"
 ```
 
-### Configure client with google Oauth2 access token
+### Configure client with google OAuth2 access token
 
 ```crystal
 GoogleDrive.configure do |config|
