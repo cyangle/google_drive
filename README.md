@@ -100,6 +100,19 @@ File.tempfile(suffix: ".json") do |file|
 end
 ```
 
+#### Create folder
+
+```crystal
+folder = GoogleDrive::File.new(
+  name: "my_app",
+  mime_type: "application/vnd.google-apps.folder",
+  parents: ["appDataFolder"]
+)
+
+files_api.create(file: folder)
+```
+
+
 #### Update file metadata by id
 
 Update file name.
