@@ -1,2 +1,7 @@
+Excluded:
+  - bin
+  - lib
+  - local
+
 Metrics/CyclomaticComplexity:
   Enabled: false
