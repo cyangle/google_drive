@@ -30,11 +30,35 @@ module GoogleDrive
     # @param file_id [String] The ID of the file or shared drive.
     # @return [Array<(Permission, Integer, Hash)>] Permission data, response status code and response headers
     def drive_permissions_create_with_http_info(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, email_message : String? = nil, enforce_single_parent : Bool? = false, move_to_new_owners_root : Bool? = false, send_notification_email : Bool? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, transfer_ownership : Bool? = false, use_domain_admin_access : Bool? = false, permission : Permission? = nil)
+      request = build_drive_permissions_create_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, email_message: email_message, enforce_single_parent: enforce_single_parent, move_to_new_owners_root: move_to_new_owners_root, send_notification_email: send_notification_email, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, transfer_ownership: transfer_ownership, use_domain_admin_access: use_domain_admin_access, permission: permission)
+
+      data, status_code, headers = @api_client.execute_api_request(request)
+
+      if @api_client.config.debugging
+        Log.debug { "API called: PermissionsApi#drive_permissions_create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      return Permission.from_nason(data), status_code, headers
+    end
+
+    # Creates a permission for a file or shared drive.
+    # @param file_id [String] The ID of the file or shared drive.
+    # @return nil
+    def drive_permissions_create(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, email_message : String? = nil, enforce_single_parent : Bool? = false, move_to_new_owners_root : Bool? = false, send_notification_email : Bool? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, transfer_ownership : Bool? = false, use_domain_admin_access : Bool? = false, permission : Permission? = nil, &block : Crest::Response ->)
+      request = build_drive_permissions_create_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, email_message: email_message, enforce_single_parent: enforce_single_parent, move_to_new_owners_root: move_to_new_owners_root, send_notification_email: send_notification_email, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, transfer_ownership: transfer_ownership, use_domain_admin_access: use_domain_admin_access, permission: permission)
+
+      request.execute do |response|
+        block.call(response)
+      end
+    end
+
+    # @return Crest::Request
+    def build_drive_permissions_create_request(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, email_message : String? = nil, enforce_single_parent : Bool? = false, move_to_new_owners_root : Bool? = false, send_notification_email : Bool? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, transfer_ownership : Bool? = false, use_domain_admin_access : Bool? = false, permission : Permission? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: PermissionsApi.drive_permissions_create ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -42,21 +66,21 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["emailMessage"] = email_message.to_s if email_message.present?
-      query_params["enforceSingleParent"] = enforce_single_parent.to_s if enforce_single_parent.present?
-      query_params["moveToNewOwnersRoot"] = move_to_new_owners_root.to_s if move_to_new_owners_root.present?
-      query_params["sendNotificationEmail"] = send_notification_email.to_s if send_notification_email.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
-      query_params["transferOwnership"] = transfer_ownership.to_s if transfer_ownership.present?
-      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if use_domain_admin_access.present?
+      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
+      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
+      query_params["key"] = key.to_s if !key.nil? && !key.null?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
+      query_params["emailMessage"] = email_message.to_s if !email_message.nil? && !email_message.null?
+      query_params["enforceSingleParent"] = enforce_single_parent.to_s if !enforce_single_parent.nil? && !enforce_single_parent.null?
+      query_params["moveToNewOwnersRoot"] = move_to_new_owners_root.to_s if !move_to_new_owners_root.nil? && !move_to_new_owners_root.null?
+      query_params["sendNotificationEmail"] = send_notification_email.to_s if !send_notification_email.nil? && !send_notification_email.null?
+      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil? && !supports_all_drives.null?
+      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil? && !supports_team_drives.null?
+      query_params["transferOwnership"] = transfer_ownership.to_s if !transfer_ownership.nil? && !transfer_ownership.null?
+      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil? && !use_domain_admin_access.null?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -77,7 +101,7 @@ module GoogleDrive
       # auth_names
       auth_names = ["Oauth2"]
 
-      data, status_code, headers = @api_client.call_api(
+      @api_client.build_api_request(
         :"POST",
         local_var_path,
         "PermissionsApi.drive_permissions_create",
@@ -88,77 +112,6 @@ module GoogleDrive
         query_params,
         form_params
       )
-
-      if @api_client.config.debugging
-        Log.debug { "API called: PermissionsApi#drive_permissions_create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
-      end
-      return Permission.from_nason(data), status_code, headers
-    end
-
-    # Creates a permission for a file or shared drive.
-    # @param file_id [String] The ID of the file or shared drive.
-    # @return nil
-    def drive_permissions_create(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, email_message : String? = nil, enforce_single_parent : Bool? = false, move_to_new_owners_root : Bool? = false, send_notification_email : Bool? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, transfer_ownership : Bool? = false, use_domain_admin_access : Bool? = false, permission : Permission? = nil, &block : Crest::Response ->)
-      if @api_client.config.debugging
-        Log.debug { "Calling API: PermissionsApi.drive_permissions_create ..." }
-      end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      # resource path
-      local_var_path = "/drive/v3/files/{fileId}/permissions".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s))
-
-      # query parameters
-      query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["emailMessage"] = email_message.to_s if email_message.present?
-      query_params["enforceSingleParent"] = enforce_single_parent.to_s if enforce_single_parent.present?
-      query_params["moveToNewOwnersRoot"] = move_to_new_owners_root.to_s if move_to_new_owners_root.present?
-      query_params["sendNotificationEmail"] = send_notification_email.to_s if send_notification_email.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
-      query_params["transferOwnership"] = transfer_ownership.to_s if transfer_ownership.present?
-      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if use_domain_admin_access.present?
-
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
-      # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
-
-      # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
-
-      # http body (model)
-      post_body = permission.to_nason
-
-      # return_type
-      return_type = "Permission"
-
-      # auth_names
-      auth_names = ["Oauth2"]
-
-      @api_client.call_api(
-        :"POST",
-        local_var_path,
-        "PermissionsApi.drive_permissions_create",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
-      ) do |response|
-        block.call(response)
-      end
     end
 
     # Deletes a permission.
@@ -175,11 +128,36 @@ module GoogleDrive
     # @param permission_id [String] The ID of the permission.
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def drive_permissions_delete_with_http_info(*, file_id : String, permission_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_domain_admin_access : Bool? = false)
+      request = build_drive_permissions_delete_request(file_id: file_id, permission_id: permission_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_domain_admin_access: use_domain_admin_access)
+
+      data, status_code, headers = @api_client.execute_api_request(request)
+
+      if @api_client.config.debugging
+        Log.debug { "API called: PermissionsApi#drive_permissions_delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      return nil, status_code, headers
+    end
+
+    # Deletes a permission.
+    # @param file_id [String] The ID of the file or shared drive.
+    # @param permission_id [String] The ID of the permission.
+    # @return nil
+    def drive_permissions_delete(*, file_id : String, permission_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_domain_admin_access : Bool? = false, &block : Crest::Response ->)
+      request = build_drive_permissions_delete_request(file_id: file_id, permission_id: permission_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_domain_admin_access: use_domain_admin_access)
+
+      request.execute do |response|
+        block.call(response)
+      end
+    end
+
+    # @return Crest::Request
+    def build_drive_permissions_delete_request(*, file_id : String, permission_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_domain_admin_access : Bool? = false) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: PermissionsApi.drive_permissions_delete ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -187,16 +165,16 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
-      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if use_domain_admin_access.present?
+      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
+      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
+      query_params["key"] = key.to_s if !key.nil? && !key.null?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
+      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil? && !supports_all_drives.null?
+      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil? && !supports_team_drives.null?
+      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil? && !use_domain_admin_access.null?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -213,7 +191,7 @@ module GoogleDrive
       # auth_names
       auth_names = ["Oauth2"]
 
-      data, status_code, headers = @api_client.call_api(
+      @api_client.build_api_request(
         :"DELETE",
         local_var_path,
         "PermissionsApi.drive_permissions_delete",
@@ -224,69 +202,6 @@ module GoogleDrive
         query_params,
         form_params
       )
-
-      if @api_client.config.debugging
-        Log.debug { "API called: PermissionsApi#drive_permissions_delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
-      end
-      return nil, status_code, headers
-    end
-
-    # Deletes a permission.
-    # @param file_id [String] The ID of the file or shared drive.
-    # @param permission_id [String] The ID of the permission.
-    # @return nil
-    def drive_permissions_delete(*, file_id : String, permission_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_domain_admin_access : Bool? = false, &block : Crest::Response ->)
-      if @api_client.config.debugging
-        Log.debug { "Calling API: PermissionsApi.drive_permissions_delete ..." }
-      end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      # resource path
-      local_var_path = "/drive/v3/files/{fileId}/permissions/{permissionId}".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s)).sub("{" + "permissionId" + "}", URI.encode_path(permission_id.to_s))
-
-      # query parameters
-      query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
-      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if use_domain_admin_access.present?
-
-      # header parameters
-      header_params = Hash(String, String).new
-
-      # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
-
-      # http body (model)
-      post_body = nil
-
-      # return_type
-      return_type = nil
-
-      # auth_names
-      auth_names = ["Oauth2"]
-
-      @api_client.call_api(
-        :"DELETE",
-        local_var_path,
-        "PermissionsApi.drive_permissions_delete",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
-      ) do |response|
-        block.call(response)
-      end
     end
 
     # Gets a permission by ID.
@@ -303,11 +218,36 @@ module GoogleDrive
     # @param permission_id [String] The ID of the permission.
     # @return [Array<(Permission, Integer, Hash)>] Permission data, response status code and response headers
     def drive_permissions_get_with_http_info(*, file_id : String, permission_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_domain_admin_access : Bool? = false)
+      request = build_drive_permissions_get_request(file_id: file_id, permission_id: permission_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_domain_admin_access: use_domain_admin_access)
+
+      data, status_code, headers = @api_client.execute_api_request(request)
+
+      if @api_client.config.debugging
+        Log.debug { "API called: PermissionsApi#drive_permissions_get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      return Permission.from_nason(data), status_code, headers
+    end
+
+    # Gets a permission by ID.
+    # @param file_id [String] The ID of the file.
+    # @param permission_id [String] The ID of the permission.
+    # @return nil
+    def drive_permissions_get(*, file_id : String, permission_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_domain_admin_access : Bool? = false, &block : Crest::Response ->)
+      request = build_drive_permissions_get_request(file_id: file_id, permission_id: permission_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_domain_admin_access: use_domain_admin_access)
+
+      request.execute do |response|
+        block.call(response)
+      end
+    end
+
+    # @return Crest::Request
+    def build_drive_permissions_get_request(*, file_id : String, permission_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_domain_admin_access : Bool? = false) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: PermissionsApi.drive_permissions_get ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -315,16 +255,16 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
-      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if use_domain_admin_access.present?
+      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
+      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
+      query_params["key"] = key.to_s if !key.nil? && !key.null?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
+      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil? && !supports_all_drives.null?
+      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil? && !supports_team_drives.null?
+      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil? && !use_domain_admin_access.null?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -343,7 +283,7 @@ module GoogleDrive
       # auth_names
       auth_names = ["Oauth2"]
 
-      data, status_code, headers = @api_client.call_api(
+      @api_client.build_api_request(
         :"GET",
         local_var_path,
         "PermissionsApi.drive_permissions_get",
@@ -354,71 +294,6 @@ module GoogleDrive
         query_params,
         form_params
       )
-
-      if @api_client.config.debugging
-        Log.debug { "API called: PermissionsApi#drive_permissions_get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
-      end
-      return Permission.from_nason(data), status_code, headers
-    end
-
-    # Gets a permission by ID.
-    # @param file_id [String] The ID of the file.
-    # @param permission_id [String] The ID of the permission.
-    # @return nil
-    def drive_permissions_get(*, file_id : String, permission_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_domain_admin_access : Bool? = false, &block : Crest::Response ->)
-      if @api_client.config.debugging
-        Log.debug { "Calling API: PermissionsApi.drive_permissions_get ..." }
-      end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      # resource path
-      local_var_path = "/drive/v3/files/{fileId}/permissions/{permissionId}".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s)).sub("{" + "permissionId" + "}", URI.encode_path(permission_id.to_s))
-
-      # query parameters
-      query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
-      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if use_domain_admin_access.present?
-
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
-
-      # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
-
-      # http body (model)
-      post_body = nil
-
-      # return_type
-      return_type = "Permission"
-
-      # auth_names
-      auth_names = ["Oauth2"]
-
-      @api_client.call_api(
-        :"GET",
-        local_var_path,
-        "PermissionsApi.drive_permissions_get",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
-      ) do |response|
-        block.call(response)
-      end
     end
 
     # Lists a file's or shared drive's permissions.
@@ -433,11 +308,35 @@ module GoogleDrive
     # @param file_id [String] The ID of the file or shared drive.
     # @return [Array<(PermissionList, Integer, Hash)>] PermissionList data, response status code and response headers
     def drive_permissions_list_with_http_info(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, include_permissions_for_view : String? = nil, page_size : Int32? = nil, page_token : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_domain_admin_access : Bool? = false)
+      request = build_drive_permissions_list_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, include_permissions_for_view: include_permissions_for_view, page_size: page_size, page_token: page_token, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_domain_admin_access: use_domain_admin_access)
+
+      data, status_code, headers = @api_client.execute_api_request(request)
+
+      if @api_client.config.debugging
+        Log.debug { "API called: PermissionsApi#drive_permissions_list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      return PermissionList.from_nason(data), status_code, headers
+    end
+
+    # Lists a file&#39;s or shared drive&#39;s permissions.
+    # @param file_id [String] The ID of the file or shared drive.
+    # @return nil
+    def drive_permissions_list(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, include_permissions_for_view : String? = nil, page_size : Int32? = nil, page_token : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_domain_admin_access : Bool? = false, &block : Crest::Response ->)
+      request = build_drive_permissions_list_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, include_permissions_for_view: include_permissions_for_view, page_size: page_size, page_token: page_token, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_domain_admin_access: use_domain_admin_access)
+
+      request.execute do |response|
+        block.call(response)
+      end
+    end
+
+    # @return Crest::Request
+    def build_drive_permissions_list_request(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, include_permissions_for_view : String? = nil, page_size : Int32? = nil, page_token : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_domain_admin_access : Bool? = false) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: PermissionsApi.drive_permissions_list ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       if @api_client.config.client_side_validation && !page_size.nil? && page_size > 100
@@ -453,19 +352,19 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if include_permissions_for_view.present?
-      query_params["pageSize"] = page_size.to_s if page_size.present?
-      query_params["pageToken"] = page_token.to_s if page_token.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
-      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if use_domain_admin_access.present?
+      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
+      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
+      query_params["key"] = key.to_s if !key.nil? && !key.null?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
+      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if !include_permissions_for_view.nil? && !include_permissions_for_view.null?
+      query_params["pageSize"] = page_size.to_s if !page_size.nil? && !page_size.null?
+      query_params["pageToken"] = page_token.to_s if !page_token.nil? && !page_token.null?
+      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil? && !supports_all_drives.null?
+      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil? && !supports_team_drives.null?
+      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil? && !use_domain_admin_access.null?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -484,7 +383,7 @@ module GoogleDrive
       # auth_names
       auth_names = ["Oauth2"]
 
-      data, status_code, headers = @api_client.call_api(
+      @api_client.build_api_request(
         :"GET",
         local_var_path,
         "PermissionsApi.drive_permissions_list",
@@ -495,81 +394,6 @@ module GoogleDrive
         query_params,
         form_params
       )
-
-      if @api_client.config.debugging
-        Log.debug { "API called: PermissionsApi#drive_permissions_list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
-      end
-      return PermissionList.from_nason(data), status_code, headers
-    end
-
-    # Lists a file&#39;s or shared drive&#39;s permissions.
-    # @param file_id [String] The ID of the file or shared drive.
-    # @return nil
-    def drive_permissions_list(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, include_permissions_for_view : String? = nil, page_size : Int32? = nil, page_token : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_domain_admin_access : Bool? = false, &block : Crest::Response ->)
-      if @api_client.config.debugging
-        Log.debug { "Calling API: PermissionsApi.drive_permissions_list ..." }
-      end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      if @api_client.config.client_side_validation && !page_size.nil? && page_size > 100
-        raise ArgumentError.new("invalid value for \"page_size\" when calling PermissionsApi.drive_permissions_list, must be smaller than or equal to 100.")
-      end
-
-      if @api_client.config.client_side_validation && !page_size.nil? && page_size < 1
-        raise ArgumentError.new("invalid value for \"page_size\" when calling PermissionsApi.drive_permissions_list, must be greater than or equal to 1.")
-      end
-
-      # resource path
-      local_var_path = "/drive/v3/files/{fileId}/permissions".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s))
-
-      # query parameters
-      query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if include_permissions_for_view.present?
-      query_params["pageSize"] = page_size.to_s if page_size.present?
-      query_params["pageToken"] = page_token.to_s if page_token.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
-      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if use_domain_admin_access.present?
-
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
-
-      # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
-
-      # http body (model)
-      post_body = nil
-
-      # return_type
-      return_type = "PermissionList"
-
-      # auth_names
-      auth_names = ["Oauth2"]
-
-      @api_client.call_api(
-        :"GET",
-        local_var_path,
-        "PermissionsApi.drive_permissions_list",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
-      ) do |response|
-        block.call(response)
-      end
     end
 
     # Updates a permission with patch semantics.
@@ -586,11 +410,36 @@ module GoogleDrive
     # @param permission_id [String] The ID of the permission.
     # @return [Array<(Permission, Integer, Hash)>] Permission data, response status code and response headers
     def drive_permissions_update_with_http_info(*, file_id : String, permission_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, remove_expiration : Bool? = false, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, transfer_ownership : Bool? = false, use_domain_admin_access : Bool? = false, permission : Permission? = nil)
+      request = build_drive_permissions_update_request(file_id: file_id, permission_id: permission_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, remove_expiration: remove_expiration, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, transfer_ownership: transfer_ownership, use_domain_admin_access: use_domain_admin_access, permission: permission)
+
+      data, status_code, headers = @api_client.execute_api_request(request)
+
+      if @api_client.config.debugging
+        Log.debug { "API called: PermissionsApi#drive_permissions_update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      return Permission.from_nason(data), status_code, headers
+    end
+
+    # Updates a permission with patch semantics.
+    # @param file_id [String] The ID of the file or shared drive.
+    # @param permission_id [String] The ID of the permission.
+    # @return nil
+    def drive_permissions_update(*, file_id : String, permission_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, remove_expiration : Bool? = false, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, transfer_ownership : Bool? = false, use_domain_admin_access : Bool? = false, permission : Permission? = nil, &block : Crest::Response ->)
+      request = build_drive_permissions_update_request(file_id: file_id, permission_id: permission_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, remove_expiration: remove_expiration, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, transfer_ownership: transfer_ownership, use_domain_admin_access: use_domain_admin_access, permission: permission)
+
+      request.execute do |response|
+        block.call(response)
+      end
+    end
+
+    # @return Crest::Request
+    def build_drive_permissions_update_request(*, file_id : String, permission_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, remove_expiration : Bool? = false, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, transfer_ownership : Bool? = false, use_domain_admin_access : Bool? = false, permission : Permission? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: PermissionsApi.drive_permissions_update ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -598,18 +447,18 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["removeExpiration"] = remove_expiration.to_s if remove_expiration.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
-      query_params["transferOwnership"] = transfer_ownership.to_s if transfer_ownership.present?
-      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if use_domain_admin_access.present?
+      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
+      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
+      query_params["key"] = key.to_s if !key.nil? && !key.null?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
+      query_params["removeExpiration"] = remove_expiration.to_s if !remove_expiration.nil? && !remove_expiration.null?
+      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil? && !supports_all_drives.null?
+      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil? && !supports_team_drives.null?
+      query_params["transferOwnership"] = transfer_ownership.to_s if !transfer_ownership.nil? && !transfer_ownership.null?
+      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil? && !use_domain_admin_access.null?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -630,7 +479,7 @@ module GoogleDrive
       # auth_names
       auth_names = ["Oauth2"]
 
-      data, status_code, headers = @api_client.call_api(
+      @api_client.build_api_request(
         :"PATCH",
         local_var_path,
         "PermissionsApi.drive_permissions_update",
@@ -641,75 +490,6 @@ module GoogleDrive
         query_params,
         form_params
       )
-
-      if @api_client.config.debugging
-        Log.debug { "API called: PermissionsApi#drive_permissions_update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
-      end
-      return Permission.from_nason(data), status_code, headers
-    end
-
-    # Updates a permission with patch semantics.
-    # @param file_id [String] The ID of the file or shared drive.
-    # @param permission_id [String] The ID of the permission.
-    # @return nil
-    def drive_permissions_update(*, file_id : String, permission_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, remove_expiration : Bool? = false, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, transfer_ownership : Bool? = false, use_domain_admin_access : Bool? = false, permission : Permission? = nil, &block : Crest::Response ->)
-      if @api_client.config.debugging
-        Log.debug { "Calling API: PermissionsApi.drive_permissions_update ..." }
-      end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      # resource path
-      local_var_path = "/drive/v3/files/{fileId}/permissions/{permissionId}".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s)).sub("{" + "permissionId" + "}", URI.encode_path(permission_id.to_s))
-
-      # query parameters
-      query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["removeExpiration"] = remove_expiration.to_s if remove_expiration.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
-      query_params["transferOwnership"] = transfer_ownership.to_s if transfer_ownership.present?
-      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if use_domain_admin_access.present?
-
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
-      # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
-
-      # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
-
-      # http body (model)
-      post_body = permission.to_nason
-
-      # return_type
-      return_type = "Permission"
-
-      # auth_names
-      auth_names = ["Oauth2"]
-
-      @api_client.call_api(
-        :"PATCH",
-        local_var_path,
-        "PermissionsApi.drive_permissions_update",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
-      ) do |response|
-        block.call(response)
-      end
     end
   end
 end

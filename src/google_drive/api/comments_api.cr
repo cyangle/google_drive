@@ -30,11 +30,35 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @return [Array<(Comment, Integer, Hash)>] Comment data, response status code and response headers
     def drive_comments_create_with_http_info(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, comment : Comment? = nil)
+      request = build_drive_comments_create_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, comment: comment)
+
+      data, status_code, headers = @api_client.execute_api_request(request)
+
+      if @api_client.config.debugging
+        Log.debug { "API called: CommentsApi#drive_comments_create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      return Comment.from_nason(data), status_code, headers
+    end
+
+    # Creates a new comment on a file.
+    # @param file_id [String] The ID of the file.
+    # @return nil
+    def drive_comments_create(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, comment : Comment? = nil, &block : Crest::Response ->)
+      request = build_drive_comments_create_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, comment: comment)
+
+      request.execute do |response|
+        block.call(response)
+      end
+    end
+
+    # @return Crest::Request
+    def build_drive_comments_create_request(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, comment : Comment? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: CommentsApi.drive_comments_create ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -42,13 +66,13 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
+      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
+      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
+      query_params["key"] = key.to_s if !key.nil? && !key.null?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -69,7 +93,7 @@ module GoogleDrive
       # auth_names
       auth_names = ["Oauth2"]
 
-      data, status_code, headers = @api_client.call_api(
+      @api_client.build_api_request(
         :"POST",
         local_var_path,
         "CommentsApi.drive_comments_create",
@@ -80,69 +104,6 @@ module GoogleDrive
         query_params,
         form_params
       )
-
-      if @api_client.config.debugging
-        Log.debug { "API called: CommentsApi#drive_comments_create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
-      end
-      return Comment.from_nason(data), status_code, headers
-    end
-
-    # Creates a new comment on a file.
-    # @param file_id [String] The ID of the file.
-    # @return nil
-    def drive_comments_create(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, comment : Comment? = nil, &block : Crest::Response ->)
-      if @api_client.config.debugging
-        Log.debug { "Calling API: CommentsApi.drive_comments_create ..." }
-      end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      # resource path
-      local_var_path = "/drive/v3/files/{fileId}/comments".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s))
-
-      # query parameters
-      query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
-      # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
-
-      # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
-
-      # http body (model)
-      post_body = comment.to_nason
-
-      # return_type
-      return_type = "Comment"
-
-      # auth_names
-      auth_names = ["Oauth2"]
-
-      @api_client.call_api(
-        :"POST",
-        local_var_path,
-        "CommentsApi.drive_comments_create",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
-      ) do |response|
-        block.call(response)
-      end
     end
 
     # Deletes a comment.
@@ -159,11 +120,36 @@ module GoogleDrive
     # @param comment_id [String] The ID of the comment.
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def drive_comments_delete_with_http_info(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil)
+      request = build_drive_comments_delete_request(file_id: file_id, comment_id: comment_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
+
+      data, status_code, headers = @api_client.execute_api_request(request)
+
+      if @api_client.config.debugging
+        Log.debug { "API called: CommentsApi#drive_comments_delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      return nil, status_code, headers
+    end
+
+    # Deletes a comment.
+    # @param file_id [String] The ID of the file.
+    # @param comment_id [String] The ID of the comment.
+    # @return nil
+    def drive_comments_delete(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, &block : Crest::Response ->)
+      request = build_drive_comments_delete_request(file_id: file_id, comment_id: comment_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
+
+      request.execute do |response|
+        block.call(response)
+      end
+    end
+
+    # @return Crest::Request
+    def build_drive_comments_delete_request(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: CommentsApi.drive_comments_delete ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -171,13 +157,13 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
+      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
+      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
+      query_params["key"] = key.to_s if !key.nil? && !key.null?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -194,7 +180,7 @@ module GoogleDrive
       # auth_names
       auth_names = ["Oauth2"]
 
-      data, status_code, headers = @api_client.call_api(
+      @api_client.build_api_request(
         :"DELETE",
         local_var_path,
         "CommentsApi.drive_comments_delete",
@@ -205,66 +191,6 @@ module GoogleDrive
         query_params,
         form_params
       )
-
-      if @api_client.config.debugging
-        Log.debug { "API called: CommentsApi#drive_comments_delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
-      end
-      return nil, status_code, headers
-    end
-
-    # Deletes a comment.
-    # @param file_id [String] The ID of the file.
-    # @param comment_id [String] The ID of the comment.
-    # @return nil
-    def drive_comments_delete(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, &block : Crest::Response ->)
-      if @api_client.config.debugging
-        Log.debug { "Calling API: CommentsApi.drive_comments_delete ..." }
-      end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      # resource path
-      local_var_path = "/drive/v3/files/{fileId}/comments/{commentId}".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s)).sub("{" + "commentId" + "}", URI.encode_path(comment_id.to_s))
-
-      # query parameters
-      query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-
-      # header parameters
-      header_params = Hash(String, String).new
-
-      # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
-
-      # http body (model)
-      post_body = nil
-
-      # return_type
-      return_type = nil
-
-      # auth_names
-      auth_names = ["Oauth2"]
-
-      @api_client.call_api(
-        :"DELETE",
-        local_var_path,
-        "CommentsApi.drive_comments_delete",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
-      ) do |response|
-        block.call(response)
-      end
     end
 
     # Gets a comment by ID.
@@ -281,11 +207,36 @@ module GoogleDrive
     # @param comment_id [String] The ID of the comment.
     # @return [Array<(Comment, Integer, Hash)>] Comment data, response status code and response headers
     def drive_comments_get_with_http_info(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = false)
+      request = build_drive_comments_get_request(file_id: file_id, comment_id: comment_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, include_deleted: include_deleted)
+
+      data, status_code, headers = @api_client.execute_api_request(request)
+
+      if @api_client.config.debugging
+        Log.debug { "API called: CommentsApi#drive_comments_get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      return Comment.from_nason(data), status_code, headers
+    end
+
+    # Gets a comment by ID.
+    # @param file_id [String] The ID of the file.
+    # @param comment_id [String] The ID of the comment.
+    # @return nil
+    def drive_comments_get(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = false, &block : Crest::Response ->)
+      request = build_drive_comments_get_request(file_id: file_id, comment_id: comment_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, include_deleted: include_deleted)
+
+      request.execute do |response|
+        block.call(response)
+      end
+    end
+
+    # @return Crest::Request
+    def build_drive_comments_get_request(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = false) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: CommentsApi.drive_comments_get ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -293,14 +244,14 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["includeDeleted"] = include_deleted.to_s if include_deleted.present?
+      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
+      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
+      query_params["key"] = key.to_s if !key.nil? && !key.null?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
+      query_params["includeDeleted"] = include_deleted.to_s if !include_deleted.nil? && !include_deleted.null?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -319,7 +270,7 @@ module GoogleDrive
       # auth_names
       auth_names = ["Oauth2"]
 
-      data, status_code, headers = @api_client.call_api(
+      @api_client.build_api_request(
         :"GET",
         local_var_path,
         "CommentsApi.drive_comments_get",
@@ -330,69 +281,6 @@ module GoogleDrive
         query_params,
         form_params
       )
-
-      if @api_client.config.debugging
-        Log.debug { "API called: CommentsApi#drive_comments_get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
-      end
-      return Comment.from_nason(data), status_code, headers
-    end
-
-    # Gets a comment by ID.
-    # @param file_id [String] The ID of the file.
-    # @param comment_id [String] The ID of the comment.
-    # @return nil
-    def drive_comments_get(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = false, &block : Crest::Response ->)
-      if @api_client.config.debugging
-        Log.debug { "Calling API: CommentsApi.drive_comments_get ..." }
-      end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      # resource path
-      local_var_path = "/drive/v3/files/{fileId}/comments/{commentId}".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s)).sub("{" + "commentId" + "}", URI.encode_path(comment_id.to_s))
-
-      # query parameters
-      query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["includeDeleted"] = include_deleted.to_s if include_deleted.present?
-
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
-
-      # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
-
-      # http body (model)
-      post_body = nil
-
-      # return_type
-      return_type = "Comment"
-
-      # auth_names
-      auth_names = ["Oauth2"]
-
-      @api_client.call_api(
-        :"GET",
-        local_var_path,
-        "CommentsApi.drive_comments_get",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
-      ) do |response|
-        block.call(response)
-      end
     end
 
     # Lists a file's comments.
@@ -407,11 +295,35 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @return [Array<(CommentList, Integer, Hash)>] CommentList data, response status code and response headers
     def drive_comments_list_with_http_info(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = false, page_size : Int32? = 20, page_token : String? = nil, start_modified_time : String? = nil)
+      request = build_drive_comments_list_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, include_deleted: include_deleted, page_size: page_size, page_token: page_token, start_modified_time: start_modified_time)
+
+      data, status_code, headers = @api_client.execute_api_request(request)
+
+      if @api_client.config.debugging
+        Log.debug { "API called: CommentsApi#drive_comments_list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      return CommentList.from_nason(data), status_code, headers
+    end
+
+    # Lists a file&#39;s comments.
+    # @param file_id [String] The ID of the file.
+    # @return nil
+    def drive_comments_list(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = false, page_size : Int32? = 20, page_token : String? = nil, start_modified_time : String? = nil, &block : Crest::Response ->)
+      request = build_drive_comments_list_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, include_deleted: include_deleted, page_size: page_size, page_token: page_token, start_modified_time: start_modified_time)
+
+      request.execute do |response|
+        block.call(response)
+      end
+    end
+
+    # @return Crest::Request
+    def build_drive_comments_list_request(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = false, page_size : Int32? = 20, page_token : String? = nil, start_modified_time : String? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: CommentsApi.drive_comments_list ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       if @api_client.config.client_side_validation && !page_size.nil? && page_size > 100
@@ -427,17 +339,17 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["includeDeleted"] = include_deleted.to_s if include_deleted.present?
-      query_params["pageSize"] = page_size.to_s if page_size.present?
-      query_params["pageToken"] = page_token.to_s if page_token.present?
-      query_params["startModifiedTime"] = start_modified_time.to_s if start_modified_time.present?
+      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
+      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
+      query_params["key"] = key.to_s if !key.nil? && !key.null?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
+      query_params["includeDeleted"] = include_deleted.to_s if !include_deleted.nil? && !include_deleted.null?
+      query_params["pageSize"] = page_size.to_s if !page_size.nil? && !page_size.null?
+      query_params["pageToken"] = page_token.to_s if !page_token.nil? && !page_token.null?
+      query_params["startModifiedTime"] = start_modified_time.to_s if !start_modified_time.nil? && !start_modified_time.null?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -456,7 +368,7 @@ module GoogleDrive
       # auth_names
       auth_names = ["Oauth2"]
 
-      data, status_code, headers = @api_client.call_api(
+      @api_client.build_api_request(
         :"GET",
         local_var_path,
         "CommentsApi.drive_comments_list",
@@ -467,79 +379,6 @@ module GoogleDrive
         query_params,
         form_params
       )
-
-      if @api_client.config.debugging
-        Log.debug { "API called: CommentsApi#drive_comments_list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
-      end
-      return CommentList.from_nason(data), status_code, headers
-    end
-
-    # Lists a file&#39;s comments.
-    # @param file_id [String] The ID of the file.
-    # @return nil
-    def drive_comments_list(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = false, page_size : Int32? = 20, page_token : String? = nil, start_modified_time : String? = nil, &block : Crest::Response ->)
-      if @api_client.config.debugging
-        Log.debug { "Calling API: CommentsApi.drive_comments_list ..." }
-      end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      if @api_client.config.client_side_validation && !page_size.nil? && page_size > 100
-        raise ArgumentError.new("invalid value for \"page_size\" when calling CommentsApi.drive_comments_list, must be smaller than or equal to 100.")
-      end
-
-      if @api_client.config.client_side_validation && !page_size.nil? && page_size < 1
-        raise ArgumentError.new("invalid value for \"page_size\" when calling CommentsApi.drive_comments_list, must be greater than or equal to 1.")
-      end
-
-      # resource path
-      local_var_path = "/drive/v3/files/{fileId}/comments".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s))
-
-      # query parameters
-      query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["includeDeleted"] = include_deleted.to_s if include_deleted.present?
-      query_params["pageSize"] = page_size.to_s if page_size.present?
-      query_params["pageToken"] = page_token.to_s if page_token.present?
-      query_params["startModifiedTime"] = start_modified_time.to_s if start_modified_time.present?
-
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
-
-      # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
-
-      # http body (model)
-      post_body = nil
-
-      # return_type
-      return_type = "CommentList"
-
-      # auth_names
-      auth_names = ["Oauth2"]
-
-      @api_client.call_api(
-        :"GET",
-        local_var_path,
-        "CommentsApi.drive_comments_list",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
-      ) do |response|
-        block.call(response)
-      end
     end
 
     # Updates a comment with patch semantics.
@@ -556,11 +395,36 @@ module GoogleDrive
     # @param comment_id [String] The ID of the comment.
     # @return [Array<(Comment, Integer, Hash)>] Comment data, response status code and response headers
     def drive_comments_update_with_http_info(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, comment : Comment? = nil)
+      request = build_drive_comments_update_request(file_id: file_id, comment_id: comment_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, comment: comment)
+
+      data, status_code, headers = @api_client.execute_api_request(request)
+
+      if @api_client.config.debugging
+        Log.debug { "API called: CommentsApi#drive_comments_update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      return Comment.from_nason(data), status_code, headers
+    end
+
+    # Updates a comment with patch semantics.
+    # @param file_id [String] The ID of the file.
+    # @param comment_id [String] The ID of the comment.
+    # @return nil
+    def drive_comments_update(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, comment : Comment? = nil, &block : Crest::Response ->)
+      request = build_drive_comments_update_request(file_id: file_id, comment_id: comment_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, comment: comment)
+
+      request.execute do |response|
+        block.call(response)
+      end
+    end
+
+    # @return Crest::Request
+    def build_drive_comments_update_request(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, comment : Comment? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: CommentsApi.drive_comments_update ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -568,13 +432,13 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
+      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
+      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
+      query_params["key"] = key.to_s if !key.nil? && !key.null?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -595,7 +459,7 @@ module GoogleDrive
       # auth_names
       auth_names = ["Oauth2"]
 
-      data, status_code, headers = @api_client.call_api(
+      @api_client.build_api_request(
         :"PATCH",
         local_var_path,
         "CommentsApi.drive_comments_update",
@@ -606,70 +470,6 @@ module GoogleDrive
         query_params,
         form_params
       )
-
-      if @api_client.config.debugging
-        Log.debug { "API called: CommentsApi#drive_comments_update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
-      end
-      return Comment.from_nason(data), status_code, headers
-    end
-
-    # Updates a comment with patch semantics.
-    # @param file_id [String] The ID of the file.
-    # @param comment_id [String] The ID of the comment.
-    # @return nil
-    def drive_comments_update(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, comment : Comment? = nil, &block : Crest::Response ->)
-      if @api_client.config.debugging
-        Log.debug { "Calling API: CommentsApi.drive_comments_update ..." }
-      end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      # resource path
-      local_var_path = "/drive/v3/files/{fileId}/comments/{commentId}".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s)).sub("{" + "commentId" + "}", URI.encode_path(comment_id.to_s))
-
-      # query parameters
-      query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
-      # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
-
-      # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
-
-      # http body (model)
-      post_body = comment.to_nason
-
-      # return_type
-      return_type = "Comment"
-
-      # auth_names
-      auth_names = ["Oauth2"]
-
-      @api_client.call_api(
-        :"PATCH",
-        local_var_path,
-        "CommentsApi.drive_comments_update",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
-      ) do |response|
-        block.call(response)
-      end
     end
   end
 end

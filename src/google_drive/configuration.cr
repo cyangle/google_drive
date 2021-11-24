@@ -212,7 +212,7 @@ module GoogleDrive
 
     # Gets Basic Auth token string
     def basic_auth_token
-      "Basic " + ["#{username}:#{password}"].pack("m").delete("\r\n")
+      "Basic #{Base64.strict_encode("#{username}:#{password}")}"
     end
 
     # Returns Auth Settings hash for api client.

@@ -28,11 +28,34 @@ module GoogleDrive
     # Gets information about the user, the user&#39;s Drive, and system capabilities.
     # @return [Array<(About, Integer, Hash)>] About data, response status code and response headers
     def drive_about_get_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil)
+      request = build_drive_about_get_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
+
+      data, status_code, headers = @api_client.execute_api_request(request)
+
+      if @api_client.config.debugging
+        Log.debug { "API called: AboutApi#drive_about_get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      return About.from_nason(data), status_code, headers
+    end
+
+    # Gets information about the user, the user&#39;s Drive, and system capabilities.
+    # @return nil
+    def drive_about_get(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, &block : Crest::Response ->)
+      request = build_drive_about_get_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
+
+      request.execute do |response|
+        block.call(response)
+      end
+    end
+
+    # @return Crest::Request
+    def build_drive_about_get_request(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: AboutApi.drive_about_get ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -40,13 +63,13 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
+      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
+      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
+      query_params["key"] = key.to_s if !key.nil? && !key.null?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -65,7 +88,7 @@ module GoogleDrive
       # auth_names
       auth_names = ["Oauth2"]
 
-      data, status_code, headers = @api_client.call_api(
+      @api_client.build_api_request(
         :"GET",
         local_var_path,
         "AboutApi.drive_about_get",
@@ -76,66 +99,6 @@ module GoogleDrive
         query_params,
         form_params
       )
-
-      if @api_client.config.debugging
-        Log.debug { "API called: AboutApi#drive_about_get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
-      end
-      return About.from_nason(data), status_code, headers
-    end
-
-    # Gets information about the user, the user&#39;s Drive, and system capabilities.
-    # @return nil
-    def drive_about_get(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, &block : Crest::Response ->)
-      if @api_client.config.debugging
-        Log.debug { "Calling API: AboutApi.drive_about_get ..." }
-      end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      # resource path
-      local_var_path = "/drive/v3/about"
-
-      # query parameters
-      query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
-
-      # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
-
-      # http body (model)
-      post_body = nil
-
-      # return_type
-      return_type = "About"
-
-      # auth_names
-      auth_names = ["Oauth2"]
-
-      @api_client.call_api(
-        :"GET",
-        local_var_path,
-        "AboutApi.drive_about_get",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
-      ) do |response|
-        block.call(response)
-      end
     end
   end
 end

@@ -30,11 +30,35 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
     def drive_files_copy_with_http_info(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, file : File? = nil)
+      request = build_drive_files_copy_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, file: file)
+
+      data, status_code, headers = @api_client.execute_api_request(request)
+
+      if @api_client.config.debugging
+        Log.debug { "API called: FilesApi#drive_files_copy\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      return File.from_nason(data), status_code, headers
+    end
+
+    # Creates a copy of a file and applies any requested updates with patch semantics. Folders cannot be copied.
+    # @param file_id [String] The ID of the file.
+    # @return nil
+    def drive_files_copy(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, file : File? = nil, &block : Crest::Response ->)
+      request = build_drive_files_copy_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, file: file)
+
+      request.execute do |response|
+        block.call(response)
+      end
+    end
+
+    # @return Crest::Request
+    def build_drive_files_copy_request(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, file : File? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.drive_files_copy ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -42,20 +66,20 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["enforceSingleParent"] = enforce_single_parent.to_s if enforce_single_parent.present?
-      query_params["ignoreDefaultVisibility"] = ignore_default_visibility.to_s if ignore_default_visibility.present?
-      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if include_permissions_for_view.present?
-      query_params["keepRevisionForever"] = keep_revision_forever.to_s if keep_revision_forever.present?
-      query_params["ocrLanguage"] = ocr_language.to_s if ocr_language.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
+      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
+      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
+      query_params["key"] = key.to_s if !key.nil? && !key.null?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
+      query_params["enforceSingleParent"] = enforce_single_parent.to_s if !enforce_single_parent.nil? && !enforce_single_parent.null?
+      query_params["ignoreDefaultVisibility"] = ignore_default_visibility.to_s if !ignore_default_visibility.nil? && !ignore_default_visibility.null?
+      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if !include_permissions_for_view.nil? && !include_permissions_for_view.null?
+      query_params["keepRevisionForever"] = keep_revision_forever.to_s if !keep_revision_forever.nil? && !keep_revision_forever.null?
+      query_params["ocrLanguage"] = ocr_language.to_s if !ocr_language.nil? && !ocr_language.null?
+      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil? && !supports_all_drives.null?
+      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil? && !supports_team_drives.null?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -76,7 +100,7 @@ module GoogleDrive
       # auth_names
       auth_names = ["Oauth2"]
 
-      data, status_code, headers = @api_client.call_api(
+      @api_client.build_api_request(
         :"POST",
         local_var_path,
         "FilesApi.drive_files_copy",
@@ -87,76 +111,6 @@ module GoogleDrive
         query_params,
         form_params
       )
-
-      if @api_client.config.debugging
-        Log.debug { "API called: FilesApi#drive_files_copy\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
-      end
-      return File.from_nason(data), status_code, headers
-    end
-
-    # Creates a copy of a file and applies any requested updates with patch semantics. Folders cannot be copied.
-    # @param file_id [String] The ID of the file.
-    # @return nil
-    def drive_files_copy(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, file : File? = nil, &block : Crest::Response ->)
-      if @api_client.config.debugging
-        Log.debug { "Calling API: FilesApi.drive_files_copy ..." }
-      end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      # resource path
-      local_var_path = "/drive/v3/files/{fileId}/copy".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s))
-
-      # query parameters
-      query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["enforceSingleParent"] = enforce_single_parent.to_s if enforce_single_parent.present?
-      query_params["ignoreDefaultVisibility"] = ignore_default_visibility.to_s if ignore_default_visibility.present?
-      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if include_permissions_for_view.present?
-      query_params["keepRevisionForever"] = keep_revision_forever.to_s if keep_revision_forever.present?
-      query_params["ocrLanguage"] = ocr_language.to_s if ocr_language.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
-
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
-      # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
-
-      # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
-
-      # http body (model)
-      post_body = file.to_nason
-
-      # return_type
-      return_type = "File"
-
-      # auth_names
-      auth_names = ["Oauth2"]
-
-      @api_client.call_api(
-        :"POST",
-        local_var_path,
-        "FilesApi.drive_files_copy",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
-      ) do |response|
-        block.call(response)
-      end
     end
 
     # Creates a new file.
@@ -169,11 +123,34 @@ module GoogleDrive
     # Creates a new file.
     # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
     def drive_files_create_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, file : File? = nil)
+      request = build_drive_files_create_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file)
+
+      data, status_code, headers = @api_client.execute_api_request(request)
+
+      if @api_client.config.debugging
+        Log.debug { "API called: FilesApi#drive_files_create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      return File.from_nason(data), status_code, headers
+    end
+
+    # Creates a new file.
+    # @return nil
+    def drive_files_create(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, file : File? = nil, &block : Crest::Response ->)
+      request = build_drive_files_create_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file)
+
+      request.execute do |response|
+        block.call(response)
+      end
+    end
+
+    # @return Crest::Request
+    def build_drive_files_create_request(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, file : File? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.drive_files_create ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -181,21 +158,21 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["enforceSingleParent"] = enforce_single_parent.to_s if enforce_single_parent.present?
-      query_params["ignoreDefaultVisibility"] = ignore_default_visibility.to_s if ignore_default_visibility.present?
-      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if include_permissions_for_view.present?
-      query_params["keepRevisionForever"] = keep_revision_forever.to_s if keep_revision_forever.present?
-      query_params["ocrLanguage"] = ocr_language.to_s if ocr_language.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
-      query_params["useContentAsIndexableText"] = use_content_as_indexable_text.to_s if use_content_as_indexable_text.present?
+      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
+      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
+      query_params["key"] = key.to_s if !key.nil? && !key.null?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
+      query_params["enforceSingleParent"] = enforce_single_parent.to_s if !enforce_single_parent.nil? && !enforce_single_parent.null?
+      query_params["ignoreDefaultVisibility"] = ignore_default_visibility.to_s if !ignore_default_visibility.nil? && !ignore_default_visibility.null?
+      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if !include_permissions_for_view.nil? && !include_permissions_for_view.null?
+      query_params["keepRevisionForever"] = keep_revision_forever.to_s if !keep_revision_forever.nil? && !keep_revision_forever.null?
+      query_params["ocrLanguage"] = ocr_language.to_s if !ocr_language.nil? && !ocr_language.null?
+      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil? && !supports_all_drives.null?
+      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil? && !supports_team_drives.null?
+      query_params["useContentAsIndexableText"] = use_content_as_indexable_text.to_s if !use_content_as_indexable_text.nil? && !use_content_as_indexable_text.null?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -216,7 +193,7 @@ module GoogleDrive
       # auth_names
       auth_names = ["Oauth2"]
 
-      data, status_code, headers = @api_client.call_api(
+      @api_client.build_api_request(
         :"POST",
         local_var_path,
         "FilesApi.drive_files_create",
@@ -227,76 +204,6 @@ module GoogleDrive
         query_params,
         form_params
       )
-
-      if @api_client.config.debugging
-        Log.debug { "API called: FilesApi#drive_files_create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
-      end
-      return File.from_nason(data), status_code, headers
-    end
-
-    # Creates a new file.
-    # @return nil
-    def drive_files_create(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, file : File? = nil, &block : Crest::Response ->)
-      if @api_client.config.debugging
-        Log.debug { "Calling API: FilesApi.drive_files_create ..." }
-      end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      # resource path
-      local_var_path = "/drive/v3/files"
-
-      # query parameters
-      query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["enforceSingleParent"] = enforce_single_parent.to_s if enforce_single_parent.present?
-      query_params["ignoreDefaultVisibility"] = ignore_default_visibility.to_s if ignore_default_visibility.present?
-      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if include_permissions_for_view.present?
-      query_params["keepRevisionForever"] = keep_revision_forever.to_s if keep_revision_forever.present?
-      query_params["ocrLanguage"] = ocr_language.to_s if ocr_language.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
-      query_params["useContentAsIndexableText"] = use_content_as_indexable_text.to_s if use_content_as_indexable_text.present?
-
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
-      # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
-
-      # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
-
-      # http body (model)
-      post_body = file.to_nason
-
-      # return_type
-      return_type = "File"
-
-      # auth_names
-      auth_names = ["Oauth2"]
-
-      @api_client.call_api(
-        :"POST",
-        local_var_path,
-        "FilesApi.drive_files_create",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
-      ) do |response|
-        block.call(response)
-      end
     end
 
     # Permanently deletes a file owned by the user without moving it to the trash. If the file belongs to a shared drive the user must be an organizer on the parent. If the target is a folder, all descendants owned by the user are also deleted.
@@ -311,11 +218,35 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def drive_files_delete_with_http_info(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false)
+      request = build_drive_files_delete_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives)
+
+      data, status_code, headers = @api_client.execute_api_request(request)
+
+      if @api_client.config.debugging
+        Log.debug { "API called: FilesApi#drive_files_delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      return nil, status_code, headers
+    end
+
+    # Permanently deletes a file owned by the user without moving it to the trash. If the file belongs to a shared drive the user must be an organizer on the parent. If the target is a folder, all descendants owned by the user are also deleted.
+    # @param file_id [String] The ID of the file.
+    # @return nil
+    def drive_files_delete(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, &block : Crest::Response ->)
+      request = build_drive_files_delete_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives)
+
+      request.execute do |response|
+        block.call(response)
+      end
+    end
+
+    # @return Crest::Request
+    def build_drive_files_delete_request(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.drive_files_delete ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -323,16 +254,16 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["enforceSingleParent"] = enforce_single_parent.to_s if enforce_single_parent.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
+      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
+      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
+      query_params["key"] = key.to_s if !key.nil? && !key.null?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
+      query_params["enforceSingleParent"] = enforce_single_parent.to_s if !enforce_single_parent.nil? && !enforce_single_parent.null?
+      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil? && !supports_all_drives.null?
+      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil? && !supports_team_drives.null?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -349,7 +280,7 @@ module GoogleDrive
       # auth_names
       auth_names = ["Oauth2"]
 
-      data, status_code, headers = @api_client.call_api(
+      @api_client.build_api_request(
         :"DELETE",
         local_var_path,
         "FilesApi.drive_files_delete",
@@ -360,68 +291,6 @@ module GoogleDrive
         query_params,
         form_params
       )
-
-      if @api_client.config.debugging
-        Log.debug { "API called: FilesApi#drive_files_delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
-      end
-      return nil, status_code, headers
-    end
-
-    # Permanently deletes a file owned by the user without moving it to the trash. If the file belongs to a shared drive the user must be an organizer on the parent. If the target is a folder, all descendants owned by the user are also deleted.
-    # @param file_id [String] The ID of the file.
-    # @return nil
-    def drive_files_delete(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, &block : Crest::Response ->)
-      if @api_client.config.debugging
-        Log.debug { "Calling API: FilesApi.drive_files_delete ..." }
-      end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      # resource path
-      local_var_path = "/drive/v3/files/{fileId}".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s))
-
-      # query parameters
-      query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["enforceSingleParent"] = enforce_single_parent.to_s if enforce_single_parent.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
-
-      # header parameters
-      header_params = Hash(String, String).new
-
-      # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
-
-      # http body (model)
-      post_body = nil
-
-      # return_type
-      return_type = nil
-
-      # auth_names
-      auth_names = ["Oauth2"]
-
-      @api_client.call_api(
-        :"DELETE",
-        local_var_path,
-        "FilesApi.drive_files_delete",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
-      ) do |response|
-        block.call(response)
-      end
     end
 
     # Permanently deletes all of the user's trashed files.
@@ -434,11 +303,34 @@ module GoogleDrive
     # Permanently deletes all of the user&#39;s trashed files.
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def drive_files_empty_trash_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false)
+      request = build_drive_files_empty_trash_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent)
+
+      data, status_code, headers = @api_client.execute_api_request(request)
+
+      if @api_client.config.debugging
+        Log.debug { "API called: FilesApi#drive_files_empty_trash\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      return nil, status_code, headers
+    end
+
+    # Permanently deletes all of the user&#39;s trashed files.
+    # @return nil
+    def drive_files_empty_trash(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, &block : Crest::Response ->)
+      request = build_drive_files_empty_trash_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent)
+
+      request.execute do |response|
+        block.call(response)
+      end
+    end
+
+    # @return Crest::Request
+    def build_drive_files_empty_trash_request(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.drive_files_empty_trash ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -446,14 +338,14 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["enforceSingleParent"] = enforce_single_parent.to_s if enforce_single_parent.present?
+      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
+      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
+      query_params["key"] = key.to_s if !key.nil? && !key.null?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
+      query_params["enforceSingleParent"] = enforce_single_parent.to_s if !enforce_single_parent.nil? && !enforce_single_parent.null?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -470,7 +362,7 @@ module GoogleDrive
       # auth_names
       auth_names = ["Oauth2"]
 
-      data, status_code, headers = @api_client.call_api(
+      @api_client.build_api_request(
         :"DELETE",
         local_var_path,
         "FilesApi.drive_files_empty_trash",
@@ -481,65 +373,6 @@ module GoogleDrive
         query_params,
         form_params
       )
-
-      if @api_client.config.debugging
-        Log.debug { "API called: FilesApi#drive_files_empty_trash\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
-      end
-      return nil, status_code, headers
-    end
-
-    # Permanently deletes all of the user&#39;s trashed files.
-    # @return nil
-    def drive_files_empty_trash(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, &block : Crest::Response ->)
-      if @api_client.config.debugging
-        Log.debug { "Calling API: FilesApi.drive_files_empty_trash ..." }
-      end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      # resource path
-      local_var_path = "/drive/v3/files/trash"
-
-      # query parameters
-      query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["enforceSingleParent"] = enforce_single_parent.to_s if enforce_single_parent.present?
-
-      # header parameters
-      header_params = Hash(String, String).new
-
-      # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
-
-      # http body (model)
-      post_body = nil
-
-      # return_type
-      return_type = nil
-
-      # auth_names
-      auth_names = ["Oauth2"]
-
-      @api_client.call_api(
-        :"DELETE",
-        local_var_path,
-        "FilesApi.drive_files_empty_trash",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
-      ) do |response|
-        block.call(response)
-      end
     end
 
     # Exports a Google Doc to the requested MIME type and returns the exported content. Please note that the exported content is limited to 10MB.
@@ -556,11 +389,36 @@ module GoogleDrive
     # @param mime_type [String] The MIME type of the format requested for this export.
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def drive_files_export_with_http_info(*, file_id : String, mime_type : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil)
+      request = build_drive_files_export_request(file_id: file_id, mime_type: mime_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
+
+      data, status_code, headers = @api_client.execute_api_request(request)
+
+      if @api_client.config.debugging
+        Log.debug { "API called: FilesApi#drive_files_export\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      return nil, status_code, headers
+    end
+
+    # Exports a Google Doc to the requested MIME type and returns the exported content. Please note that the exported content is limited to 10MB.
+    # @param file_id [String] The ID of the file.
+    # @param mime_type [String] The MIME type of the format requested for this export.
+    # @return nil
+    def drive_files_export(*, file_id : String, mime_type : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, &block : Crest::Response ->)
+      request = build_drive_files_export_request(file_id: file_id, mime_type: mime_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
+
+      request.execute do |response|
+        block.call(response)
+      end
+    end
+
+    # @return Crest::Request
+    def build_drive_files_export_request(*, file_id : String, mime_type : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.drive_files_export ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -568,14 +426,14 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["mimeType"] = mime_type.to_s if mime_type.present?
+      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
+      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
+      query_params["key"] = key.to_s if !key.nil? && !key.null?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
+      query_params["mimeType"] = mime_type.to_s if !mime_type.nil? && !mime_type.null?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -592,7 +450,7 @@ module GoogleDrive
       # auth_names
       auth_names = ["Oauth2"]
 
-      data, status_code, headers = @api_client.call_api(
+      @api_client.build_api_request(
         :"GET",
         local_var_path,
         "FilesApi.drive_files_export",
@@ -603,67 +461,6 @@ module GoogleDrive
         query_params,
         form_params
       )
-
-      if @api_client.config.debugging
-        Log.debug { "API called: FilesApi#drive_files_export\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
-      end
-      return nil, status_code, headers
-    end
-
-    # Exports a Google Doc to the requested MIME type and returns the exported content. Please note that the exported content is limited to 10MB.
-    # @param file_id [String] The ID of the file.
-    # @param mime_type [String] The MIME type of the format requested for this export.
-    # @return nil
-    def drive_files_export(*, file_id : String, mime_type : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, &block : Crest::Response ->)
-      if @api_client.config.debugging
-        Log.debug { "Calling API: FilesApi.drive_files_export ..." }
-      end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      # resource path
-      local_var_path = "/drive/v3/files/{fileId}/export".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s))
-
-      # query parameters
-      query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["mimeType"] = mime_type.to_s if mime_type.present?
-
-      # header parameters
-      header_params = Hash(String, String).new
-
-      # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
-
-      # http body (model)
-      post_body = nil
-
-      # return_type
-      return_type = nil
-
-      # auth_names
-      auth_names = ["Oauth2"]
-
-      @api_client.call_api(
-        :"GET",
-        local_var_path,
-        "FilesApi.drive_files_export",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
-      ) do |response|
-        block.call(response)
-      end
     end
 
     # Generates a set of file IDs which can be provided in create or copy requests.
@@ -676,11 +473,34 @@ module GoogleDrive
     # Generates a set of file IDs which can be provided in create or copy requests.
     # @return [Array<(GeneratedIds, Integer, Hash)>] GeneratedIds data, response status code and response headers
     def drive_files_generate_ids_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, count : Int32? = 10, space : String? = "drive", _type : String? = "files")
+      request = build_drive_files_generate_ids_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, count: count, space: space, _type: _type)
+
+      data, status_code, headers = @api_client.execute_api_request(request)
+
+      if @api_client.config.debugging
+        Log.debug { "API called: FilesApi#drive_files_generate_ids\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      return GeneratedIds.from_nason(data), status_code, headers
+    end
+
+    # Generates a set of file IDs which can be provided in create or copy requests.
+    # @return nil
+    def drive_files_generate_ids(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, count : Int32? = 10, space : String? = "drive", _type : String? = "files", &block : Crest::Response ->)
+      request = build_drive_files_generate_ids_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, count: count, space: space, _type: _type)
+
+      request.execute do |response|
+        block.call(response)
+      end
+    end
+
+    # @return Crest::Request
+    def build_drive_files_generate_ids_request(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, count : Int32? = 10, space : String? = "drive", _type : String? = "files") : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.drive_files_generate_ids ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       if @api_client.config.client_side_validation && !count.nil? && count > 1000
@@ -696,16 +516,16 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["count"] = count.to_s if count.present?
-      query_params["space"] = space.to_s if space.present?
-      query_params["type"] = _type.to_s if _type.present?
+      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
+      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
+      query_params["key"] = key.to_s if !key.nil? && !key.null?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
+      query_params["count"] = count.to_s if !count.nil? && !count.null?
+      query_params["space"] = space.to_s if !space.nil? && !space.null?
+      query_params["type"] = _type.to_s if !_type.nil? && !_type.null?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -724,7 +544,7 @@ module GoogleDrive
       # auth_names
       auth_names = ["Oauth2"]
 
-      data, status_code, headers = @api_client.call_api(
+      @api_client.build_api_request(
         :"GET",
         local_var_path,
         "FilesApi.drive_files_generate_ids",
@@ -735,77 +555,6 @@ module GoogleDrive
         query_params,
         form_params
       )
-
-      if @api_client.config.debugging
-        Log.debug { "API called: FilesApi#drive_files_generate_ids\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
-      end
-      return GeneratedIds.from_nason(data), status_code, headers
-    end
-
-    # Generates a set of file IDs which can be provided in create or copy requests.
-    # @return nil
-    def drive_files_generate_ids(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, count : Int32? = 10, space : String? = "drive", _type : String? = "files", &block : Crest::Response ->)
-      if @api_client.config.debugging
-        Log.debug { "Calling API: FilesApi.drive_files_generate_ids ..." }
-      end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      if @api_client.config.client_side_validation && !count.nil? && count > 1000
-        raise ArgumentError.new("invalid value for \"count\" when calling FilesApi.drive_files_generate_ids, must be smaller than or equal to 1000.")
-      end
-
-      if @api_client.config.client_side_validation && !count.nil? && count < 1
-        raise ArgumentError.new("invalid value for \"count\" when calling FilesApi.drive_files_generate_ids, must be greater than or equal to 1.")
-      end
-
-      # resource path
-      local_var_path = "/drive/v3/files/generateIds"
-
-      # query parameters
-      query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["count"] = count.to_s if count.present?
-      query_params["space"] = space.to_s if space.present?
-      query_params["type"] = _type.to_s if _type.present?
-
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
-
-      # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
-
-      # http body (model)
-      post_body = nil
-
-      # return_type
-      return_type = "GeneratedIds"
-
-      # auth_names
-      auth_names = ["Oauth2"]
-
-      @api_client.call_api(
-        :"GET",
-        local_var_path,
-        "FilesApi.drive_files_generate_ids",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
-      ) do |response|
-        block.call(response)
-      end
     end
 
     # Gets a file's metadata or content by ID.
@@ -820,11 +569,35 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
     def drive_files_get_with_http_info(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false, include_permissions_for_view : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false)
+      request = build_drive_files_get_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives)
+
+      data, status_code, headers = @api_client.execute_api_request(request)
+
+      if @api_client.config.debugging
+        Log.debug { "API called: FilesApi#drive_files_get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      return File.from_nason(data), status_code, headers
+    end
+
+    # Gets a file&#39;s metadata or content by ID.
+    # @param file_id [String] The ID of the file.
+    # @return nil
+    def drive_files_get(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false, include_permissions_for_view : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, &block : Crest::Response ->)
+      request = build_drive_files_get_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives)
+
+      request.execute do |response|
+        block.call(response)
+      end
+    end
+
+    # @return Crest::Request
+    def build_drive_files_get_request(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false, include_permissions_for_view : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.drive_files_get ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -832,17 +605,17 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["acknowledgeAbuse"] = acknowledge_abuse.to_s if acknowledge_abuse.present?
-      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if include_permissions_for_view.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
+      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
+      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
+      query_params["key"] = key.to_s if !key.nil? && !key.null?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
+      query_params["acknowledgeAbuse"] = acknowledge_abuse.to_s if !acknowledge_abuse.nil? && !acknowledge_abuse.null?
+      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if !include_permissions_for_view.nil? && !include_permissions_for_view.null?
+      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil? && !supports_all_drives.null?
+      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil? && !supports_team_drives.null?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -861,7 +634,7 @@ module GoogleDrive
       # auth_names
       auth_names = ["Oauth2"]
 
-      data, status_code, headers = @api_client.call_api(
+      @api_client.build_api_request(
         :"GET",
         local_var_path,
         "FilesApi.drive_files_get",
@@ -872,71 +645,6 @@ module GoogleDrive
         query_params,
         form_params
       )
-
-      if @api_client.config.debugging
-        Log.debug { "API called: FilesApi#drive_files_get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
-      end
-      return File.from_nason(data), status_code, headers
-    end
-
-    # Gets a file&#39;s metadata or content by ID.
-    # @param file_id [String] The ID of the file.
-    # @return nil
-    def drive_files_get(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false, include_permissions_for_view : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, &block : Crest::Response ->)
-      if @api_client.config.debugging
-        Log.debug { "Calling API: FilesApi.drive_files_get ..." }
-      end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      # resource path
-      local_var_path = "/drive/v3/files/{fileId}".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s))
-
-      # query parameters
-      query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["acknowledgeAbuse"] = acknowledge_abuse.to_s if acknowledge_abuse.present?
-      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if include_permissions_for_view.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
-
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json", "*/*"])
-
-      # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
-
-      # http body (model)
-      post_body = nil
-
-      # return_type
-      return_type = "File"
-
-      # auth_names
-      auth_names = ["Oauth2"]
-
-      @api_client.call_api(
-        :"GET",
-        local_var_path,
-        "FilesApi.drive_files_get",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
-      ) do |response|
-        block.call(response)
-      end
     end
 
     # Lists or searches files.
@@ -949,15 +657,38 @@ module GoogleDrive
     # Lists or searches files.
     # @return [Array<(FileList, Integer, Hash)>] FileList data, response status code and response headers
     def drive_files_list_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, corpora : String? = nil, corpus : String? = nil, drive_id : String? = nil, include_items_from_all_drives : Bool? = false, include_permissions_for_view : String? = nil, include_team_drive_items : Bool? = false, order_by : String? = nil, page_size : Int32? = 100, page_token : String? = nil, q : String? = nil, spaces : String? = "drive", supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil)
+      request = build_drive_files_list_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, corpora: corpora, corpus: corpus, drive_id: drive_id, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_team_drive_items: include_team_drive_items, order_by: order_by, page_size: page_size, page_token: page_token, q: q, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
+
+      data, status_code, headers = @api_client.execute_api_request(request)
+
+      if @api_client.config.debugging
+        Log.debug { "API called: FilesApi#drive_files_list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      return FileList.from_nason(data), status_code, headers
+    end
+
+    # Lists or searches files.
+    # @return nil
+    def drive_files_list(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, corpora : String? = nil, corpus : String? = nil, drive_id : String? = nil, include_items_from_all_drives : Bool? = false, include_permissions_for_view : String? = nil, include_team_drive_items : Bool? = false, order_by : String? = nil, page_size : Int32? = 100, page_token : String? = nil, q : String? = nil, spaces : String? = "drive", supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil, &block : Crest::Response ->)
+      request = build_drive_files_list_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, corpora: corpora, corpus: corpus, drive_id: drive_id, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_team_drive_items: include_team_drive_items, order_by: order_by, page_size: page_size, page_token: page_token, q: q, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
+
+      request.execute do |response|
+        block.call(response)
+      end
+    end
+
+    # @return Crest::Request
+    def build_drive_files_list_request(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, corpora : String? = nil, corpus : String? = nil, drive_id : String? = nil, include_items_from_all_drives : Bool? = false, include_permissions_for_view : String? = nil, include_team_drive_items : Bool? = false, order_by : String? = nil, page_size : Int32? = 100, page_token : String? = nil, q : String? = nil, spaces : String? = "drive", supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.drive_files_list ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       allowable_values = ["domain", "user"]
-      if @api_client.config.client_side_validation && corpus.present? && !allowable_values.includes?(corpus)
+      if @api_client.config.client_side_validation && !corpus.nil? && !corpus.null? && !allowable_values.includes?(corpus)
         raise ArgumentError.new("invalid value for \"corpus\", must be one of #{allowable_values}")
       end
       if @api_client.config.client_side_validation && !page_size.nil? && page_size > 1000
@@ -973,27 +704,27 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["corpora"] = corpora.to_s if corpora.present?
-      query_params["corpus"] = corpus.to_s if corpus.present?
-      query_params["driveId"] = drive_id.to_s if drive_id.present?
-      query_params["includeItemsFromAllDrives"] = include_items_from_all_drives.to_s if include_items_from_all_drives.present?
-      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if include_permissions_for_view.present?
-      query_params["includeTeamDriveItems"] = include_team_drive_items.to_s if include_team_drive_items.present?
-      query_params["orderBy"] = order_by.to_s if order_by.present?
-      query_params["pageSize"] = page_size.to_s if page_size.present?
-      query_params["pageToken"] = page_token.to_s if page_token.present?
-      query_params["q"] = q.to_s if q.present?
-      query_params["spaces"] = spaces.to_s if spaces.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
-      query_params["teamDriveId"] = team_drive_id.to_s if team_drive_id.present?
+      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
+      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
+      query_params["key"] = key.to_s if !key.nil? && !key.null?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
+      query_params["corpora"] = corpora.to_s if !corpora.nil? && !corpora.null?
+      query_params["corpus"] = corpus.to_s if !corpus.nil? && !corpus.null?
+      query_params["driveId"] = drive_id.to_s if !drive_id.nil? && !drive_id.null?
+      query_params["includeItemsFromAllDrives"] = include_items_from_all_drives.to_s if !include_items_from_all_drives.nil? && !include_items_from_all_drives.null?
+      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if !include_permissions_for_view.nil? && !include_permissions_for_view.null?
+      query_params["includeTeamDriveItems"] = include_team_drive_items.to_s if !include_team_drive_items.nil? && !include_team_drive_items.null?
+      query_params["orderBy"] = order_by.to_s if !order_by.nil? && !order_by.null?
+      query_params["pageSize"] = page_size.to_s if !page_size.nil? && !page_size.null?
+      query_params["pageToken"] = page_token.to_s if !page_token.nil? && !page_token.null?
+      query_params["q"] = q.to_s if !q.nil? && !q.null?
+      query_params["spaces"] = spaces.to_s if !spaces.nil? && !spaces.null?
+      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil? && !supports_all_drives.null?
+      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil? && !supports_team_drives.null?
+      query_params["teamDriveId"] = team_drive_id.to_s if !team_drive_id.nil? && !team_drive_id.null?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -1012,7 +743,7 @@ module GoogleDrive
       # auth_names
       auth_names = ["Oauth2"]
 
-      data, status_code, headers = @api_client.call_api(
+      @api_client.build_api_request(
         :"GET",
         local_var_path,
         "FilesApi.drive_files_list",
@@ -1023,92 +754,6 @@ module GoogleDrive
         query_params,
         form_params
       )
-
-      if @api_client.config.debugging
-        Log.debug { "API called: FilesApi#drive_files_list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
-      end
-      return FileList.from_nason(data), status_code, headers
-    end
-
-    # Lists or searches files.
-    # @return nil
-    def drive_files_list(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, corpora : String? = nil, corpus : String? = nil, drive_id : String? = nil, include_items_from_all_drives : Bool? = false, include_permissions_for_view : String? = nil, include_team_drive_items : Bool? = false, order_by : String? = nil, page_size : Int32? = 100, page_token : String? = nil, q : String? = nil, spaces : String? = "drive", supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil, &block : Crest::Response ->)
-      if @api_client.config.debugging
-        Log.debug { "Calling API: FilesApi.drive_files_list ..." }
-      end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      allowable_values = ["domain", "user"]
-      if @api_client.config.client_side_validation && corpus.present? && !allowable_values.includes?(corpus)
-        raise ArgumentError.new("invalid value for \"corpus\", must be one of #{allowable_values}")
-      end
-      if @api_client.config.client_side_validation && !page_size.nil? && page_size > 1000
-        raise ArgumentError.new("invalid value for \"page_size\" when calling FilesApi.drive_files_list, must be smaller than or equal to 1000.")
-      end
-
-      if @api_client.config.client_side_validation && !page_size.nil? && page_size < 1
-        raise ArgumentError.new("invalid value for \"page_size\" when calling FilesApi.drive_files_list, must be greater than or equal to 1.")
-      end
-
-      # resource path
-      local_var_path = "/drive/v3/files"
-
-      # query parameters
-      query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["corpora"] = corpora.to_s if corpora.present?
-      query_params["corpus"] = corpus.to_s if corpus.present?
-      query_params["driveId"] = drive_id.to_s if drive_id.present?
-      query_params["includeItemsFromAllDrives"] = include_items_from_all_drives.to_s if include_items_from_all_drives.present?
-      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if include_permissions_for_view.present?
-      query_params["includeTeamDriveItems"] = include_team_drive_items.to_s if include_team_drive_items.present?
-      query_params["orderBy"] = order_by.to_s if order_by.present?
-      query_params["pageSize"] = page_size.to_s if page_size.present?
-      query_params["pageToken"] = page_token.to_s if page_token.present?
-      query_params["q"] = q.to_s if q.present?
-      query_params["spaces"] = spaces.to_s if spaces.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
-      query_params["teamDriveId"] = team_drive_id.to_s if team_drive_id.present?
-
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
-
-      # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
-
-      # http body (model)
-      post_body = nil
-
-      # return_type
-      return_type = "FileList"
-
-      # auth_names
-      auth_names = ["Oauth2"]
-
-      @api_client.call_api(
-        :"GET",
-        local_var_path,
-        "FilesApi.drive_files_list",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
-      ) do |response|
-        block.call(response)
-      end
     end
 
     # Updates a file's metadata and/or content. When calling this method, only populate fields in the request that you want to modify. When updating fields, some fields might change automatically, such as modifiedDate. This method supports patch semantics.
@@ -1123,11 +768,35 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
     def drive_files_update_with_http_info(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, file : File? = nil)
+      request = build_drive_files_update_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file)
+
+      data, status_code, headers = @api_client.execute_api_request(request)
+
+      if @api_client.config.debugging
+        Log.debug { "API called: FilesApi#drive_files_update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      return File.from_nason(data), status_code, headers
+    end
+
+    # Updates a file&#39;s metadata and/or content. When calling this method, only populate fields in the request that you want to modify. When updating fields, some fields might change automatically, such as modifiedDate. This method supports patch semantics.
+    # @param file_id [String] The ID of the file.
+    # @return nil
+    def drive_files_update(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, file : File? = nil, &block : Crest::Response ->)
+      request = build_drive_files_update_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file)
+
+      request.execute do |response|
+        block.call(response)
+      end
+    end
+
+    # @return Crest::Request
+    def build_drive_files_update_request(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, file : File? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.drive_files_update ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -1135,22 +804,22 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["addParents"] = add_parents.to_s if add_parents.present?
-      query_params["enforceSingleParent"] = enforce_single_parent.to_s if enforce_single_parent.present?
-      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if include_permissions_for_view.present?
-      query_params["keepRevisionForever"] = keep_revision_forever.to_s if keep_revision_forever.present?
-      query_params["ocrLanguage"] = ocr_language.to_s if ocr_language.present?
-      query_params["removeParents"] = remove_parents.to_s if remove_parents.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
-      query_params["useContentAsIndexableText"] = use_content_as_indexable_text.to_s if use_content_as_indexable_text.present?
+      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
+      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
+      query_params["key"] = key.to_s if !key.nil? && !key.null?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
+      query_params["addParents"] = add_parents.to_s if !add_parents.nil? && !add_parents.null?
+      query_params["enforceSingleParent"] = enforce_single_parent.to_s if !enforce_single_parent.nil? && !enforce_single_parent.null?
+      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if !include_permissions_for_view.nil? && !include_permissions_for_view.null?
+      query_params["keepRevisionForever"] = keep_revision_forever.to_s if !keep_revision_forever.nil? && !keep_revision_forever.null?
+      query_params["ocrLanguage"] = ocr_language.to_s if !ocr_language.nil? && !ocr_language.null?
+      query_params["removeParents"] = remove_parents.to_s if !remove_parents.nil? && !remove_parents.null?
+      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil? && !supports_all_drives.null?
+      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil? && !supports_team_drives.null?
+      query_params["useContentAsIndexableText"] = use_content_as_indexable_text.to_s if !use_content_as_indexable_text.nil? && !use_content_as_indexable_text.null?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -1171,7 +840,7 @@ module GoogleDrive
       # auth_names
       auth_names = ["Oauth2"]
 
-      data, status_code, headers = @api_client.call_api(
+      @api_client.build_api_request(
         :"PATCH",
         local_var_path,
         "FilesApi.drive_files_update",
@@ -1182,78 +851,6 @@ module GoogleDrive
         query_params,
         form_params
       )
-
-      if @api_client.config.debugging
-        Log.debug { "API called: FilesApi#drive_files_update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
-      end
-      return File.from_nason(data), status_code, headers
-    end
-
-    # Updates a file&#39;s metadata and/or content. When calling this method, only populate fields in the request that you want to modify. When updating fields, some fields might change automatically, such as modifiedDate. This method supports patch semantics.
-    # @param file_id [String] The ID of the file.
-    # @return nil
-    def drive_files_update(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, file : File? = nil, &block : Crest::Response ->)
-      if @api_client.config.debugging
-        Log.debug { "Calling API: FilesApi.drive_files_update ..." }
-      end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      # resource path
-      local_var_path = "/drive/v3/files/{fileId}".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s))
-
-      # query parameters
-      query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["addParents"] = add_parents.to_s if add_parents.present?
-      query_params["enforceSingleParent"] = enforce_single_parent.to_s if enforce_single_parent.present?
-      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if include_permissions_for_view.present?
-      query_params["keepRevisionForever"] = keep_revision_forever.to_s if keep_revision_forever.present?
-      query_params["ocrLanguage"] = ocr_language.to_s if ocr_language.present?
-      query_params["removeParents"] = remove_parents.to_s if remove_parents.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
-      query_params["useContentAsIndexableText"] = use_content_as_indexable_text.to_s if use_content_as_indexable_text.present?
-
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
-      # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["application/octet-stream"])
-
-      # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
-
-      # http body (model)
-      post_body = file.to_nason
-
-      # return_type
-      return_type = "File"
-
-      # auth_names
-      auth_names = ["Oauth2"]
-
-      @api_client.call_api(
-        :"PATCH",
-        local_var_path,
-        "FilesApi.drive_files_update",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
-      ) do |response|
-        block.call(response)
-      end
     end
 
     # Creates a new file.
@@ -1268,6 +865,30 @@ module GoogleDrive
     # @param upload_type [String] The type of upload request to the /upload URI
     # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
     def drive_files_upload_with_http_info(*, upload_type : String = "multipart", enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, metadata : ::File? = nil, media : ::File? = nil)
+      request = build_drive_files_upload_request(upload_type: upload_type, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, metadata: metadata, media: media)
+
+      data, status_code, headers = @api_client.execute_api_request(request)
+
+      if @api_client.config.debugging
+        Log.debug { "API called: FilesApi#drive_files_upload\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      return File.from_nason(data), status_code, headers
+    end
+
+    # Creates a new file.
+    # @param upload_type [String] The type of upload request to the /upload URI
+    # @return nil
+    def drive_files_upload(*, upload_type : String = "multipart", enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, metadata : ::File? = nil, media : ::File? = nil, &block : Crest::Response ->)
+      request = build_drive_files_upload_request(upload_type: upload_type, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, metadata: metadata, media: media)
+
+      request.execute do |response|
+        block.call(response)
+      end
+    end
+
+    # @return Crest::Request
+    def build_drive_files_upload_request(*, upload_type : String = "multipart", enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, metadata : ::File? = nil, media : ::File? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.drive_files_upload ..." }
       end
@@ -1281,15 +902,15 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, String).new
-      query_params["uploadType"] = upload_type.to_s if upload_type.present?
-      query_params["enforceSingleParent"] = enforce_single_parent.to_s if enforce_single_parent.present?
-      query_params["ignoreDefaultVisibility"] = ignore_default_visibility.to_s if ignore_default_visibility.present?
-      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if include_permissions_for_view.present?
-      query_params["keepRevisionForever"] = keep_revision_forever.to_s if keep_revision_forever.present?
-      query_params["ocrLanguage"] = ocr_language.to_s if ocr_language.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
-      query_params["useContentAsIndexableText"] = use_content_as_indexable_text.to_s if use_content_as_indexable_text.present?
+      query_params["uploadType"] = upload_type.to_s if !upload_type.nil? && !upload_type.null?
+      query_params["enforceSingleParent"] = enforce_single_parent.to_s if !enforce_single_parent.nil? && !enforce_single_parent.null?
+      query_params["ignoreDefaultVisibility"] = ignore_default_visibility.to_s if !ignore_default_visibility.nil? && !ignore_default_visibility.null?
+      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if !include_permissions_for_view.nil? && !include_permissions_for_view.null?
+      query_params["keepRevisionForever"] = keep_revision_forever.to_s if !keep_revision_forever.nil? && !keep_revision_forever.null?
+      query_params["ocrLanguage"] = ocr_language.to_s if !ocr_language.nil? && !ocr_language.null?
+      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil? && !supports_all_drives.null?
+      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil? && !supports_team_drives.null?
+      query_params["useContentAsIndexableText"] = use_content_as_indexable_text.to_s if !use_content_as_indexable_text.nil? && !use_content_as_indexable_text.null?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -1312,7 +933,7 @@ module GoogleDrive
       # auth_names
       auth_names = ["Oauth2"]
 
-      data, status_code, headers = @api_client.call_api(
+      @api_client.build_api_request(
         :"POST",
         local_var_path,
         "FilesApi.drive_files_upload",
@@ -1323,74 +944,6 @@ module GoogleDrive
         query_params,
         form_params
       )
-
-      if @api_client.config.debugging
-        Log.debug { "API called: FilesApi#drive_files_upload\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
-      end
-      return File.from_nason(data), status_code, headers
-    end
-
-    # Creates a new file.
-    # @param upload_type [String] The type of upload request to the /upload URI
-    # @return nil
-    def drive_files_upload(*, upload_type : String = "multipart", enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, metadata : ::File? = nil, media : ::File? = nil, &block : Crest::Response ->)
-      if @api_client.config.debugging
-        Log.debug { "Calling API: FilesApi.drive_files_upload ..." }
-      end
-      # verify enum value
-      allowable_values = ["media", "multipart", "resumable"]
-      if @api_client.config.client_side_validation && !allowable_values.includes?(upload_type)
-        raise ArgumentError.new("invalid value for \"upload_type\", must be one of #{allowable_values}")
-      end
-      # resource path
-      local_var_path = "/upload/drive/v3/files"
-
-      # query parameters
-      query_params = Hash(String, String).new
-      query_params["uploadType"] = upload_type.to_s if upload_type.present?
-      query_params["enforceSingleParent"] = enforce_single_parent.to_s if enforce_single_parent.present?
-      query_params["ignoreDefaultVisibility"] = ignore_default_visibility.to_s if ignore_default_visibility.present?
-      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if include_permissions_for_view.present?
-      query_params["keepRevisionForever"] = keep_revision_forever.to_s if keep_revision_forever.present?
-      query_params["ocrLanguage"] = ocr_language.to_s if ocr_language.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
-      query_params["useContentAsIndexableText"] = use_content_as_indexable_text.to_s if use_content_as_indexable_text.present?
-
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
-      # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["multipart/related"])
-
-      # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
-      form_params["Metadata"] = metadata if metadata.present?
-      form_params["Media"] = media if media.present?
-
-      # http body (model)
-      post_body = nil
-
-      # return_type
-      return_type = "File"
-
-      # auth_names
-      auth_names = ["Oauth2"]
-
-      @api_client.call_api(
-        :"POST",
-        local_var_path,
-        "FilesApi.drive_files_upload",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
-      ) do |response|
-        block.call(response)
-      end
     end
 
     # Subscribes to changes to a file
@@ -1405,11 +958,35 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @return [Array<(Channel, Integer, Hash)>] Channel data, response status code and response headers
     def drive_files_watch_with_http_info(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false, include_permissions_for_view : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, channel : Channel? = nil)
+      request = build_drive_files_watch_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, channel: channel)
+
+      data, status_code, headers = @api_client.execute_api_request(request)
+
+      if @api_client.config.debugging
+        Log.debug { "API called: FilesApi#drive_files_watch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      return Channel.from_nason(data), status_code, headers
+    end
+
+    # Subscribes to changes to a file
+    # @param file_id [String] The ID of the file.
+    # @return nil
+    def drive_files_watch(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false, include_permissions_for_view : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, channel : Channel? = nil, &block : Crest::Response ->)
+      request = build_drive_files_watch_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, channel: channel)
+
+      request.execute do |response|
+        block.call(response)
+      end
+    end
+
+    # @return Crest::Request
+    def build_drive_files_watch_request(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false, include_permissions_for_view : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, channel : Channel? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.drive_files_watch ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -1417,17 +994,17 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["acknowledgeAbuse"] = acknowledge_abuse.to_s if acknowledge_abuse.present?
-      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if include_permissions_for_view.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
+      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
+      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
+      query_params["key"] = key.to_s if !key.nil? && !key.null?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
+      query_params["acknowledgeAbuse"] = acknowledge_abuse.to_s if !acknowledge_abuse.nil? && !acknowledge_abuse.null?
+      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if !include_permissions_for_view.nil? && !include_permissions_for_view.null?
+      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil? && !supports_all_drives.null?
+      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil? && !supports_team_drives.null?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -1448,7 +1025,7 @@ module GoogleDrive
       # auth_names
       auth_names = ["Oauth2"]
 
-      data, status_code, headers = @api_client.call_api(
+      @api_client.build_api_request(
         :"POST",
         local_var_path,
         "FilesApi.drive_files_watch",
@@ -1459,73 +1036,6 @@ module GoogleDrive
         query_params,
         form_params
       )
-
-      if @api_client.config.debugging
-        Log.debug { "API called: FilesApi#drive_files_watch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
-      end
-      return Channel.from_nason(data), status_code, headers
-    end
-
-    # Subscribes to changes to a file
-    # @param file_id [String] The ID of the file.
-    # @return nil
-    def drive_files_watch(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false, include_permissions_for_view : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, channel : Channel? = nil, &block : Crest::Response ->)
-      if @api_client.config.debugging
-        Log.debug { "Calling API: FilesApi.drive_files_watch ..." }
-      end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && alt.present? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      # resource path
-      local_var_path = "/drive/v3/files/{fileId}/watch".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s))
-
-      # query parameters
-      query_params = Hash(String, String).new
-      query_params["alt"] = alt.to_s if alt.present?
-      query_params["fields"] = fields.to_s if fields.present?
-      query_params["key"] = key.to_s if key.present?
-      query_params["oauth_token"] = oauth_token.to_s if oauth_token.present?
-      query_params["prettyPrint"] = pretty_print.to_s if pretty_print.present?
-      query_params["quotaUser"] = quota_user.to_s if quota_user.present?
-      query_params["userIp"] = user_ip.to_s if user_ip.present?
-      query_params["acknowledgeAbuse"] = acknowledge_abuse.to_s if acknowledge_abuse.present?
-      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if include_permissions_for_view.present?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if supports_all_drives.present?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if supports_team_drives.present?
-
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
-      # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
-
-      # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
-
-      # http body (model)
-      post_body = channel.to_nason
-
-      # return_type
-      return_type = "Channel"
-
-      # auth_names
-      auth_names = ["Oauth2"]
-
-      @api_client.call_api(
-        :"POST",
-        local_var_path,
-        "FilesApi.drive_files_watch",
-        return_type,
-        post_body,
-        auth_names,
-        header_params,
-        query_params,
-        form_params
-      ) do |response|
-        block.call(response)
-      end
     end
   end
 end

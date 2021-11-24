@@ -125,11 +125,11 @@ module GoogleDrive
       end
     end
 
-    # Call an API with given options.
+    # Build an API request with given options.
     #
-    # @return [Array<(Object, Integer, Hash)>] an array of 3 elements:
+    # @return Crest::Request
     #   the data deserialized from response body (could be nil), response status code and response headers.
-    def call_api(http_method : Symbol, path : String, operation : String, return_type : String?, post_body : String?, auth_names = [] of String, header_params = {} of String => String, query_params = {} of String => String, form_params = {} of String => (String | Array(String) | ::File))
+    def build_api_request(http_method : Symbol, path : String, operation : String, return_type : String?, post_body : String?, auth_names = [] of String, header_params = {} of String => String, query_params = {} of String => String, form_params = {} of String => (String | Array(String) | ::File)) : Crest::Request
       # ssl_options = {
       #   "ca_file" => @config.ssl_ca_file,
       #   "verify" => @config.ssl_verify,
@@ -149,7 +149,7 @@ module GoogleDrive
         form_or_body = form_params
       end
 
-      request = Crest::Request.new(
+      Crest::Request.new(
         http_method,
         build_request_url(path, operation),
         params: query_params,
@@ -159,7 +159,9 @@ module GoogleDrive
         logging: @config.debugging,
         handle_errors: false
       )
+    end
 
+    def execute_api_request(request : Crest::Request)
       response = request.execute
 
       if @config.debugging
@@ -180,46 +182,6 @@ module GoogleDrive
       end
 
       return response.body, response.status_code, response.headers
-    end
-
-    # Call an API with given options and block.
-    #
-    # @return [Array<(Object, Integer, Hash)>] an array of 3 elements:
-    #   the data deserialized from response body (could be nil), response status code and response headers.
-    def call_api(http_method : Symbol, path : String, operation : String, return_type : String?, post_body : String?, auth_names = [] of String, header_params = {} of String => String, query_params = {} of String => String, form_params = {} of String => (String | Array(String) | ::File), &block : Crest::Response ->) : Nil
-      # ssl_options = {
-      #   "ca_file" => @config.ssl_ca_file,
-      #   "verify" => @config.ssl_verify,
-      #   "verify_mode" => @config.ssl_verify_mode,
-      #   "client_cert" => @config.ssl_client_cert,
-      #   "client_key" => @config.ssl_client_key
-      # }
-
-      update_params_for_auth! header_params, query_params, auth_names
-
-      if !post_body.nil? && !post_body.empty?
-        # use JSON string in the payload
-        form_or_body = post_body
-      else
-        # use HTTP forms in the payload
-        # TODO use HTTP form encoding
-        form_or_body = form_params
-      end
-
-      request = Crest::Request.new(
-        http_method,
-        build_request_url(path, operation),
-        params: query_params,
-        headers: header_params,
-        # cookies: cookie_params, # TODO add cookies support
-        form: form_or_body,
-        logging: @config.debugging,
-        handle_errors: false
-      )
-
-      request.execute do |response|
-        block.call(response)
-      end
     end
   end
 end
