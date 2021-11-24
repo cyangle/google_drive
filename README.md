@@ -64,6 +64,12 @@ files_api = GoogleDrive::FilesApi.new
 files_api.list(page_size: 10, spaces: "appDataFolder")
 ```
 
+#### Get file meta data by id
+
+```crystal
+file_meta : GoogleDrive::File = files_api.get(file_id: "unique_file_id")
+```
+
 #### Download file by id
 
 ```crystal
@@ -72,12 +78,6 @@ files_api.get(file_id: "unique_file_id", alt: "media") do |response|
     IO.copy(response.body_io, file)
   end
 end
-```
-
-#### Get file meta data by id
-
-```crystal
-file_meta : GoogleDrive::File = files_api.get(file_id: "unique_file_id", alt: "json")
 ```
 
 #### Upload file
@@ -93,7 +93,6 @@ File.tempfile(suffix: ".json") do |file|
   file.print(file_meta.to_nason) # This shard uses nason for JSON serialization
   file.rewind
   new_file_meta : GoogleDrive::File = files_api.upload(
-    upload_type: "multipart",
     metadata: file,
     media: File.open("./test.json")
   )
