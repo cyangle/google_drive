@@ -104,7 +104,7 @@ end
 #### Delete file by id
 
 ```crystal
-files_api.drive_files_delete(file_id = "unique_file_id")
+files_api.drive_files_delete(file_id: "unique_file_id")
 ```
 
 ## Development
