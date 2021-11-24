@@ -22,8 +22,8 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @param revision_id [String] The ID of the revision.
     # @return [nil]
-    def drive_revisions_delete(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil)
-      drive_revisions_delete_with_http_info(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
+    def delete(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil)
+      delete_with_http_info(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
       nil
     end
 
@@ -31,13 +31,13 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @param revision_id [String] The ID of the revision.
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def drive_revisions_delete_with_http_info(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil)
-      request = build_drive_revisions_delete_request(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
+    def delete_with_http_info(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil)
+      request = build_delete_request(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
       if @api_client.config.debugging
-        Log.debug { "API called: RevisionsApi#drive_revisions_delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+        Log.debug { "API called: RevisionsApi#delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
       return nil, status_code, headers
@@ -47,8 +47,8 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @param revision_id [String] The ID of the revision.
     # @return nil
-    def drive_revisions_delete(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, &block : Crest::Response ->)
-      request = build_drive_revisions_delete_request(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
+    def delete(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, &block : Crest::Response ->)
+      request = build_delete_request(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
 
       request.execute do |response|
         block.call(response)
@@ -56,9 +56,9 @@ module GoogleDrive
     end
 
     # @return Crest::Request
-    def build_drive_revisions_delete_request(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil) : Crest::Request
+    def build_delete_request(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil) : Crest::Request
       if @api_client.config.debugging
-        Log.debug { "Calling API: RevisionsApi.drive_revisions_delete ..." }
+        Log.debug { "Calling API: RevisionsApi.delete ..." }
       end
       allowable_values = ["json", "media"]
       if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
@@ -105,8 +105,8 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @param revision_id [String] The ID of the revision.
     # @return [Revision]
-    def drive_revisions_get(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false)
-      data, _status_code, _headers = drive_revisions_get_with_http_info(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse)
+    def get(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false)
+      data, _status_code, _headers = get_with_http_info(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse)
       data
     end
 
@@ -114,13 +114,13 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @param revision_id [String] The ID of the revision.
     # @return [Array<(Revision, Integer, Hash)>] Revision data, response status code and response headers
-    def drive_revisions_get_with_http_info(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false)
-      request = build_drive_revisions_get_request(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse)
+    def get_with_http_info(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false)
+      request = build_get_request(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
       if @api_client.config.debugging
-        Log.debug { "API called: RevisionsApi#drive_revisions_get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+        Log.debug { "API called: RevisionsApi#get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
       return Revision.from_nason(data), status_code, headers
@@ -130,8 +130,8 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @param revision_id [String] The ID of the revision.
     # @return nil
-    def drive_revisions_get(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false, &block : Crest::Response ->)
-      request = build_drive_revisions_get_request(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse)
+    def get(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false, &block : Crest::Response ->)
+      request = build_get_request(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse)
 
       request.execute do |response|
         block.call(response)
@@ -139,9 +139,9 @@ module GoogleDrive
     end
 
     # @return Crest::Request
-    def build_drive_revisions_get_request(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false) : Crest::Request
+    def build_get_request(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false) : Crest::Request
       if @api_client.config.debugging
-        Log.debug { "Calling API: RevisionsApi.drive_revisions_get ..." }
+        Log.debug { "Calling API: RevisionsApi.get ..." }
       end
       allowable_values = ["json", "media"]
       if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
@@ -190,21 +190,21 @@ module GoogleDrive
     # Lists a file's revisions.
     # @param file_id [String] The ID of the file.
     # @return [RevisionList]
-    def drive_revisions_list(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = 200, page_token : String? = nil)
-      data, _status_code, _headers = drive_revisions_list_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token)
+    def list(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = 200, page_token : String? = nil)
+      data, _status_code, _headers = list_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token)
       data
     end
 
     # Lists a file&#39;s revisions.
     # @param file_id [String] The ID of the file.
     # @return [Array<(RevisionList, Integer, Hash)>] RevisionList data, response status code and response headers
-    def drive_revisions_list_with_http_info(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = 200, page_token : String? = nil)
-      request = build_drive_revisions_list_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token)
+    def list_with_http_info(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = 200, page_token : String? = nil)
+      request = build_list_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
       if @api_client.config.debugging
-        Log.debug { "API called: RevisionsApi#drive_revisions_list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+        Log.debug { "API called: RevisionsApi#list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
       return RevisionList.from_nason(data), status_code, headers
@@ -213,8 +213,8 @@ module GoogleDrive
     # Lists a file&#39;s revisions.
     # @param file_id [String] The ID of the file.
     # @return nil
-    def drive_revisions_list(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = 200, page_token : String? = nil, &block : Crest::Response ->)
-      request = build_drive_revisions_list_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token)
+    def list(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = 200, page_token : String? = nil, &block : Crest::Response ->)
+      request = build_list_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token)
 
       request.execute do |response|
         block.call(response)
@@ -222,20 +222,20 @@ module GoogleDrive
     end
 
     # @return Crest::Request
-    def build_drive_revisions_list_request(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = 200, page_token : String? = nil) : Crest::Request
+    def build_list_request(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = 200, page_token : String? = nil) : Crest::Request
       if @api_client.config.debugging
-        Log.debug { "Calling API: RevisionsApi.drive_revisions_list ..." }
+        Log.debug { "Calling API: RevisionsApi.list ..." }
       end
       allowable_values = ["json", "media"]
       if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       if @api_client.config.client_side_validation && !page_size.nil? && page_size > 1000
-        raise ArgumentError.new("invalid value for \"page_size\" when calling RevisionsApi.drive_revisions_list, must be smaller than or equal to 1000.")
+        raise ArgumentError.new("invalid value for \"page_size\" when calling RevisionsApi.list, must be smaller than or equal to 1000.")
       end
 
       if @api_client.config.client_side_validation && !page_size.nil? && page_size < 1
-        raise ArgumentError.new("invalid value for \"page_size\" when calling RevisionsApi.drive_revisions_list, must be greater than or equal to 1.")
+        raise ArgumentError.new("invalid value for \"page_size\" when calling RevisionsApi.list, must be greater than or equal to 1.")
       end
 
       # resource path
@@ -283,8 +283,8 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @param revision_id [String] The ID of the revision.
     # @return [Revision]
-    def drive_revisions_update(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, revision : Revision? = nil)
-      data, _status_code, _headers = drive_revisions_update_with_http_info(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, revision: revision)
+    def update(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, revision : Revision? = nil)
+      data, _status_code, _headers = update_with_http_info(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, revision: revision)
       data
     end
 
@@ -292,13 +292,13 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @param revision_id [String] The ID of the revision.
     # @return [Array<(Revision, Integer, Hash)>] Revision data, response status code and response headers
-    def drive_revisions_update_with_http_info(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, revision : Revision? = nil)
-      request = build_drive_revisions_update_request(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, revision: revision)
+    def update_with_http_info(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, revision : Revision? = nil)
+      request = build_update_request(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, revision: revision)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
       if @api_client.config.debugging
-        Log.debug { "API called: RevisionsApi#drive_revisions_update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+        Log.debug { "API called: RevisionsApi#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
       return Revision.from_nason(data), status_code, headers
@@ -308,8 +308,8 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @param revision_id [String] The ID of the revision.
     # @return nil
-    def drive_revisions_update(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, revision : Revision? = nil, &block : Crest::Response ->)
-      request = build_drive_revisions_update_request(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, revision: revision)
+    def update(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, revision : Revision? = nil, &block : Crest::Response ->)
+      request = build_update_request(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, revision: revision)
 
       request.execute do |response|
         block.call(response)
@@ -317,9 +317,9 @@ module GoogleDrive
     end
 
     # @return Crest::Request
-    def build_drive_revisions_update_request(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, revision : Revision? = nil) : Crest::Request
+    def build_update_request(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, revision : Revision? = nil) : Crest::Request
       if @api_client.config.debugging
-        Log.debug { "Calling API: RevisionsApi.drive_revisions_update ..." }
+        Log.debug { "Calling API: RevisionsApi.update ..." }
       end
       allowable_values = ["json", "media"]
       if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)

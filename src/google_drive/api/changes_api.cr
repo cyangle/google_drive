@@ -20,20 +20,20 @@ module GoogleDrive
 
     # Gets the starting pageToken for listing future changes.
     # @return [StartPageToken]
-    def drive_changes_get_start_page_token(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil)
-      data, _status_code, _headers = drive_changes_get_start_page_token_with_http_info(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
+    def get_start_page_token(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil)
+      data, _status_code, _headers = get_start_page_token_with_http_info(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
       data
     end
 
     # Gets the starting pageToken for listing future changes.
     # @return [Array<(StartPageToken, Integer, Hash)>] StartPageToken data, response status code and response headers
-    def drive_changes_get_start_page_token_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil)
-      request = build_drive_changes_get_start_page_token_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
+    def get_start_page_token_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil)
+      request = build_get_start_page_token_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
       if @api_client.config.debugging
-        Log.debug { "API called: ChangesApi#drive_changes_get_start_page_token\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+        Log.debug { "API called: ChangesApi#get_start_page_token\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
       return StartPageToken.from_nason(data), status_code, headers
@@ -41,8 +41,8 @@ module GoogleDrive
 
     # Gets the starting pageToken for listing future changes.
     # @return nil
-    def drive_changes_get_start_page_token(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil, &block : Crest::Response ->)
-      request = build_drive_changes_get_start_page_token_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
+    def get_start_page_token(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil, &block : Crest::Response ->)
+      request = build_get_start_page_token_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
 
       request.execute do |response|
         block.call(response)
@@ -50,9 +50,9 @@ module GoogleDrive
     end
 
     # @return Crest::Request
-    def build_drive_changes_get_start_page_token_request(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil) : Crest::Request
+    def build_get_start_page_token_request(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil) : Crest::Request
       if @api_client.config.debugging
-        Log.debug { "Calling API: ChangesApi.drive_changes_get_start_page_token ..." }
+        Log.debug { "Calling API: ChangesApi.get_start_page_token ..." }
       end
       allowable_values = ["json", "media"]
       if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
@@ -104,21 +104,21 @@ module GoogleDrive
     # Lists the changes for a user or shared drive.
     # @param page_token [String] The token for continuing a previous list request on the next page. This should be set to the value of &#39;nextPageToken&#39; from the previous response or to the response from the getStartPageToken method.
     # @return [ChangeList]
-    def drive_changes_list(*, page_token : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, include_corpus_removals : Bool? = false, include_items_from_all_drives : Bool? = false, include_permissions_for_view : String? = nil, include_removed : Bool? = true, include_team_drive_items : Bool? = false, page_size : Int32? = 100, restrict_to_my_drive : Bool? = false, spaces : String? = "drive", supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil)
-      data, _status_code, _headers = drive_changes_list_with_http_info(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
+    def list(*, page_token : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, include_corpus_removals : Bool? = false, include_items_from_all_drives : Bool? = false, include_permissions_for_view : String? = nil, include_removed : Bool? = true, include_team_drive_items : Bool? = false, page_size : Int32? = 100, restrict_to_my_drive : Bool? = false, spaces : String? = "drive", supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil)
+      data, _status_code, _headers = list_with_http_info(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
       data
     end
 
     # Lists the changes for a user or shared drive.
     # @param page_token [String] The token for continuing a previous list request on the next page. This should be set to the value of &#39;nextPageToken&#39; from the previous response or to the response from the getStartPageToken method.
     # @return [Array<(ChangeList, Integer, Hash)>] ChangeList data, response status code and response headers
-    def drive_changes_list_with_http_info(*, page_token : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, include_corpus_removals : Bool? = false, include_items_from_all_drives : Bool? = false, include_permissions_for_view : String? = nil, include_removed : Bool? = true, include_team_drive_items : Bool? = false, page_size : Int32? = 100, restrict_to_my_drive : Bool? = false, spaces : String? = "drive", supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil)
-      request = build_drive_changes_list_request(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
+    def list_with_http_info(*, page_token : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, include_corpus_removals : Bool? = false, include_items_from_all_drives : Bool? = false, include_permissions_for_view : String? = nil, include_removed : Bool? = true, include_team_drive_items : Bool? = false, page_size : Int32? = 100, restrict_to_my_drive : Bool? = false, spaces : String? = "drive", supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil)
+      request = build_list_request(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
       if @api_client.config.debugging
-        Log.debug { "API called: ChangesApi#drive_changes_list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+        Log.debug { "API called: ChangesApi#list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
       return ChangeList.from_nason(data), status_code, headers
@@ -127,8 +127,8 @@ module GoogleDrive
     # Lists the changes for a user or shared drive.
     # @param page_token [String] The token for continuing a previous list request on the next page. This should be set to the value of &#39;nextPageToken&#39; from the previous response or to the response from the getStartPageToken method.
     # @return nil
-    def drive_changes_list(*, page_token : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, include_corpus_removals : Bool? = false, include_items_from_all_drives : Bool? = false, include_permissions_for_view : String? = nil, include_removed : Bool? = true, include_team_drive_items : Bool? = false, page_size : Int32? = 100, restrict_to_my_drive : Bool? = false, spaces : String? = "drive", supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil, &block : Crest::Response ->)
-      request = build_drive_changes_list_request(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
+    def list(*, page_token : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, include_corpus_removals : Bool? = false, include_items_from_all_drives : Bool? = false, include_permissions_for_view : String? = nil, include_removed : Bool? = true, include_team_drive_items : Bool? = false, page_size : Int32? = 100, restrict_to_my_drive : Bool? = false, spaces : String? = "drive", supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil, &block : Crest::Response ->)
+      request = build_list_request(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
 
       request.execute do |response|
         block.call(response)
@@ -136,20 +136,20 @@ module GoogleDrive
     end
 
     # @return Crest::Request
-    def build_drive_changes_list_request(*, page_token : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, include_corpus_removals : Bool? = false, include_items_from_all_drives : Bool? = false, include_permissions_for_view : String? = nil, include_removed : Bool? = true, include_team_drive_items : Bool? = false, page_size : Int32? = 100, restrict_to_my_drive : Bool? = false, spaces : String? = "drive", supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil) : Crest::Request
+    def build_list_request(*, page_token : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, include_corpus_removals : Bool? = false, include_items_from_all_drives : Bool? = false, include_permissions_for_view : String? = nil, include_removed : Bool? = true, include_team_drive_items : Bool? = false, page_size : Int32? = 100, restrict_to_my_drive : Bool? = false, spaces : String? = "drive", supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil) : Crest::Request
       if @api_client.config.debugging
-        Log.debug { "Calling API: ChangesApi.drive_changes_list ..." }
+        Log.debug { "Calling API: ChangesApi.list ..." }
       end
       allowable_values = ["json", "media"]
       if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       if @api_client.config.client_side_validation && !page_size.nil? && page_size > 1000
-        raise ArgumentError.new("invalid value for \"page_size\" when calling ChangesApi.drive_changes_list, must be smaller than or equal to 1000.")
+        raise ArgumentError.new("invalid value for \"page_size\" when calling ChangesApi.list, must be smaller than or equal to 1000.")
       end
 
       if @api_client.config.client_side_validation && !page_size.nil? && page_size < 1
-        raise ArgumentError.new("invalid value for \"page_size\" when calling ChangesApi.drive_changes_list, must be greater than or equal to 1.")
+        raise ArgumentError.new("invalid value for \"page_size\" when calling ChangesApi.list, must be greater than or equal to 1.")
       end
 
       # resource path
@@ -207,21 +207,21 @@ module GoogleDrive
     # Subscribes to changes for a user.
     # @param page_token [String] The token for continuing a previous list request on the next page. This should be set to the value of &#39;nextPageToken&#39; from the previous response or to the response from the getStartPageToken method.
     # @return [Channel]
-    def drive_changes_watch(*, page_token : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, include_corpus_removals : Bool? = false, include_items_from_all_drives : Bool? = false, include_permissions_for_view : String? = nil, include_removed : Bool? = true, include_team_drive_items : Bool? = false, page_size : Int32? = 100, restrict_to_my_drive : Bool? = false, spaces : String? = "drive", supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil, channel : Channel? = nil)
-      data, _status_code, _headers = drive_changes_watch_with_http_info(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id, channel: channel)
+    def watch(*, page_token : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, include_corpus_removals : Bool? = false, include_items_from_all_drives : Bool? = false, include_permissions_for_view : String? = nil, include_removed : Bool? = true, include_team_drive_items : Bool? = false, page_size : Int32? = 100, restrict_to_my_drive : Bool? = false, spaces : String? = "drive", supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil, channel : Channel? = nil)
+      data, _status_code, _headers = watch_with_http_info(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id, channel: channel)
       data
     end
 
     # Subscribes to changes for a user.
     # @param page_token [String] The token for continuing a previous list request on the next page. This should be set to the value of &#39;nextPageToken&#39; from the previous response or to the response from the getStartPageToken method.
     # @return [Array<(Channel, Integer, Hash)>] Channel data, response status code and response headers
-    def drive_changes_watch_with_http_info(*, page_token : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, include_corpus_removals : Bool? = false, include_items_from_all_drives : Bool? = false, include_permissions_for_view : String? = nil, include_removed : Bool? = true, include_team_drive_items : Bool? = false, page_size : Int32? = 100, restrict_to_my_drive : Bool? = false, spaces : String? = "drive", supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil, channel : Channel? = nil)
-      request = build_drive_changes_watch_request(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id, channel: channel)
+    def watch_with_http_info(*, page_token : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, include_corpus_removals : Bool? = false, include_items_from_all_drives : Bool? = false, include_permissions_for_view : String? = nil, include_removed : Bool? = true, include_team_drive_items : Bool? = false, page_size : Int32? = 100, restrict_to_my_drive : Bool? = false, spaces : String? = "drive", supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil, channel : Channel? = nil)
+      request = build_watch_request(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id, channel: channel)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
       if @api_client.config.debugging
-        Log.debug { "API called: ChangesApi#drive_changes_watch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+        Log.debug { "API called: ChangesApi#watch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
       return Channel.from_nason(data), status_code, headers
@@ -230,8 +230,8 @@ module GoogleDrive
     # Subscribes to changes for a user.
     # @param page_token [String] The token for continuing a previous list request on the next page. This should be set to the value of &#39;nextPageToken&#39; from the previous response or to the response from the getStartPageToken method.
     # @return nil
-    def drive_changes_watch(*, page_token : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, include_corpus_removals : Bool? = false, include_items_from_all_drives : Bool? = false, include_permissions_for_view : String? = nil, include_removed : Bool? = true, include_team_drive_items : Bool? = false, page_size : Int32? = 100, restrict_to_my_drive : Bool? = false, spaces : String? = "drive", supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil, channel : Channel? = nil, &block : Crest::Response ->)
-      request = build_drive_changes_watch_request(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id, channel: channel)
+    def watch(*, page_token : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, include_corpus_removals : Bool? = false, include_items_from_all_drives : Bool? = false, include_permissions_for_view : String? = nil, include_removed : Bool? = true, include_team_drive_items : Bool? = false, page_size : Int32? = 100, restrict_to_my_drive : Bool? = false, spaces : String? = "drive", supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil, channel : Channel? = nil, &block : Crest::Response ->)
+      request = build_watch_request(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id, channel: channel)
 
       request.execute do |response|
         block.call(response)
@@ -239,20 +239,20 @@ module GoogleDrive
     end
 
     # @return Crest::Request
-    def build_drive_changes_watch_request(*, page_token : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, include_corpus_removals : Bool? = false, include_items_from_all_drives : Bool? = false, include_permissions_for_view : String? = nil, include_removed : Bool? = true, include_team_drive_items : Bool? = false, page_size : Int32? = 100, restrict_to_my_drive : Bool? = false, spaces : String? = "drive", supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil, channel : Channel? = nil) : Crest::Request
+    def build_watch_request(*, page_token : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, include_corpus_removals : Bool? = false, include_items_from_all_drives : Bool? = false, include_permissions_for_view : String? = nil, include_removed : Bool? = true, include_team_drive_items : Bool? = false, page_size : Int32? = 100, restrict_to_my_drive : Bool? = false, spaces : String? = "drive", supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil, channel : Channel? = nil) : Crest::Request
       if @api_client.config.debugging
-        Log.debug { "Calling API: ChangesApi.drive_changes_watch ..." }
+        Log.debug { "Calling API: ChangesApi.watch ..." }
       end
       allowable_values = ["json", "media"]
       if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       if @api_client.config.client_side_validation && !page_size.nil? && page_size > 1000
-        raise ArgumentError.new("invalid value for \"page_size\" when calling ChangesApi.drive_changes_watch, must be smaller than or equal to 1000.")
+        raise ArgumentError.new("invalid value for \"page_size\" when calling ChangesApi.watch, must be smaller than or equal to 1000.")
       end
 
       if @api_client.config.client_side_validation && !page_size.nil? && page_size < 1
-        raise ArgumentError.new("invalid value for \"page_size\" when calling ChangesApi.drive_changes_watch, must be greater than or equal to 1.")
+        raise ArgumentError.new("invalid value for \"page_size\" when calling ChangesApi.watch, must be greater than or equal to 1.")
       end
 
       # resource path
