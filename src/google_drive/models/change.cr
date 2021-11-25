@@ -52,7 +52,7 @@ module GoogleDrive
     property team_drive_id : String?
 
     # The time of this change (RFC 3339 date-time).
-    @[NASON::Field(key: "time", type: Time?, nillable: true)]
+    @[NASON::Field(key: "time", type: Time?, converter: Time::RFC3339Converter, nillable: true)]
     property time : Time?
 
     # Deprecated - use changeType instead.

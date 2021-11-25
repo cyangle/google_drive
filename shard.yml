@@ -1,5 +1,5 @@
 name: google_drive
-version: 3.1.0
+version: 3.1.1
 authors:
   - cyangle
 description: |
@@ -11,7 +11,7 @@ dependencies:
     version: ~> 1.0
   nason:
     github: cyangle/nason
-    version: ~> 0.3.0
+    version: ~> 0.3.1
 
 development_dependencies:
   kemal:

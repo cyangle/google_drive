@@ -46,7 +46,7 @@ module GoogleDrive
     property mime_type : String?
 
     # The last time the revision was modified (RFC 3339 date-time).
-    @[NASON::Field(key: "modifiedTime", type: Time?, nillable: true)]
+    @[NASON::Field(key: "modifiedTime", type: Time?, converter: Time::RFC3339Converter, nillable: true)]
     property modified_time : Time?
 
     # The original filename used to create this revision. This is only applicable to files with binary content in Drive.

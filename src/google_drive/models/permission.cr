@@ -39,7 +39,7 @@ module GoogleDrive
     property email_address : String?
 
     # The time at which this permission will expire (RFC 3339 date-time). Expiration times have the following restrictions:   - They can only be set on user and group permissions  - The time must be in the future  - The time cannot be more than a year in the future
-    @[NASON::Field(key: "expirationTime", type: Time?, nillable: true)]
+    @[NASON::Field(key: "expirationTime", type: Time?, converter: Time::RFC3339Converter, nillable: true)]
     property expiration_time : Time?
 
     # The ID of this permission. This is a unique identifier for the grantee, and is published in User resources as permissionId. IDs should be treated as opaque values.

@@ -30,7 +30,7 @@ module GoogleDrive
     property content : String?
 
     # The time at which the comment was created (RFC 3339 date-time).
-    @[NASON::Field(key: "createdTime", type: Time?, nillable: true)]
+    @[NASON::Field(key: "createdTime", type: Time?, converter: Time::RFC3339Converter, nillable: true)]
     property created_time : Time?
 
     # Whether the comment has been deleted. A deleted comment has no content.
@@ -50,7 +50,7 @@ module GoogleDrive
     property kind : String?
 
     # The last time the comment or any of its replies was modified (RFC 3339 date-time).
-    @[NASON::Field(key: "modifiedTime", type: Time?, nillable: true)]
+    @[NASON::Field(key: "modifiedTime", type: Time?, converter: Time::RFC3339Converter, nillable: true)]
     property modified_time : Time?
 
     @[NASON::Field(key: "quotedFileContent", type: CommentQuotedFileContent?, nillable: true)]

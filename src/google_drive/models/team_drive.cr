@@ -33,7 +33,7 @@ module GoogleDrive
     property color_rgb : String?
 
     # The time at which the Team Drive was created (RFC 3339 date-time).
-    @[NASON::Field(key: "createdTime", type: Time?, nillable: true)]
+    @[NASON::Field(key: "createdTime", type: Time?, converter: Time::RFC3339Converter, nillable: true)]
     property created_time : Time?
 
     # The ID of this Team Drive which is also the ID of the top level folder of this Team Drive.

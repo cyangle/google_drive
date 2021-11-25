@@ -37,7 +37,7 @@ module GoogleDrive
     property copy_requires_writer_permission : Bool?
 
     # The time at which the file was created (RFC 3339 date-time).
-    @[NASON::Field(key: "createdTime", type: Time?, nillable: true)]
+    @[NASON::Field(key: "createdTime", type: Time?, converter: Time::RFC3339Converter, nillable: true)]
     property created_time : Time?
 
     # A short description of the file.
@@ -118,11 +118,11 @@ module GoogleDrive
     property modified_by_me : Bool?
 
     # The last time the file was modified by the user (RFC 3339 date-time).
-    @[NASON::Field(key: "modifiedByMeTime", type: Time?, nillable: true)]
+    @[NASON::Field(key: "modifiedByMeTime", type: Time?, converter: Time::RFC3339Converter, nillable: true)]
     property modified_by_me_time : Time?
 
     # The last time the file was modified by anyone (RFC 3339 date-time). Note that setting modifiedTime will also update modifiedByMeTime for the user.
-    @[NASON::Field(key: "modifiedTime", type: Time?, nillable: true)]
+    @[NASON::Field(key: "modifiedTime", type: Time?, converter: Time::RFC3339Converter, nillable: true)]
     property modified_time : Time?
 
     # The name of the file. This is not necessarily unique within a folder. Note that for immutable items such as the top level folders of shared drives, My Drive root folder, and Application Data folder the name is constant.
@@ -170,7 +170,7 @@ module GoogleDrive
     property shared : Bool?
 
     # The time at which the file was shared with the user, if applicable (RFC 3339 date-time).
-    @[NASON::Field(key: "sharedWithMeTime", type: Time?, nillable: true)]
+    @[NASON::Field(key: "sharedWithMeTime", type: Time?, converter: Time::RFC3339Converter, nillable: true)]
     property shared_with_me_time : Time?
 
     @[NASON::Field(key: "sharingUser", type: User?, nillable: true)]
@@ -208,7 +208,7 @@ module GoogleDrive
     property trashed : Bool?
 
     # The time that the item was trashed (RFC 3339 date-time). Only populated for items in shared drives.
-    @[NASON::Field(key: "trashedTime", type: Time?, nillable: true)]
+    @[NASON::Field(key: "trashedTime", type: Time?, converter: Time::RFC3339Converter, nillable: true)]
     property trashed_time : Time?
 
     @[NASON::Field(key: "trashingUser", type: User?, nillable: true)]
@@ -226,7 +226,7 @@ module GoogleDrive
     property viewed_by_me : Bool?
 
     # The last time the file was viewed by the user (RFC 3339 date-time).
-    @[NASON::Field(key: "viewedByMeTime", type: Time?, nillable: true)]
+    @[NASON::Field(key: "viewedByMeTime", type: Time?, converter: Time::RFC3339Converter, nillable: true)]
     property viewed_by_me_time : Time?
 
     # Deprecated - use copyRequiresWriterPermission instead.

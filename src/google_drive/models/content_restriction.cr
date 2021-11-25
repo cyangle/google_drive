@@ -30,7 +30,7 @@ module GoogleDrive
     property restricting_user : User?
 
     # The time at which the content restriction was set (formatted RFC 3339 timestamp). Only populated if readOnly is true.
-    @[NASON::Field(key: "restrictionTime", type: Time?, nillable: true)]
+    @[NASON::Field(key: "restrictionTime", type: Time?, converter: Time::RFC3339Converter, nillable: true)]
     property restriction_time : Time?
 
     # The type of the content restriction. Currently the only possible value is globalContentRestriction.
