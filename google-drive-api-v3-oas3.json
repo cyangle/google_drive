@@ -1924,19 +1924,9 @@
         ],
         "requestBody": {
           "content": {
-            "multipart/related": {
+            "multipart/form-data": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "Metadata": {
-                    "type": "string",
-                    "format": "binary"
-                  },
-                  "Media": {
-                    "type": "string",
-                    "format": "binary"
-                  }
-                }
+                "$ref": "#/components/schemas/fileUploadRequest"
               }
             }
           }
@@ -5795,6 +5785,19 @@
           "nextPageToken": {
             "type": "string",
             "description": "The page token for the next page of files. This will be absent if the end of the files list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results."
+          }
+        }
+      },
+      "fileUploadRequest": {
+        "type": "object",
+        "properties": {
+          "Metadata": {
+            "type": "string",
+            "format": "binary"
+          },
+          "Media": {
+            "type": "string",
+            "format": "binary"
           }
         }
       },

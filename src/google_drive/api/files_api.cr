@@ -995,7 +995,7 @@ module GoogleDrive
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["*/*"])
       # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["multipart/related"])
+      header_params["Content-Type"] = @api_client.select_header_content_type(["multipart/form-data"])
 
       # form parameters
       form_params = Hash(String, (String | Array(String) | ::File)).new
