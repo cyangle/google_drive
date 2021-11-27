@@ -77,7 +77,7 @@ module GoogleDrive
       header_params["Accept"] = @api_client.select_header_accept(["*/*"])
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
+      form_params = nil
 
       # http body (model)
       post_body = nil

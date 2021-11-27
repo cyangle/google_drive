@@ -81,7 +81,7 @@ module GoogleDrive
       header_params["Accept"] = @api_client.select_header_accept(["*/*"])
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
+      form_params = nil
 
       # http body (model)
       post_body = nil
@@ -184,7 +184,7 @@ module GoogleDrive
       header_params["Accept"] = @api_client.select_header_accept(["*/*"])
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
+      form_params = nil
 
       # http body (model)
       post_body = nil
@@ -289,7 +289,7 @@ module GoogleDrive
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
+      form_params = nil
 
       # http body (model)
       post_body = channel.to_nason
