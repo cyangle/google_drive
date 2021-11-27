@@ -999,7 +999,6 @@ module GoogleDrive
 
       # form parameters
       form_params = Hash(String, (String | Array(String) | ::File)).new
-      form_params = Hash(String, (String | Array(String) | ::File)).new
       form_params["Metadata"] = metadata if !metadata.nil? && !metadata.null?
       form_params["Media"] = media if !media.nil? && !media.null?
 
