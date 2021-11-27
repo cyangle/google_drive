@@ -1,0 +1,12 @@
+tasks:
+  -
+    name: 'Remove common method prefix "drive_[api_name]_"'
+    file_glob: './src/google_drive/api/*.cr'
+    pattern: 'drive_%{api_name}_'
+    new_value: ''
+    multi_line: false
+  -
+    name: 'Restore operation name'
+    file_glob: './src/google_drive/api/*.cr'
+    pattern: 'operation: "%{capitalized_api_name}Api.'
+    new_value: 'operation: "%{capitalized_api_name}Api.drive_%{api_name}_'
