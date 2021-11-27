@@ -19,7 +19,7 @@ module GoogleDrive
     end
 
     # Deprecated use drives.create instead.
-    # @param request_id [String] An ID, such as a random UUID, which uniquely identifies this user&#39;s request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned.
+    # @param request_id [String] An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned.
     # @return [TeamDrive]
     def create(*, request_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, team_drive : TeamDrive? = nil)
       data, _status_code, _headers = create_with_http_info(request_id: request_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, team_drive: team_drive)
@@ -27,7 +27,7 @@ module GoogleDrive
     end
 
     # Deprecated use drives.create instead.
-    # @param request_id [String] An ID, such as a random UUID, which uniquely identifies this user&#39;s request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned.
+    # @param request_id [String] An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned.
     # @return [Array<(TeamDrive, Integer, Hash)>] TeamDrive data, response status code and response headers
     def create_with_http_info(*, request_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, team_drive : TeamDrive? = nil)
       request = build_create_request(request_id: request_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, team_drive: team_drive)
@@ -42,7 +42,7 @@ module GoogleDrive
     end
 
     # Deprecated use drives.create instead.
-    # @param request_id [String] An ID, such as a random UUID, which uniquely identifies this user&#39;s request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned.
+    # @param request_id [String] An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned.
     # @return nil
     def create(*, request_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, team_drive : TeamDrive? = nil, &block : Crest::Response ->)
       request = build_create_request(request_id: request_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, team_drive: team_drive)
