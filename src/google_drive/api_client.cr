@@ -13,6 +13,16 @@ require "./configuration"
 
 module GoogleDrive
   class ApiClient
+    COLLECTION_FORMAT_MULTI         = "multi"
+    COLLECTION_FORMAT_SEPARATOR_MAP = {
+      "csv"                   => ",",
+      "ssv"                   => " ",
+      "tsv"                   => "\t",
+      "pipes"                 => "|",
+      COLLECTION_FORMAT_MULTI => COLLECTION_FORMAT_MULTI,
+    }
+    UNKNOWN_COLLECTION_FORMAT_SEPARATOR = "unknown"
+
     # The Configuration object holding settings to be used in the API client.
     property config : Configuration
 
@@ -107,22 +117,14 @@ module GoogleDrive
 
     # Build parameter value according to the given collection format.
     # @param [String] collection_format one of csv, ssv, tsv, pipes and multi
-    def build_collection_param(params, collection_format)
+    def build_collection_param(params : Array, collection_format : String) : String | Array(String)
+      separator = COLLECTION_FORMAT_SEPARATOR_MAP.fetch(collection_format, UNKNOWN_COLLECTION_FORMAT_SEPARATOR)
+      raise "unknown collection format: #{collection_format}" if separator == UNKNOWN_COLLECTION_FORMAT_SEPARATOR
+
       param_strings = params.map(&.to_s)
-      case collection_format
-      when "csv"
-        param_strings.join(",")
-      when "ssv"
-        param_strings.join(" ")
-      when "tsv"
-        param_strings.join("\t")
-      when "pipes"
-        param_strings.join("|")
-      when "multi"
-        param_strings
-      else
-        raise "unknown collection format: #{collection_format.inspect}"
-      end
+      return param_strings if collection_format == COLLECTION_FORMAT_MULTI
+
+      param_strings.join(separator)
     end
 
     # Build an API request with given options.
