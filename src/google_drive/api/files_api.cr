@@ -30,7 +30,7 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
     def copy_with_http_info(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, file : File? = nil)
-      request = build_copy_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, file: file)
+      request = build_api_request_for_copy(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, file: file)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
@@ -45,7 +45,7 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @return nil
     def copy(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, file : File? = nil, &block : Crest::Response ->)
-      request = build_copy_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, file: file)
+      request = build_api_request_for_copy(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, file: file)
 
       request.execute do |response|
         block.call(response)
@@ -53,7 +53,7 @@ module GoogleDrive
     end
 
     # @return Crest::Request
-    def build_copy_request(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, file : File? = nil) : Crest::Request
+    def build_api_request_for_copy(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, file : File? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.copy ..." }
       end
@@ -119,7 +119,7 @@ module GoogleDrive
     # Creates a new file.
     # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
     def create_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, file : File? = nil)
-      request = build_create_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file)
+      request = build_api_request_for_create(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
@@ -133,7 +133,7 @@ module GoogleDrive
     # Creates a new file.
     # @return nil
     def create(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, file : File? = nil, &block : Crest::Response ->)
-      request = build_create_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file)
+      request = build_api_request_for_create(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file)
 
       request.execute do |response|
         block.call(response)
@@ -141,7 +141,7 @@ module GoogleDrive
     end
 
     # @return Crest::Request
-    def build_create_request(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, file : File? = nil) : Crest::Request
+    def build_api_request_for_create(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, file : File? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.create ..." }
       end
@@ -210,7 +210,7 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def delete_with_http_info(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false)
-      request = build_delete_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives)
+      request = build_api_request_for_delete(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
@@ -225,7 +225,7 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @return nil
     def delete(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, &block : Crest::Response ->)
-      request = build_delete_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives)
+      request = build_api_request_for_delete(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives)
 
       request.execute do |response|
         block.call(response)
@@ -233,7 +233,7 @@ module GoogleDrive
     end
 
     # @return Crest::Request
-    def build_delete_request(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false) : Crest::Request
+    def build_api_request_for_delete(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.delete ..." }
       end
@@ -291,7 +291,7 @@ module GoogleDrive
     # Permanently deletes all of the user&#39;s trashed files.
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def empty_trash_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false)
-      request = build_empty_trash_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent)
+      request = build_api_request_for_empty_trash(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
@@ -305,7 +305,7 @@ module GoogleDrive
     # Permanently deletes all of the user&#39;s trashed files.
     # @return nil
     def empty_trash(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, &block : Crest::Response ->)
-      request = build_empty_trash_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent)
+      request = build_api_request_for_empty_trash(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent)
 
       request.execute do |response|
         block.call(response)
@@ -313,7 +313,7 @@ module GoogleDrive
     end
 
     # @return Crest::Request
-    def build_empty_trash_request(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false) : Crest::Request
+    def build_api_request_for_empty_trash(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.empty_trash ..." }
       end
@@ -373,7 +373,7 @@ module GoogleDrive
     # @param mime_type [String] The MIME type of the format requested for this export.
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def export_with_http_info(*, file_id : String, mime_type : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil)
-      request = build_export_request(file_id: file_id, mime_type: mime_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
+      request = build_api_request_for_export(file_id: file_id, mime_type: mime_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
@@ -389,7 +389,7 @@ module GoogleDrive
     # @param mime_type [String] The MIME type of the format requested for this export.
     # @return nil
     def export(*, file_id : String, mime_type : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, &block : Crest::Response ->)
-      request = build_export_request(file_id: file_id, mime_type: mime_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
+      request = build_api_request_for_export(file_id: file_id, mime_type: mime_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
 
       request.execute do |response|
         block.call(response)
@@ -397,7 +397,7 @@ module GoogleDrive
     end
 
     # @return Crest::Request
-    def build_export_request(*, file_id : String, mime_type : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil) : Crest::Request
+    def build_api_request_for_export(*, file_id : String, mime_type : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.export ..." }
       end
@@ -453,7 +453,7 @@ module GoogleDrive
     # Generates a set of file IDs which can be provided in create or copy requests.
     # @return [Array<(GeneratedIds, Integer, Hash)>] GeneratedIds data, response status code and response headers
     def generate_ids_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, count : Int32? = 10, space : String? = "drive", _type : String? = "files")
-      request = build_generate_ids_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, count: count, space: space, _type: _type)
+      request = build_api_request_for_generate_ids(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, count: count, space: space, _type: _type)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
@@ -467,7 +467,7 @@ module GoogleDrive
     # Generates a set of file IDs which can be provided in create or copy requests.
     # @return nil
     def generate_ids(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, count : Int32? = 10, space : String? = "drive", _type : String? = "files", &block : Crest::Response ->)
-      request = build_generate_ids_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, count: count, space: space, _type: _type)
+      request = build_api_request_for_generate_ids(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, count: count, space: space, _type: _type)
 
       request.execute do |response|
         block.call(response)
@@ -475,7 +475,7 @@ module GoogleDrive
     end
 
     # @return Crest::Request
-    def build_generate_ids_request(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, count : Int32? = 10, space : String? = "drive", _type : String? = "files") : Crest::Request
+    def build_api_request_for_generate_ids(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, count : Int32? = 10, space : String? = "drive", _type : String? = "files") : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.generate_ids ..." }
       end
@@ -545,7 +545,7 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
     def get_with_http_info(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false, include_permissions_for_view : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false)
-      request = build_get_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives)
+      request = build_api_request_for_get(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
@@ -560,7 +560,7 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @return nil
     def get(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false, include_permissions_for_view : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, &block : Crest::Response ->)
-      request = build_get_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives)
+      request = build_api_request_for_get(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives)
 
       request.execute do |response|
         block.call(response)
@@ -568,7 +568,7 @@ module GoogleDrive
     end
 
     # @return Crest::Request
-    def build_get_request(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false, include_permissions_for_view : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false) : Crest::Request
+    def build_api_request_for_get(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false, include_permissions_for_view : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.get ..." }
       end
@@ -629,7 +629,7 @@ module GoogleDrive
     # Lists or searches files.
     # @return [Array<(FileList, Integer, Hash)>] FileList data, response status code and response headers
     def list_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, corpora : String? = nil, corpus : String? = nil, drive_id : String? = nil, include_items_from_all_drives : Bool? = false, include_permissions_for_view : String? = nil, include_team_drive_items : Bool? = false, order_by : String? = nil, page_size : Int32? = 100, page_token : String? = nil, q : String? = nil, spaces : String? = "drive", supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil)
-      request = build_list_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, corpora: corpora, corpus: corpus, drive_id: drive_id, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_team_drive_items: include_team_drive_items, order_by: order_by, page_size: page_size, page_token: page_token, q: q, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
+      request = build_api_request_for_list(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, corpora: corpora, corpus: corpus, drive_id: drive_id, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_team_drive_items: include_team_drive_items, order_by: order_by, page_size: page_size, page_token: page_token, q: q, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
@@ -643,7 +643,7 @@ module GoogleDrive
     # Lists or searches files.
     # @return nil
     def list(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, corpora : String? = nil, corpus : String? = nil, drive_id : String? = nil, include_items_from_all_drives : Bool? = false, include_permissions_for_view : String? = nil, include_team_drive_items : Bool? = false, order_by : String? = nil, page_size : Int32? = 100, page_token : String? = nil, q : String? = nil, spaces : String? = "drive", supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil, &block : Crest::Response ->)
-      request = build_list_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, corpora: corpora, corpus: corpus, drive_id: drive_id, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_team_drive_items: include_team_drive_items, order_by: order_by, page_size: page_size, page_token: page_token, q: q, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
+      request = build_api_request_for_list(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, corpora: corpora, corpus: corpus, drive_id: drive_id, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_team_drive_items: include_team_drive_items, order_by: order_by, page_size: page_size, page_token: page_token, q: q, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
 
       request.execute do |response|
         block.call(response)
@@ -651,7 +651,7 @@ module GoogleDrive
     end
 
     # @return Crest::Request
-    def build_list_request(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, corpora : String? = nil, corpus : String? = nil, drive_id : String? = nil, include_items_from_all_drives : Bool? = false, include_permissions_for_view : String? = nil, include_team_drive_items : Bool? = false, order_by : String? = nil, page_size : Int32? = 100, page_token : String? = nil, q : String? = nil, spaces : String? = "drive", supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil) : Crest::Request
+    def build_api_request_for_list(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, corpora : String? = nil, corpus : String? = nil, drive_id : String? = nil, include_items_from_all_drives : Bool? = false, include_permissions_for_view : String? = nil, include_team_drive_items : Bool? = false, order_by : String? = nil, page_size : Int32? = 100, page_token : String? = nil, q : String? = nil, spaces : String? = "drive", supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, team_drive_id : String? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.list ..." }
       end
@@ -736,7 +736,7 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
     def update_with_http_info(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, file : File? = nil)
-      request = build_update_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file)
+      request = build_api_request_for_update(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
@@ -751,7 +751,7 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @return nil
     def update(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, file : File? = nil, &block : Crest::Response ->)
-      request = build_update_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file)
+      request = build_api_request_for_update(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file)
 
       request.execute do |response|
         block.call(response)
@@ -759,7 +759,7 @@ module GoogleDrive
     end
 
     # @return Crest::Request
-    def build_update_request(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, file : File? = nil) : Crest::Request
+    def build_api_request_for_update(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, file : File? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.update ..." }
       end
@@ -831,7 +831,7 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
     def update_content_with_http_info(*, upload_type : String = "media", file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, media : ::File? = nil)
-      request = build_update_content_request(upload_type: upload_type, file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, media: media)
+      request = build_api_request_for_update_content(upload_type: upload_type, file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, media: media)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
@@ -847,7 +847,7 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @return nil
     def update_content(*, upload_type : String = "media", file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, media : ::File? = nil, &block : Crest::Response ->)
-      request = build_update_content_request(upload_type: upload_type, file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, media: media)
+      request = build_api_request_for_update_content(upload_type: upload_type, file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, media: media)
 
       request.execute do |response|
         block.call(response)
@@ -855,7 +855,7 @@ module GoogleDrive
     end
 
     # @return Crest::Request
-    def build_update_content_request(*, upload_type : String = "media", file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, media : ::File? = nil) : Crest::Request
+    def build_api_request_for_update_content(*, upload_type : String = "media", file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, media : ::File? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.update_content ..." }
       end
@@ -932,7 +932,7 @@ module GoogleDrive
     # @param upload_type [String] The type of upload request to the /upload URI
     # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
     def upload_with_http_info(*, upload_type : String = "multipart", alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, metadata : ::File? = nil, media : ::File? = nil)
-      request = build_upload_request(upload_type: upload_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, metadata: metadata, media: media)
+      request = build_api_request_for_upload(upload_type: upload_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, metadata: metadata, media: media)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
@@ -947,7 +947,7 @@ module GoogleDrive
     # @param upload_type [String] The type of upload request to the /upload URI
     # @return nil
     def upload(*, upload_type : String = "multipart", alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, metadata : ::File? = nil, media : ::File? = nil, &block : Crest::Response ->)
-      request = build_upload_request(upload_type: upload_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, metadata: metadata, media: media)
+      request = build_api_request_for_upload(upload_type: upload_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, metadata: metadata, media: media)
 
       request.execute do |response|
         block.call(response)
@@ -955,7 +955,7 @@ module GoogleDrive
     end
 
     # @return Crest::Request
-    def build_upload_request(*, upload_type : String = "multipart", alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, metadata : ::File? = nil, media : ::File? = nil) : Crest::Request
+    def build_api_request_for_upload(*, upload_type : String = "multipart", alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = false, ignore_default_visibility : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, metadata : ::File? = nil, media : ::File? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.upload ..." }
       end
@@ -1032,7 +1032,7 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @return [Array<(Channel, Integer, Hash)>] Channel data, response status code and response headers
     def watch_with_http_info(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false, include_permissions_for_view : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, channel : Channel? = nil)
-      request = build_watch_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, channel: channel)
+      request = build_api_request_for_watch(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, channel: channel)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1047,7 +1047,7 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @return nil
     def watch(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false, include_permissions_for_view : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, channel : Channel? = nil, &block : Crest::Response ->)
-      request = build_watch_request(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, channel: channel)
+      request = build_api_request_for_watch(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, channel: channel)
 
       request.execute do |response|
         block.call(response)
@@ -1055,7 +1055,7 @@ module GoogleDrive
     end
 
     # @return Crest::Request
-    def build_watch_request(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false, include_permissions_for_view : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, channel : Channel? = nil) : Crest::Request
+    def build_api_request_for_watch(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false, include_permissions_for_view : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, channel : Channel? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.watch ..." }
       end

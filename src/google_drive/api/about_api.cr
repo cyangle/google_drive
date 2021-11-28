@@ -28,7 +28,7 @@ module GoogleDrive
     # Gets information about the user, the user&#39;s Drive, and system capabilities.
     # @return [Array<(About, Integer, Hash)>] About data, response status code and response headers
     def get_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil)
-      request = build_get_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
+      request = build_api_request_for_get(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
@@ -42,7 +42,7 @@ module GoogleDrive
     # Gets information about the user, the user&#39;s Drive, and system capabilities.
     # @return nil
     def get(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, &block : Crest::Response ->)
-      request = build_get_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
+      request = build_api_request_for_get(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
 
       request.execute do |response|
         block.call(response)
@@ -50,7 +50,7 @@ module GoogleDrive
     end
 
     # @return Crest::Request
-    def build_get_request(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil) : Crest::Request
+    def build_api_request_for_get(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: AboutApi.get ..." }
       end

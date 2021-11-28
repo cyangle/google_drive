@@ -28,7 +28,7 @@ module GoogleDrive
     # Stop watching resources through this channel
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def stop_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, channel : Channel? = nil)
-      request = build_stop_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, channel: channel)
+      request = build_api_request_for_stop(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, channel: channel)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
@@ -42,7 +42,7 @@ module GoogleDrive
     # Stop watching resources through this channel
     # @return nil
     def stop(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, channel : Channel? = nil, &block : Crest::Response ->)
-      request = build_stop_request(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, channel: channel)
+      request = build_api_request_for_stop(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, channel: channel)
 
       request.execute do |response|
         block.call(response)
@@ -50,7 +50,7 @@ module GoogleDrive
     end
 
     # @return Crest::Request
-    def build_stop_request(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, channel : Channel? = nil) : Crest::Request
+    def build_api_request_for_stop(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, channel : Channel? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: ChannelsApi.stop ..." }
       end
