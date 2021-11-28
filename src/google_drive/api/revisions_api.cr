@@ -48,11 +48,7 @@ module GoogleDrive
     # @param revision_id [String] The ID of the revision.
     # @return nil
     def delete(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, &block : Crest::Response ->)
-      request = build_api_request_for_delete(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
-
-      request.execute do |response|
-        block.call(response)
-      end
+      build_api_request_for_delete(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip).execute(&block)
     end
 
     # @return Crest::Request
@@ -131,11 +127,7 @@ module GoogleDrive
     # @param revision_id [String] The ID of the revision.
     # @return nil
     def get(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = false, &block : Crest::Response ->)
-      request = build_api_request_for_get(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse)
-
-      request.execute do |response|
-        block.call(response)
-      end
+      build_api_request_for_get(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse).execute(&block)
     end
 
     # @return Crest::Request
@@ -214,11 +206,7 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @return nil
     def list(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = 200, page_token : String? = nil, &block : Crest::Response ->)
-      request = build_api_request_for_list(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token)
-
-      request.execute do |response|
-        block.call(response)
-      end
+      build_api_request_for_list(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token).execute(&block)
     end
 
     # @return Crest::Request
@@ -309,11 +297,7 @@ module GoogleDrive
     # @param revision_id [String] The ID of the revision.
     # @return nil
     def update(*, file_id : String, revision_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, revision : Revision? = nil, &block : Crest::Response ->)
-      request = build_api_request_for_update(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, revision: revision)
-
-      request.execute do |response|
-        block.call(response)
-      end
+      build_api_request_for_update(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, revision: revision).execute(&block)
     end
 
     # @return Crest::Request

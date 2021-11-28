@@ -42,11 +42,7 @@ module GoogleDrive
     # Gets information about the user, the user&#39;s Drive, and system capabilities.
     # @return nil
     def get(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, &block : Crest::Response ->)
-      request = build_api_request_for_get(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
-
-      request.execute do |response|
-        block.call(response)
-      end
+      build_api_request_for_get(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip).execute(&block)
     end
 
     # @return Crest::Request

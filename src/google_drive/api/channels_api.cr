@@ -42,11 +42,7 @@ module GoogleDrive
     # Stop watching resources through this channel
     # @return nil
     def stop(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, channel : Channel? = nil, &block : Crest::Response ->)
-      request = build_api_request_for_stop(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, channel: channel)
-
-      request.execute do |response|
-        block.call(response)
-      end
+      build_api_request_for_stop(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, channel: channel).execute(&block)
     end
 
     # @return Crest::Request

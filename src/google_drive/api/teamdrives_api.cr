@@ -45,11 +45,7 @@ module GoogleDrive
     # @param request_id [String] An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned.
     # @return nil
     def create(*, request_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, team_drive : TeamDrive? = nil, &block : Crest::Response ->)
-      request = build_api_request_for_create(request_id: request_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, team_drive: team_drive)
-
-      request.execute do |response|
-        block.call(response)
-      end
+      build_api_request_for_create(request_id: request_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, team_drive: team_drive).execute(&block)
     end
 
     # @return Crest::Request
@@ -130,11 +126,7 @@ module GoogleDrive
     # @param team_drive_id [String] The ID of the Team Drive
     # @return nil
     def delete(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, &block : Crest::Response ->)
-      request = build_api_request_for_delete(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
-
-      request.execute do |response|
-        block.call(response)
-      end
+      build_api_request_for_delete(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip).execute(&block)
     end
 
     # @return Crest::Request
@@ -210,11 +202,7 @@ module GoogleDrive
     # @param team_drive_id [String] The ID of the Team Drive
     # @return nil
     def get(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = false, &block : Crest::Response ->)
-      request = build_api_request_for_get(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access)
-
-      request.execute do |response|
-        block.call(response)
-      end
+      build_api_request_for_get(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access).execute(&block)
     end
 
     # @return Crest::Request
@@ -290,11 +278,7 @@ module GoogleDrive
     # Deprecated use drives.list instead.
     # @return nil
     def list(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = 10, page_token : String? = nil, q : String? = nil, use_domain_admin_access : Bool? = false, &block : Crest::Response ->)
-      request = build_api_request_for_list(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token, q: q, use_domain_admin_access: use_domain_admin_access)
-
-      request.execute do |response|
-        block.call(response)
-      end
+      build_api_request_for_list(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token, q: q, use_domain_admin_access: use_domain_admin_access).execute(&block)
     end
 
     # @return Crest::Request
@@ -384,11 +368,7 @@ module GoogleDrive
     # @param team_drive_id [String] The ID of the Team Drive
     # @return nil
     def update(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = false, team_drive : TeamDrive? = nil, &block : Crest::Response ->)
-      request = build_api_request_for_update(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access, team_drive: team_drive)
-
-      request.execute do |response|
-        block.call(response)
-      end
+      build_api_request_for_update(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access, team_drive: team_drive).execute(&block)
     end
 
     # @return Crest::Request
