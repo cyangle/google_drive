@@ -63,7 +63,7 @@ module GoogleDrive
       local_var_path = "/drive/v3/files/{fileId}/revisions/{revisionId}".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s)).sub("{" + "revisionId" + "}", URI.encode_path(revision_id.to_s))
 
       # query parameters
-      query_params = Hash(String, String).new
+      query_params = Hash(String, (String | Array(String))).new
       query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
       query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
       query_params["key"] = key.to_s if !key.nil? && !key.null?
@@ -142,7 +142,7 @@ module GoogleDrive
       local_var_path = "/drive/v3/files/{fileId}/revisions/{revisionId}".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s)).sub("{" + "revisionId" + "}", URI.encode_path(revision_id.to_s))
 
       # query parameters
-      query_params = Hash(String, String).new
+      query_params = Hash(String, (String | Array(String))).new
       query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
       query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
       query_params["key"] = key.to_s if !key.nil? && !key.null?
@@ -229,7 +229,7 @@ module GoogleDrive
       local_var_path = "/drive/v3/files/{fileId}/revisions".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s))
 
       # query parameters
-      query_params = Hash(String, String).new
+      query_params = Hash(String, (String | Array(String))).new
       query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
       query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
       query_params["key"] = key.to_s if !key.nil? && !key.null?
@@ -312,7 +312,7 @@ module GoogleDrive
       local_var_path = "/drive/v3/files/{fileId}/revisions/{revisionId}".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s)).sub("{" + "revisionId" + "}", URI.encode_path(revision_id.to_s))
 
       # query parameters
-      query_params = Hash(String, String).new
+      query_params = Hash(String, (String | Array(String))).new
       query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
       query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
       query_params["key"] = key.to_s if !key.nil? && !key.null?

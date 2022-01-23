@@ -60,7 +60,7 @@ module GoogleDrive
       local_var_path = "/drive/v3/drives"
 
       # query parameters
-      query_params = Hash(String, String).new
+      query_params = Hash(String, (String | Array(String))).new
       query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
       query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
       query_params["key"] = key.to_s if !key.nil? && !key.null?
@@ -141,7 +141,7 @@ module GoogleDrive
       local_var_path = "/drive/v3/drives/{driveId}".sub("{" + "driveId" + "}", URI.encode_path(drive_id.to_s))
 
       # query parameters
-      query_params = Hash(String, String).new
+      query_params = Hash(String, (String | Array(String))).new
       query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
       query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
       query_params["key"] = key.to_s if !key.nil? && !key.null?
@@ -217,7 +217,7 @@ module GoogleDrive
       local_var_path = "/drive/v3/drives/{driveId}".sub("{" + "driveId" + "}", URI.encode_path(drive_id.to_s))
 
       # query parameters
-      query_params = Hash(String, String).new
+      query_params = Hash(String, (String | Array(String))).new
       query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
       query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
       query_params["key"] = key.to_s if !key.nil? && !key.null?
@@ -296,7 +296,7 @@ module GoogleDrive
       local_var_path = "/drive/v3/drives/{driveId}/hide".sub("{" + "driveId" + "}", URI.encode_path(drive_id.to_s))
 
       # query parameters
-      query_params = Hash(String, String).new
+      query_params = Hash(String, (String | Array(String))).new
       query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
       query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
       query_params["key"] = key.to_s if !key.nil? && !key.null?
@@ -379,7 +379,7 @@ module GoogleDrive
       local_var_path = "/drive/v3/drives"
 
       # query parameters
-      query_params = Hash(String, String).new
+      query_params = Hash(String, (String | Array(String))).new
       query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
       query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
       query_params["key"] = key.to_s if !key.nil? && !key.null?
@@ -461,7 +461,7 @@ module GoogleDrive
       local_var_path = "/drive/v3/drives/{driveId}/unhide".sub("{" + "driveId" + "}", URI.encode_path(drive_id.to_s))
 
       # query parameters
-      query_params = Hash(String, String).new
+      query_params = Hash(String, (String | Array(String))).new
       query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
       query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
       query_params["key"] = key.to_s if !key.nil? && !key.null?
@@ -539,7 +539,7 @@ module GoogleDrive
       local_var_path = "/drive/v3/drives/{driveId}".sub("{" + "driveId" + "}", URI.encode_path(drive_id.to_s))
 
       # query parameters
-      query_params = Hash(String, String).new
+      query_params = Hash(String, (String | Array(String))).new
       query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
       query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
       query_params["key"] = key.to_s if !key.nil? && !key.null?
