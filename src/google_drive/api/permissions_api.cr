@@ -37,7 +37,7 @@ module GoogleDrive
         Log.debug { "API called: PermissionsApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Permission.from_nason(data), status_code, headers
+      return Permission.from_json(data), status_code, headers
     end
 
     # Creates a permission for a file or shared drive.
@@ -53,7 +53,7 @@ module GoogleDrive
         Log.debug { "Calling API: PermissionsApi.create ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -61,21 +61,21 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, (String | Array(String))).new
-      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
-      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
-      query_params["key"] = key.to_s if !key.nil? && !key.null?
-      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
-      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
-      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
-      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
-      query_params["emailMessage"] = email_message.to_s if !email_message.nil? && !email_message.null?
-      query_params["enforceSingleParent"] = enforce_single_parent.to_s if !enforce_single_parent.nil? && !enforce_single_parent.null?
-      query_params["moveToNewOwnersRoot"] = move_to_new_owners_root.to_s if !move_to_new_owners_root.nil? && !move_to_new_owners_root.null?
-      query_params["sendNotificationEmail"] = send_notification_email.to_s if !send_notification_email.nil? && !send_notification_email.null?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil? && !supports_all_drives.null?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil? && !supports_team_drives.null?
-      query_params["transferOwnership"] = transfer_ownership.to_s if !transfer_ownership.nil? && !transfer_ownership.null?
-      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil? && !use_domain_admin_access.null?
+      query_params["alt"] = alt.to_s if !alt.nil?
+      query_params["fields"] = fields.to_s if !fields.nil?
+      query_params["key"] = key.to_s if !key.nil?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil?
+      query_params["emailMessage"] = email_message.to_s if !email_message.nil?
+      query_params["enforceSingleParent"] = enforce_single_parent.to_s if !enforce_single_parent.nil?
+      query_params["moveToNewOwnersRoot"] = move_to_new_owners_root.to_s if !move_to_new_owners_root.nil?
+      query_params["sendNotificationEmail"] = send_notification_email.to_s if !send_notification_email.nil?
+      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil?
+      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil?
+      query_params["transferOwnership"] = transfer_ownership.to_s if !transfer_ownership.nil?
+      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -88,7 +88,7 @@ module GoogleDrive
       form_params = nil
 
       # http body (model)
-      post_body = permission.to_nason
+      post_body = permission.to_json
 
       # auth_names
       auth_names = ["Oauth2"]
@@ -144,7 +144,7 @@ module GoogleDrive
         Log.debug { "Calling API: PermissionsApi.delete ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -152,16 +152,16 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, (String | Array(String))).new
-      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
-      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
-      query_params["key"] = key.to_s if !key.nil? && !key.null?
-      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
-      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
-      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
-      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil? && !supports_all_drives.null?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil? && !supports_team_drives.null?
-      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil? && !use_domain_admin_access.null?
+      query_params["alt"] = alt.to_s if !alt.nil?
+      query_params["fields"] = fields.to_s if !fields.nil?
+      query_params["key"] = key.to_s if !key.nil?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil?
+      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil?
+      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil?
+      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -209,7 +209,7 @@ module GoogleDrive
         Log.debug { "API called: PermissionsApi#get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Permission.from_nason(data), status_code, headers
+      return Permission.from_json(data), status_code, headers
     end
 
     # Gets a permission by ID.
@@ -226,7 +226,7 @@ module GoogleDrive
         Log.debug { "Calling API: PermissionsApi.get ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -234,16 +234,16 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, (String | Array(String))).new
-      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
-      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
-      query_params["key"] = key.to_s if !key.nil? && !key.null?
-      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
-      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
-      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
-      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil? && !supports_all_drives.null?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil? && !supports_team_drives.null?
-      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil? && !use_domain_admin_access.null?
+      query_params["alt"] = alt.to_s if !alt.nil?
+      query_params["fields"] = fields.to_s if !fields.nil?
+      query_params["key"] = key.to_s if !key.nil?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil?
+      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil?
+      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil?
+      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -291,7 +291,7 @@ module GoogleDrive
         Log.debug { "API called: PermissionsApi#list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return PermissionList.from_nason(data), status_code, headers
+      return PermissionList.from_json(data), status_code, headers
     end
 
     # Lists a file&#39;s or shared drive&#39;s permissions.
@@ -307,7 +307,7 @@ module GoogleDrive
         Log.debug { "Calling API: PermissionsApi.list ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       if @api_client.config.client_side_validation && !page_size.nil? && page_size > 100
@@ -323,19 +323,19 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, (String | Array(String))).new
-      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
-      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
-      query_params["key"] = key.to_s if !key.nil? && !key.null?
-      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
-      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
-      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
-      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
-      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if !include_permissions_for_view.nil? && !include_permissions_for_view.null?
-      query_params["pageSize"] = page_size.to_s if !page_size.nil? && !page_size.null?
-      query_params["pageToken"] = page_token.to_s if !page_token.nil? && !page_token.null?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil? && !supports_all_drives.null?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil? && !supports_team_drives.null?
-      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil? && !use_domain_admin_access.null?
+      query_params["alt"] = alt.to_s if !alt.nil?
+      query_params["fields"] = fields.to_s if !fields.nil?
+      query_params["key"] = key.to_s if !key.nil?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil?
+      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if !include_permissions_for_view.nil?
+      query_params["pageSize"] = page_size.to_s if !page_size.nil?
+      query_params["pageToken"] = page_token.to_s if !page_token.nil?
+      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil?
+      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil?
+      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -385,7 +385,7 @@ module GoogleDrive
         Log.debug { "API called: PermissionsApi#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Permission.from_nason(data), status_code, headers
+      return Permission.from_json(data), status_code, headers
     end
 
     # Updates a permission with patch semantics.
@@ -402,7 +402,7 @@ module GoogleDrive
         Log.debug { "Calling API: PermissionsApi.update ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -410,18 +410,18 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, (String | Array(String))).new
-      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
-      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
-      query_params["key"] = key.to_s if !key.nil? && !key.null?
-      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
-      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
-      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
-      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
-      query_params["removeExpiration"] = remove_expiration.to_s if !remove_expiration.nil? && !remove_expiration.null?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil? && !supports_all_drives.null?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil? && !supports_team_drives.null?
-      query_params["transferOwnership"] = transfer_ownership.to_s if !transfer_ownership.nil? && !transfer_ownership.null?
-      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil? && !use_domain_admin_access.null?
+      query_params["alt"] = alt.to_s if !alt.nil?
+      query_params["fields"] = fields.to_s if !fields.nil?
+      query_params["key"] = key.to_s if !key.nil?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil?
+      query_params["removeExpiration"] = remove_expiration.to_s if !remove_expiration.nil?
+      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil?
+      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil?
+      query_params["transferOwnership"] = transfer_ownership.to_s if !transfer_ownership.nil?
+      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -434,7 +434,7 @@ module GoogleDrive
       form_params = nil
 
       # http body (model)
-      post_body = permission.to_nason
+      post_body = permission.to_json
 
       # auth_names
       auth_names = ["Oauth2"]

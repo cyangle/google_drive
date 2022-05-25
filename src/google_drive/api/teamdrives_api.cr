@@ -37,7 +37,7 @@ module GoogleDrive
         Log.debug { "API called: TeamdrivesApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return TeamDrive.from_nason(data), status_code, headers
+      return TeamDrive.from_json(data), status_code, headers
     end
 
     # Deprecated use drives.create instead.
@@ -53,7 +53,7 @@ module GoogleDrive
         Log.debug { "Calling API: TeamdrivesApi.create ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -61,14 +61,14 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, (String | Array(String))).new
-      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
-      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
-      query_params["key"] = key.to_s if !key.nil? && !key.null?
-      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
-      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
-      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
-      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
-      query_params["requestId"] = request_id.to_s if !request_id.nil? && !request_id.null?
+      query_params["alt"] = alt.to_s if !alt.nil?
+      query_params["fields"] = fields.to_s if !fields.nil?
+      query_params["key"] = key.to_s if !key.nil?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil?
+      query_params["requestId"] = request_id.to_s if !request_id.nil?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -81,7 +81,7 @@ module GoogleDrive
       form_params = nil
 
       # http body (model)
-      post_body = team_drive.to_nason
+      post_body = team_drive.to_json
 
       # auth_names
       auth_names = ["Oauth2"]
@@ -134,7 +134,7 @@ module GoogleDrive
         Log.debug { "Calling API: TeamdrivesApi.delete ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -142,13 +142,13 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, (String | Array(String))).new
-      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
-      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
-      query_params["key"] = key.to_s if !key.nil? && !key.null?
-      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
-      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
-      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
-      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
+      query_params["alt"] = alt.to_s if !alt.nil?
+      query_params["fields"] = fields.to_s if !fields.nil?
+      query_params["key"] = key.to_s if !key.nil?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -194,7 +194,7 @@ module GoogleDrive
         Log.debug { "API called: TeamdrivesApi#get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return TeamDrive.from_nason(data), status_code, headers
+      return TeamDrive.from_json(data), status_code, headers
     end
 
     # Deprecated use drives.get instead.
@@ -210,7 +210,7 @@ module GoogleDrive
         Log.debug { "Calling API: TeamdrivesApi.get ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -218,14 +218,14 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, (String | Array(String))).new
-      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
-      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
-      query_params["key"] = key.to_s if !key.nil? && !key.null?
-      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
-      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
-      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
-      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
-      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil? && !use_domain_admin_access.null?
+      query_params["alt"] = alt.to_s if !alt.nil?
+      query_params["fields"] = fields.to_s if !fields.nil?
+      query_params["key"] = key.to_s if !key.nil?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil?
+      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -271,7 +271,7 @@ module GoogleDrive
         Log.debug { "API called: TeamdrivesApi#list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return TeamDriveList.from_nason(data), status_code, headers
+      return TeamDriveList.from_json(data), status_code, headers
     end
 
     # Deprecated use drives.list instead.
@@ -286,7 +286,7 @@ module GoogleDrive
         Log.debug { "Calling API: TeamdrivesApi.list ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       if @api_client.config.client_side_validation && !page_size.nil? && page_size > 100
@@ -302,17 +302,17 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, (String | Array(String))).new
-      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
-      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
-      query_params["key"] = key.to_s if !key.nil? && !key.null?
-      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
-      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
-      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
-      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
-      query_params["pageSize"] = page_size.to_s if !page_size.nil? && !page_size.null?
-      query_params["pageToken"] = page_token.to_s if !page_token.nil? && !page_token.null?
-      query_params["q"] = q.to_s if !q.nil? && !q.null?
-      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil? && !use_domain_admin_access.null?
+      query_params["alt"] = alt.to_s if !alt.nil?
+      query_params["fields"] = fields.to_s if !fields.nil?
+      query_params["key"] = key.to_s if !key.nil?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil?
+      query_params["pageSize"] = page_size.to_s if !page_size.nil?
+      query_params["pageToken"] = page_token.to_s if !page_token.nil?
+      query_params["q"] = q.to_s if !q.nil?
+      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -360,7 +360,7 @@ module GoogleDrive
         Log.debug { "API called: TeamdrivesApi#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return TeamDrive.from_nason(data), status_code, headers
+      return TeamDrive.from_json(data), status_code, headers
     end
 
     # Deprecated use drives.update instead
@@ -376,7 +376,7 @@ module GoogleDrive
         Log.debug { "Calling API: TeamdrivesApi.update ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -384,14 +384,14 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, (String | Array(String))).new
-      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
-      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
-      query_params["key"] = key.to_s if !key.nil? && !key.null?
-      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
-      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
-      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
-      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
-      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil? && !use_domain_admin_access.null?
+      query_params["alt"] = alt.to_s if !alt.nil?
+      query_params["fields"] = fields.to_s if !fields.nil?
+      query_params["key"] = key.to_s if !key.nil?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil?
+      query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -404,7 +404,7 @@ module GoogleDrive
       form_params = nil
 
       # http body (model)
-      post_body = team_drive.to_nason
+      post_body = team_drive.to_json
 
       # auth_names
       auth_names = ["Oauth2"]

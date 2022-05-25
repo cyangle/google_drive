@@ -35,7 +35,7 @@ module GoogleDrive
         Log.debug { "API called: ChangesApi#get_start_page_token\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return StartPageToken.from_nason(data), status_code, headers
+      return StartPageToken.from_json(data), status_code, headers
     end
 
     # Gets the starting pageToken for listing future changes.
@@ -50,7 +50,7 @@ module GoogleDrive
         Log.debug { "Calling API: ChangesApi.get_start_page_token ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       # resource path
@@ -58,17 +58,17 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, (String | Array(String))).new
-      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
-      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
-      query_params["key"] = key.to_s if !key.nil? && !key.null?
-      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
-      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
-      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
-      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
-      query_params["driveId"] = drive_id.to_s if !drive_id.nil? && !drive_id.null?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil? && !supports_all_drives.null?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil? && !supports_team_drives.null?
-      query_params["teamDriveId"] = team_drive_id.to_s if !team_drive_id.nil? && !team_drive_id.null?
+      query_params["alt"] = alt.to_s if !alt.nil?
+      query_params["fields"] = fields.to_s if !fields.nil?
+      query_params["key"] = key.to_s if !key.nil?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil?
+      query_params["driveId"] = drive_id.to_s if !drive_id.nil?
+      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil?
+      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil?
+      query_params["teamDriveId"] = team_drive_id.to_s if !team_drive_id.nil?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -116,7 +116,7 @@ module GoogleDrive
         Log.debug { "API called: ChangesApi#list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return ChangeList.from_nason(data), status_code, headers
+      return ChangeList.from_json(data), status_code, headers
     end
 
     # Lists the changes for a user or shared drive.
@@ -132,7 +132,7 @@ module GoogleDrive
         Log.debug { "Calling API: ChangesApi.list ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       if @api_client.config.client_side_validation && !page_size.nil? && page_size > 1000
@@ -148,26 +148,26 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, (String | Array(String))).new
-      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
-      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
-      query_params["key"] = key.to_s if !key.nil? && !key.null?
-      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
-      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
-      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
-      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
-      query_params["pageToken"] = page_token.to_s if !page_token.nil? && !page_token.null?
-      query_params["driveId"] = drive_id.to_s if !drive_id.nil? && !drive_id.null?
-      query_params["includeCorpusRemovals"] = include_corpus_removals.to_s if !include_corpus_removals.nil? && !include_corpus_removals.null?
-      query_params["includeItemsFromAllDrives"] = include_items_from_all_drives.to_s if !include_items_from_all_drives.nil? && !include_items_from_all_drives.null?
-      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if !include_permissions_for_view.nil? && !include_permissions_for_view.null?
-      query_params["includeRemoved"] = include_removed.to_s if !include_removed.nil? && !include_removed.null?
-      query_params["includeTeamDriveItems"] = include_team_drive_items.to_s if !include_team_drive_items.nil? && !include_team_drive_items.null?
-      query_params["pageSize"] = page_size.to_s if !page_size.nil? && !page_size.null?
-      query_params["restrictToMyDrive"] = restrict_to_my_drive.to_s if !restrict_to_my_drive.nil? && !restrict_to_my_drive.null?
-      query_params["spaces"] = spaces.to_s if !spaces.nil? && !spaces.null?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil? && !supports_all_drives.null?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil? && !supports_team_drives.null?
-      query_params["teamDriveId"] = team_drive_id.to_s if !team_drive_id.nil? && !team_drive_id.null?
+      query_params["alt"] = alt.to_s if !alt.nil?
+      query_params["fields"] = fields.to_s if !fields.nil?
+      query_params["key"] = key.to_s if !key.nil?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil?
+      query_params["pageToken"] = page_token.to_s if !page_token.nil?
+      query_params["driveId"] = drive_id.to_s if !drive_id.nil?
+      query_params["includeCorpusRemovals"] = include_corpus_removals.to_s if !include_corpus_removals.nil?
+      query_params["includeItemsFromAllDrives"] = include_items_from_all_drives.to_s if !include_items_from_all_drives.nil?
+      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if !include_permissions_for_view.nil?
+      query_params["includeRemoved"] = include_removed.to_s if !include_removed.nil?
+      query_params["includeTeamDriveItems"] = include_team_drive_items.to_s if !include_team_drive_items.nil?
+      query_params["pageSize"] = page_size.to_s if !page_size.nil?
+      query_params["restrictToMyDrive"] = restrict_to_my_drive.to_s if !restrict_to_my_drive.nil?
+      query_params["spaces"] = spaces.to_s if !spaces.nil?
+      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil?
+      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil?
+      query_params["teamDriveId"] = team_drive_id.to_s if !team_drive_id.nil?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -215,7 +215,7 @@ module GoogleDrive
         Log.debug { "API called: ChangesApi#watch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Channel.from_nason(data), status_code, headers
+      return Channel.from_json(data), status_code, headers
     end
 
     # Subscribes to changes for a user.
@@ -231,7 +231,7 @@ module GoogleDrive
         Log.debug { "Calling API: ChangesApi.watch ..." }
       end
       allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !alt.null? && !allowable_values.includes?(alt)
+      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
         raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
       end
       if @api_client.config.client_side_validation && !page_size.nil? && page_size > 1000
@@ -247,26 +247,26 @@ module GoogleDrive
 
       # query parameters
       query_params = Hash(String, (String | Array(String))).new
-      query_params["alt"] = alt.to_s if !alt.nil? && !alt.null?
-      query_params["fields"] = fields.to_s if !fields.nil? && !fields.null?
-      query_params["key"] = key.to_s if !key.nil? && !key.null?
-      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil? && !oauth_token.null?
-      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil? && !pretty_print.null?
-      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil? && !quota_user.null?
-      query_params["userIp"] = user_ip.to_s if !user_ip.nil? && !user_ip.null?
-      query_params["pageToken"] = page_token.to_s if !page_token.nil? && !page_token.null?
-      query_params["driveId"] = drive_id.to_s if !drive_id.nil? && !drive_id.null?
-      query_params["includeCorpusRemovals"] = include_corpus_removals.to_s if !include_corpus_removals.nil? && !include_corpus_removals.null?
-      query_params["includeItemsFromAllDrives"] = include_items_from_all_drives.to_s if !include_items_from_all_drives.nil? && !include_items_from_all_drives.null?
-      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if !include_permissions_for_view.nil? && !include_permissions_for_view.null?
-      query_params["includeRemoved"] = include_removed.to_s if !include_removed.nil? && !include_removed.null?
-      query_params["includeTeamDriveItems"] = include_team_drive_items.to_s if !include_team_drive_items.nil? && !include_team_drive_items.null?
-      query_params["pageSize"] = page_size.to_s if !page_size.nil? && !page_size.null?
-      query_params["restrictToMyDrive"] = restrict_to_my_drive.to_s if !restrict_to_my_drive.nil? && !restrict_to_my_drive.null?
-      query_params["spaces"] = spaces.to_s if !spaces.nil? && !spaces.null?
-      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil? && !supports_all_drives.null?
-      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil? && !supports_team_drives.null?
-      query_params["teamDriveId"] = team_drive_id.to_s if !team_drive_id.nil? && !team_drive_id.null?
+      query_params["alt"] = alt.to_s if !alt.nil?
+      query_params["fields"] = fields.to_s if !fields.nil?
+      query_params["key"] = key.to_s if !key.nil?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil?
+      query_params["pageToken"] = page_token.to_s if !page_token.nil?
+      query_params["driveId"] = drive_id.to_s if !drive_id.nil?
+      query_params["includeCorpusRemovals"] = include_corpus_removals.to_s if !include_corpus_removals.nil?
+      query_params["includeItemsFromAllDrives"] = include_items_from_all_drives.to_s if !include_items_from_all_drives.nil?
+      query_params["includePermissionsForView"] = include_permissions_for_view.to_s if !include_permissions_for_view.nil?
+      query_params["includeRemoved"] = include_removed.to_s if !include_removed.nil?
+      query_params["includeTeamDriveItems"] = include_team_drive_items.to_s if !include_team_drive_items.nil?
+      query_params["pageSize"] = page_size.to_s if !page_size.nil?
+      query_params["restrictToMyDrive"] = restrict_to_my_drive.to_s if !restrict_to_my_drive.nil?
+      query_params["spaces"] = spaces.to_s if !spaces.nil?
+      query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil?
+      query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil?
+      query_params["teamDriveId"] = team_drive_id.to_s if !team_drive_id.nil?
 
       # header parameters
       header_params = Hash(String, String).new
@@ -279,7 +279,7 @@ module GoogleDrive
       form_params = nil
 
       # http body (model)
-      post_body = channel.to_nason
+      post_body = channel.to_json
 
       # auth_names
       auth_names = ["Oauth2"]
