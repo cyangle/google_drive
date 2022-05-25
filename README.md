@@ -86,7 +86,7 @@ file_meta = GoogleDrive::File.new(
 )
 
 File.tempfile(suffix: ".json") do |file|
-  file.print(file_meta.to_nason) # This shard uses nason for JSON serialization
+  file.print(file_meta.to_json)
   file.rewind
   new_file_meta : GoogleDrive::File = files_api.upload(
     metadata: file,
