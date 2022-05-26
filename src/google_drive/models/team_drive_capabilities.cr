@@ -15,6 +15,7 @@ module GoogleDrive
   # Capabilities the current user has on this Team Drive.
   class TeamDriveCapabilities
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # Whether the current user can add children to folders in this Team Drive.

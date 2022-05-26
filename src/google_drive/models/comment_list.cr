@@ -15,6 +15,7 @@ module GoogleDrive
   # A list of comments on a file.
   class CommentList
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # The list of comments. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.

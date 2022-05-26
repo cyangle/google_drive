@@ -14,6 +14,7 @@ require "log"
 module GoogleDrive
   class PermissionTeamDrivePermissionDetailsInner
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # Deprecated - use permissionDetails/inherited instead.

@@ -15,6 +15,7 @@ module GoogleDrive
   # Deprecated: use the drive collection instead.
   class TeamDrive
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     @[JSON::Field(key: "backgroundImageFile", type: TeamDriveBackgroundImageFile?, presence: true, ignore_serialize: background_image_file.nil? && !background_image_file_present?, emit_null: true)]

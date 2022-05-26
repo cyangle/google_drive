@@ -15,6 +15,7 @@ module GoogleDrive
   # A change to a file or shared drive.
   class Change
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # The type of the change. Possible values are file and drive.

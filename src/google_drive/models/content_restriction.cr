@@ -15,6 +15,7 @@ module GoogleDrive
   # A restriction for accessing the content of the file.
   class ContentRestriction
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # Whether the content of the file is read-only. If a file is read-only, a new revision of the file may not be added, comments may not be added or modified, and the title of the file may not be modified.

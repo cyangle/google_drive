@@ -15,6 +15,7 @@ module GoogleDrive
   # Geographic location information stored in the image.
   class FileImageMediaMetadataLocation
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # The altitude stored in the image.

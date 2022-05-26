@@ -15,6 +15,7 @@ module GoogleDrive
   # Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
   class FileCapabilities
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # Whether the current user can add children to this folder. This is always false when the item is not a folder.

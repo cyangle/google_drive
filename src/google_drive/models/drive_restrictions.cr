@@ -15,6 +15,7 @@ module GoogleDrive
   # A set of restrictions that apply to this shared drive or items inside this shared drive.
   class DriveRestrictions
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # Whether administrative privileges on this shared drive are required to modify restrictions.

@@ -15,6 +15,7 @@ module GoogleDrive
   # The file content to which the comment refers, typically within the anchor region. For a text file, for example, this would be the text at the location of the comment.
   class CommentQuotedFileContent
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # The MIME type of the quoted content.

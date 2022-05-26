@@ -15,6 +15,7 @@ module GoogleDrive
   # Additional information about the content of the file. These fields are never populated in responses.
   class FileContentHints
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # Text to be indexed for the file to improve fullText queries. This is limited to 128KB in length and may contain HTML elements.

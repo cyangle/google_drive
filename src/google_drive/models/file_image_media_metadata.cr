@@ -15,6 +15,7 @@ module GoogleDrive
   # Additional metadata about image media, if available.
   class FileImageMediaMetadata
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # The aperture used to create the photo (f-number).

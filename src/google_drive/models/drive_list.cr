@@ -15,6 +15,7 @@ module GoogleDrive
   # A list of shared drives.
   class DriveList
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # The list of shared drives. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.

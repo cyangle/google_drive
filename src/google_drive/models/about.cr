@@ -15,6 +15,7 @@ module GoogleDrive
   # Information about the user, the user's Drive, and system capabilities.
   class About
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # Whether the user has installed the requesting app.

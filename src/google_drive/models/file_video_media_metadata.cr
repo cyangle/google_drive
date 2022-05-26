@@ -15,6 +15,7 @@ module GoogleDrive
   # Additional metadata about video media. This may not be available immediately upon upload.
   class FileVideoMediaMetadata
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # The duration of the video in milliseconds.

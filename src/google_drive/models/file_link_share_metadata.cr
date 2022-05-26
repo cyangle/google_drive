@@ -15,6 +15,7 @@ module GoogleDrive
   # Contains details about the link URLs that clients are using to refer to this item.
   class FileLinkShareMetadata
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # Whether the file is eligible for security update.

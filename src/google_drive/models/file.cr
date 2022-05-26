@@ -15,6 +15,7 @@ module GoogleDrive
   # The metadata for a file.
   class File
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # A collection of arbitrary key-value pairs which are private to the requesting app. Entries with null values are cleared in update and copy requests. These properties can only be retrieved using an authenticated request. An authenticated request uses an access token obtained with a OAuth 2 client ID. You cannot use an API key to retrieve private properties.

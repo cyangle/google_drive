@@ -15,6 +15,7 @@ module GoogleDrive
   # A list of generated file IDs which can be provided in create requests.
   class GeneratedIds
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # The IDs generated for the requesting user in the specified space.

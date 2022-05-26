@@ -15,6 +15,7 @@ module GoogleDrive
   # A list of permissions for a file.
   class PermissionList
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # Identifies what kind of resource this is. Value: the fixed string \"drive#permissionList\".

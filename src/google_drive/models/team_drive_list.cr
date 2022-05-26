@@ -15,6 +15,7 @@ module GoogleDrive
   # A list of Team Drives.
   class TeamDriveList
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # Identifies what kind of resource this is. Value: the fixed string \"drive#teamDriveList\".

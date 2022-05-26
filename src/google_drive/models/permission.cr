@@ -15,6 +15,7 @@ module GoogleDrive
   # A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
   class Permission
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # Whether the permission allows the file to be discovered through search. This is only applicable for permissions of type domain or anyone.

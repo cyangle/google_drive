@@ -15,6 +15,7 @@ module GoogleDrive
   # Capabilities the current user has on this shared drive.
   class DriveCapabilities
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # Whether the current user can add children to folders in this shared drive.

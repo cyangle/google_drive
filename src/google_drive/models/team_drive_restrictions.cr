@@ -15,6 +15,7 @@ module GoogleDrive
   # A set of restrictions that apply to this Team Drive or items inside this Team Drive.
   class TeamDriveRestrictions
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # Whether administrative privileges on this Team Drive are required to modify restrictions.

@@ -15,6 +15,7 @@ module GoogleDrive
   # A thumbnail for the file. This will only be used if Google Drive cannot generate a standard thumbnail.
   class FileContentHintsThumbnail
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # The thumbnail data encoded with URL-safe Base64 (RFC 4648 section 5).

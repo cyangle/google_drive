@@ -15,6 +15,7 @@ module GoogleDrive
   # The metadata for a revision to a file.
   class Revision
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # Links for exporting Docs Editors files to specific formats.

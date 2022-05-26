@@ -14,6 +14,7 @@ require "log"
 module GoogleDrive
   class AboutTeamDriveThemesInner
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # Deprecated - use driveThemes/backgroundImageLink instead.

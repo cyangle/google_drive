@@ -15,6 +15,7 @@ module GoogleDrive
   # An notification channel used to watch for resource changes.
   class Channel
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # The address where notifications are delivered for this channel.

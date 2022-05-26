@@ -15,6 +15,7 @@ module GoogleDrive
   # The user's storage quota limits and usage. All fields are measured in bytes.
   class AboutStorageQuota
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # The usage limit, if applicable. This will not be present if the user has unlimited storage.

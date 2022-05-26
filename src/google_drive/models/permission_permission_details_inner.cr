@@ -14,6 +14,7 @@ require "log"
 module GoogleDrive
   class PermissionPermissionDetailsInner
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # Whether this permission is inherited. This field is always populated. This is an output-only field.

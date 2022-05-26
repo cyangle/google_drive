@@ -15,6 +15,7 @@ module GoogleDrive
   # A comment on a file.
   class Comment
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # A region of the document represented as a JSON string. For details on defining anchor properties, refer to  Add comments and replies.

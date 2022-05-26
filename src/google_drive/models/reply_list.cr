@@ -15,6 +15,7 @@ module GoogleDrive
   # A list of replies to a comment on a file.
   class ReplyList
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # Identifies what kind of resource this is. Value: the fixed string \"drive#replyList\".

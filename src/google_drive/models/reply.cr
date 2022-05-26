@@ -15,6 +15,7 @@ module GoogleDrive
   # A reply to a comment on a file.
   class Reply
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # The action the reply performed to the parent comment. Valid values are:   - resolve  - reopen

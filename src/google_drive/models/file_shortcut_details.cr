@@ -15,6 +15,7 @@ module GoogleDrive
   # Shortcut file details. Only populated for shortcut files, which have the mimeType field set to application/vnd.google-apps.shortcut.
   class FileShortcutDetails
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # The ID of the file that this shortcut points to.

@@ -15,6 +15,7 @@ module GoogleDrive
   # A list of files.
   class FileList
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # The list of files. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.

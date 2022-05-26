@@ -15,6 +15,7 @@ module GoogleDrive
   # A list of revisions of a file.
   class RevisionList
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # Identifies what kind of resource this is. Value: the fixed string \"drive#revisionList\".

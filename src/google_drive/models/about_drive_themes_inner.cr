@@ -14,6 +14,7 @@ require "log"
 module GoogleDrive
   class AboutDriveThemesInner
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # A link to this theme's background image.

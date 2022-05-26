@@ -15,6 +15,7 @@ module GoogleDrive
   # An image file and cropping parameters from which a background image for this shared drive is set. This is a write only field; it can only be set on drive.drives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
   class DriveBackgroundImageFile
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # The ID of an image file in Google Drive to use for the background image.

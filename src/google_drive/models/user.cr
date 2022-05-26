@@ -15,6 +15,7 @@ module GoogleDrive
   # Information about a Drive user.
   class User
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
 
     # Optional properties
     # A plain text displayable name for this user.
