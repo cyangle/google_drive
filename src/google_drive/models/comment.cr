@@ -13,77 +13,78 @@ require "log"
 
 module GoogleDrive
   # A comment on a file.
+  @[JSON::Serializable::Options(emit_nulls: true)]
   class Comment
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
     # A region of the document represented as a JSON string. For details on defining anchor properties, refer to  Add comments and replies.
-    @[JSON::Field(key: "anchor", type: String?, presence: true, ignore_serialize: anchor.nil? && !anchor_present?, emit_null: true)]
+    @[JSON::Field(key: "anchor", type: String?, presence: true, ignore_serialize: anchor.nil? && !anchor_present?)]
     property anchor : String?
     @[JSON::Field(ignore: true)]
     property? anchor_present : Bool = false
 
-    @[JSON::Field(key: "author", type: User?, presence: true, ignore_serialize: author.nil? && !author_present?, emit_null: true)]
+    @[JSON::Field(key: "author", type: User?, presence: true, ignore_serialize: author.nil? && !author_present?)]
     property author : User?
     @[JSON::Field(ignore: true)]
     property? author_present : Bool = false
 
     # The plain text content of the comment. This field is used for setting the content, while htmlContent should be displayed.
-    @[JSON::Field(key: "content", type: String?, presence: true, ignore_serialize: content.nil? && !content_present?, emit_null: true)]
+    @[JSON::Field(key: "content", type: String?, presence: true, ignore_serialize: content.nil? && !content_present?)]
     property content : String?
     @[JSON::Field(ignore: true)]
     property? content_present : Bool = false
 
     # The time at which the comment was created (RFC 3339 date-time).
-    @[JSON::Field(key: "createdTime", type: Time?, converter: Time::RFC3339Converter, presence: true, ignore_serialize: created_time.nil? && !created_time_present?, emit_null: true)]
+    @[JSON::Field(key: "createdTime", type: Time?, converter: Time::RFC3339Converter, presence: true, ignore_serialize: created_time.nil? && !created_time_present?)]
     property created_time : Time?
     @[JSON::Field(ignore: true)]
     property? created_time_present : Bool = false
 
     # Whether the comment has been deleted. A deleted comment has no content.
-    @[JSON::Field(key: "deleted", type: Bool?, presence: true, ignore_serialize: deleted.nil? && !deleted_present?, emit_null: true)]
+    @[JSON::Field(key: "deleted", type: Bool?, presence: true, ignore_serialize: deleted.nil? && !deleted_present?)]
     property deleted : Bool?
     @[JSON::Field(ignore: true)]
     property? deleted_present : Bool = false
 
     # The content of the comment with HTML formatting.
-    @[JSON::Field(key: "htmlContent", type: String?, presence: true, ignore_serialize: html_content.nil? && !html_content_present?, emit_null: true)]
+    @[JSON::Field(key: "htmlContent", type: String?, presence: true, ignore_serialize: html_content.nil? && !html_content_present?)]
     property html_content : String?
     @[JSON::Field(ignore: true)]
     property? html_content_present : Bool = false
 
     # The ID of the comment.
-    @[JSON::Field(key: "id", type: String?, presence: true, ignore_serialize: id.nil? && !id_present?, emit_null: true)]
+    @[JSON::Field(key: "id", type: String?, presence: true, ignore_serialize: id.nil? && !id_present?)]
     property id : String?
     @[JSON::Field(ignore: true)]
     property? id_present : Bool = false
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#comment\".
-    @[JSON::Field(key: "kind", type: String?, default: "drive#comment", presence: true, ignore_serialize: kind.nil? && !kind_present?, emit_null: true)]
+    @[JSON::Field(key: "kind", type: String?, default: "drive#comment", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
     property kind : String?
     @[JSON::Field(ignore: true)]
     property? kind_present : Bool = false
 
     # The last time the comment or any of its replies was modified (RFC 3339 date-time).
-    @[JSON::Field(key: "modifiedTime", type: Time?, converter: Time::RFC3339Converter, presence: true, ignore_serialize: modified_time.nil? && !modified_time_present?, emit_null: true)]
+    @[JSON::Field(key: "modifiedTime", type: Time?, converter: Time::RFC3339Converter, presence: true, ignore_serialize: modified_time.nil? && !modified_time_present?)]
     property modified_time : Time?
     @[JSON::Field(ignore: true)]
     property? modified_time_present : Bool = false
 
-    @[JSON::Field(key: "quotedFileContent", type: CommentQuotedFileContent?, presence: true, ignore_serialize: quoted_file_content.nil? && !quoted_file_content_present?, emit_null: true)]
+    @[JSON::Field(key: "quotedFileContent", type: CommentQuotedFileContent?, presence: true, ignore_serialize: quoted_file_content.nil? && !quoted_file_content_present?)]
     property quoted_file_content : CommentQuotedFileContent?
     @[JSON::Field(ignore: true)]
     property? quoted_file_content_present : Bool = false
 
     # The full list of replies to the comment in chronological order.
-    @[JSON::Field(key: "replies", type: Array(Reply)?, presence: true, ignore_serialize: replies.nil? && !replies_present?, emit_null: true)]
+    @[JSON::Field(key: "replies", type: Array(Reply)?, presence: true, ignore_serialize: replies.nil? && !replies_present?)]
     property replies : Array(Reply)?
     @[JSON::Field(ignore: true)]
     property? replies_present : Bool = false
 
     # Whether the comment has been resolved by one of its replies.
-    @[JSON::Field(key: "resolved", type: Bool?, presence: true, ignore_serialize: resolved.nil? && !resolved_present?, emit_null: true)]
+    @[JSON::Field(key: "resolved", type: Bool?, presence: true, ignore_serialize: resolved.nil? && !resolved_present?)]
     property resolved : Bool?
     @[JSON::Field(ignore: true)]
     property? resolved_present : Bool = false

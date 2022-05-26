@@ -13,18 +13,19 @@ require "log"
 
 module GoogleDrive
   # Additional information about the content of the file. These fields are never populated in responses.
+  @[JSON::Serializable::Options(emit_nulls: true)]
   class FileContentHints
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
     # Text to be indexed for the file to improve fullText queries. This is limited to 128KB in length and may contain HTML elements.
-    @[JSON::Field(key: "indexableText", type: String?, presence: true, ignore_serialize: indexable_text.nil? && !indexable_text_present?, emit_null: true)]
+    @[JSON::Field(key: "indexableText", type: String?, presence: true, ignore_serialize: indexable_text.nil? && !indexable_text_present?)]
     property indexable_text : String?
     @[JSON::Field(ignore: true)]
     property? indexable_text_present : Bool = false
 
-    @[JSON::Field(key: "thumbnail", type: FileContentHintsThumbnail?, presence: true, ignore_serialize: thumbnail.nil? && !thumbnail_present?, emit_null: true)]
+    @[JSON::Field(key: "thumbnail", type: FileContentHintsThumbnail?, presence: true, ignore_serialize: thumbnail.nil? && !thumbnail_present?)]
     property thumbnail : FileContentHintsThumbnail?
     @[JSON::Field(ignore: true)]
     property? thumbnail_present : Bool = false

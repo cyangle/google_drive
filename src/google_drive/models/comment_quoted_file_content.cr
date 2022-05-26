@@ -13,19 +13,20 @@ require "log"
 
 module GoogleDrive
   # The file content to which the comment refers, typically within the anchor region. For a text file, for example, this would be the text at the location of the comment.
+  @[JSON::Serializable::Options(emit_nulls: true)]
   class CommentQuotedFileContent
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
     # The MIME type of the quoted content.
-    @[JSON::Field(key: "mimeType", type: String?, presence: true, ignore_serialize: mime_type.nil? && !mime_type_present?, emit_null: true)]
+    @[JSON::Field(key: "mimeType", type: String?, presence: true, ignore_serialize: mime_type.nil? && !mime_type_present?)]
     property mime_type : String?
     @[JSON::Field(ignore: true)]
     property? mime_type_present : Bool = false
 
     # The quoted content itself. This is interpreted as plain text if set through the API.
-    @[JSON::Field(key: "value", type: String?, presence: true, ignore_serialize: value.nil? && !value_present?, emit_null: true)]
+    @[JSON::Field(key: "value", type: String?, presence: true, ignore_serialize: value.nil? && !value_present?)]
     property value : String?
     @[JSON::Field(ignore: true)]
     property? value_present : Bool = false

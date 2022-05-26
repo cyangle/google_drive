@@ -13,25 +13,26 @@ require "log"
 
 module GoogleDrive
   # Shortcut file details. Only populated for shortcut files, which have the mimeType field set to application/vnd.google-apps.shortcut.
+  @[JSON::Serializable::Options(emit_nulls: true)]
   class FileShortcutDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
     # The ID of the file that this shortcut points to.
-    @[JSON::Field(key: "targetId", type: String?, presence: true, ignore_serialize: target_id.nil? && !target_id_present?, emit_null: true)]
+    @[JSON::Field(key: "targetId", type: String?, presence: true, ignore_serialize: target_id.nil? && !target_id_present?)]
     property target_id : String?
     @[JSON::Field(ignore: true)]
     property? target_id_present : Bool = false
 
     # The MIME type of the file that this shortcut points to. The value of this field is a snapshot of the target's MIME type, captured when the shortcut is created.
-    @[JSON::Field(key: "targetMimeType", type: String?, presence: true, ignore_serialize: target_mime_type.nil? && !target_mime_type_present?, emit_null: true)]
+    @[JSON::Field(key: "targetMimeType", type: String?, presence: true, ignore_serialize: target_mime_type.nil? && !target_mime_type_present?)]
     property target_mime_type : String?
     @[JSON::Field(ignore: true)]
     property? target_mime_type_present : Bool = false
 
     # The ResourceKey for the target file.
-    @[JSON::Field(key: "targetResourceKey", type: String?, presence: true, ignore_serialize: target_resource_key.nil? && !target_resource_key_present?, emit_null: true)]
+    @[JSON::Field(key: "targetResourceKey", type: String?, presence: true, ignore_serialize: target_resource_key.nil? && !target_resource_key_present?)]
     property target_resource_key : String?
     @[JSON::Field(ignore: true)]
     property? target_resource_key_present : Bool = false

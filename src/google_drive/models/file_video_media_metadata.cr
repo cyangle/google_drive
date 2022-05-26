@@ -13,25 +13,26 @@ require "log"
 
 module GoogleDrive
   # Additional metadata about video media. This may not be available immediately upon upload.
+  @[JSON::Serializable::Options(emit_nulls: true)]
   class FileVideoMediaMetadata
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
     # The duration of the video in milliseconds.
-    @[JSON::Field(key: "durationMillis", type: String?, presence: true, ignore_serialize: duration_millis.nil? && !duration_millis_present?, emit_null: true)]
+    @[JSON::Field(key: "durationMillis", type: String?, presence: true, ignore_serialize: duration_millis.nil? && !duration_millis_present?)]
     property duration_millis : String?
     @[JSON::Field(ignore: true)]
     property? duration_millis_present : Bool = false
 
     # The height of the video in pixels.
-    @[JSON::Field(key: "height", type: Int32?, presence: true, ignore_serialize: height.nil? && !height_present?, emit_null: true)]
+    @[JSON::Field(key: "height", type: Int32?, presence: true, ignore_serialize: height.nil? && !height_present?)]
     property height : Int32?
     @[JSON::Field(ignore: true)]
     property? height_present : Bool = false
 
     # The width of the video in pixels.
-    @[JSON::Field(key: "width", type: Int32?, presence: true, ignore_serialize: width.nil? && !width_present?, emit_null: true)]
+    @[JSON::Field(key: "width", type: Int32?, presence: true, ignore_serialize: width.nil? && !width_present?)]
     property width : Int32?
     @[JSON::Field(ignore: true)]
     property? width_present : Bool = false

@@ -13,25 +13,26 @@ require "log"
 
 module GoogleDrive
   # A list of generated file IDs which can be provided in create requests.
+  @[JSON::Serializable::Options(emit_nulls: true)]
   class GeneratedIds
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
     # The IDs generated for the requesting user in the specified space.
-    @[JSON::Field(key: "ids", type: Array(String)?, presence: true, ignore_serialize: ids.nil? && !ids_present?, emit_null: true)]
+    @[JSON::Field(key: "ids", type: Array(String)?, presence: true, ignore_serialize: ids.nil? && !ids_present?)]
     property ids : Array(String)?
     @[JSON::Field(ignore: true)]
     property? ids_present : Bool = false
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#generatedIds\".
-    @[JSON::Field(key: "kind", type: String?, default: "drive#generatedIds", presence: true, ignore_serialize: kind.nil? && !kind_present?, emit_null: true)]
+    @[JSON::Field(key: "kind", type: String?, default: "drive#generatedIds", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
     property kind : String?
     @[JSON::Field(ignore: true)]
     property? kind_present : Bool = false
 
     # The type of file that can be created with these IDs.
-    @[JSON::Field(key: "space", type: String?, presence: true, ignore_serialize: space.nil? && !space_present?, emit_null: true)]
+    @[JSON::Field(key: "space", type: String?, presence: true, ignore_serialize: space.nil? && !space_present?)]
     property space : String?
     @[JSON::Field(ignore: true)]
     property? space_present : Bool = false

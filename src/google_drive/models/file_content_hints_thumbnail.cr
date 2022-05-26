@@ -13,19 +13,20 @@ require "log"
 
 module GoogleDrive
   # A thumbnail for the file. This will only be used if Google Drive cannot generate a standard thumbnail.
+  @[JSON::Serializable::Options(emit_nulls: true)]
   class FileContentHintsThumbnail
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
     # The thumbnail data encoded with URL-safe Base64 (RFC 4648 section 5).
-    @[JSON::Field(key: "image", type: String?, presence: true, ignore_serialize: image.nil? && !image_present?, emit_null: true)]
+    @[JSON::Field(key: "image", type: String?, presence: true, ignore_serialize: image.nil? && !image_present?)]
     property image : String?
     @[JSON::Field(ignore: true)]
     property? image_present : Bool = false
 
     # The MIME type of the thumbnail.
-    @[JSON::Field(key: "mimeType", type: String?, presence: true, ignore_serialize: mime_type.nil? && !mime_type_present?, emit_null: true)]
+    @[JSON::Field(key: "mimeType", type: String?, presence: true, ignore_serialize: mime_type.nil? && !mime_type_present?)]
     property mime_type : String?
     @[JSON::Field(ignore: true)]
     property? mime_type_present : Bool = false

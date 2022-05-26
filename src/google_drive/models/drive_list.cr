@@ -13,25 +13,26 @@ require "log"
 
 module GoogleDrive
   # A list of shared drives.
+  @[JSON::Serializable::Options(emit_nulls: true)]
   class DriveList
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
     # The list of shared drives. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.
-    @[JSON::Field(key: "drives", type: Array(Drive)?, presence: true, ignore_serialize: drives.nil? && !drives_present?, emit_null: true)]
+    @[JSON::Field(key: "drives", type: Array(Drive)?, presence: true, ignore_serialize: drives.nil? && !drives_present?)]
     property drives : Array(Drive)?
     @[JSON::Field(ignore: true)]
     property? drives_present : Bool = false
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#driveList\".
-    @[JSON::Field(key: "kind", type: String?, default: "drive#driveList", presence: true, ignore_serialize: kind.nil? && !kind_present?, emit_null: true)]
+    @[JSON::Field(key: "kind", type: String?, default: "drive#driveList", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
     property kind : String?
     @[JSON::Field(ignore: true)]
     property? kind_present : Bool = false
 
     # The page token for the next page of shared drives. This will be absent if the end of the list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results.
-    @[JSON::Field(key: "nextPageToken", type: String?, presence: true, ignore_serialize: next_page_token.nil? && !next_page_token_present?, emit_null: true)]
+    @[JSON::Field(key: "nextPageToken", type: String?, presence: true, ignore_serialize: next_page_token.nil? && !next_page_token_present?)]
     property next_page_token : String?
     @[JSON::Field(ignore: true)]
     property? next_page_token_present : Bool = false

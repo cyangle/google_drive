@@ -13,70 +13,71 @@ require "log"
 
 module GoogleDrive
   # Representation of a shared drive.
+  @[JSON::Serializable::Options(emit_nulls: true)]
   class Drive
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    @[JSON::Field(key: "backgroundImageFile", type: DriveBackgroundImageFile?, presence: true, ignore_serialize: background_image_file.nil? && !background_image_file_present?, emit_null: true)]
+    @[JSON::Field(key: "backgroundImageFile", type: DriveBackgroundImageFile?, presence: true, ignore_serialize: background_image_file.nil? && !background_image_file_present?)]
     property background_image_file : DriveBackgroundImageFile?
     @[JSON::Field(ignore: true)]
     property? background_image_file_present : Bool = false
 
     # A short-lived link to this shared drive's background image.
-    @[JSON::Field(key: "backgroundImageLink", type: String?, presence: true, ignore_serialize: background_image_link.nil? && !background_image_link_present?, emit_null: true)]
+    @[JSON::Field(key: "backgroundImageLink", type: String?, presence: true, ignore_serialize: background_image_link.nil? && !background_image_link_present?)]
     property background_image_link : String?
     @[JSON::Field(ignore: true)]
     property? background_image_link_present : Bool = false
 
-    @[JSON::Field(key: "capabilities", type: DriveCapabilities?, presence: true, ignore_serialize: capabilities.nil? && !capabilities_present?, emit_null: true)]
+    @[JSON::Field(key: "capabilities", type: DriveCapabilities?, presence: true, ignore_serialize: capabilities.nil? && !capabilities_present?)]
     property capabilities : DriveCapabilities?
     @[JSON::Field(ignore: true)]
     property? capabilities_present : Bool = false
 
     # The color of this shared drive as an RGB hex string. It can only be set on a drive.drives.update request that does not set themeId.
-    @[JSON::Field(key: "colorRgb", type: String?, presence: true, ignore_serialize: color_rgb.nil? && !color_rgb_present?, emit_null: true)]
+    @[JSON::Field(key: "colorRgb", type: String?, presence: true, ignore_serialize: color_rgb.nil? && !color_rgb_present?)]
     property color_rgb : String?
     @[JSON::Field(ignore: true)]
     property? color_rgb_present : Bool = false
 
     # The time at which the shared drive was created (RFC 3339 date-time).
-    @[JSON::Field(key: "createdTime", type: Time?, converter: Time::RFC3339Converter, presence: true, ignore_serialize: created_time.nil? && !created_time_present?, emit_null: true)]
+    @[JSON::Field(key: "createdTime", type: Time?, converter: Time::RFC3339Converter, presence: true, ignore_serialize: created_time.nil? && !created_time_present?)]
     property created_time : Time?
     @[JSON::Field(ignore: true)]
     property? created_time_present : Bool = false
 
     # Whether the shared drive is hidden from default view.
-    @[JSON::Field(key: "hidden", type: Bool?, presence: true, ignore_serialize: hidden.nil? && !hidden_present?, emit_null: true)]
+    @[JSON::Field(key: "hidden", type: Bool?, presence: true, ignore_serialize: hidden.nil? && !hidden_present?)]
     property hidden : Bool?
     @[JSON::Field(ignore: true)]
     property? hidden_present : Bool = false
 
     # The ID of this shared drive which is also the ID of the top level folder of this shared drive.
-    @[JSON::Field(key: "id", type: String?, presence: true, ignore_serialize: id.nil? && !id_present?, emit_null: true)]
+    @[JSON::Field(key: "id", type: String?, presence: true, ignore_serialize: id.nil? && !id_present?)]
     property id : String?
     @[JSON::Field(ignore: true)]
     property? id_present : Bool = false
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#drive\".
-    @[JSON::Field(key: "kind", type: String?, default: "drive#drive", presence: true, ignore_serialize: kind.nil? && !kind_present?, emit_null: true)]
+    @[JSON::Field(key: "kind", type: String?, default: "drive#drive", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
     property kind : String?
     @[JSON::Field(ignore: true)]
     property? kind_present : Bool = false
 
     # The name of this shared drive.
-    @[JSON::Field(key: "name", type: String?, presence: true, ignore_serialize: name.nil? && !name_present?, emit_null: true)]
+    @[JSON::Field(key: "name", type: String?, presence: true, ignore_serialize: name.nil? && !name_present?)]
     property name : String?
     @[JSON::Field(ignore: true)]
     property? name_present : Bool = false
 
-    @[JSON::Field(key: "restrictions", type: DriveRestrictions?, presence: true, ignore_serialize: restrictions.nil? && !restrictions_present?, emit_null: true)]
+    @[JSON::Field(key: "restrictions", type: DriveRestrictions?, presence: true, ignore_serialize: restrictions.nil? && !restrictions_present?)]
     property restrictions : DriveRestrictions?
     @[JSON::Field(ignore: true)]
     property? restrictions_present : Bool = false
 
     # The ID of the theme from which the background image and color will be set. The set of possible driveThemes can be retrieved from a drive.about.get response. When not specified on a drive.drives.create request, a random theme is chosen from which the background image and color are set. This is a write-only field; it can only be set on requests that don't set colorRgb or backgroundImageFile.
-    @[JSON::Field(key: "themeId", type: String?, presence: true, ignore_serialize: theme_id.nil? && !theme_id_present?, emit_null: true)]
+    @[JSON::Field(key: "themeId", type: String?, presence: true, ignore_serialize: theme_id.nil? && !theme_id_present?)]
     property theme_id : String?
     @[JSON::Field(ignore: true)]
     property? theme_id_present : Bool = false

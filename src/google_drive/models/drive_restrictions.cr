@@ -13,31 +13,32 @@ require "log"
 
 module GoogleDrive
   # A set of restrictions that apply to this shared drive or items inside this shared drive.
+  @[JSON::Serializable::Options(emit_nulls: true)]
   class DriveRestrictions
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
     # Whether administrative privileges on this shared drive are required to modify restrictions.
-    @[JSON::Field(key: "adminManagedRestrictions", type: Bool?, presence: true, ignore_serialize: admin_managed_restrictions.nil? && !admin_managed_restrictions_present?, emit_null: true)]
+    @[JSON::Field(key: "adminManagedRestrictions", type: Bool?, presence: true, ignore_serialize: admin_managed_restrictions.nil? && !admin_managed_restrictions_present?)]
     property admin_managed_restrictions : Bool?
     @[JSON::Field(ignore: true)]
     property? admin_managed_restrictions_present : Bool = false
 
     # Whether the options to copy, print, or download files inside this shared drive, should be disabled for readers and commenters. When this restriction is set to true, it will override the similarly named field to true for any file inside this shared drive.
-    @[JSON::Field(key: "copyRequiresWriterPermission", type: Bool?, presence: true, ignore_serialize: copy_requires_writer_permission.nil? && !copy_requires_writer_permission_present?, emit_null: true)]
+    @[JSON::Field(key: "copyRequiresWriterPermission", type: Bool?, presence: true, ignore_serialize: copy_requires_writer_permission.nil? && !copy_requires_writer_permission_present?)]
     property copy_requires_writer_permission : Bool?
     @[JSON::Field(ignore: true)]
     property? copy_requires_writer_permission_present : Bool = false
 
     # Whether access to this shared drive and items inside this shared drive is restricted to users of the domain to which this shared drive belongs. This restriction may be overridden by other sharing policies controlled outside of this shared drive.
-    @[JSON::Field(key: "domainUsersOnly", type: Bool?, presence: true, ignore_serialize: domain_users_only.nil? && !domain_users_only_present?, emit_null: true)]
+    @[JSON::Field(key: "domainUsersOnly", type: Bool?, presence: true, ignore_serialize: domain_users_only.nil? && !domain_users_only_present?)]
     property domain_users_only : Bool?
     @[JSON::Field(ignore: true)]
     property? domain_users_only_present : Bool = false
 
     # Whether access to items inside this shared drive is restricted to its members.
-    @[JSON::Field(key: "driveMembersOnly", type: Bool?, presence: true, ignore_serialize: drive_members_only.nil? && !drive_members_only_present?, emit_null: true)]
+    @[JSON::Field(key: "driveMembersOnly", type: Bool?, presence: true, ignore_serialize: drive_members_only.nil? && !drive_members_only_present?)]
     property drive_members_only : Bool?
     @[JSON::Field(ignore: true)]
     property? drive_members_only_present : Bool = false

@@ -12,25 +12,26 @@ require "time"
 require "log"
 
 module GoogleDrive
+  @[JSON::Serializable::Options(emit_nulls: true)]
   class AboutDriveThemesInner
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
     # A link to this theme's background image.
-    @[JSON::Field(key: "backgroundImageLink", type: String?, presence: true, ignore_serialize: background_image_link.nil? && !background_image_link_present?, emit_null: true)]
+    @[JSON::Field(key: "backgroundImageLink", type: String?, presence: true, ignore_serialize: background_image_link.nil? && !background_image_link_present?)]
     property background_image_link : String?
     @[JSON::Field(ignore: true)]
     property? background_image_link_present : Bool = false
 
     # The color of this theme as an RGB hex string.
-    @[JSON::Field(key: "colorRgb", type: String?, presence: true, ignore_serialize: color_rgb.nil? && !color_rgb_present?, emit_null: true)]
+    @[JSON::Field(key: "colorRgb", type: String?, presence: true, ignore_serialize: color_rgb.nil? && !color_rgb_present?)]
     property color_rgb : String?
     @[JSON::Field(ignore: true)]
     property? color_rgb_present : Bool = false
 
     # The ID of the theme.
-    @[JSON::Field(key: "id", type: String?, presence: true, ignore_serialize: id.nil? && !id_present?, emit_null: true)]
+    @[JSON::Field(key: "id", type: String?, presence: true, ignore_serialize: id.nil? && !id_present?)]
     property id : String?
     @[JSON::Field(ignore: true)]
     property? id_present : Bool = false

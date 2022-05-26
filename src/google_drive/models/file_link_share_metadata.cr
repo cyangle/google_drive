@@ -13,19 +13,20 @@ require "log"
 
 module GoogleDrive
   # Contains details about the link URLs that clients are using to refer to this item.
+  @[JSON::Serializable::Options(emit_nulls: true)]
   class FileLinkShareMetadata
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
     # Whether the file is eligible for security update.
-    @[JSON::Field(key: "securityUpdateEligible", type: Bool?, presence: true, ignore_serialize: security_update_eligible.nil? && !security_update_eligible_present?, emit_null: true)]
+    @[JSON::Field(key: "securityUpdateEligible", type: Bool?, presence: true, ignore_serialize: security_update_eligible.nil? && !security_update_eligible_present?)]
     property security_update_eligible : Bool?
     @[JSON::Field(ignore: true)]
     property? security_update_eligible_present : Bool = false
 
     # Whether the security update is enabled for this file.
-    @[JSON::Field(key: "securityUpdateEnabled", type: Bool?, presence: true, ignore_serialize: security_update_enabled.nil? && !security_update_enabled_present?, emit_null: true)]
+    @[JSON::Field(key: "securityUpdateEnabled", type: Bool?, presence: true, ignore_serialize: security_update_enabled.nil? && !security_update_enabled_present?)]
     property security_update_enabled : Bool?
     @[JSON::Field(ignore: true)]
     property? security_update_enabled_present : Bool = false

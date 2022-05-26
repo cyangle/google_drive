@@ -12,19 +12,20 @@ require "time"
 require "log"
 
 module GoogleDrive
+  @[JSON::Serializable::Options(emit_nulls: true)]
   class StartPageToken
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
     # Identifies what kind of resource this is. Value: the fixed string \"drive#startPageToken\".
-    @[JSON::Field(key: "kind", type: String?, default: "drive#startPageToken", presence: true, ignore_serialize: kind.nil? && !kind_present?, emit_null: true)]
+    @[JSON::Field(key: "kind", type: String?, default: "drive#startPageToken", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
     property kind : String?
     @[JSON::Field(ignore: true)]
     property? kind_present : Bool = false
 
     # The starting page token for listing changes.
-    @[JSON::Field(key: "startPageToken", type: String?, presence: true, ignore_serialize: start_page_token.nil? && !start_page_token_present?, emit_null: true)]
+    @[JSON::Field(key: "startPageToken", type: String?, presence: true, ignore_serialize: start_page_token.nil? && !start_page_token_present?)]
     property start_page_token : String?
     @[JSON::Field(ignore: true)]
     property? start_page_token_present : Bool = false
