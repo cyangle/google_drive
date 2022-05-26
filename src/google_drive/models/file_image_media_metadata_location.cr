@@ -22,18 +22,21 @@ module GoogleDrive
     # The altitude stored in the image.
     @[JSON::Field(key: "altitude", type: Float64?, presence: true, ignore_serialize: altitude.nil? && !altitude_present?)]
     property altitude : Float64?
+
     @[JSON::Field(ignore: true)]
     property? altitude_present : Bool = false
 
     # The latitude stored in the image.
     @[JSON::Field(key: "latitude", type: Float64?, presence: true, ignore_serialize: latitude.nil? && !latitude_present?)]
     property latitude : Float64?
+
     @[JSON::Field(ignore: true)]
     property? latitude_present : Bool = false
 
     # The longitude stored in the image.
     @[JSON::Field(key: "longitude", type: Float64?, presence: true, ignore_serialize: longitude.nil? && !longitude_present?)]
     property longitude : Float64?
+
     @[JSON::Field(ignore: true)]
     property? longitude_present : Bool = false
 

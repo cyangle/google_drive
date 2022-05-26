@@ -21,24 +21,28 @@ module GoogleDrive
     # Whether this permission is inherited. This field is always populated. This is an output-only field.
     @[JSON::Field(key: "inherited", type: Bool?, presence: true, ignore_serialize: inherited.nil? && !inherited_present?)]
     property inherited : Bool?
+
     @[JSON::Field(ignore: true)]
     property? inherited_present : Bool = false
 
     # The ID of the item from which this permission is inherited. This is an output-only field.
     @[JSON::Field(key: "inheritedFrom", type: String?, presence: true, ignore_serialize: inherited_from.nil? && !inherited_from_present?)]
     property inherited_from : String?
+
     @[JSON::Field(ignore: true)]
     property? inherited_from_present : Bool = false
 
     # The permission type for this user. While new values may be added in future, the following are currently possible:   - file  - member
     @[JSON::Field(key: "permissionType", type: String?, presence: true, ignore_serialize: permission_type.nil? && !permission_type_present?)]
     property permission_type : String?
+
     @[JSON::Field(ignore: true)]
     property? permission_type_present : Bool = false
 
     # The primary role for this user. While new values may be added in the future, the following are currently possible:   - organizer  - fileOrganizer  - writer  - commenter  - reader
     @[JSON::Field(key: "role", type: String?, presence: true, ignore_serialize: role.nil? && !role_present?)]
     property role : String?
+
     @[JSON::Field(ignore: true)]
     property? role_present : Bool = false
 

@@ -22,12 +22,14 @@ module GoogleDrive
     # Whether the file is eligible for security update.
     @[JSON::Field(key: "securityUpdateEligible", type: Bool?, presence: true, ignore_serialize: security_update_eligible.nil? && !security_update_eligible_present?)]
     property security_update_eligible : Bool?
+
     @[JSON::Field(ignore: true)]
     property? security_update_eligible_present : Bool = false
 
     # Whether the security update is enabled for this file.
     @[JSON::Field(key: "securityUpdateEnabled", type: Bool?, presence: true, ignore_serialize: security_update_enabled.nil? && !security_update_enabled_present?)]
     property security_update_enabled : Bool?
+
     @[JSON::Field(ignore: true)]
     property? security_update_enabled_present : Bool = false
 

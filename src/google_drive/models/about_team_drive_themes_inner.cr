@@ -21,18 +21,21 @@ module GoogleDrive
     # Deprecated - use driveThemes/backgroundImageLink instead.
     @[JSON::Field(key: "backgroundImageLink", type: String?, presence: true, ignore_serialize: background_image_link.nil? && !background_image_link_present?)]
     property background_image_link : String?
+
     @[JSON::Field(ignore: true)]
     property? background_image_link_present : Bool = false
 
     # Deprecated - use driveThemes/colorRgb instead.
     @[JSON::Field(key: "colorRgb", type: String?, presence: true, ignore_serialize: color_rgb.nil? && !color_rgb_present?)]
     property color_rgb : String?
+
     @[JSON::Field(ignore: true)]
     property? color_rgb_present : Bool = false
 
     # Deprecated - use driveThemes/id instead.
     @[JSON::Field(key: "id", type: String?, presence: true, ignore_serialize: id.nil? && !id_present?)]
     property id : String?
+
     @[JSON::Field(ignore: true)]
     property? id_present : Bool = false
 

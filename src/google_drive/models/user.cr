@@ -22,36 +22,42 @@ module GoogleDrive
     # A plain text displayable name for this user.
     @[JSON::Field(key: "displayName", type: String?, presence: true, ignore_serialize: display_name.nil? && !display_name_present?)]
     property display_name : String?
+
     @[JSON::Field(ignore: true)]
     property? display_name_present : Bool = false
 
     # The email address of the user. This may not be present in certain contexts if the user has not made their email address visible to the requester.
     @[JSON::Field(key: "emailAddress", type: String?, presence: true, ignore_serialize: email_address.nil? && !email_address_present?)]
     property email_address : String?
+
     @[JSON::Field(ignore: true)]
     property? email_address_present : Bool = false
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#user\".
     @[JSON::Field(key: "kind", type: String?, default: "drive#user", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
     property kind : String?
+
     @[JSON::Field(ignore: true)]
     property? kind_present : Bool = false
 
     # Whether this user is the requesting user.
     @[JSON::Field(key: "me", type: Bool?, presence: true, ignore_serialize: me.nil? && !me_present?)]
     property me : Bool?
+
     @[JSON::Field(ignore: true)]
     property? me_present : Bool = false
 
     # The user's ID as visible in Permission resources.
     @[JSON::Field(key: "permissionId", type: String?, presence: true, ignore_serialize: permission_id.nil? && !permission_id_present?)]
     property permission_id : String?
+
     @[JSON::Field(ignore: true)]
     property? permission_id_present : Bool = false
 
     # A link to the user's profile photo, if available.
     @[JSON::Field(key: "photoLink", type: String?, presence: true, ignore_serialize: photo_link.nil? && !photo_link_present?)]
     property photo_link : String?
+
     @[JSON::Field(ignore: true)]
     property? photo_link_present : Bool = false
 

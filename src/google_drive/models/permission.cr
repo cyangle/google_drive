@@ -22,84 +22,98 @@ module GoogleDrive
     # Whether the permission allows the file to be discovered through search. This is only applicable for permissions of type domain or anyone.
     @[JSON::Field(key: "allowFileDiscovery", type: Bool?, presence: true, ignore_serialize: allow_file_discovery.nil? && !allow_file_discovery_present?)]
     property allow_file_discovery : Bool?
+
     @[JSON::Field(ignore: true)]
     property? allow_file_discovery_present : Bool = false
 
     # Whether the account associated with this permission has been deleted. This field only pertains to user and group permissions.
     @[JSON::Field(key: "deleted", type: Bool?, presence: true, ignore_serialize: deleted.nil? && !deleted_present?)]
     property deleted : Bool?
+
     @[JSON::Field(ignore: true)]
     property? deleted_present : Bool = false
 
     # The \"pretty\" name of the value of the permission. The following is a list of examples for each type of permission:   - user - User's full name, as defined for their Google account, such as \"Joe Smith.\"  - group - Name of the Google Group, such as \"The Company Administrators.\"  - domain - String domain name, such as \"thecompany.com.\"  - anyone - No displayName is present.
     @[JSON::Field(key: "displayName", type: String?, presence: true, ignore_serialize: display_name.nil? && !display_name_present?)]
     property display_name : String?
+
     @[JSON::Field(ignore: true)]
     property? display_name_present : Bool = false
 
     # The domain to which this permission refers.
     @[JSON::Field(key: "domain", type: String?, presence: true, ignore_serialize: domain.nil? && !domain_present?)]
     property domain : String?
+
     @[JSON::Field(ignore: true)]
     property? domain_present : Bool = false
 
     # The email address of the user or group to which this permission refers.
     @[JSON::Field(key: "emailAddress", type: String?, presence: true, ignore_serialize: email_address.nil? && !email_address_present?)]
     property email_address : String?
+
     @[JSON::Field(ignore: true)]
     property? email_address_present : Bool = false
 
     # The time at which this permission will expire (RFC 3339 date-time). Expiration times have the following restrictions:   - They can only be set on user and group permissions  - The time must be in the future  - The time cannot be more than a year in the future
     @[JSON::Field(key: "expirationTime", type: Time?, converter: Time::RFC3339Converter, presence: true, ignore_serialize: expiration_time.nil? && !expiration_time_present?)]
     property expiration_time : Time?
+
     @[JSON::Field(ignore: true)]
     property? expiration_time_present : Bool = false
 
     # The ID of this permission. This is a unique identifier for the grantee, and is published in User resources as permissionId. IDs should be treated as opaque values.
     @[JSON::Field(key: "id", type: String?, presence: true, ignore_serialize: id.nil? && !id_present?)]
     property id : String?
+
     @[JSON::Field(ignore: true)]
     property? id_present : Bool = false
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#permission\".
     @[JSON::Field(key: "kind", type: String?, default: "drive#permission", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
     property kind : String?
+
     @[JSON::Field(ignore: true)]
     property? kind_present : Bool = false
 
     # Details of whether the permissions on this shared drive item are inherited or directly on this item. This is an output-only field which is present only for shared drive items.
     @[JSON::Field(key: "permissionDetails", type: Array(PermissionPermissionDetailsInner)?, presence: true, ignore_serialize: permission_details.nil? && !permission_details_present?)]
     property permission_details : Array(PermissionPermissionDetailsInner)?
+
     @[JSON::Field(ignore: true)]
     property? permission_details_present : Bool = false
 
     # A link to the user's profile photo, if available.
     @[JSON::Field(key: "photoLink", type: String?, presence: true, ignore_serialize: photo_link.nil? && !photo_link_present?)]
     property photo_link : String?
+
     @[JSON::Field(ignore: true)]
     property? photo_link_present : Bool = false
 
     # The role granted by this permission. While new values may be supported in the future, the following are currently allowed:   - owner  - organizer  - fileOrganizer  - writer  - commenter  - reader
     @[JSON::Field(key: "role", type: String?, presence: true, ignore_serialize: role.nil? && !role_present?)]
     property role : String?
+
     @[JSON::Field(ignore: true)]
     property? role_present : Bool = false
 
     # Deprecated - use permissionDetails instead.
     @[JSON::Field(key: "teamDrivePermissionDetails", type: Array(PermissionTeamDrivePermissionDetailsInner)?, presence: true, ignore_serialize: team_drive_permission_details.nil? && !team_drive_permission_details_present?)]
     property team_drive_permission_details : Array(PermissionTeamDrivePermissionDetailsInner)?
+
     @[JSON::Field(ignore: true)]
     property? team_drive_permission_details_present : Bool = false
 
     # The type of the grantee. Valid values are:   - user  - group  - domain  - anyone  When creating a permission, if type is user or group, you must provide an emailAddress for the user or group. When type is domain, you must provide a domain. There isn't extra information required for a anyone type.
     @[JSON::Field(key: "type", type: String?, presence: true, ignore_serialize: _type.nil? && !_type_present?)]
     property _type : String?
+
     @[JSON::Field(ignore: true)]
     property? _type_present : Bool = false
 
     # Indicates the view for this permission. Only populated for permissions that belong to a view. published is the only supported value.
     @[JSON::Field(key: "view", type: String?, presence: true, ignore_serialize: view.nil? && !view_present?)]
     property view : String?
+
     @[JSON::Field(ignore: true)]
     property? view_present : Bool = false
 

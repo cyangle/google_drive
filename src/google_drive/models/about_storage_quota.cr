@@ -22,24 +22,28 @@ module GoogleDrive
     # The usage limit, if applicable. This will not be present if the user has unlimited storage.
     @[JSON::Field(key: "limit", type: String?, presence: true, ignore_serialize: limit.nil? && !limit_present?)]
     property limit : String?
+
     @[JSON::Field(ignore: true)]
     property? limit_present : Bool = false
 
     # The total usage across all services.
     @[JSON::Field(key: "usage", type: String?, presence: true, ignore_serialize: usage.nil? && !usage_present?)]
     property usage : String?
+
     @[JSON::Field(ignore: true)]
     property? usage_present : Bool = false
 
     # The usage by all files in Google Drive.
     @[JSON::Field(key: "usageInDrive", type: String?, presence: true, ignore_serialize: usage_in_drive.nil? && !usage_in_drive_present?)]
     property usage_in_drive : String?
+
     @[JSON::Field(ignore: true)]
     property? usage_in_drive_present : Bool = false
 
     # The usage by trashed files in Google Drive.
     @[JSON::Field(key: "usageInDriveTrash", type: String?, presence: true, ignore_serialize: usage_in_drive_trash.nil? && !usage_in_drive_trash_present?)]
     property usage_in_drive_trash : String?
+
     @[JSON::Field(ignore: true)]
     property? usage_in_drive_trash_present : Bool = false
 

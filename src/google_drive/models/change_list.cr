@@ -22,24 +22,28 @@ module GoogleDrive
     # The list of changes. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.
     @[JSON::Field(key: "changes", type: Array(Change)?, presence: true, ignore_serialize: changes.nil? && !changes_present?)]
     property changes : Array(Change)?
+
     @[JSON::Field(ignore: true)]
     property? changes_present : Bool = false
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#changeList\".
     @[JSON::Field(key: "kind", type: String?, default: "drive#changeList", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
     property kind : String?
+
     @[JSON::Field(ignore: true)]
     property? kind_present : Bool = false
 
     # The starting page token for future changes. This will be present only if the end of the current changes list has been reached.
     @[JSON::Field(key: "newStartPageToken", type: String?, presence: true, ignore_serialize: new_start_page_token.nil? && !new_start_page_token_present?)]
     property new_start_page_token : String?
+
     @[JSON::Field(ignore: true)]
     property? new_start_page_token_present : Bool = false
 
     # The page token for the next page of changes. This will be absent if the end of the changes list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results.
     @[JSON::Field(key: "nextPageToken", type: String?, presence: true, ignore_serialize: next_page_token.nil? && !next_page_token_present?)]
     property next_page_token : String?
+
     @[JSON::Field(ignore: true)]
     property? next_page_token_present : Bool = false
 

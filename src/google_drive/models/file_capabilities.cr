@@ -22,210 +22,245 @@ module GoogleDrive
     # Whether the current user can add children to this folder. This is always false when the item is not a folder.
     @[JSON::Field(key: "canAddChildren", type: Bool?, presence: true, ignore_serialize: can_add_children.nil? && !can_add_children_present?)]
     property can_add_children : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_add_children_present : Bool = false
 
     # Whether the current user can add a folder from another drive (different shared drive or My Drive) to this folder. This is false when the item is not a folder. Only populated for items in shared drives.
     @[JSON::Field(key: "canAddFolderFromAnotherDrive", type: Bool?, presence: true, ignore_serialize: can_add_folder_from_another_drive.nil? && !can_add_folder_from_another_drive_present?)]
     property can_add_folder_from_another_drive : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_add_folder_from_another_drive_present : Bool = false
 
     # Whether the current user can add a parent for the item without removing an existing parent in the same request. Not populated for shared drive files.
     @[JSON::Field(key: "canAddMyDriveParent", type: Bool?, presence: true, ignore_serialize: can_add_my_drive_parent.nil? && !can_add_my_drive_parent_present?)]
     property can_add_my_drive_parent : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_add_my_drive_parent_present : Bool = false
 
     # Whether the current user can change the copyRequiresWriterPermission restriction of this file.
     @[JSON::Field(key: "canChangeCopyRequiresWriterPermission", type: Bool?, presence: true, ignore_serialize: can_change_copy_requires_writer_permission.nil? && !can_change_copy_requires_writer_permission_present?)]
     property can_change_copy_requires_writer_permission : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_change_copy_requires_writer_permission_present : Bool = false
 
     # Whether the current user can change the securityUpdateEnabled field on link share metadata.
     @[JSON::Field(key: "canChangeSecurityUpdateEnabled", type: Bool?, presence: true, ignore_serialize: can_change_security_update_enabled.nil? && !can_change_security_update_enabled_present?)]
     property can_change_security_update_enabled : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_change_security_update_enabled_present : Bool = false
 
     # Deprecated
     @[JSON::Field(key: "canChangeViewersCanCopyContent", type: Bool?, presence: true, ignore_serialize: can_change_viewers_can_copy_content.nil? && !can_change_viewers_can_copy_content_present?)]
     property can_change_viewers_can_copy_content : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_change_viewers_can_copy_content_present : Bool = false
 
     # Whether the current user can comment on this file.
     @[JSON::Field(key: "canComment", type: Bool?, presence: true, ignore_serialize: can_comment.nil? && !can_comment_present?)]
     property can_comment : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_comment_present : Bool = false
 
     # Whether the current user can copy this file. For an item in a shared drive, whether the current user can copy non-folder descendants of this item, or this item itself if it is not a folder.
     @[JSON::Field(key: "canCopy", type: Bool?, presence: true, ignore_serialize: can_copy.nil? && !can_copy_present?)]
     property can_copy : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_copy_present : Bool = false
 
     # Whether the current user can delete this file.
     @[JSON::Field(key: "canDelete", type: Bool?, presence: true, ignore_serialize: can_delete.nil? && !can_delete_present?)]
     property can_delete : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_delete_present : Bool = false
 
     # Whether the current user can delete children of this folder. This is false when the item is not a folder. Only populated for items in shared drives.
     @[JSON::Field(key: "canDeleteChildren", type: Bool?, presence: true, ignore_serialize: can_delete_children.nil? && !can_delete_children_present?)]
     property can_delete_children : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_delete_children_present : Bool = false
 
     # Whether the current user can download this file.
     @[JSON::Field(key: "canDownload", type: Bool?, presence: true, ignore_serialize: can_download.nil? && !can_download_present?)]
     property can_download : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_download_present : Bool = false
 
     # Whether the current user can edit this file. Other factors may limit the type of changes a user can make to a file. For example, see canChangeCopyRequiresWriterPermission or canModifyContent.
     @[JSON::Field(key: "canEdit", type: Bool?, presence: true, ignore_serialize: can_edit.nil? && !can_edit_present?)]
     property can_edit : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_edit_present : Bool = false
 
     # Whether the current user can list the children of this folder. This is always false when the item is not a folder.
     @[JSON::Field(key: "canListChildren", type: Bool?, presence: true, ignore_serialize: can_list_children.nil? && !can_list_children_present?)]
     property can_list_children : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_list_children_present : Bool = false
 
     # Whether the current user can modify the content of this file.
     @[JSON::Field(key: "canModifyContent", type: Bool?, presence: true, ignore_serialize: can_modify_content.nil? && !can_modify_content_present?)]
     property can_modify_content : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_modify_content_present : Bool = false
 
     # Whether the current user can modify restrictions on content of this file.
     @[JSON::Field(key: "canModifyContentRestriction", type: Bool?, presence: true, ignore_serialize: can_modify_content_restriction.nil? && !can_modify_content_restriction_present?)]
     property can_modify_content_restriction : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_modify_content_restriction_present : Bool = false
 
     # Whether the current user can move children of this folder outside of the shared drive. This is false when the item is not a folder. Only populated for items in shared drives.
     @[JSON::Field(key: "canMoveChildrenOutOfDrive", type: Bool?, presence: true, ignore_serialize: can_move_children_out_of_drive.nil? && !can_move_children_out_of_drive_present?)]
     property can_move_children_out_of_drive : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_move_children_out_of_drive_present : Bool = false
 
     # Deprecated - use canMoveChildrenOutOfDrive instead.
     @[JSON::Field(key: "canMoveChildrenOutOfTeamDrive", type: Bool?, presence: true, ignore_serialize: can_move_children_out_of_team_drive.nil? && !can_move_children_out_of_team_drive_present?)]
     property can_move_children_out_of_team_drive : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_move_children_out_of_team_drive_present : Bool = false
 
     # Whether the current user can move children of this folder within this drive. This is false when the item is not a folder. Note that a request to move the child may still fail depending on the current user's access to the child and to the destination folder.
     @[JSON::Field(key: "canMoveChildrenWithinDrive", type: Bool?, presence: true, ignore_serialize: can_move_children_within_drive.nil? && !can_move_children_within_drive_present?)]
     property can_move_children_within_drive : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_move_children_within_drive_present : Bool = false
 
     # Deprecated - use canMoveChildrenWithinDrive instead.
     @[JSON::Field(key: "canMoveChildrenWithinTeamDrive", type: Bool?, presence: true, ignore_serialize: can_move_children_within_team_drive.nil? && !can_move_children_within_team_drive_present?)]
     property can_move_children_within_team_drive : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_move_children_within_team_drive_present : Bool = false
 
     # Deprecated - use canMoveItemOutOfDrive instead.
     @[JSON::Field(key: "canMoveItemIntoTeamDrive", type: Bool?, presence: true, ignore_serialize: can_move_item_into_team_drive.nil? && !can_move_item_into_team_drive_present?)]
     property can_move_item_into_team_drive : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_move_item_into_team_drive_present : Bool = false
 
     # Whether the current user can move this item outside of this drive by changing its parent. Note that a request to change the parent of the item may still fail depending on the new parent that is being added.
     @[JSON::Field(key: "canMoveItemOutOfDrive", type: Bool?, presence: true, ignore_serialize: can_move_item_out_of_drive.nil? && !can_move_item_out_of_drive_present?)]
     property can_move_item_out_of_drive : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_move_item_out_of_drive_present : Bool = false
 
     # Deprecated - use canMoveItemOutOfDrive instead.
     @[JSON::Field(key: "canMoveItemOutOfTeamDrive", type: Bool?, presence: true, ignore_serialize: can_move_item_out_of_team_drive.nil? && !can_move_item_out_of_team_drive_present?)]
     property can_move_item_out_of_team_drive : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_move_item_out_of_team_drive_present : Bool = false
 
     # Whether the current user can move this item within this drive. Note that a request to change the parent of the item may still fail depending on the new parent that is being added and the parent that is being removed.
     @[JSON::Field(key: "canMoveItemWithinDrive", type: Bool?, presence: true, ignore_serialize: can_move_item_within_drive.nil? && !can_move_item_within_drive_present?)]
     property can_move_item_within_drive : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_move_item_within_drive_present : Bool = false
 
     # Deprecated - use canMoveItemWithinDrive instead.
     @[JSON::Field(key: "canMoveItemWithinTeamDrive", type: Bool?, presence: true, ignore_serialize: can_move_item_within_team_drive.nil? && !can_move_item_within_team_drive_present?)]
     property can_move_item_within_team_drive : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_move_item_within_team_drive_present : Bool = false
 
     # Deprecated - use canMoveItemWithinDrive or canMoveItemOutOfDrive instead.
     @[JSON::Field(key: "canMoveTeamDriveItem", type: Bool?, presence: true, ignore_serialize: can_move_team_drive_item.nil? && !can_move_team_drive_item_present?)]
     property can_move_team_drive_item : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_move_team_drive_item_present : Bool = false
 
     # Whether the current user can read the shared drive to which this file belongs. Only populated for items in shared drives.
     @[JSON::Field(key: "canReadDrive", type: Bool?, presence: true, ignore_serialize: can_read_drive.nil? && !can_read_drive_present?)]
     property can_read_drive : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_read_drive_present : Bool = false
 
     # Whether the current user can read the revisions resource of this file. For a shared drive item, whether revisions of non-folder descendants of this item, or this item itself if it is not a folder, can be read.
     @[JSON::Field(key: "canReadRevisions", type: Bool?, presence: true, ignore_serialize: can_read_revisions.nil? && !can_read_revisions_present?)]
     property can_read_revisions : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_read_revisions_present : Bool = false
 
     # Deprecated - use canReadDrive instead.
     @[JSON::Field(key: "canReadTeamDrive", type: Bool?, presence: true, ignore_serialize: can_read_team_drive.nil? && !can_read_team_drive_present?)]
     property can_read_team_drive : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_read_team_drive_present : Bool = false
 
     # Whether the current user can remove children from this folder. This is always false when the item is not a folder. For a folder in a shared drive, use canDeleteChildren or canTrashChildren instead.
     @[JSON::Field(key: "canRemoveChildren", type: Bool?, presence: true, ignore_serialize: can_remove_children.nil? && !can_remove_children_present?)]
     property can_remove_children : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_remove_children_present : Bool = false
 
     # Whether the current user can remove a parent from the item without adding another parent in the same request. Not populated for shared drive files.
     @[JSON::Field(key: "canRemoveMyDriveParent", type: Bool?, presence: true, ignore_serialize: can_remove_my_drive_parent.nil? && !can_remove_my_drive_parent_present?)]
     property can_remove_my_drive_parent : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_remove_my_drive_parent_present : Bool = false
 
     # Whether the current user can rename this file.
     @[JSON::Field(key: "canRename", type: Bool?, presence: true, ignore_serialize: can_rename.nil? && !can_rename_present?)]
     property can_rename : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_rename_present : Bool = false
 
     # Whether the current user can modify the sharing settings for this file.
     @[JSON::Field(key: "canShare", type: Bool?, presence: true, ignore_serialize: can_share.nil? && !can_share_present?)]
     property can_share : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_share_present : Bool = false
 
     # Whether the current user can move this file to trash.
     @[JSON::Field(key: "canTrash", type: Bool?, presence: true, ignore_serialize: can_trash.nil? && !can_trash_present?)]
     property can_trash : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_trash_present : Bool = false
 
     # Whether the current user can trash children of this folder. This is false when the item is not a folder. Only populated for items in shared drives.
     @[JSON::Field(key: "canTrashChildren", type: Bool?, presence: true, ignore_serialize: can_trash_children.nil? && !can_trash_children_present?)]
     property can_trash_children : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_trash_children_present : Bool = false
 
     # Whether the current user can restore this file from trash.
     @[JSON::Field(key: "canUntrash", type: Bool?, presence: true, ignore_serialize: can_untrash.nil? && !can_untrash_present?)]
     property can_untrash : Bool?
+
     @[JSON::Field(ignore: true)]
     property? can_untrash_present : Bool = false
 

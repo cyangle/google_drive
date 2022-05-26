@@ -21,24 +21,28 @@ module GoogleDrive
     # Deprecated - use permissionDetails/inherited instead.
     @[JSON::Field(key: "inherited", type: Bool?, presence: true, ignore_serialize: inherited.nil? && !inherited_present?)]
     property inherited : Bool?
+
     @[JSON::Field(ignore: true)]
     property? inherited_present : Bool = false
 
     # Deprecated - use permissionDetails/inheritedFrom instead.
     @[JSON::Field(key: "inheritedFrom", type: String?, presence: true, ignore_serialize: inherited_from.nil? && !inherited_from_present?)]
     property inherited_from : String?
+
     @[JSON::Field(ignore: true)]
     property? inherited_from_present : Bool = false
 
     # Deprecated - use permissionDetails/role instead.
     @[JSON::Field(key: "role", type: String?, presence: true, ignore_serialize: role.nil? && !role_present?)]
     property role : String?
+
     @[JSON::Field(ignore: true)]
     property? role_present : Bool = false
 
     # Deprecated - use permissionDetails/permissionType instead.
     @[JSON::Field(key: "teamDrivePermissionType", type: String?, presence: true, ignore_serialize: team_drive_permission_type.nil? && !team_drive_permission_type_present?)]
     property team_drive_permission_type : String?
+
     @[JSON::Field(ignore: true)]
     property? team_drive_permission_type_present : Bool = false
 

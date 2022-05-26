@@ -22,125 +22,146 @@ module GoogleDrive
     # The aperture used to create the photo (f-number).
     @[JSON::Field(key: "aperture", type: Float32?, presence: true, ignore_serialize: aperture.nil? && !aperture_present?)]
     property aperture : Float32?
+
     @[JSON::Field(ignore: true)]
     property? aperture_present : Bool = false
 
     # The make of the camera used to create the photo.
     @[JSON::Field(key: "cameraMake", type: String?, presence: true, ignore_serialize: camera_make.nil? && !camera_make_present?)]
     property camera_make : String?
+
     @[JSON::Field(ignore: true)]
     property? camera_make_present : Bool = false
 
     # The model of the camera used to create the photo.
     @[JSON::Field(key: "cameraModel", type: String?, presence: true, ignore_serialize: camera_model.nil? && !camera_model_present?)]
     property camera_model : String?
+
     @[JSON::Field(ignore: true)]
     property? camera_model_present : Bool = false
 
     # The color space of the photo.
     @[JSON::Field(key: "colorSpace", type: String?, presence: true, ignore_serialize: color_space.nil? && !color_space_present?)]
     property color_space : String?
+
     @[JSON::Field(ignore: true)]
     property? color_space_present : Bool = false
 
     # The exposure bias of the photo (APEX value).
     @[JSON::Field(key: "exposureBias", type: Float32?, presence: true, ignore_serialize: exposure_bias.nil? && !exposure_bias_present?)]
     property exposure_bias : Float32?
+
     @[JSON::Field(ignore: true)]
     property? exposure_bias_present : Bool = false
 
     # The exposure mode used to create the photo.
     @[JSON::Field(key: "exposureMode", type: String?, presence: true, ignore_serialize: exposure_mode.nil? && !exposure_mode_present?)]
     property exposure_mode : String?
+
     @[JSON::Field(ignore: true)]
     property? exposure_mode_present : Bool = false
 
     # The length of the exposure, in seconds.
     @[JSON::Field(key: "exposureTime", type: Float32?, presence: true, ignore_serialize: exposure_time.nil? && !exposure_time_present?)]
     property exposure_time : Float32?
+
     @[JSON::Field(ignore: true)]
     property? exposure_time_present : Bool = false
 
     # Whether a flash was used to create the photo.
     @[JSON::Field(key: "flashUsed", type: Bool?, presence: true, ignore_serialize: flash_used.nil? && !flash_used_present?)]
     property flash_used : Bool?
+
     @[JSON::Field(ignore: true)]
     property? flash_used_present : Bool = false
 
     # The focal length used to create the photo, in millimeters.
     @[JSON::Field(key: "focalLength", type: Float32?, presence: true, ignore_serialize: focal_length.nil? && !focal_length_present?)]
     property focal_length : Float32?
+
     @[JSON::Field(ignore: true)]
     property? focal_length_present : Bool = false
 
     # The height of the image in pixels.
     @[JSON::Field(key: "height", type: Int32?, presence: true, ignore_serialize: height.nil? && !height_present?)]
     property height : Int32?
+
     @[JSON::Field(ignore: true)]
     property? height_present : Bool = false
 
     # The ISO speed used to create the photo.
     @[JSON::Field(key: "isoSpeed", type: Int32?, presence: true, ignore_serialize: iso_speed.nil? && !iso_speed_present?)]
     property iso_speed : Int32?
+
     @[JSON::Field(ignore: true)]
     property? iso_speed_present : Bool = false
 
     # The lens used to create the photo.
     @[JSON::Field(key: "lens", type: String?, presence: true, ignore_serialize: lens.nil? && !lens_present?)]
     property lens : String?
+
     @[JSON::Field(ignore: true)]
     property? lens_present : Bool = false
 
     @[JSON::Field(key: "location", type: FileImageMediaMetadataLocation?, presence: true, ignore_serialize: location.nil? && !location_present?)]
     property location : FileImageMediaMetadataLocation?
+
     @[JSON::Field(ignore: true)]
     property? location_present : Bool = false
 
     # The smallest f-number of the lens at the focal length used to create the photo (APEX value).
     @[JSON::Field(key: "maxApertureValue", type: Float32?, presence: true, ignore_serialize: max_aperture_value.nil? && !max_aperture_value_present?)]
     property max_aperture_value : Float32?
+
     @[JSON::Field(ignore: true)]
     property? max_aperture_value_present : Bool = false
 
     # The metering mode used to create the photo.
     @[JSON::Field(key: "meteringMode", type: String?, presence: true, ignore_serialize: metering_mode.nil? && !metering_mode_present?)]
     property metering_mode : String?
+
     @[JSON::Field(ignore: true)]
     property? metering_mode_present : Bool = false
 
     # The number of clockwise 90 degree rotations applied from the image's original orientation.
     @[JSON::Field(key: "rotation", type: Int32?, presence: true, ignore_serialize: rotation.nil? && !rotation_present?)]
     property rotation : Int32?
+
     @[JSON::Field(ignore: true)]
     property? rotation_present : Bool = false
 
     # The type of sensor used to create the photo.
     @[JSON::Field(key: "sensor", type: String?, presence: true, ignore_serialize: sensor.nil? && !sensor_present?)]
     property sensor : String?
+
     @[JSON::Field(ignore: true)]
     property? sensor_present : Bool = false
 
     # The distance to the subject of the photo, in meters.
     @[JSON::Field(key: "subjectDistance", type: Int32?, presence: true, ignore_serialize: subject_distance.nil? && !subject_distance_present?)]
     property subject_distance : Int32?
+
     @[JSON::Field(ignore: true)]
     property? subject_distance_present : Bool = false
 
     # The date and time the photo was taken (EXIF DateTime).
     @[JSON::Field(key: "time", type: String?, presence: true, ignore_serialize: time.nil? && !time_present?)]
     property time : String?
+
     @[JSON::Field(ignore: true)]
     property? time_present : Bool = false
 
     # The white balance mode used to create the photo.
     @[JSON::Field(key: "whiteBalance", type: String?, presence: true, ignore_serialize: white_balance.nil? && !white_balance_present?)]
     property white_balance : String?
+
     @[JSON::Field(ignore: true)]
     property? white_balance_present : Bool = false
 
     # The width of the image in pixels.
     @[JSON::Field(key: "width", type: Int32?, presence: true, ignore_serialize: width.nil? && !width_present?)]
     property width : Int32?
+
     @[JSON::Field(ignore: true)]
     property? width_present : Bool = false
 

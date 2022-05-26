@@ -22,53 +22,62 @@ module GoogleDrive
     # The action the reply performed to the parent comment. Valid values are:   - resolve  - reopen
     @[JSON::Field(key: "action", type: String?, presence: true, ignore_serialize: action.nil? && !action_present?)]
     property action : String?
+
     @[JSON::Field(ignore: true)]
     property? action_present : Bool = false
 
     @[JSON::Field(key: "author", type: User?, presence: true, ignore_serialize: author.nil? && !author_present?)]
     property author : User?
+
     @[JSON::Field(ignore: true)]
     property? author_present : Bool = false
 
     # The plain text content of the reply. This field is used for setting the content, while htmlContent should be displayed. This is required on creates if no action is specified.
     @[JSON::Field(key: "content", type: String?, presence: true, ignore_serialize: content.nil? && !content_present?)]
     property content : String?
+
     @[JSON::Field(ignore: true)]
     property? content_present : Bool = false
 
     # The time at which the reply was created (RFC 3339 date-time).
     @[JSON::Field(key: "createdTime", type: Time?, converter: Time::RFC3339Converter, presence: true, ignore_serialize: created_time.nil? && !created_time_present?)]
     property created_time : Time?
+
     @[JSON::Field(ignore: true)]
     property? created_time_present : Bool = false
 
     # Whether the reply has been deleted. A deleted reply has no content.
     @[JSON::Field(key: "deleted", type: Bool?, presence: true, ignore_serialize: deleted.nil? && !deleted_present?)]
     property deleted : Bool?
+
     @[JSON::Field(ignore: true)]
     property? deleted_present : Bool = false
 
     # The content of the reply with HTML formatting.
     @[JSON::Field(key: "htmlContent", type: String?, presence: true, ignore_serialize: html_content.nil? && !html_content_present?)]
     property html_content : String?
+
     @[JSON::Field(ignore: true)]
     property? html_content_present : Bool = false
 
     # The ID of the reply.
     @[JSON::Field(key: "id", type: String?, presence: true, ignore_serialize: id.nil? && !id_present?)]
     property id : String?
+
     @[JSON::Field(ignore: true)]
     property? id_present : Bool = false
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#reply\".
     @[JSON::Field(key: "kind", type: String?, default: "drive#reply", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
     property kind : String?
+
     @[JSON::Field(ignore: true)]
     property? kind_present : Bool = false
 
     # The last time the reply was modified (RFC 3339 date-time).
     @[JSON::Field(key: "modifiedTime", type: Time?, converter: Time::RFC3339Converter, presence: true, ignore_serialize: modified_time.nil? && !modified_time_present?)]
     property modified_time : Time?
+
     @[JSON::Field(ignore: true)]
     property? modified_time_present : Bool = false
 
