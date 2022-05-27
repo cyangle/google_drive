@@ -252,7 +252,7 @@ describe "FilesApi" do
   # @option opts [Bool] :supports_all_drives Whether the requesting application supports both My Drives and shared drives.
   # @option opts [Bool] :supports_team_drives Deprecated use supportsAllDrives instead.
   # @option opts [Bool] :use_content_as_indexable_text Whether to use the uploaded content as indexable text.
-  # @option opts [::File] :media
+  # @option opts [::File] :body
   # @return [File]
   describe "drive_files_update_content test" do
     it "should work" do
