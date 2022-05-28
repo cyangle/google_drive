@@ -130,7 +130,7 @@ module GoogleDrive
     #
     # @return Crest::Request
     #   the data deserialized from response body (could be nil), response status code and response headers.
-    def build_api_request(http_method : Symbol, path : String, operation : String, post_body : String?, auth_names = [] of String, header_params = {} of String => String, query_params = {} of String => (String | Array(String)), form_params : Hash(String, (String | Array(String) | ::File)) | Nil = {} of String => (String | Array(String) | ::File)) : Crest::Request
+    def build_api_request(http_method : Symbol, path : String, operation : String, post_body : IO | String?, auth_names = [] of String, header_params = {} of String => String, query_params = {} of String => (String | Array(String)), form_params : Hash(String, (String | Array(String) | ::File)) | Nil = {} of String => (String | Array(String) | ::File)) : Crest::Request
       # ssl_options = {
       #   "ca_file" => @config.ssl_ca_file,
       #   "verify" => @config.ssl_verify,
@@ -141,7 +141,7 @@ module GoogleDrive
 
       update_params_for_auth! header_params, query_params, auth_names
 
-      if !post_body.nil? && !post_body.empty?
+      if !post_body.nil? && (post_body.is_a?(IO) || post_body.is_a?(String) && !post_body.empty?)
         # use JSON string in the payload
         form_or_body = post_body
       else

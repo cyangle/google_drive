@@ -10,7 +10,7 @@ license: MIT
 dependencies:
   crest:
     github: mamantoha/crest
-    version: ">= 1.1.0"
+    version: ">= 1.3.0"
 
 development_dependencies:
   kemal:

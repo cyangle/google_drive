@@ -784,8 +784,8 @@ module GoogleDrive
     # @param upload_type [String] The type of upload request to the /upload URI
     # @param file_id [String] The ID of the file.
     # @return [File]
-    def update_content(*, upload_type : String = "media", file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, media : ::File? = nil)
-      data, _status_code, _headers = update_content_with_http_info(upload_type: upload_type, file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, media: media)
+    def update_content(*, upload_type : String = "media", file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, body : ::File? = nil)
+      data, _status_code, _headers = update_content_with_http_info(upload_type: upload_type, file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, body: body)
       data
     end
 
@@ -793,8 +793,8 @@ module GoogleDrive
     # @param upload_type [String] The type of upload request to the /upload URI
     # @param file_id [String] The ID of the file.
     # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
-    def update_content_with_http_info(*, upload_type : String = "media", file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, media : ::File? = nil)
-      request = build_api_request_for_update_content(upload_type: upload_type, file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, media: media)
+    def update_content_with_http_info(*, upload_type : String = "media", file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, body : ::File? = nil)
+      request = build_api_request_for_update_content(upload_type: upload_type, file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, body: body)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
@@ -809,12 +809,12 @@ module GoogleDrive
     # @param upload_type [String] The type of upload request to the /upload URI
     # @param file_id [String] The ID of the file.
     # @return nil
-    def update_content(*, upload_type : String = "media", file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, media : ::File? = nil, &block : Crest::Response ->)
-      build_api_request_for_update_content(upload_type: upload_type, file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, media: media).execute(&block)
+    def update_content(*, upload_type : String = "media", file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, body : ::File? = nil, &block : Crest::Response ->)
+      build_api_request_for_update_content(upload_type: upload_type, file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, body: body).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_update_content(*, upload_type : String = "media", file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, media : ::File? = nil) : Crest::Request
+    def build_api_request_for_update_content(*, upload_type : String = "media", file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = false, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = false, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = false, supports_team_drives : Bool? = false, use_content_as_indexable_text : Bool? = false, body : ::File? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.update_content ..." }
       end
@@ -855,14 +855,13 @@ module GoogleDrive
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["*/*"])
       # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["multipart/form-data"])
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/octet-stream"])
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
-      form_params["Media"] = media if !media.nil?
+      form_params = nil
 
       # http body (model)
-      post_body = nil
+      post_body = body
 
       # auth_names
       auth_names = ["Oauth2"]
