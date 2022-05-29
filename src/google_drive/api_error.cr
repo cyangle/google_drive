@@ -28,7 +28,7 @@ module GoogleDrive
       msg = ""
       msg = msg + "\nHTTP status code: #{code}" if @code
       msg = msg + "\nResponse headers: #{response_headers}" if @response_headers
-      if @message.nil? || @message.empty?
+      if @message.nil? || @message.to_s.empty?
         msg = msg + "\nError message: the server returns an error but the HTTP response body is empty."
       else
         msg = msg + "\nResponse body: #{@message}"

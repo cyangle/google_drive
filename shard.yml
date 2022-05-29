@@ -21,3 +21,6 @@ development_dependencies:
   post_process:
     github: cyangle/post_process
     version: ~> 0.2.2
+  vcr:
+    github: spoved/vcr.cr
+    version: ~> 0.5.2
