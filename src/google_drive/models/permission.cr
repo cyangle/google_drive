@@ -75,6 +75,13 @@ module GoogleDrive
     @[JSON::Field(ignore: true)]
     property? kind_present : Bool = false
 
+    # Whether the account associated with this permission is a pending owner. Only populated for user type permissions for files that are not in a shared drive.
+    @[JSON::Field(key: "pendingOwner", type: Bool?, presence: true, ignore_serialize: pending_owner.nil? && !pending_owner_present?)]
+    property pending_owner : Bool?
+
+    @[JSON::Field(ignore: true)]
+    property? pending_owner_present : Bool = false
+
     # Details of whether the permissions on this shared drive item are inherited or directly on this item. This is an output-only field which is present only for shared drive items.
     @[JSON::Field(key: "permissionDetails", type: Array(PermissionPermissionDetailsInner)?, presence: true, ignore_serialize: permission_details.nil? && !permission_details_present?)]
     property permission_details : Array(PermissionPermissionDetailsInner)?
@@ -119,7 +126,7 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @allow_file_discovery : Bool? = nil, @deleted : Bool? = nil, @display_name : String? = nil, @domain : String? = nil, @email_address : String? = nil, @expiration_time : Time? = nil, @id : String? = nil, @kind : String? = "drive#permission", @permission_details : Array(PermissionPermissionDetailsInner)? = nil, @photo_link : String? = nil, @role : String? = nil, @team_drive_permission_details : Array(PermissionTeamDrivePermissionDetailsInner)? = nil, @_type : String? = nil, @view : String? = nil)
+    def initialize(*, @allow_file_discovery : Bool? = nil, @deleted : Bool? = nil, @display_name : String? = nil, @domain : String? = nil, @email_address : String? = nil, @expiration_time : Time? = nil, @id : String? = nil, @kind : String? = "drive#permission", @pending_owner : Bool? = nil, @permission_details : Array(PermissionPermissionDetailsInner)? = nil, @photo_link : String? = nil, @role : String? = nil, @team_drive_permission_details : Array(PermissionTeamDrivePermissionDetailsInner)? = nil, @_type : String? = nil, @view : String? = nil)
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -148,6 +155,7 @@ module GoogleDrive
         expiration_time == o.expiration_time &&
         id == o.id &&
         kind == o.kind &&
+        pending_owner == o.pending_owner &&
         permission_details == o.permission_details &&
         photo_link == o.photo_link &&
         role == o.role &&
@@ -165,7 +173,7 @@ module GoogleDrive
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [allow_file_discovery, deleted, display_name, domain, email_address, expiration_time, id, kind, permission_details, photo_link, role, team_drive_permission_details, _type, view].hash
+      [allow_file_discovery, deleted, display_name, domain, email_address, expiration_time, id, kind, pending_owner, permission_details, photo_link, role, team_drive_permission_details, _type, view].hash
     end
 
     # Builds the object from hash

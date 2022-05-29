@@ -138,6 +138,13 @@ module GoogleDrive
     @[JSON::Field(ignore: true)]
     property? can_rename_team_drive_present : Bool = false
 
+    # Whether the current user can reset the Team Drive restrictions to defaults.
+    @[JSON::Field(key: "canResetTeamDriveRestrictions", type: Bool?, presence: true, ignore_serialize: can_reset_team_drive_restrictions.nil? && !can_reset_team_drive_restrictions_present?)]
+    property can_reset_team_drive_restrictions : Bool?
+
+    @[JSON::Field(ignore: true)]
+    property? can_reset_team_drive_restrictions_present : Bool = false
+
     # Whether the current user can share files or folders in this Team Drive.
     @[JSON::Field(key: "canShare", type: Bool?, presence: true, ignore_serialize: can_share.nil? && !can_share_present?)]
     property can_share : Bool?
@@ -154,7 +161,7 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @can_add_children : Bool? = nil, @can_change_copy_requires_writer_permission_restriction : Bool? = nil, @can_change_domain_users_only_restriction : Bool? = nil, @can_change_team_drive_background : Bool? = nil, @can_change_team_members_only_restriction : Bool? = nil, @can_comment : Bool? = nil, @can_copy : Bool? = nil, @can_delete_children : Bool? = nil, @can_delete_team_drive : Bool? = nil, @can_download : Bool? = nil, @can_edit : Bool? = nil, @can_list_children : Bool? = nil, @can_manage_members : Bool? = nil, @can_read_revisions : Bool? = nil, @can_remove_children : Bool? = nil, @can_rename : Bool? = nil, @can_rename_team_drive : Bool? = nil, @can_share : Bool? = nil, @can_trash_children : Bool? = nil)
+    def initialize(*, @can_add_children : Bool? = nil, @can_change_copy_requires_writer_permission_restriction : Bool? = nil, @can_change_domain_users_only_restriction : Bool? = nil, @can_change_team_drive_background : Bool? = nil, @can_change_team_members_only_restriction : Bool? = nil, @can_comment : Bool? = nil, @can_copy : Bool? = nil, @can_delete_children : Bool? = nil, @can_delete_team_drive : Bool? = nil, @can_download : Bool? = nil, @can_edit : Bool? = nil, @can_list_children : Bool? = nil, @can_manage_members : Bool? = nil, @can_read_revisions : Bool? = nil, @can_remove_children : Bool? = nil, @can_rename : Bool? = nil, @can_rename_team_drive : Bool? = nil, @can_reset_team_drive_restrictions : Bool? = nil, @can_share : Bool? = nil, @can_trash_children : Bool? = nil)
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -192,6 +199,7 @@ module GoogleDrive
         can_remove_children == o.can_remove_children &&
         can_rename == o.can_rename &&
         can_rename_team_drive == o.can_rename_team_drive &&
+        can_reset_team_drive_restrictions == o.can_reset_team_drive_restrictions &&
         can_share == o.can_share &&
         can_trash_children == o.can_trash_children
     end
@@ -205,7 +213,7 @@ module GoogleDrive
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [can_add_children, can_change_copy_requires_writer_permission_restriction, can_change_domain_users_only_restriction, can_change_team_drive_background, can_change_team_members_only_restriction, can_comment, can_copy, can_delete_children, can_delete_team_drive, can_download, can_edit, can_list_children, can_manage_members, can_read_revisions, can_remove_children, can_rename, can_rename_team_drive, can_share, can_trash_children].hash
+      [can_add_children, can_change_copy_requires_writer_permission_restriction, can_change_domain_users_only_restriction, can_change_team_drive_background, can_change_team_members_only_restriction, can_comment, can_copy, can_delete_children, can_delete_team_drive, can_download, can_edit, can_list_children, can_manage_members, can_read_revisions, can_remove_children, can_rename, can_rename_team_drive, can_reset_team_drive_restrictions, can_share, can_trash_children].hash
     end
 
     # Builds the object from hash

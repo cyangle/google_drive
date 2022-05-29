@@ -223,6 +223,12 @@ module GoogleDrive
           "key"   => "Authorization",
           "value" => "Bearer #{access_token}",
         },
+        "Oauth2c" => {
+          "type"  => "oauth2",
+          "in"    => "header",
+          "key"   => "Authorization",
+          "value" => "Bearer #{access_token}",
+        },
       }
     end
 

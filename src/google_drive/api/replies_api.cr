@@ -21,7 +21,7 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @param comment_id [String] The ID of the comment.
     # @return [Reply]
-    def create(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, reply : Reply? = nil)
+    def create(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, reply : Reply? = nil)
       data, _status_code, _headers = create_with_http_info(file_id: file_id, comment_id: comment_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, reply: reply)
       data
     end
@@ -30,7 +30,7 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @param comment_id [String] The ID of the comment.
     # @return [Array<(Reply, Integer, Hash)>] Reply data, response status code and response headers
-    def create_with_http_info(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, reply : Reply? = nil)
+    def create_with_http_info(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, reply : Reply? = nil)
       request = build_api_request_for_create(file_id: file_id, comment_id: comment_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, reply: reply)
 
       data, status_code, headers = @api_client.execute_api_request(request)
@@ -46,12 +46,12 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @param comment_id [String] The ID of the comment.
     # @return nil
-    def create(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, reply : Reply? = nil, &block : Crest::Response ->)
+    def create(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, reply : Reply? = nil, &block : Crest::Response ->)
       build_api_request_for_create(file_id: file_id, comment_id: comment_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, reply: reply).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_create(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, reply : Reply? = nil) : Crest::Request
+    def build_api_request_for_create(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, reply : Reply? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: RepliesApi.create ..." }
       end
@@ -75,7 +75,7 @@ module GoogleDrive
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
 
@@ -86,7 +86,7 @@ module GoogleDrive
       post_body = reply.to_json
 
       # auth_names
-      auth_names = ["Oauth2"]
+      auth_names = ["Oauth2", "Oauth2c"]
 
       @api_client.build_api_request(
         http_method: :"POST",
@@ -105,7 +105,7 @@ module GoogleDrive
     # @param comment_id [String] The ID of the comment.
     # @param reply_id [String] The ID of the reply.
     # @return [nil]
-    def delete(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil)
+    def delete(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil)
       delete_with_http_info(file_id: file_id, comment_id: comment_id, reply_id: reply_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
       nil
     end
@@ -115,7 +115,7 @@ module GoogleDrive
     # @param comment_id [String] The ID of the comment.
     # @param reply_id [String] The ID of the reply.
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def delete_with_http_info(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil)
+    def delete_with_http_info(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil)
       request = build_api_request_for_delete(file_id: file_id, comment_id: comment_id, reply_id: reply_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
 
       data, status_code, headers = @api_client.execute_api_request(request)
@@ -132,12 +132,12 @@ module GoogleDrive
     # @param comment_id [String] The ID of the comment.
     # @param reply_id [String] The ID of the reply.
     # @return nil
-    def delete(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, &block : Crest::Response ->)
+    def delete(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, &block : Crest::Response ->)
       build_api_request_for_delete(file_id: file_id, comment_id: comment_id, reply_id: reply_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_delete(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil) : Crest::Request
+    def build_api_request_for_delete(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: RepliesApi.delete ..." }
       end
@@ -168,7 +168,7 @@ module GoogleDrive
       post_body = nil
 
       # auth_names
-      auth_names = ["Oauth2"]
+      auth_names = ["Oauth2", "Oauth2c"]
 
       @api_client.build_api_request(
         http_method: :"DELETE",
@@ -187,7 +187,7 @@ module GoogleDrive
     # @param comment_id [String] The ID of the comment.
     # @param reply_id [String] The ID of the reply.
     # @return [Reply]
-    def get(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = false)
+    def get(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = nil)
       data, _status_code, _headers = get_with_http_info(file_id: file_id, comment_id: comment_id, reply_id: reply_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, include_deleted: include_deleted)
       data
     end
@@ -197,7 +197,7 @@ module GoogleDrive
     # @param comment_id [String] The ID of the comment.
     # @param reply_id [String] The ID of the reply.
     # @return [Array<(Reply, Integer, Hash)>] Reply data, response status code and response headers
-    def get_with_http_info(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = false)
+    def get_with_http_info(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = nil)
       request = build_api_request_for_get(file_id: file_id, comment_id: comment_id, reply_id: reply_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, include_deleted: include_deleted)
 
       data, status_code, headers = @api_client.execute_api_request(request)
@@ -214,12 +214,12 @@ module GoogleDrive
     # @param comment_id [String] The ID of the comment.
     # @param reply_id [String] The ID of the reply.
     # @return nil
-    def get(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = false, &block : Crest::Response ->)
+    def get(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = nil, &block : Crest::Response ->)
       build_api_request_for_get(file_id: file_id, comment_id: comment_id, reply_id: reply_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, include_deleted: include_deleted).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_get(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = false) : Crest::Request
+    def build_api_request_for_get(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: RepliesApi.get ..." }
       end
@@ -244,7 +244,7 @@ module GoogleDrive
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # form parameters
       form_params = nil
@@ -253,7 +253,7 @@ module GoogleDrive
       post_body = nil
 
       # auth_names
-      auth_names = ["Oauth2"]
+      auth_names = ["Oauth2", "Oauth2c"]
 
       @api_client.build_api_request(
         http_method: :"GET",
@@ -271,7 +271,7 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @param comment_id [String] The ID of the comment.
     # @return [ReplyList]
-    def list(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = false, page_size : Int32? = 20, page_token : String? = nil)
+    def list(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = nil, page_size : Int32? = nil, page_token : String? = nil)
       data, _status_code, _headers = list_with_http_info(file_id: file_id, comment_id: comment_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, include_deleted: include_deleted, page_size: page_size, page_token: page_token)
       data
     end
@@ -280,7 +280,7 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @param comment_id [String] The ID of the comment.
     # @return [Array<(ReplyList, Integer, Hash)>] ReplyList data, response status code and response headers
-    def list_with_http_info(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = false, page_size : Int32? = 20, page_token : String? = nil)
+    def list_with_http_info(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = nil, page_size : Int32? = nil, page_token : String? = nil)
       request = build_api_request_for_list(file_id: file_id, comment_id: comment_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, include_deleted: include_deleted, page_size: page_size, page_token: page_token)
 
       data, status_code, headers = @api_client.execute_api_request(request)
@@ -296,12 +296,12 @@ module GoogleDrive
     # @param file_id [String] The ID of the file.
     # @param comment_id [String] The ID of the comment.
     # @return nil
-    def list(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = false, page_size : Int32? = 20, page_token : String? = nil, &block : Crest::Response ->)
+    def list(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = nil, page_size : Int32? = nil, page_token : String? = nil, &block : Crest::Response ->)
       build_api_request_for_list(file_id: file_id, comment_id: comment_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, include_deleted: include_deleted, page_size: page_size, page_token: page_token).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_list(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = false, page_size : Int32? = 20, page_token : String? = nil) : Crest::Request
+    def build_api_request_for_list(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = nil, page_size : Int32? = nil, page_token : String? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: RepliesApi.list ..." }
       end
@@ -336,7 +336,7 @@ module GoogleDrive
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # form parameters
       form_params = nil
@@ -345,7 +345,7 @@ module GoogleDrive
       post_body = nil
 
       # auth_names
-      auth_names = ["Oauth2"]
+      auth_names = ["Oauth2", "Oauth2c"]
 
       @api_client.build_api_request(
         http_method: :"GET",
@@ -364,7 +364,7 @@ module GoogleDrive
     # @param comment_id [String] The ID of the comment.
     # @param reply_id [String] The ID of the reply.
     # @return [Reply]
-    def update(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, reply : Reply? = nil)
+    def update(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, reply : Reply? = nil)
       data, _status_code, _headers = update_with_http_info(file_id: file_id, comment_id: comment_id, reply_id: reply_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, reply: reply)
       data
     end
@@ -374,7 +374,7 @@ module GoogleDrive
     # @param comment_id [String] The ID of the comment.
     # @param reply_id [String] The ID of the reply.
     # @return [Array<(Reply, Integer, Hash)>] Reply data, response status code and response headers
-    def update_with_http_info(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, reply : Reply? = nil)
+    def update_with_http_info(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, reply : Reply? = nil)
       request = build_api_request_for_update(file_id: file_id, comment_id: comment_id, reply_id: reply_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, reply: reply)
 
       data, status_code, headers = @api_client.execute_api_request(request)
@@ -391,12 +391,12 @@ module GoogleDrive
     # @param comment_id [String] The ID of the comment.
     # @param reply_id [String] The ID of the reply.
     # @return nil
-    def update(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, reply : Reply? = nil, &block : Crest::Response ->)
+    def update(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, reply : Reply? = nil, &block : Crest::Response ->)
       build_api_request_for_update(file_id: file_id, comment_id: comment_id, reply_id: reply_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, reply: reply).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_update(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, reply : Reply? = nil) : Crest::Request
+    def build_api_request_for_update(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, reply : Reply? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: RepliesApi.update ..." }
       end
@@ -420,7 +420,7 @@ module GoogleDrive
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
 
@@ -431,7 +431,7 @@ module GoogleDrive
       post_body = reply.to_json
 
       # auth_names
-      auth_names = ["Oauth2"]
+      auth_names = ["Oauth2", "Oauth2c"]
 
       @api_client.build_api_request(
         http_method: :"PATCH",

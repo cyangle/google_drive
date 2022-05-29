@@ -19,14 +19,14 @@ module GoogleDrive
 
     # Stop watching resources through this channel
     # @return [nil]
-    def stop(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, channel : Channel? = nil)
+    def stop(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, channel : Channel? = nil)
       stop_with_http_info(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, channel: channel)
       nil
     end
 
     # Stop watching resources through this channel
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def stop_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, channel : Channel? = nil)
+    def stop_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, channel : Channel? = nil)
       request = build_api_request_for_stop(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, channel: channel)
 
       data, status_code, headers = @api_client.execute_api_request(request)
@@ -40,12 +40,12 @@ module GoogleDrive
 
     # Stop watching resources through this channel
     # @return nil
-    def stop(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, channel : Channel? = nil, &block : Crest::Response ->)
+    def stop(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, channel : Channel? = nil, &block : Crest::Response ->)
       build_api_request_for_stop(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, channel: channel).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_stop(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, channel : Channel? = nil) : Crest::Request
+    def build_api_request_for_stop(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, channel : Channel? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: ChannelsApi.stop ..." }
       end
@@ -78,7 +78,7 @@ module GoogleDrive
       post_body = channel.to_json
 
       # auth_names
-      auth_names = ["Oauth2"]
+      auth_names = ["Oauth2", "Oauth2c"]
 
       @api_client.build_api_request(
         http_method: :"POST",

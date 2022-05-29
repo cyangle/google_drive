@@ -73,6 +73,13 @@ module GoogleDrive
     @[JSON::Field(ignore: true)]
     property? name_present : Bool = false
 
+    # The organizational unit of this shared drive. This field is only populated on drives.list responses when the useDomainAdminAccess parameter is set to true.
+    @[JSON::Field(key: "orgUnitId", type: String?, presence: true, ignore_serialize: org_unit_id.nil? && !org_unit_id_present?)]
+    property org_unit_id : String?
+
+    @[JSON::Field(ignore: true)]
+    property? org_unit_id_present : Bool = false
+
     @[JSON::Field(key: "restrictions", type: TeamDriveRestrictions?, presence: true, ignore_serialize: restrictions.nil? && !restrictions_present?)]
     property restrictions : TeamDriveRestrictions?
 
@@ -88,7 +95,7 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @background_image_file : TeamDriveBackgroundImageFile? = nil, @background_image_link : String? = nil, @capabilities : TeamDriveCapabilities? = nil, @color_rgb : String? = nil, @created_time : Time? = nil, @id : String? = nil, @kind : String? = "drive#teamDrive", @name : String? = nil, @restrictions : TeamDriveRestrictions? = nil, @theme_id : String? = nil)
+    def initialize(*, @background_image_file : TeamDriveBackgroundImageFile? = nil, @background_image_link : String? = nil, @capabilities : TeamDriveCapabilities? = nil, @color_rgb : String? = nil, @created_time : Time? = nil, @id : String? = nil, @kind : String? = "drive#teamDrive", @name : String? = nil, @org_unit_id : String? = nil, @restrictions : TeamDriveRestrictions? = nil, @theme_id : String? = nil)
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -117,6 +124,7 @@ module GoogleDrive
         id == o.id &&
         kind == o.kind &&
         name == o.name &&
+        org_unit_id == o.org_unit_id &&
         restrictions == o.restrictions &&
         theme_id == o.theme_id
     end
@@ -130,7 +138,7 @@ module GoogleDrive
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [background_image_file, background_image_link, capabilities, color_rgb, created_time, id, kind, name, restrictions, theme_id].hash
+      [background_image_file, background_image_link, capabilities, color_rgb, created_time, id, kind, name, org_unit_id, restrictions, theme_id].hash
     end
 
     # Builds the object from hash

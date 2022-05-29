@@ -20,7 +20,7 @@ module GoogleDrive
     # Deprecated use drives.create instead.
     # @param request_id [String] An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned.
     # @return [TeamDrive]
-    def create(*, request_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, team_drive : TeamDrive? = nil)
+    def create(*, request_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, team_drive : TeamDrive? = nil)
       data, _status_code, _headers = create_with_http_info(request_id: request_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, team_drive: team_drive)
       data
     end
@@ -28,7 +28,7 @@ module GoogleDrive
     # Deprecated use drives.create instead.
     # @param request_id [String] An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned.
     # @return [Array<(TeamDrive, Integer, Hash)>] TeamDrive data, response status code and response headers
-    def create_with_http_info(*, request_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, team_drive : TeamDrive? = nil)
+    def create_with_http_info(*, request_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, team_drive : TeamDrive? = nil)
       request = build_api_request_for_create(request_id: request_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, team_drive: team_drive)
 
       data, status_code, headers = @api_client.execute_api_request(request)
@@ -43,12 +43,12 @@ module GoogleDrive
     # Deprecated use drives.create instead.
     # @param request_id [String] An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned.
     # @return nil
-    def create(*, request_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, team_drive : TeamDrive? = nil, &block : Crest::Response ->)
+    def create(*, request_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, team_drive : TeamDrive? = nil, &block : Crest::Response ->)
       build_api_request_for_create(request_id: request_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, team_drive: team_drive).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_create(*, request_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, team_drive : TeamDrive? = nil) : Crest::Request
+    def build_api_request_for_create(*, request_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, team_drive : TeamDrive? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: TeamdrivesApi.create ..." }
       end
@@ -73,7 +73,7 @@ module GoogleDrive
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
 
@@ -84,7 +84,7 @@ module GoogleDrive
       post_body = team_drive.to_json
 
       # auth_names
-      auth_names = ["Oauth2"]
+      auth_names = ["Oauth2", "Oauth2c"]
 
       @api_client.build_api_request(
         http_method: :"POST",
@@ -101,7 +101,7 @@ module GoogleDrive
     # Deprecated use drives.delete instead.
     # @param team_drive_id [String] The ID of the Team Drive
     # @return [nil]
-    def delete(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil)
+    def delete(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil)
       delete_with_http_info(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
       nil
     end
@@ -109,7 +109,7 @@ module GoogleDrive
     # Deprecated use drives.delete instead.
     # @param team_drive_id [String] The ID of the Team Drive
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def delete_with_http_info(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil)
+    def delete_with_http_info(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil)
       request = build_api_request_for_delete(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
 
       data, status_code, headers = @api_client.execute_api_request(request)
@@ -124,12 +124,12 @@ module GoogleDrive
     # Deprecated use drives.delete instead.
     # @param team_drive_id [String] The ID of the Team Drive
     # @return nil
-    def delete(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, &block : Crest::Response ->)
+    def delete(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, &block : Crest::Response ->)
       build_api_request_for_delete(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_delete(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil) : Crest::Request
+    def build_api_request_for_delete(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: TeamdrivesApi.delete ..." }
       end
@@ -160,7 +160,7 @@ module GoogleDrive
       post_body = nil
 
       # auth_names
-      auth_names = ["Oauth2"]
+      auth_names = ["Oauth2", "Oauth2c"]
 
       @api_client.build_api_request(
         http_method: :"DELETE",
@@ -177,7 +177,7 @@ module GoogleDrive
     # Deprecated use drives.get instead.
     # @param team_drive_id [String] The ID of the Team Drive
     # @return [TeamDrive]
-    def get(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = false)
+    def get(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = nil)
       data, _status_code, _headers = get_with_http_info(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access)
       data
     end
@@ -185,7 +185,7 @@ module GoogleDrive
     # Deprecated use drives.get instead.
     # @param team_drive_id [String] The ID of the Team Drive
     # @return [Array<(TeamDrive, Integer, Hash)>] TeamDrive data, response status code and response headers
-    def get_with_http_info(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = false)
+    def get_with_http_info(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = nil)
       request = build_api_request_for_get(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access)
 
       data, status_code, headers = @api_client.execute_api_request(request)
@@ -200,12 +200,12 @@ module GoogleDrive
     # Deprecated use drives.get instead.
     # @param team_drive_id [String] The ID of the Team Drive
     # @return nil
-    def get(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = false, &block : Crest::Response ->)
+    def get(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = nil, &block : Crest::Response ->)
       build_api_request_for_get(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_get(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = false) : Crest::Request
+    def build_api_request_for_get(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: TeamdrivesApi.get ..." }
       end
@@ -230,7 +230,7 @@ module GoogleDrive
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # form parameters
       form_params = nil
@@ -239,7 +239,7 @@ module GoogleDrive
       post_body = nil
 
       # auth_names
-      auth_names = ["Oauth2"]
+      auth_names = ["Oauth2", "Oauth2c"]
 
       @api_client.build_api_request(
         http_method: :"GET",
@@ -255,14 +255,14 @@ module GoogleDrive
 
     # Deprecated use drives.list instead.
     # @return [TeamDriveList]
-    def list(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = 10, page_token : String? = nil, q : String? = nil, use_domain_admin_access : Bool? = false)
+    def list(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = nil, page_token : String? = nil, q : String? = nil, use_domain_admin_access : Bool? = nil)
       data, _status_code, _headers = list_with_http_info(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token, q: q, use_domain_admin_access: use_domain_admin_access)
       data
     end
 
     # Deprecated use drives.list instead.
     # @return [Array<(TeamDriveList, Integer, Hash)>] TeamDriveList data, response status code and response headers
-    def list_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = 10, page_token : String? = nil, q : String? = nil, use_domain_admin_access : Bool? = false)
+    def list_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = nil, page_token : String? = nil, q : String? = nil, use_domain_admin_access : Bool? = nil)
       request = build_api_request_for_list(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token, q: q, use_domain_admin_access: use_domain_admin_access)
 
       data, status_code, headers = @api_client.execute_api_request(request)
@@ -276,12 +276,12 @@ module GoogleDrive
 
     # Deprecated use drives.list instead.
     # @return nil
-    def list(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = 10, page_token : String? = nil, q : String? = nil, use_domain_admin_access : Bool? = false, &block : Crest::Response ->)
+    def list(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = nil, page_token : String? = nil, q : String? = nil, use_domain_admin_access : Bool? = nil, &block : Crest::Response ->)
       build_api_request_for_list(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token, q: q, use_domain_admin_access: use_domain_admin_access).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_list(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = 10, page_token : String? = nil, q : String? = nil, use_domain_admin_access : Bool? = false) : Crest::Request
+    def build_api_request_for_list(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = nil, page_token : String? = nil, q : String? = nil, use_domain_admin_access : Bool? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: TeamdrivesApi.list ..." }
       end
@@ -317,7 +317,7 @@ module GoogleDrive
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # form parameters
       form_params = nil
@@ -326,7 +326,7 @@ module GoogleDrive
       post_body = nil
 
       # auth_names
-      auth_names = ["Oauth2"]
+      auth_names = ["Oauth2", "Oauth2c"]
 
       @api_client.build_api_request(
         http_method: :"GET",
@@ -343,7 +343,7 @@ module GoogleDrive
     # Deprecated use drives.update instead
     # @param team_drive_id [String] The ID of the Team Drive
     # @return [TeamDrive]
-    def update(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = false, team_drive : TeamDrive? = nil)
+    def update(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = nil, team_drive : TeamDrive? = nil)
       data, _status_code, _headers = update_with_http_info(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access, team_drive: team_drive)
       data
     end
@@ -351,7 +351,7 @@ module GoogleDrive
     # Deprecated use drives.update instead
     # @param team_drive_id [String] The ID of the Team Drive
     # @return [Array<(TeamDrive, Integer, Hash)>] TeamDrive data, response status code and response headers
-    def update_with_http_info(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = false, team_drive : TeamDrive? = nil)
+    def update_with_http_info(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = nil, team_drive : TeamDrive? = nil)
       request = build_api_request_for_update(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access, team_drive: team_drive)
 
       data, status_code, headers = @api_client.execute_api_request(request)
@@ -366,12 +366,12 @@ module GoogleDrive
     # Deprecated use drives.update instead
     # @param team_drive_id [String] The ID of the Team Drive
     # @return nil
-    def update(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = false, team_drive : TeamDrive? = nil, &block : Crest::Response ->)
+    def update(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = nil, team_drive : TeamDrive? = nil, &block : Crest::Response ->)
       build_api_request_for_update(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access, team_drive: team_drive).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_update(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = true, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = false, team_drive : TeamDrive? = nil) : Crest::Request
+    def build_api_request_for_update(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = nil, team_drive : TeamDrive? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: TeamdrivesApi.update ..." }
       end
@@ -396,7 +396,7 @@ module GoogleDrive
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["*/*"])
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
 
@@ -407,7 +407,7 @@ module GoogleDrive
       post_body = team_drive.to_json
 
       # auth_names
-      auth_names = ["Oauth2"]
+      auth_names = ["Oauth2", "Oauth2c"]
 
       @api_client.build_api_request(
         http_method: :"PATCH",
