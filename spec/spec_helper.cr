@@ -28,3 +28,11 @@ module MIME::Multipart
     "--------------------------aIsvamjjzHDWAhDBa7Leku6kSnaKc8i3qyG8H8BA9sJodcqo"
   end
 end
+
+class File < IO::FileDescriptor
+  def to_s
+    gets_to_end.tap do |_|
+      rewind
+    end
+  end
+end

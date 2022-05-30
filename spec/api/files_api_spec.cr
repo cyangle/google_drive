@@ -283,21 +283,42 @@ describe "FilesApi" do
   # @option opts [::File] :media
   # @return [File]
   describe "drive_files_upload test" do
-    it "uploads file successfully" do
-      load_cassette("drive_files_upload") do
-        files_api = GoogleDrive::FilesApi.new
-        file_meta = GoogleDrive::File.new(
-          name: "hello.txt",
-          mime_type: "text/plain",
-          parents: ["appDataFolder"]
-        )
-        (File.read("spec/fixtures/sample_files/metadata.json")).should eq(file_meta.to_json)
-        file = files_api.upload(
-          upload_type: "multipart",
-          metadata: File.open("spec/fixtures/sample_files/metadata.json"),
-          media: File.open("spec/fixtures/sample_files/hello.txt")
-        )
-        (file.name).should eq(file_meta.name)
+    context "Multipart upload (uploadType=multipart)" do
+      it "uploads file successfully" do
+        load_cassette("drive_files_upload") do
+          files_api = GoogleDrive::FilesApi.new
+          file_meta = GoogleDrive::File.new(
+            name: "hello.txt",
+            mime_type: "text/plain",
+            parents: ["appDataFolder"]
+          )
+          (File.read("spec/fixtures/sample_files/metadata.json")).should eq(file_meta.to_json)
+          file = files_api.upload(
+            upload_type: "multipart",
+            metadata: File.open("spec/fixtures/sample_files/metadata.json"),
+            media: File.open("spec/fixtures/sample_files/hello.txt")
+          )
+          (file.name).should eq(file_meta.name)
+        end
+      end
+    end
+
+    context "Simple upload (uploadType=media)" do
+      it "uploads file successfully" do
+        load_cassette("drive_files_upload") do
+          files_api = GoogleDrive::FilesApi.new
+          file = files_api.upload(
+            upload_type: "media",
+            media: File.open("spec/fixtures/sample_files/simple_upload.csv")
+          )
+          (file.name).should eq("Untitled")
+          (file.mime_type).should eq("text/csv")
+        end
+      end
+    end
+
+    context "Resumable upload (uploadType=resumable)" do
+      it "uploads file successfully" do
       end
     end
   end

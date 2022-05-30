@@ -949,15 +949,15 @@ module GoogleDrive
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["multipart/form-data"])
+      header_params["Content-Type"] = upload_type == "media" ? MIME.from_filename(media.not_nil!.path) : @api_client.select_header_content_type(["multipart/form-data"])
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | ::File)).new
-      form_params["Metadata"] = metadata if !metadata.nil?
-      form_params["Media"] = media if !media.nil?
+      form_params = upload_type == "multipart" ? Hash(String, (String | Array(String) | ::File)).new : nil
+      form_params["Metadata"] = metadata if form_params && !metadata.nil? && upload_type == "multipart"
+      form_params["Media"] = media if form_params && !media.nil? && upload_type == "multipart"
 
       # http body (model)
-      post_body = nil
+      post_body = upload_type == "multipart" ? nil : media.not_nil!
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
