@@ -1,0 +1,12 @@
+{
+  "method": "POST",
+  "host": null,
+  "resource": "/upload/drive/v3/files?alt=json&uploadType=media",
+  "headers": {
+    "Accept": ["application/json"],
+    "Content-Type": ["text/csv"],
+    "Authorization": ["<Authorization>"]
+  },
+  "body": "id,name\n1,crystal\n",
+  "query_params": { "alt": "json", "uploadType": "media" }
+}

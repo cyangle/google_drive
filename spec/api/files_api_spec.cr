@@ -284,6 +284,17 @@ describe "FilesApi" do
   # @return [File]
   describe "drive_files_upload test" do
     context "Multipart upload (uploadType=multipart)" do
+      it "generates correct http request" do
+        files_api = GoogleDrive::FilesApi.new
+        request = files_api.build_api_request_for_upload(
+          upload_type: "multipart",
+          metadata: File.open("spec/fixtures/sample_files/metadata.json"),
+          media: File.open("spec/fixtures/sample_files/hello.txt")
+        )
+        secured_request = VCR.filter_sensitive_data!(request.http_request)
+        (secured_request.to_json).should eq(Helpers.compact_json("spec/fixtures/requests/files_api/multipart_upload.json"))
+      end
+
       it "uploads file successfully" do
         load_cassette("drive_files_upload") do
           files_api = GoogleDrive::FilesApi.new
@@ -304,6 +315,16 @@ describe "FilesApi" do
     end
 
     context "Simple upload (uploadType=media)" do
+      it "generates correct http request" do
+        files_api = GoogleDrive::FilesApi.new
+        request = files_api.build_api_request_for_upload(
+          upload_type: "media",
+          media: File.open("spec/fixtures/sample_files/simple_upload.csv")
+        )
+        secured_request = VCR.filter_sensitive_data!(request.http_request)
+        (secured_request.to_json).should eq(Helpers.compact_json("spec/fixtures/requests/files_api/simple_upload.json"))
+      end
+
       it "uploads file successfully" do
         load_cassette("drive_files_upload") do
           files_api = GoogleDrive::FilesApi.new

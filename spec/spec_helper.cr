@@ -11,6 +11,7 @@
 require "spec"
 require "../src/google_drive"
 require "vcr"
+require "./support/**"
 
 ACCESS_TOKEN = ENV.fetch("ACCESS_TOKEN", "ignored_by_vcr")
 
