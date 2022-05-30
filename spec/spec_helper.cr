@@ -20,6 +20,7 @@ end
 
 VCR.configure do |settings|
   settings.filter_sensitive_data["Authorization"] = "<Authorization>"
+  settings.filter_sensitive_data["User-Agent"] = "<User-Agent>"
 end
 
 # Hard code multipart form boundary, so that the request VCR hash stays the same
