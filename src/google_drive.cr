@@ -16,7 +16,7 @@ require "time"
 require "uri"
 
 # Project files
-require "./google_drive/ext/**"
+require "./ext/**"
 require "./google_drive/configuration.cr"
 require "./google_drive/api_error.cr"
 require "./google_drive/api_client.cr"
