@@ -283,8 +283,22 @@ describe "FilesApi" do
   # @option opts [::File] :media
   # @return [File]
   describe "drive_files_upload test" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    it "uploads file successfully" do
+      load_cassette("drive_files_upload") do
+        files_api = GoogleDrive::FilesApi.new
+        file_meta = GoogleDrive::File.new(
+          name: "hello.txt",
+          mime_type: "text/plain",
+          parents: ["appDataFolder"]
+        )
+        (File.read("spec/fixtures/sample_files/metadata.json")).should eq(file_meta.to_json)
+        file = files_api.upload(
+          upload_type: "multipart",
+          metadata: File.open("spec/fixtures/sample_files/metadata.json"),
+          media: File.open("spec/fixtures/sample_files/hello.txt")
+        )
+        (file.name).should eq(file_meta.name)
+      end
     end
   end
 

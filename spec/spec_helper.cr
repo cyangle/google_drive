@@ -10,3 +10,21 @@
 # load modules
 require "spec"
 require "../src/google_drive"
+require "vcr"
+
+ACCESS_TOKEN = ENV.fetch("ACCESS_TOKEN", "ignored_by_vcr")
+
+GoogleDrive.configure do |config|
+  config.access_token = ACCESS_TOKEN
+end
+
+VCR.configure do |settings|
+  settings.filter_sensitive_data["Authorization"] = "<Authorization>"
+end
+
+# Hard code multipart form boundary, so that the request VCR hash stays the same
+module MIME::Multipart
+  def self.generate_boundary : String
+    "--------------------------aIsvamjjzHDWAhDBa7Leku6kSnaKc8i3qyG8H8BA9sJodcqo"
+  end
+end

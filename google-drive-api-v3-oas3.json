@@ -1828,11 +1828,11 @@
       },
       "fileUploadRequest": {
         "properties": {
-          "Media": {
+          "Metadata": {
             "format": "binary",
             "type": "string"
           },
-          "Metadata": {
+          "Media": {
             "format": "binary",
             "type": "string"
           }
