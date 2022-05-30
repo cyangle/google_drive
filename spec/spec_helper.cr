@@ -9,32 +9,6 @@
 
 # load modules
 require "spec"
-require "../src/google_drive"
 require "vcr"
+require "../src/google_drive"
 require "./support/**"
-
-ACCESS_TOKEN = ENV.fetch("ACCESS_TOKEN", "ignored_by_vcr")
-
-GoogleDrive.configure do |config|
-  config.access_token = ACCESS_TOKEN
-end
-
-VCR.configure do |settings|
-  settings.filter_sensitive_data["Authorization"] = "<Authorization>"
-  settings.filter_sensitive_data["User-Agent"] = "<User-Agent>"
-end
-
-# Hard code multipart form boundary, so that the request VCR hash stays the same
-module MIME::Multipart
-  def self.generate_boundary : String
-    "--------------------------aIsvamjjzHDWAhDBa7Leku6kSnaKc8i3qyG8H8BA9sJodcqo"
-  end
-end
-
-class File < IO::FileDescriptor
-  def to_s
-    gets_to_end.tap do |_|
-      rewind
-    end
-  end
-end

@@ -58,6 +58,9 @@ spec/models/team_drive_restrictions_spec.cr
 spec/models/team_drive_spec.cr
 spec/models/user_spec.cr
 spec/spec_helper.cr
+spec/support/ext.cr
+spec/support/helpers.cr
+spec/support/vcr.cr
 src/ext/json/serialization.cr
 src/ext/time.cr
 src/google_drive.cr
