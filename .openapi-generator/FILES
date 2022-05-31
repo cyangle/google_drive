@@ -62,3 +62,4 @@ src/google_drive/models/team_drive_capabilities.cr
 src/google_drive/models/team_drive_list.cr
 src/google_drive/models/team_drive_restrictions.cr
 src/google_drive/models/user.cr
+src/validators/enum_validator.cr
