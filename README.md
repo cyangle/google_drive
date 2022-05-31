@@ -78,6 +78,17 @@ end
 
 #### Upload file
 
+##### Simple upload
+
+```crystal
+new_file_meta : GoogleDrive::File = files_api.upload(
+  upload_type: "media",
+  media: File.open("./test.json")
+)
+```
+
+##### Multipart upload
+
 ```crystal
 file_meta = GoogleDrive::File.new(
   name: "test.json",
@@ -85,15 +96,11 @@ file_meta = GoogleDrive::File.new(
   parents: ["appDataFolder"]
 )
 
-File.tempfile(suffix: ".json") do |file|
-  file.print(file_meta.to_json)
-  file.rewind
-  new_file_meta : GoogleDrive::File = files_api.upload(
-    metadata: file,
-    media: File.open("./test.json")
-  )
-  file.delete
-end
+new_file_meta : GoogleDrive::File = files_api.upload(
+  upload_type: "multipart",
+  metadata: IO::Memory.new(file_meta.to_json),
+  media: File.open("./test.json")
+)
 ```
 
 #### Create folder
