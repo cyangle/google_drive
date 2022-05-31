@@ -8,8 +8,8 @@
       "multipart/form-data; boundary=\"--------------------------aIsvamjjzHDWAhDBa7Leku6kSnaKc8i3qyG8H8BA9sJodcqo\""
     ],
     "Authorization": ["<Authorization>"],
-    "Content-Length": ["603"]
+    "Content-Length": ["608"]
   },
-  "body": "----------------------------aIsvamjjzHDWAhDBa7Leku6kSnaKc8i3qyG8H8BA9sJodcqo\r\nContent-Type: application/json\r\nContent-Disposition: form-data; name=\"Metadata\"; filename=\"spec/fixtures/sample_files/metadata.json\"\r\n\r\n{\"kind\":\"drive#file\",\"mimeType\":\"text/plain\",\"name\":\"hello.txt\",\"parents\":[\"appDataFolder\"]}\r\n----------------------------aIsvamjjzHDWAhDBa7Leku6kSnaKc8i3qyG8H8BA9sJodcqo\r\nContent-Type: text/plain\r\nContent-Disposition: form-data; name=\"Media\"; filename=\"spec/fixtures/sample_files/hello.txt\"\r\n\r\nhello crystal\n\r\n----------------------------aIsvamjjzHDWAhDBa7Leku6kSnaKc8i3qyG8H8BA9sJodcqo--",
+  "body": "----------------------------aIsvamjjzHDWAhDBa7Leku6kSnaKc8i3qyG8H8BA9sJodcqo\r\nContent-Type: application/json\r\nContent-Disposition: form-data; name=\"Metadata.json\"; filename=\"spec/fixtures/sample_files/metadata.json\"\r\n\r\n{\"kind\":\"drive#file\",\"mimeType\":\"text/plain\",\"name\":\"hello.txt\",\"parents\":[\"appDataFolder\"]}\r\n----------------------------aIsvamjjzHDWAhDBa7Leku6kSnaKc8i3qyG8H8BA9sJodcqo\r\nContent-Type: text/plain\r\nContent-Disposition: form-data; name=\"Media\"; filename=\"spec/fixtures/sample_files/hello.txt\"\r\n\r\nhello crystal\n\r\n----------------------------aIsvamjjzHDWAhDBa7Leku6kSnaKc8i3qyG8H8BA9sJodcqo--",
   "query_params": { "alt": "json", "uploadType": "multipart" }
 }

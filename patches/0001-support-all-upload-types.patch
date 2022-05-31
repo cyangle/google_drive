@@ -20,11 +20,11 @@ index 112640e..5a7a9d4 100644
 +      header_params["Content-Type"] = upload_type == "media" ? MIME.from_filename(media.not_nil!.path) : @api_client.select_header_content_type(["multipart/form-data"])
  
        # form parameters
--      form_params = Hash(String, (String | Array(String) | ::File)).new
+-      form_params = Hash(String, (String | Array(String) | IO)).new
 -      form_params["Metadata"] = metadata if !metadata.nil?
 -      form_params["Media"] = media if !media.nil?
-+      form_params = upload_type == "multipart" ? Hash(String, (String | Array(String) | ::File)).new : nil
-+      form_params["Metadata"] = metadata if form_params && !metadata.nil? && upload_type == "multipart"
++      form_params = upload_type == "multipart" ? Hash(String, (String | Array(String) | IO)).new : nil
++      form_params["Metadata.json"] = metadata if form_params && !metadata.nil? && upload_type == "multipart"
 +      form_params["Media"] = media if form_params && !media.nil? && upload_type == "multipart"
  
        # http body (model)

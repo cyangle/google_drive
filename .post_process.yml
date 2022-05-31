@@ -10,3 +10,7 @@ tasks:
         name: 'Restore operation name'
         pattern: 'operation: "%{capitalized_api_name}Api.'
         new_value: 'operation: "%{capitalized_api_name}Api.drive_%{api_name}_'
+      -
+        name: "Update ::File to IO | String"
+        pattern: ': ::File'
+        new_value: ': IO | String'
