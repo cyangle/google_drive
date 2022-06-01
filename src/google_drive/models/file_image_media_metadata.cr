@@ -174,6 +174,7 @@ module GoogleDrive
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties
     end
 
@@ -218,9 +219,7 @@ module GoogleDrive
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Integer] Hash code
-    def hash
-      [aperture, camera_make, camera_model, color_space, exposure_bias, exposure_mode, exposure_time, flash_used, focal_length, height, iso_speed, lens, location, max_aperture_value, metering_mode, rotation, sensor, subject_distance, time, white_balance, width].hash
-    end
+    # @return [UInt64] Hash code
+    def_hash(@aperture, @camera_make, @camera_model, @color_space, @exposure_bias, @exposure_mode, @exposure_time, @flash_used, @focal_length, @height, @iso_speed, @lens, @location, @max_aperture_value, @metering_mode, @rotation, @sensor, @subject_distance, @time, @white_balance, @width)
   end
 end

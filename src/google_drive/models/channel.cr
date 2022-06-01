@@ -98,6 +98,7 @@ module GoogleDrive
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties
     end
 
@@ -131,9 +132,7 @@ module GoogleDrive
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Integer] Hash code
-    def hash
-      [address, expiration, id, kind, params, payload, resource_id, resource_uri, token, _type].hash
-    end
+    # @return [UInt64] Hash code
+    def_hash(@address, @expiration, @id, @kind, @params, @payload, @resource_id, @resource_uri, @token, @_type)
   end
 end

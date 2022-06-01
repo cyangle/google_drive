@@ -818,7 +818,6 @@ module GoogleDrive
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.update_content ..." }
       end
-      # verify enum value
       allowable_values = ["media", "multipart", "resumable"]
       if @api_client.config.client_side_validation && !allowable_values.includes?(upload_type)
         raise ArgumentError.new("invalid value for \"upload_type\", must be one of #{allowable_values}")
@@ -913,7 +912,6 @@ module GoogleDrive
       if @api_client.config.debugging
         Log.debug { "Calling API: FilesApi.upload ..." }
       end
-      # verify enum value
       allowable_values = ["media", "multipart", "resumable"]
       if @api_client.config.client_side_validation && !allowable_values.includes?(upload_type)
         raise ArgumentError.new("invalid value for \"upload_type\", must be one of #{allowable_values}")

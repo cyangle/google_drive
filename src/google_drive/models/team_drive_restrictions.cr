@@ -56,6 +56,7 @@ module GoogleDrive
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties
     end
 
@@ -83,9 +84,7 @@ module GoogleDrive
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Integer] Hash code
-    def hash
-      [admin_managed_restrictions, copy_requires_writer_permission, domain_users_only, team_members_only].hash
-    end
+    # @return [UInt64] Hash code
+    def_hash(@admin_managed_restrictions, @copy_requires_writer_permission, @domain_users_only, @team_members_only)
   end
 end

@@ -280,6 +280,7 @@ module GoogleDrive
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties
     end
 
@@ -339,9 +340,7 @@ module GoogleDrive
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Integer] Hash code
-    def hash
-      [can_accept_ownership, can_add_children, can_add_folder_from_another_drive, can_add_my_drive_parent, can_change_copy_requires_writer_permission, can_change_security_update_enabled, can_change_viewers_can_copy_content, can_comment, can_copy, can_delete, can_delete_children, can_download, can_edit, can_list_children, can_modify_content, can_modify_content_restriction, can_move_children_out_of_drive, can_move_children_out_of_team_drive, can_move_children_within_drive, can_move_children_within_team_drive, can_move_item_into_team_drive, can_move_item_out_of_drive, can_move_item_out_of_team_drive, can_move_item_within_drive, can_move_item_within_team_drive, can_move_team_drive_item, can_read_drive, can_read_revisions, can_read_team_drive, can_remove_children, can_remove_my_drive_parent, can_rename, can_share, can_trash, can_trash_children, can_untrash].hash
-    end
+    # @return [UInt64] Hash code
+    def_hash(@can_accept_ownership, @can_add_children, @can_add_folder_from_another_drive, @can_add_my_drive_parent, @can_change_copy_requires_writer_permission, @can_change_security_update_enabled, @can_change_viewers_can_copy_content, @can_comment, @can_copy, @can_delete, @can_delete_children, @can_download, @can_edit, @can_list_children, @can_modify_content, @can_modify_content_restriction, @can_move_children_out_of_drive, @can_move_children_out_of_team_drive, @can_move_children_within_drive, @can_move_children_within_team_drive, @can_move_item_into_team_drive, @can_move_item_out_of_drive, @can_move_item_out_of_team_drive, @can_move_item_within_drive, @can_move_item_within_team_drive, @can_move_team_drive_item, @can_read_drive, @can_read_revisions, @can_read_team_drive, @can_remove_children, @can_remove_my_drive_parent, @can_rename, @can_share, @can_trash, @can_trash_children, @can_untrash)
   end
 end

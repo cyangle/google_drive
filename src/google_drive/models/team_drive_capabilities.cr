@@ -168,6 +168,7 @@ module GoogleDrive
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties
     end
 
@@ -211,9 +212,7 @@ module GoogleDrive
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Integer] Hash code
-    def hash
-      [can_add_children, can_change_copy_requires_writer_permission_restriction, can_change_domain_users_only_restriction, can_change_team_drive_background, can_change_team_members_only_restriction, can_comment, can_copy, can_delete_children, can_delete_team_drive, can_download, can_edit, can_list_children, can_manage_members, can_read_revisions, can_remove_children, can_rename, can_rename_team_drive, can_reset_team_drive_restrictions, can_share, can_trash_children].hash
-    end
+    # @return [UInt64] Hash code
+    def_hash(@can_add_children, @can_change_copy_requires_writer_permission_restriction, @can_change_domain_users_only_restriction, @can_change_team_drive_background, @can_change_team_members_only_restriction, @can_comment, @can_copy, @can_delete_children, @can_delete_team_drive, @can_download, @can_edit, @can_list_children, @can_manage_members, @can_read_revisions, @can_remove_children, @can_rename, @can_rename_team_drive, @can_reset_team_drive_restrictions, @can_share, @can_trash_children)
   end
 end

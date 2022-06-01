@@ -432,6 +432,7 @@ module GoogleDrive
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties
     end
 
@@ -514,9 +515,7 @@ module GoogleDrive
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Integer] Hash code
-    def hash
-      [app_properties, capabilities, content_hints, content_restrictions, copy_requires_writer_permission, created_time, description, drive_id, explicitly_trashed, export_links, file_extension, folder_color_rgb, full_file_extension, has_augmented_permissions, has_thumbnail, head_revision_id, icon_link, id, image_media_metadata, is_app_authorized, kind, last_modifying_user, link_share_metadata, md5_checksum, mime_type, modified_by_me, modified_by_me_time, modified_time, name, original_filename, owned_by_me, owners, parents, permission_ids, permissions, properties, quota_bytes_used, resource_key, shared, shared_with_me_time, sharing_user, shortcut_details, size, spaces, starred, team_drive_id, thumbnail_link, thumbnail_version, trashed, trashed_time, trashing_user, version, video_media_metadata, viewed_by_me, viewed_by_me_time, viewers_can_copy_content, web_content_link, web_view_link, writers_can_share].hash
-    end
+    # @return [UInt64] Hash code
+    def_hash(@app_properties, @capabilities, @content_hints, @content_restrictions, @copy_requires_writer_permission, @created_time, @description, @drive_id, @explicitly_trashed, @export_links, @file_extension, @folder_color_rgb, @full_file_extension, @has_augmented_permissions, @has_thumbnail, @head_revision_id, @icon_link, @id, @image_media_metadata, @is_app_authorized, @kind, @last_modifying_user, @link_share_metadata, @md5_checksum, @mime_type, @modified_by_me, @modified_by_me_time, @modified_time, @name, @original_filename, @owned_by_me, @owners, @parents, @permission_ids, @permissions, @properties, @quota_bytes_used, @resource_key, @shared, @shared_with_me_time, @sharing_user, @shortcut_details, @size, @spaces, @starred, @team_drive_id, @thumbnail_link, @thumbnail_version, @trashed, @trashed_time, @trashing_user, @version, @video_media_metadata, @viewed_by_me, @viewed_by_me_time, @viewers_can_copy_content, @web_content_link, @web_view_link, @writers_can_share)
   end
 end
