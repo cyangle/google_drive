@@ -143,36 +143,16 @@ module GoogleDrive
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        allow_file_discovery == o.allow_file_discovery &&
-        deleted == o.deleted &&
-        display_name == o.display_name &&
-        domain == o.domain &&
-        email_address == o.email_address &&
-        expiration_time == o.expiration_time &&
-        id == o.id &&
-        kind == o.kind &&
-        pending_owner == o.pending_owner &&
-        permission_details == o.permission_details &&
-        photo_link == o.photo_link &&
-        role == o.role &&
-        team_drive_permission_details == o.team_drive_permission_details &&
-        _type == o._type &&
-        view == o.view
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@allow_file_discovery, @deleted, @display_name, @domain, @email_address, @expiration_time, @id, @kind, @pending_owner, @permission_details, @photo_link, @role, @team_drive_permission_details, @_type, @view)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@allow_file_discovery, @deleted, @display_name, @domain, @email_address, @expiration_time, @id, @kind, @pending_owner, @permission_details, @photo_link, @role, @team_drive_permission_details, @_type, @view)
   end
 end

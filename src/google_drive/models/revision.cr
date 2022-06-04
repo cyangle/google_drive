@@ -135,35 +135,16 @@ module GoogleDrive
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        export_links == o.export_links &&
-        id == o.id &&
-        keep_forever == o.keep_forever &&
-        kind == o.kind &&
-        last_modifying_user == o.last_modifying_user &&
-        md5_checksum == o.md5_checksum &&
-        mime_type == o.mime_type &&
-        modified_time == o.modified_time &&
-        original_filename == o.original_filename &&
-        publish_auto == o.publish_auto &&
-        published == o.published &&
-        published_link == o.published_link &&
-        published_outside_domain == o.published_outside_domain &&
-        size == o.size
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@export_links, @id, @keep_forever, @kind, @last_modifying_user, @md5_checksum, @mime_type, @modified_time, @original_filename, @publish_auto, @published, @published_link, @published_outside_domain, @size)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@export_links, @id, @keep_forever, @kind, @last_modifying_user, @md5_checksum, @mime_type, @modified_time, @original_filename, @publish_auto, @published, @published_link, @published_outside_domain, @size)
   end
 end

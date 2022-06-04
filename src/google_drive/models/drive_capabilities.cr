@@ -171,40 +171,16 @@ module GoogleDrive
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        can_add_children == o.can_add_children &&
-        can_change_copy_requires_writer_permission_restriction == o.can_change_copy_requires_writer_permission_restriction &&
-        can_change_domain_users_only_restriction == o.can_change_domain_users_only_restriction &&
-        can_change_drive_background == o.can_change_drive_background &&
-        can_change_drive_members_only_restriction == o.can_change_drive_members_only_restriction &&
-        can_comment == o.can_comment &&
-        can_copy == o.can_copy &&
-        can_delete_children == o.can_delete_children &&
-        can_delete_drive == o.can_delete_drive &&
-        can_download == o.can_download &&
-        can_edit == o.can_edit &&
-        can_list_children == o.can_list_children &&
-        can_manage_members == o.can_manage_members &&
-        can_read_revisions == o.can_read_revisions &&
-        can_rename == o.can_rename &&
-        can_rename_drive == o.can_rename_drive &&
-        can_reset_drive_restrictions == o.can_reset_drive_restrictions &&
-        can_share == o.can_share &&
-        can_trash_children == o.can_trash_children
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@can_add_children, @can_change_copy_requires_writer_permission_restriction, @can_change_domain_users_only_restriction, @can_change_drive_background, @can_change_drive_members_only_restriction, @can_comment, @can_copy, @can_delete_children, @can_delete_drive, @can_download, @can_edit, @can_list_children, @can_manage_members, @can_read_revisions, @can_rename, @can_rename_drive, @can_reset_drive_restrictions, @can_share, @can_trash_children)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@can_add_children, @can_change_copy_requires_writer_permission_restriction, @can_change_domain_users_only_restriction, @can_change_drive_background, @can_change_drive_members_only_restriction, @can_comment, @can_copy, @can_delete_children, @can_delete_drive, @can_download, @can_edit, @can_list_children, @can_manage_members, @can_read_revisions, @can_rename, @can_rename_drive, @can_reset_drive_restrictions, @can_share, @can_trash_children)
   end
 end

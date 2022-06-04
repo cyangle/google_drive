@@ -184,42 +184,16 @@ module GoogleDrive
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        aperture == o.aperture &&
-        camera_make == o.camera_make &&
-        camera_model == o.camera_model &&
-        color_space == o.color_space &&
-        exposure_bias == o.exposure_bias &&
-        exposure_mode == o.exposure_mode &&
-        exposure_time == o.exposure_time &&
-        flash_used == o.flash_used &&
-        focal_length == o.focal_length &&
-        height == o.height &&
-        iso_speed == o.iso_speed &&
-        lens == o.lens &&
-        location == o.location &&
-        max_aperture_value == o.max_aperture_value &&
-        metering_mode == o.metering_mode &&
-        rotation == o.rotation &&
-        sensor == o.sensor &&
-        subject_distance == o.subject_distance &&
-        time == o.time &&
-        white_balance == o.white_balance &&
-        width == o.width
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@aperture, @camera_make, @camera_model, @color_space, @exposure_bias, @exposure_mode, @exposure_time, @flash_used, @focal_length, @height, @iso_speed, @lens, @location, @max_aperture_value, @metering_mode, @rotation, @sensor, @subject_distance, @time, @white_balance, @width)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@aperture, @camera_make, @camera_model, @color_space, @exposure_bias, @exposure_mode, @exposure_time, @flash_used, @focal_length, @height, @iso_speed, @lens, @location, @max_aperture_value, @metering_mode, @rotation, @sensor, @subject_distance, @time, @white_balance, @width)
   end
 end

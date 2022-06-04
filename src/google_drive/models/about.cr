@@ -127,34 +127,16 @@ module GoogleDrive
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        app_installed == o.app_installed &&
-        can_create_drives == o.can_create_drives &&
-        can_create_team_drives == o.can_create_team_drives &&
-        drive_themes == o.drive_themes &&
-        export_formats == o.export_formats &&
-        folder_color_palette == o.folder_color_palette &&
-        import_formats == o.import_formats &&
-        kind == o.kind &&
-        max_import_sizes == o.max_import_sizes &&
-        max_upload_size == o.max_upload_size &&
-        storage_quota == o.storage_quota &&
-        team_drive_themes == o.team_drive_themes &&
-        user == o.user
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@app_installed, @can_create_drives, @can_create_team_drives, @drive_themes, @export_formats, @folder_color_palette, @import_formats, @kind, @max_import_sizes, @max_upload_size, @storage_quota, @team_drive_themes, @user)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@app_installed, @can_create_drives, @can_create_team_drives, @drive_themes, @export_formats, @folder_color_palette, @import_formats, @kind, @max_import_sizes, @max_upload_size, @storage_quota, @team_drive_themes, @user)
   end
 end

@@ -112,32 +112,16 @@ module GoogleDrive
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        change_type == o.change_type &&
-        drive == o.drive &&
-        drive_id == o.drive_id &&
-        file == o.file &&
-        file_id == o.file_id &&
-        kind == o.kind &&
-        removed == o.removed &&
-        team_drive == o.team_drive &&
-        team_drive_id == o.team_drive_id &&
-        time == o.time &&
-        _type == o._type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@change_type, @drive, @drive_id, @file, @file_id, @kind, @removed, @team_drive, @team_drive_id, @time, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@change_type, @drive, @drive_id, @file, @file_id, @kind, @removed, @team_drive, @team_drive_id, @time, @_type)
   end
 end

@@ -442,80 +442,16 @@ module GoogleDrive
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        app_properties == o.app_properties &&
-        capabilities == o.capabilities &&
-        content_hints == o.content_hints &&
-        content_restrictions == o.content_restrictions &&
-        copy_requires_writer_permission == o.copy_requires_writer_permission &&
-        created_time == o.created_time &&
-        description == o.description &&
-        drive_id == o.drive_id &&
-        explicitly_trashed == o.explicitly_trashed &&
-        export_links == o.export_links &&
-        file_extension == o.file_extension &&
-        folder_color_rgb == o.folder_color_rgb &&
-        full_file_extension == o.full_file_extension &&
-        has_augmented_permissions == o.has_augmented_permissions &&
-        has_thumbnail == o.has_thumbnail &&
-        head_revision_id == o.head_revision_id &&
-        icon_link == o.icon_link &&
-        id == o.id &&
-        image_media_metadata == o.image_media_metadata &&
-        is_app_authorized == o.is_app_authorized &&
-        kind == o.kind &&
-        last_modifying_user == o.last_modifying_user &&
-        link_share_metadata == o.link_share_metadata &&
-        md5_checksum == o.md5_checksum &&
-        mime_type == o.mime_type &&
-        modified_by_me == o.modified_by_me &&
-        modified_by_me_time == o.modified_by_me_time &&
-        modified_time == o.modified_time &&
-        name == o.name &&
-        original_filename == o.original_filename &&
-        owned_by_me == o.owned_by_me &&
-        owners == o.owners &&
-        parents == o.parents &&
-        permission_ids == o.permission_ids &&
-        permissions == o.permissions &&
-        properties == o.properties &&
-        quota_bytes_used == o.quota_bytes_used &&
-        resource_key == o.resource_key &&
-        shared == o.shared &&
-        shared_with_me_time == o.shared_with_me_time &&
-        sharing_user == o.sharing_user &&
-        shortcut_details == o.shortcut_details &&
-        size == o.size &&
-        spaces == o.spaces &&
-        starred == o.starred &&
-        team_drive_id == o.team_drive_id &&
-        thumbnail_link == o.thumbnail_link &&
-        thumbnail_version == o.thumbnail_version &&
-        trashed == o.trashed &&
-        trashed_time == o.trashed_time &&
-        trashing_user == o.trashing_user &&
-        version == o.version &&
-        video_media_metadata == o.video_media_metadata &&
-        viewed_by_me == o.viewed_by_me &&
-        viewed_by_me_time == o.viewed_by_me_time &&
-        viewers_can_copy_content == o.viewers_can_copy_content &&
-        web_content_link == o.web_content_link &&
-        web_view_link == o.web_view_link &&
-        writers_can_share == o.writers_can_share
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@app_properties, @capabilities, @content_hints, @content_restrictions, @copy_requires_writer_permission, @created_time, @description, @drive_id, @explicitly_trashed, @export_links, @file_extension, @folder_color_rgb, @full_file_extension, @has_augmented_permissions, @has_thumbnail, @head_revision_id, @icon_link, @id, @image_media_metadata, @is_app_authorized, @kind, @last_modifying_user, @link_share_metadata, @md5_checksum, @mime_type, @modified_by_me, @modified_by_me_time, @modified_time, @name, @original_filename, @owned_by_me, @owners, @parents, @permission_ids, @permissions, @properties, @quota_bytes_used, @resource_key, @shared, @shared_with_me_time, @sharing_user, @shortcut_details, @size, @spaces, @starred, @team_drive_id, @thumbnail_link, @thumbnail_version, @trashed, @trashed_time, @trashing_user, @version, @video_media_metadata, @viewed_by_me, @viewed_by_me_time, @viewers_can_copy_content, @web_content_link, @web_view_link, @writers_can_share)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@app_properties, @capabilities, @content_hints, @content_restrictions, @copy_requires_writer_permission, @created_time, @description, @drive_id, @explicitly_trashed, @export_links, @file_extension, @folder_color_rgb, @full_file_extension, @has_augmented_permissions, @has_thumbnail, @head_revision_id, @icon_link, @id, @image_media_metadata, @is_app_authorized, @kind, @last_modifying_user, @link_share_metadata, @md5_checksum, @mime_type, @modified_by_me, @modified_by_me_time, @modified_time, @name, @original_filename, @owned_by_me, @owners, @parents, @permission_ids, @permissions, @properties, @quota_bytes_used, @resource_key, @shared, @shared_with_me_time, @sharing_user, @shortcut_details, @size, @spaces, @starred, @team_drive_id, @thumbnail_link, @thumbnail_version, @trashed, @trashed_time, @trashing_user, @version, @video_media_metadata, @viewed_by_me, @viewed_by_me_time, @viewers_can_copy_content, @web_content_link, @web_view_link, @writers_can_share)
   end
 end

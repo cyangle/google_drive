@@ -80,27 +80,16 @@ module GoogleDrive
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        display_name == o.display_name &&
-        email_address == o.email_address &&
-        kind == o.kind &&
-        me == o.me &&
-        permission_id == o.permission_id &&
-        photo_link == o.photo_link
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@display_name, @email_address, @kind, @me, @permission_id, @photo_link)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@display_name, @email_address, @kind, @me, @permission_id, @photo_link)
   end
 end

@@ -290,57 +290,16 @@ module GoogleDrive
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        can_accept_ownership == o.can_accept_ownership &&
-        can_add_children == o.can_add_children &&
-        can_add_folder_from_another_drive == o.can_add_folder_from_another_drive &&
-        can_add_my_drive_parent == o.can_add_my_drive_parent &&
-        can_change_copy_requires_writer_permission == o.can_change_copy_requires_writer_permission &&
-        can_change_security_update_enabled == o.can_change_security_update_enabled &&
-        can_change_viewers_can_copy_content == o.can_change_viewers_can_copy_content &&
-        can_comment == o.can_comment &&
-        can_copy == o.can_copy &&
-        can_delete == o.can_delete &&
-        can_delete_children == o.can_delete_children &&
-        can_download == o.can_download &&
-        can_edit == o.can_edit &&
-        can_list_children == o.can_list_children &&
-        can_modify_content == o.can_modify_content &&
-        can_modify_content_restriction == o.can_modify_content_restriction &&
-        can_move_children_out_of_drive == o.can_move_children_out_of_drive &&
-        can_move_children_out_of_team_drive == o.can_move_children_out_of_team_drive &&
-        can_move_children_within_drive == o.can_move_children_within_drive &&
-        can_move_children_within_team_drive == o.can_move_children_within_team_drive &&
-        can_move_item_into_team_drive == o.can_move_item_into_team_drive &&
-        can_move_item_out_of_drive == o.can_move_item_out_of_drive &&
-        can_move_item_out_of_team_drive == o.can_move_item_out_of_team_drive &&
-        can_move_item_within_drive == o.can_move_item_within_drive &&
-        can_move_item_within_team_drive == o.can_move_item_within_team_drive &&
-        can_move_team_drive_item == o.can_move_team_drive_item &&
-        can_read_drive == o.can_read_drive &&
-        can_read_revisions == o.can_read_revisions &&
-        can_read_team_drive == o.can_read_team_drive &&
-        can_remove_children == o.can_remove_children &&
-        can_remove_my_drive_parent == o.can_remove_my_drive_parent &&
-        can_rename == o.can_rename &&
-        can_share == o.can_share &&
-        can_trash == o.can_trash &&
-        can_trash_children == o.can_trash_children &&
-        can_untrash == o.can_untrash
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@can_accept_ownership, @can_add_children, @can_add_folder_from_another_drive, @can_add_my_drive_parent, @can_change_copy_requires_writer_permission, @can_change_security_update_enabled, @can_change_viewers_can_copy_content, @can_comment, @can_copy, @can_delete, @can_delete_children, @can_download, @can_edit, @can_list_children, @can_modify_content, @can_modify_content_restriction, @can_move_children_out_of_drive, @can_move_children_out_of_team_drive, @can_move_children_within_drive, @can_move_children_within_team_drive, @can_move_item_into_team_drive, @can_move_item_out_of_drive, @can_move_item_out_of_team_drive, @can_move_item_within_drive, @can_move_item_within_team_drive, @can_move_team_drive_item, @can_read_drive, @can_read_revisions, @can_read_team_drive, @can_remove_children, @can_remove_my_drive_parent, @can_rename, @can_share, @can_trash, @can_trash_children, @can_untrash)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@can_accept_ownership, @can_add_children, @can_add_folder_from_another_drive, @can_add_my_drive_parent, @can_change_copy_requires_writer_permission, @can_change_security_update_enabled, @can_change_viewers_can_copy_content, @can_comment, @can_copy, @can_delete, @can_delete_children, @can_download, @can_edit, @can_list_children, @can_modify_content, @can_modify_content_restriction, @can_move_children_out_of_drive, @can_move_children_out_of_team_drive, @can_move_children_within_drive, @can_move_children_within_team_drive, @can_move_item_into_team_drive, @can_move_item_out_of_drive, @can_move_item_out_of_team_drive, @can_move_item_within_drive, @can_move_item_within_team_drive, @can_move_team_drive_item, @can_read_drive, @can_read_revisions, @can_read_team_drive, @can_remove_children, @can_remove_my_drive_parent, @can_rename, @can_share, @can_trash, @can_trash_children, @can_untrash)
   end
 end
