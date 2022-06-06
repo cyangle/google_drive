@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # A collection of arbitrary key-value pairs which are private to the requesting app. Entries with null values are cleared in update and copy requests. These properties can only be retrieved using an authenticated request. An authenticated request uses an access token obtained with a OAuth 2 client ID. You cannot use an API key to retrieve private properties.
     @[JSON::Field(key: "appProperties", type: Hash(String, String)?, presence: true, ignore_serialize: app_properties.nil? && !app_properties_present?)]
     property app_properties : Hash(String, String)?
@@ -158,7 +159,7 @@ module GoogleDrive
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#file\".
     @[JSON::Field(key: "kind", type: String?, default: "drive#file", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String?
+    property kind : String? = "drive#file"
 
     @[JSON::Field(ignore: true)]
     property? kind_present : Bool = false
@@ -425,7 +426,69 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @app_properties : Hash(String, String)? = nil, @capabilities : FileCapabilities? = nil, @content_hints : FileContentHints? = nil, @content_restrictions : Array(ContentRestriction)? = nil, @copy_requires_writer_permission : Bool? = nil, @created_time : Time? = nil, @description : String? = nil, @drive_id : String? = nil, @explicitly_trashed : Bool? = nil, @export_links : Hash(String, String)? = nil, @file_extension : String? = nil, @folder_color_rgb : String? = nil, @full_file_extension : String? = nil, @has_augmented_permissions : Bool? = nil, @has_thumbnail : Bool? = nil, @head_revision_id : String? = nil, @icon_link : String? = nil, @id : String? = nil, @image_media_metadata : FileImageMediaMetadata? = nil, @is_app_authorized : Bool? = nil, @kind : String? = "drive#file", @last_modifying_user : User? = nil, @link_share_metadata : FileLinkShareMetadata? = nil, @md5_checksum : String? = nil, @mime_type : String? = nil, @modified_by_me : Bool? = nil, @modified_by_me_time : Time? = nil, @modified_time : Time? = nil, @name : String? = nil, @original_filename : String? = nil, @owned_by_me : Bool? = nil, @owners : Array(User)? = nil, @parents : Array(String)? = nil, @permission_ids : Array(String)? = nil, @permissions : Array(Permission)? = nil, @properties : Hash(String, String)? = nil, @quota_bytes_used : String? = nil, @resource_key : String? = nil, @shared : Bool? = nil, @shared_with_me_time : Time? = nil, @sharing_user : User? = nil, @shortcut_details : FileShortcutDetails? = nil, @size : String? = nil, @spaces : Array(String)? = nil, @starred : Bool? = nil, @team_drive_id : String? = nil, @thumbnail_link : String? = nil, @thumbnail_version : String? = nil, @trashed : Bool? = nil, @trashed_time : Time? = nil, @trashing_user : User? = nil, @version : String? = nil, @video_media_metadata : FileVideoMediaMetadata? = nil, @viewed_by_me : Bool? = nil, @viewed_by_me_time : Time? = nil, @viewers_can_copy_content : Bool? = nil, @web_content_link : String? = nil, @web_view_link : String? = nil, @writers_can_share : Bool? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @app_properties : Hash(String, String)? = nil,
+      @capabilities : FileCapabilities? = nil,
+      @content_hints : FileContentHints? = nil,
+      @content_restrictions : Array(ContentRestriction)? = nil,
+      @copy_requires_writer_permission : Bool? = nil,
+      @created_time : Time? = nil,
+      @description : String? = nil,
+      @drive_id : String? = nil,
+      @explicitly_trashed : Bool? = nil,
+      @export_links : Hash(String, String)? = nil,
+      @file_extension : String? = nil,
+      @folder_color_rgb : String? = nil,
+      @full_file_extension : String? = nil,
+      @has_augmented_permissions : Bool? = nil,
+      @has_thumbnail : Bool? = nil,
+      @head_revision_id : String? = nil,
+      @icon_link : String? = nil,
+      @id : String? = nil,
+      @image_media_metadata : FileImageMediaMetadata? = nil,
+      @is_app_authorized : Bool? = nil,
+      @kind : String? = "drive#file",
+      @last_modifying_user : User? = nil,
+      @link_share_metadata : FileLinkShareMetadata? = nil,
+      @md5_checksum : String? = nil,
+      @mime_type : String? = nil,
+      @modified_by_me : Bool? = nil,
+      @modified_by_me_time : Time? = nil,
+      @modified_time : Time? = nil,
+      @name : String? = nil,
+      @original_filename : String? = nil,
+      @owned_by_me : Bool? = nil,
+      @owners : Array(User)? = nil,
+      @parents : Array(String)? = nil,
+      @permission_ids : Array(String)? = nil,
+      @permissions : Array(Permission)? = nil,
+      @properties : Hash(String, String)? = nil,
+      @quota_bytes_used : String? = nil,
+      @resource_key : String? = nil,
+      @shared : Bool? = nil,
+      @shared_with_me_time : Time? = nil,
+      @sharing_user : User? = nil,
+      @shortcut_details : FileShortcutDetails? = nil,
+      @size : String? = nil,
+      @spaces : Array(String)? = nil,
+      @starred : Bool? = nil,
+      @team_drive_id : String? = nil,
+      @thumbnail_link : String? = nil,
+      @thumbnail_version : String? = nil,
+      @trashed : Bool? = nil,
+      @trashed_time : Time? = nil,
+      @trashing_user : User? = nil,
+      @version : String? = nil,
+      @video_media_metadata : FileVideoMediaMetadata? = nil,
+      @viewed_by_me : Bool? = nil,
+      @viewed_by_me_time : Time? = nil,
+      @viewers_can_copy_content : Bool? = nil,
+      @web_content_link : String? = nil,
+      @web_view_link : String? = nil,
+      @writers_can_share : Bool? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -452,6 +515,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@app_properties, @capabilities, @content_hints, @content_restrictions, @copy_requires_writer_permission, @created_time, @description, @drive_id, @explicitly_trashed, @export_links, @file_extension, @folder_color_rgb, @full_file_extension, @has_augmented_permissions, @has_thumbnail, @head_revision_id, @icon_link, @id, @image_media_metadata, @is_app_authorized, @kind, @last_modifying_user, @link_share_metadata, @md5_checksum, @mime_type, @modified_by_me, @modified_by_me_time, @modified_time, @name, @original_filename, @owned_by_me, @owners, @parents, @permission_ids, @permissions, @properties, @quota_bytes_used, @resource_key, @shared, @shared_with_me_time, @sharing_user, @shortcut_details, @size, @spaces, @starred, @team_drive_id, @thumbnail_link, @thumbnail_version, @trashed, @trashed_time, @trashing_user, @version, @video_media_metadata, @viewed_by_me, @viewed_by_me_time, @viewers_can_copy_content, @web_content_link, @web_view_link, @writers_can_share)
+    def_equals_and_hash(@app_properties, @app_properties_present, @capabilities, @capabilities_present, @content_hints, @content_hints_present, @content_restrictions, @content_restrictions_present, @copy_requires_writer_permission, @copy_requires_writer_permission_present, @created_time, @created_time_present, @description, @description_present, @drive_id, @drive_id_present, @explicitly_trashed, @explicitly_trashed_present, @export_links, @export_links_present, @file_extension, @file_extension_present, @folder_color_rgb, @folder_color_rgb_present, @full_file_extension, @full_file_extension_present, @has_augmented_permissions, @has_augmented_permissions_present, @has_thumbnail, @has_thumbnail_present, @head_revision_id, @head_revision_id_present, @icon_link, @icon_link_present, @id, @id_present, @image_media_metadata, @image_media_metadata_present, @is_app_authorized, @is_app_authorized_present, @kind, @kind_present, @last_modifying_user, @last_modifying_user_present, @link_share_metadata, @link_share_metadata_present, @md5_checksum, @md5_checksum_present, @mime_type, @mime_type_present, @modified_by_me, @modified_by_me_present, @modified_by_me_time, @modified_by_me_time_present, @modified_time, @modified_time_present, @name, @name_present, @original_filename, @original_filename_present, @owned_by_me, @owned_by_me_present, @owners, @owners_present, @parents, @parents_present, @permission_ids, @permission_ids_present, @permissions, @permissions_present, @properties, @properties_present, @quota_bytes_used, @quota_bytes_used_present, @resource_key, @resource_key_present, @shared, @shared_present, @shared_with_me_time, @shared_with_me_time_present, @sharing_user, @sharing_user_present, @shortcut_details, @shortcut_details_present, @size, @size_present, @spaces, @spaces_present, @starred, @starred_present, @team_drive_id, @team_drive_id_present, @thumbnail_link, @thumbnail_link_present, @thumbnail_version, @thumbnail_version_present, @trashed, @trashed_present, @trashed_time, @trashed_time_present, @trashing_user, @trashing_user_present, @version, @version_present, @video_media_metadata, @video_media_metadata_present, @viewed_by_me, @viewed_by_me_present, @viewed_by_me_time, @viewed_by_me_time_present, @viewers_can_copy_content, @viewers_can_copy_content_present, @web_content_link, @web_content_link_present, @web_view_link, @web_view_link_present, @writers_can_share, @writers_can_share_present)
   end
 end

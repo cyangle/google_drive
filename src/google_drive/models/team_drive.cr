@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "backgroundImageFile", type: TeamDriveBackgroundImageFile?, presence: true, ignore_serialize: background_image_file.nil? && !background_image_file_present?)]
     property background_image_file : TeamDriveBackgroundImageFile?
 
@@ -61,7 +62,7 @@ module GoogleDrive
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#teamDrive\".
     @[JSON::Field(key: "kind", type: String?, default: "drive#teamDrive", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String?
+    property kind : String? = "drive#teamDrive"
 
     @[JSON::Field(ignore: true)]
     property? kind_present : Bool = false
@@ -95,7 +96,21 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @background_image_file : TeamDriveBackgroundImageFile? = nil, @background_image_link : String? = nil, @capabilities : TeamDriveCapabilities? = nil, @color_rgb : String? = nil, @created_time : Time? = nil, @id : String? = nil, @kind : String? = "drive#teamDrive", @name : String? = nil, @org_unit_id : String? = nil, @restrictions : TeamDriveRestrictions? = nil, @theme_id : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @background_image_file : TeamDriveBackgroundImageFile? = nil,
+      @background_image_link : String? = nil,
+      @capabilities : TeamDriveCapabilities? = nil,
+      @color_rgb : String? = nil,
+      @created_time : Time? = nil,
+      @id : String? = nil,
+      @kind : String? = "drive#teamDrive",
+      @name : String? = nil,
+      @org_unit_id : String? = nil,
+      @restrictions : TeamDriveRestrictions? = nil,
+      @theme_id : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -122,6 +137,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@background_image_file, @background_image_link, @capabilities, @color_rgb, @created_time, @id, @kind, @name, @org_unit_id, @restrictions, @theme_id)
+    def_equals_and_hash(@background_image_file, @background_image_file_present, @background_image_link, @background_image_link_present, @capabilities, @capabilities_present, @color_rgb, @color_rgb_present, @created_time, @created_time_present, @id, @id_present, @kind, @kind_present, @name, @name_present, @org_unit_id, @org_unit_id_present, @restrictions, @restrictions_present, @theme_id, @theme_id_present)
   end
 end

@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Text to be indexed for the file to improve fullText queries. This is limited to 128KB in length and may contain HTML elements.
     @[JSON::Field(key: "indexableText", type: String?, presence: true, ignore_serialize: indexable_text.nil? && !indexable_text_present?)]
     property indexable_text : String?
@@ -34,7 +35,12 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @indexable_text : String? = nil, @thumbnail : FileContentHintsThumbnail? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @indexable_text : String? = nil,
+      @thumbnail : FileContentHintsThumbnail? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -61,6 +67,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@indexable_text, @thumbnail)
+    def_equals_and_hash(@indexable_text, @indexable_text_present, @thumbnail, @thumbnail_present)
   end
 end

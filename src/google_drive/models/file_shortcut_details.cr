@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # The ID of the file that this shortcut points to.
     @[JSON::Field(key: "targetId", type: String?, presence: true, ignore_serialize: target_id.nil? && !target_id_present?)]
     property target_id : String?
@@ -42,7 +43,13 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @target_id : String? = nil, @target_mime_type : String? = nil, @target_resource_key : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @target_id : String? = nil,
+      @target_mime_type : String? = nil,
+      @target_resource_key : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -69,6 +76,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@target_id, @target_mime_type, @target_resource_key)
+    def_equals_and_hash(@target_id, @target_id_present, @target_mime_type, @target_mime_type_present, @target_resource_key, @target_resource_key_present)
   end
 end

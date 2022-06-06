@@ -18,6 +18,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Deprecated - use driveThemes/backgroundImageLink instead.
     @[JSON::Field(key: "backgroundImageLink", type: String?, presence: true, ignore_serialize: background_image_link.nil? && !background_image_link_present?)]
     property background_image_link : String?
@@ -41,7 +42,13 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @background_image_link : String? = nil, @color_rgb : String? = nil, @id : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @background_image_link : String? = nil,
+      @color_rgb : String? = nil,
+      @id : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -68,6 +75,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@background_image_link, @color_rgb, @id)
+    def_equals_and_hash(@background_image_link, @background_image_link_present, @color_rgb, @color_rgb_present, @id, @id_present)
   end
 end

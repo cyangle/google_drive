@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # The action the reply performed to the parent comment. Valid values are:   - resolve  - reopen
     @[JSON::Field(key: "action", type: String?, presence: true, ignore_serialize: action.nil? && !action_present?)]
     property action : String?
@@ -69,7 +70,7 @@ module GoogleDrive
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#reply\".
     @[JSON::Field(key: "kind", type: String?, default: "drive#reply", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String?
+    property kind : String? = "drive#reply"
 
     @[JSON::Field(ignore: true)]
     property? kind_present : Bool = false
@@ -83,7 +84,19 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @action : String? = nil, @author : User? = nil, @content : String? = nil, @created_time : Time? = nil, @deleted : Bool? = nil, @html_content : String? = nil, @id : String? = nil, @kind : String? = "drive#reply", @modified_time : Time? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @action : String? = nil,
+      @author : User? = nil,
+      @content : String? = nil,
+      @created_time : Time? = nil,
+      @deleted : Bool? = nil,
+      @html_content : String? = nil,
+      @id : String? = nil,
+      @kind : String? = "drive#reply",
+      @modified_time : Time? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -110,6 +123,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@action, @author, @content, @created_time, @deleted, @html_content, @id, @kind, @modified_time)
+    def_equals_and_hash(@action, @action_present, @author, @author_present, @content, @content_present, @created_time, @created_time_present, @deleted, @deleted_present, @html_content, @html_content_present, @id, @id_present, @kind, @kind_present, @modified_time, @modified_time_present)
   end
 end

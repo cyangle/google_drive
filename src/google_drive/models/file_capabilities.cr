@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Whether the current user is the pending owner of the file. Not populated for shared drive files.
     @[JSON::Field(key: "canAcceptOwnership", type: Bool?, presence: true, ignore_serialize: can_accept_ownership.nil? && !can_accept_ownership_present?)]
     property can_accept_ownership : Bool?
@@ -273,7 +274,46 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @can_accept_ownership : Bool? = nil, @can_add_children : Bool? = nil, @can_add_folder_from_another_drive : Bool? = nil, @can_add_my_drive_parent : Bool? = nil, @can_change_copy_requires_writer_permission : Bool? = nil, @can_change_security_update_enabled : Bool? = nil, @can_change_viewers_can_copy_content : Bool? = nil, @can_comment : Bool? = nil, @can_copy : Bool? = nil, @can_delete : Bool? = nil, @can_delete_children : Bool? = nil, @can_download : Bool? = nil, @can_edit : Bool? = nil, @can_list_children : Bool? = nil, @can_modify_content : Bool? = nil, @can_modify_content_restriction : Bool? = nil, @can_move_children_out_of_drive : Bool? = nil, @can_move_children_out_of_team_drive : Bool? = nil, @can_move_children_within_drive : Bool? = nil, @can_move_children_within_team_drive : Bool? = nil, @can_move_item_into_team_drive : Bool? = nil, @can_move_item_out_of_drive : Bool? = nil, @can_move_item_out_of_team_drive : Bool? = nil, @can_move_item_within_drive : Bool? = nil, @can_move_item_within_team_drive : Bool? = nil, @can_move_team_drive_item : Bool? = nil, @can_read_drive : Bool? = nil, @can_read_revisions : Bool? = nil, @can_read_team_drive : Bool? = nil, @can_remove_children : Bool? = nil, @can_remove_my_drive_parent : Bool? = nil, @can_rename : Bool? = nil, @can_share : Bool? = nil, @can_trash : Bool? = nil, @can_trash_children : Bool? = nil, @can_untrash : Bool? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @can_accept_ownership : Bool? = nil,
+      @can_add_children : Bool? = nil,
+      @can_add_folder_from_another_drive : Bool? = nil,
+      @can_add_my_drive_parent : Bool? = nil,
+      @can_change_copy_requires_writer_permission : Bool? = nil,
+      @can_change_security_update_enabled : Bool? = nil,
+      @can_change_viewers_can_copy_content : Bool? = nil,
+      @can_comment : Bool? = nil,
+      @can_copy : Bool? = nil,
+      @can_delete : Bool? = nil,
+      @can_delete_children : Bool? = nil,
+      @can_download : Bool? = nil,
+      @can_edit : Bool? = nil,
+      @can_list_children : Bool? = nil,
+      @can_modify_content : Bool? = nil,
+      @can_modify_content_restriction : Bool? = nil,
+      @can_move_children_out_of_drive : Bool? = nil,
+      @can_move_children_out_of_team_drive : Bool? = nil,
+      @can_move_children_within_drive : Bool? = nil,
+      @can_move_children_within_team_drive : Bool? = nil,
+      @can_move_item_into_team_drive : Bool? = nil,
+      @can_move_item_out_of_drive : Bool? = nil,
+      @can_move_item_out_of_team_drive : Bool? = nil,
+      @can_move_item_within_drive : Bool? = nil,
+      @can_move_item_within_team_drive : Bool? = nil,
+      @can_move_team_drive_item : Bool? = nil,
+      @can_read_drive : Bool? = nil,
+      @can_read_revisions : Bool? = nil,
+      @can_read_team_drive : Bool? = nil,
+      @can_remove_children : Bool? = nil,
+      @can_remove_my_drive_parent : Bool? = nil,
+      @can_rename : Bool? = nil,
+      @can_share : Bool? = nil,
+      @can_trash : Bool? = nil,
+      @can_trash_children : Bool? = nil,
+      @can_untrash : Bool? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -300,6 +340,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@can_accept_ownership, @can_add_children, @can_add_folder_from_another_drive, @can_add_my_drive_parent, @can_change_copy_requires_writer_permission, @can_change_security_update_enabled, @can_change_viewers_can_copy_content, @can_comment, @can_copy, @can_delete, @can_delete_children, @can_download, @can_edit, @can_list_children, @can_modify_content, @can_modify_content_restriction, @can_move_children_out_of_drive, @can_move_children_out_of_team_drive, @can_move_children_within_drive, @can_move_children_within_team_drive, @can_move_item_into_team_drive, @can_move_item_out_of_drive, @can_move_item_out_of_team_drive, @can_move_item_within_drive, @can_move_item_within_team_drive, @can_move_team_drive_item, @can_read_drive, @can_read_revisions, @can_read_team_drive, @can_remove_children, @can_remove_my_drive_parent, @can_rename, @can_share, @can_trash, @can_trash_children, @can_untrash)
+    def_equals_and_hash(@can_accept_ownership, @can_accept_ownership_present, @can_add_children, @can_add_children_present, @can_add_folder_from_another_drive, @can_add_folder_from_another_drive_present, @can_add_my_drive_parent, @can_add_my_drive_parent_present, @can_change_copy_requires_writer_permission, @can_change_copy_requires_writer_permission_present, @can_change_security_update_enabled, @can_change_security_update_enabled_present, @can_change_viewers_can_copy_content, @can_change_viewers_can_copy_content_present, @can_comment, @can_comment_present, @can_copy, @can_copy_present, @can_delete, @can_delete_present, @can_delete_children, @can_delete_children_present, @can_download, @can_download_present, @can_edit, @can_edit_present, @can_list_children, @can_list_children_present, @can_modify_content, @can_modify_content_present, @can_modify_content_restriction, @can_modify_content_restriction_present, @can_move_children_out_of_drive, @can_move_children_out_of_drive_present, @can_move_children_out_of_team_drive, @can_move_children_out_of_team_drive_present, @can_move_children_within_drive, @can_move_children_within_drive_present, @can_move_children_within_team_drive, @can_move_children_within_team_drive_present, @can_move_item_into_team_drive, @can_move_item_into_team_drive_present, @can_move_item_out_of_drive, @can_move_item_out_of_drive_present, @can_move_item_out_of_team_drive, @can_move_item_out_of_team_drive_present, @can_move_item_within_drive, @can_move_item_within_drive_present, @can_move_item_within_team_drive, @can_move_item_within_team_drive_present, @can_move_team_drive_item, @can_move_team_drive_item_present, @can_read_drive, @can_read_drive_present, @can_read_revisions, @can_read_revisions_present, @can_read_team_drive, @can_read_team_drive_present, @can_remove_children, @can_remove_children_present, @can_remove_my_drive_parent, @can_remove_my_drive_parent_present, @can_rename, @can_rename_present, @can_share, @can_share_present, @can_trash, @can_trash_present, @can_trash_children, @can_trash_children_present, @can_untrash, @can_untrash_present)
   end
 end

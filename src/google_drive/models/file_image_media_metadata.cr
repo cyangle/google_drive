@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # The aperture used to create the photo (f-number).
     @[JSON::Field(key: "aperture", type: Float32?, presence: true, ignore_serialize: aperture.nil? && !aperture_present?)]
     property aperture : Float32?
@@ -167,7 +168,31 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @aperture : Float32? = nil, @camera_make : String? = nil, @camera_model : String? = nil, @color_space : String? = nil, @exposure_bias : Float32? = nil, @exposure_mode : String? = nil, @exposure_time : Float32? = nil, @flash_used : Bool? = nil, @focal_length : Float32? = nil, @height : Int32? = nil, @iso_speed : Int32? = nil, @lens : String? = nil, @location : FileImageMediaMetadataLocation? = nil, @max_aperture_value : Float32? = nil, @metering_mode : String? = nil, @rotation : Int32? = nil, @sensor : String? = nil, @subject_distance : Int32? = nil, @time : String? = nil, @white_balance : String? = nil, @width : Int32? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @aperture : Float32? = nil,
+      @camera_make : String? = nil,
+      @camera_model : String? = nil,
+      @color_space : String? = nil,
+      @exposure_bias : Float32? = nil,
+      @exposure_mode : String? = nil,
+      @exposure_time : Float32? = nil,
+      @flash_used : Bool? = nil,
+      @focal_length : Float32? = nil,
+      @height : Int32? = nil,
+      @iso_speed : Int32? = nil,
+      @lens : String? = nil,
+      @location : FileImageMediaMetadataLocation? = nil,
+      @max_aperture_value : Float32? = nil,
+      @metering_mode : String? = nil,
+      @rotation : Int32? = nil,
+      @sensor : String? = nil,
+      @subject_distance : Int32? = nil,
+      @time : String? = nil,
+      @white_balance : String? = nil,
+      @width : Int32? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -194,6 +219,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@aperture, @camera_make, @camera_model, @color_space, @exposure_bias, @exposure_mode, @exposure_time, @flash_used, @focal_length, @height, @iso_speed, @lens, @location, @max_aperture_value, @metering_mode, @rotation, @sensor, @subject_distance, @time, @white_balance, @width)
+    def_equals_and_hash(@aperture, @aperture_present, @camera_make, @camera_make_present, @camera_model, @camera_model_present, @color_space, @color_space_present, @exposure_bias, @exposure_bias_present, @exposure_mode, @exposure_mode_present, @exposure_time, @exposure_time_present, @flash_used, @flash_used_present, @focal_length, @focal_length_present, @height, @height_present, @iso_speed, @iso_speed_present, @lens, @lens_present, @location, @location_present, @max_aperture_value, @max_aperture_value_present, @metering_mode, @metering_mode_present, @rotation, @rotation_present, @sensor, @sensor_present, @subject_distance, @subject_distance_present, @time, @time_present, @white_balance, @white_balance_present, @width, @width_present)
   end
 end

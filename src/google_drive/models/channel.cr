@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # The address where notifications are delivered for this channel.
     @[JSON::Field(key: "address", type: String?, presence: true, ignore_serialize: address.nil? && !address_present?)]
     property address : String?
@@ -42,7 +43,7 @@ module GoogleDrive
 
     # Identifies this as a notification channel used to watch for changes to a resource, which is \"api#channel\".
     @[JSON::Field(key: "kind", type: String?, default: "api#channel", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String?
+    property kind : String? = "api#channel"
 
     @[JSON::Field(ignore: true)]
     property? kind_present : Bool = false
@@ -91,7 +92,20 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @address : String? = nil, @expiration : String? = nil, @id : String? = nil, @kind : String? = "api#channel", @params : Hash(String, String)? = nil, @payload : Bool? = nil, @resource_id : String? = nil, @resource_uri : String? = nil, @token : String? = nil, @_type : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @address : String? = nil,
+      @expiration : String? = nil,
+      @id : String? = nil,
+      @kind : String? = "api#channel",
+      @params : Hash(String, String)? = nil,
+      @payload : Bool? = nil,
+      @resource_id : String? = nil,
+      @resource_uri : String? = nil,
+      @token : String? = nil,
+      @_type : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -118,6 +132,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@address, @expiration, @id, @kind, @params, @payload, @resource_id, @resource_uri, @token, @_type)
+    def_equals_and_hash(@address, @address_present, @expiration, @expiration_present, @id, @id_present, @kind, @kind_present, @params, @params_present, @payload, @payload_present, @resource_id, @resource_id_present, @resource_uri, @resource_uri_present, @token, @token_present, @_type, @_type_present)
   end
 end

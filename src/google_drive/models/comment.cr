@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # A region of the document represented as a JSON string. For details on defining anchor properties, refer to  Add comments and replies.
     @[JSON::Field(key: "anchor", type: String?, presence: true, ignore_serialize: anchor.nil? && !anchor_present?)]
     property anchor : String?
@@ -69,7 +70,7 @@ module GoogleDrive
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#comment\".
     @[JSON::Field(key: "kind", type: String?, default: "drive#comment", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String?
+    property kind : String? = "drive#comment"
 
     @[JSON::Field(ignore: true)]
     property? kind_present : Bool = false
@@ -103,7 +104,22 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @anchor : String? = nil, @author : User? = nil, @content : String? = nil, @created_time : Time? = nil, @deleted : Bool? = nil, @html_content : String? = nil, @id : String? = nil, @kind : String? = "drive#comment", @modified_time : Time? = nil, @quoted_file_content : CommentQuotedFileContent? = nil, @replies : Array(Reply)? = nil, @resolved : Bool? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @anchor : String? = nil,
+      @author : User? = nil,
+      @content : String? = nil,
+      @created_time : Time? = nil,
+      @deleted : Bool? = nil,
+      @html_content : String? = nil,
+      @id : String? = nil,
+      @kind : String? = "drive#comment",
+      @modified_time : Time? = nil,
+      @quoted_file_content : CommentQuotedFileContent? = nil,
+      @replies : Array(Reply)? = nil,
+      @resolved : Bool? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -130,6 +146,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@anchor, @author, @content, @created_time, @deleted, @html_content, @id, @kind, @modified_time, @quoted_file_content, @replies, @resolved)
+    def_equals_and_hash(@anchor, @anchor_present, @author, @author_present, @content, @content_present, @created_time, @created_time_present, @deleted, @deleted_present, @html_content, @html_content_present, @id, @id_present, @kind, @kind_present, @modified_time, @modified_time_present, @quoted_file_content, @quoted_file_content_present, @replies, @replies_present, @resolved, @resolved_present)
   end
 end

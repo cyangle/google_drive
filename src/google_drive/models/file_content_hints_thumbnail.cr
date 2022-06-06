@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # The thumbnail data encoded with URL-safe Base64 (RFC 4648 section 5).
     @[JSON::Field(key: "image", type: String?, presence: true, ignore_serialize: image.nil? && !image_present?)]
     property image : String?
@@ -35,7 +36,12 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @image : String? = nil, @mime_type : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @image : String? = nil,
+      @mime_type : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -62,6 +68,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@image, @mime_type)
+    def_equals_and_hash(@image, @image_present, @mime_type, @mime_type_present)
   end
 end

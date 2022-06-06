@@ -18,9 +18,10 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Identifies what kind of resource this is. Value: the fixed string \"drive#startPageToken\".
     @[JSON::Field(key: "kind", type: String?, default: "drive#startPageToken", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String?
+    property kind : String? = "drive#startPageToken"
 
     @[JSON::Field(ignore: true)]
     property? kind_present : Bool = false
@@ -34,7 +35,12 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @kind : String? = "drive#startPageToken", @start_page_token : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @kind : String? = "drive#startPageToken",
+      @start_page_token : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -61,6 +67,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@kind, @start_page_token)
+    def_equals_and_hash(@kind, @kind_present, @start_page_token, @start_page_token_present)
   end
 end

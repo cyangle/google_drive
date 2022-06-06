@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Whether administrative privileges on this shared drive are required to modify restrictions.
     @[JSON::Field(key: "adminManagedRestrictions", type: Bool?, presence: true, ignore_serialize: admin_managed_restrictions.nil? && !admin_managed_restrictions_present?)]
     property admin_managed_restrictions : Bool?
@@ -49,7 +50,14 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @admin_managed_restrictions : Bool? = nil, @copy_requires_writer_permission : Bool? = nil, @domain_users_only : Bool? = nil, @drive_members_only : Bool? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @admin_managed_restrictions : Bool? = nil,
+      @copy_requires_writer_permission : Bool? = nil,
+      @domain_users_only : Bool? = nil,
+      @drive_members_only : Bool? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -76,6 +84,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@admin_managed_restrictions, @copy_requires_writer_permission, @domain_users_only, @drive_members_only)
+    def_equals_and_hash(@admin_managed_restrictions, @admin_managed_restrictions_present, @copy_requires_writer_permission, @copy_requires_writer_permission_present, @domain_users_only, @domain_users_only_present, @drive_members_only, @drive_members_only_present)
   end
 end

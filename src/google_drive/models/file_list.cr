@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # The list of files. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.
     @[JSON::Field(key: "files", type: Array(File)?, presence: true, ignore_serialize: files.nil? && !files_present?)]
     property files : Array(File)?
@@ -35,7 +36,7 @@ module GoogleDrive
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#fileList\".
     @[JSON::Field(key: "kind", type: String?, default: "drive#fileList", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String?
+    property kind : String? = "drive#fileList"
 
     @[JSON::Field(ignore: true)]
     property? kind_present : Bool = false
@@ -49,7 +50,14 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @files : Array(File)? = nil, @incomplete_search : Bool? = nil, @kind : String? = "drive#fileList", @next_page_token : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @files : Array(File)? = nil,
+      @incomplete_search : Bool? = nil,
+      @kind : String? = "drive#fileList",
+      @next_page_token : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -76,6 +84,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@files, @incomplete_search, @kind, @next_page_token)
+    def_equals_and_hash(@files, @files_present, @incomplete_search, @incomplete_search_present, @kind, @kind_present, @next_page_token, @next_page_token_present)
   end
 end

@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Whether the file is eligible for security update.
     @[JSON::Field(key: "securityUpdateEligible", type: Bool?, presence: true, ignore_serialize: security_update_eligible.nil? && !security_update_eligible_present?)]
     property security_update_eligible : Bool?
@@ -35,7 +36,12 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @security_update_eligible : Bool? = nil, @security_update_enabled : Bool? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @security_update_eligible : Bool? = nil,
+      @security_update_enabled : Bool? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -62,6 +68,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@security_update_eligible, @security_update_enabled)
+    def_equals_and_hash(@security_update_eligible, @security_update_eligible_present, @security_update_enabled, @security_update_enabled_present)
   end
 end

@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # The usage limit, if applicable. This will not be present if the user has unlimited storage.
     @[JSON::Field(key: "limit", type: String?, presence: true, ignore_serialize: limit.nil? && !limit_present?)]
     property limit : String?
@@ -49,7 +50,14 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @limit : String? = nil, @usage : String? = nil, @usage_in_drive : String? = nil, @usage_in_drive_trash : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @limit : String? = nil,
+      @usage : String? = nil,
+      @usage_in_drive : String? = nil,
+      @usage_in_drive_trash : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -76,6 +84,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@limit, @usage, @usage_in_drive, @usage_in_drive_trash)
+    def_equals_and_hash(@limit, @limit_present, @usage, @usage_present, @usage_in_drive, @usage_in_drive_present, @usage_in_drive_trash, @usage_in_drive_trash_present)
   end
 end

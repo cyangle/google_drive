@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Whether the user has installed the requesting app.
     @[JSON::Field(key: "appInstalled", type: Bool?, presence: true, ignore_serialize: app_installed.nil? && !app_installed_present?)]
     property app_installed : Bool?
@@ -70,7 +71,7 @@ module GoogleDrive
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#about\".
     @[JSON::Field(key: "kind", type: String?, default: "drive#about", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String?
+    property kind : String? = "drive#about"
 
     @[JSON::Field(ignore: true)]
     property? kind_present : Bool = false
@@ -110,7 +111,23 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @app_installed : Bool? = nil, @can_create_drives : Bool? = nil, @can_create_team_drives : Bool? = nil, @drive_themes : Array(AboutDriveThemesInner)? = nil, @export_formats : Hash(String, Array(String))? = nil, @folder_color_palette : Array(String)? = nil, @import_formats : Hash(String, Array(String))? = nil, @kind : String? = "drive#about", @max_import_sizes : Hash(String, String)? = nil, @max_upload_size : String? = nil, @storage_quota : AboutStorageQuota? = nil, @team_drive_themes : Array(AboutTeamDriveThemesInner)? = nil, @user : User? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @app_installed : Bool? = nil,
+      @can_create_drives : Bool? = nil,
+      @can_create_team_drives : Bool? = nil,
+      @drive_themes : Array(AboutDriveThemesInner)? = nil,
+      @export_formats : Hash(String, Array(String))? = nil,
+      @folder_color_palette : Array(String)? = nil,
+      @import_formats : Hash(String, Array(String))? = nil,
+      @kind : String? = "drive#about",
+      @max_import_sizes : Hash(String, String)? = nil,
+      @max_upload_size : String? = nil,
+      @storage_quota : AboutStorageQuota? = nil,
+      @team_drive_themes : Array(AboutTeamDriveThemesInner)? = nil,
+      @user : User? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -137,6 +154,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@app_installed, @can_create_drives, @can_create_team_drives, @drive_themes, @export_formats, @folder_color_palette, @import_formats, @kind, @max_import_sizes, @max_upload_size, @storage_quota, @team_drive_themes, @user)
+    def_equals_and_hash(@app_installed, @app_installed_present, @can_create_drives, @can_create_drives_present, @can_create_team_drives, @can_create_team_drives_present, @drive_themes, @drive_themes_present, @export_formats, @export_formats_present, @folder_color_palette, @folder_color_palette_present, @import_formats, @import_formats_present, @kind, @kind_present, @max_import_sizes, @max_import_sizes_present, @max_upload_size, @max_upload_size_present, @storage_quota, @storage_quota_present, @team_drive_themes, @team_drive_themes_present, @user, @user_present)
   end
 end

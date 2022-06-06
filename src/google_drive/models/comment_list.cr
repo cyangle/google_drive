@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # The list of comments. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.
     @[JSON::Field(key: "comments", type: Array(Comment)?, presence: true, ignore_serialize: comments.nil? && !comments_present?)]
     property comments : Array(Comment)?
@@ -28,7 +29,7 @@ module GoogleDrive
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#commentList\".
     @[JSON::Field(key: "kind", type: String?, default: "drive#commentList", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String?
+    property kind : String? = "drive#commentList"
 
     @[JSON::Field(ignore: true)]
     property? kind_present : Bool = false
@@ -42,7 +43,13 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @comments : Array(Comment)? = nil, @kind : String? = "drive#commentList", @next_page_token : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @comments : Array(Comment)? = nil,
+      @kind : String? = "drive#commentList",
+      @next_page_token : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -69,6 +76,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@comments, @kind, @next_page_token)
+    def_equals_and_hash(@comments, @comments_present, @kind, @kind_present, @next_page_token, @next_page_token_present)
   end
 end

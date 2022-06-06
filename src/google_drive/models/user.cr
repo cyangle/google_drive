@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # A plain text displayable name for this user.
     @[JSON::Field(key: "displayName", type: String?, presence: true, ignore_serialize: display_name.nil? && !display_name_present?)]
     property display_name : String?
@@ -35,7 +36,7 @@ module GoogleDrive
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#user\".
     @[JSON::Field(key: "kind", type: String?, default: "drive#user", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String?
+    property kind : String? = "drive#user"
 
     @[JSON::Field(ignore: true)]
     property? kind_present : Bool = false
@@ -63,7 +64,16 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @display_name : String? = nil, @email_address : String? = nil, @kind : String? = "drive#user", @me : Bool? = nil, @permission_id : String? = nil, @photo_link : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @display_name : String? = nil,
+      @email_address : String? = nil,
+      @kind : String? = "drive#user",
+      @me : Bool? = nil,
+      @permission_id : String? = nil,
+      @photo_link : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -90,6 +100,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@display_name, @email_address, @kind, @me, @permission_id, @photo_link)
+    def_equals_and_hash(@display_name, @display_name_present, @email_address, @email_address_present, @kind, @kind_present, @me, @me_present, @permission_id, @permission_id_present, @photo_link, @photo_link_present)
   end
 end

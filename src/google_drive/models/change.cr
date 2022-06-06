@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # The type of the change. Possible values are file and drive.
     @[JSON::Field(key: "changeType", type: String?, presence: true, ignore_serialize: change_type.nil? && !change_type_present?)]
     property change_type : String?
@@ -54,7 +55,7 @@ module GoogleDrive
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#change\".
     @[JSON::Field(key: "kind", type: String?, default: "drive#change", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String?
+    property kind : String? = "drive#change"
 
     @[JSON::Field(ignore: true)]
     property? kind_present : Bool = false
@@ -95,7 +96,21 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @change_type : String? = nil, @drive : Drive? = nil, @drive_id : String? = nil, @file : File? = nil, @file_id : String? = nil, @kind : String? = "drive#change", @removed : Bool? = nil, @team_drive : TeamDrive? = nil, @team_drive_id : String? = nil, @time : Time? = nil, @_type : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @change_type : String? = nil,
+      @drive : Drive? = nil,
+      @drive_id : String? = nil,
+      @file : File? = nil,
+      @file_id : String? = nil,
+      @kind : String? = "drive#change",
+      @removed : Bool? = nil,
+      @team_drive : TeamDrive? = nil,
+      @team_drive_id : String? = nil,
+      @time : Time? = nil,
+      @_type : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -122,6 +137,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@change_type, @drive, @drive_id, @file, @file_id, @kind, @removed, @team_drive, @team_drive_id, @time, @_type)
+    def_equals_and_hash(@change_type, @change_type_present, @drive, @drive_present, @drive_id, @drive_id_present, @file, @file_present, @file_id, @file_id_present, @kind, @kind_present, @removed, @removed_present, @team_drive, @team_drive_present, @team_drive_id, @team_drive_id_present, @time, @time_present, @_type, @_type_present)
   end
 end

@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Whether the current user can add children to folders in this shared drive.
     @[JSON::Field(key: "canAddChildren", type: Bool?, presence: true, ignore_serialize: can_add_children.nil? && !can_add_children_present?)]
     property can_add_children : Bool?
@@ -154,7 +155,29 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @can_add_children : Bool? = nil, @can_change_copy_requires_writer_permission_restriction : Bool? = nil, @can_change_domain_users_only_restriction : Bool? = nil, @can_change_drive_background : Bool? = nil, @can_change_drive_members_only_restriction : Bool? = nil, @can_comment : Bool? = nil, @can_copy : Bool? = nil, @can_delete_children : Bool? = nil, @can_delete_drive : Bool? = nil, @can_download : Bool? = nil, @can_edit : Bool? = nil, @can_list_children : Bool? = nil, @can_manage_members : Bool? = nil, @can_read_revisions : Bool? = nil, @can_rename : Bool? = nil, @can_rename_drive : Bool? = nil, @can_reset_drive_restrictions : Bool? = nil, @can_share : Bool? = nil, @can_trash_children : Bool? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @can_add_children : Bool? = nil,
+      @can_change_copy_requires_writer_permission_restriction : Bool? = nil,
+      @can_change_domain_users_only_restriction : Bool? = nil,
+      @can_change_drive_background : Bool? = nil,
+      @can_change_drive_members_only_restriction : Bool? = nil,
+      @can_comment : Bool? = nil,
+      @can_copy : Bool? = nil,
+      @can_delete_children : Bool? = nil,
+      @can_delete_drive : Bool? = nil,
+      @can_download : Bool? = nil,
+      @can_edit : Bool? = nil,
+      @can_list_children : Bool? = nil,
+      @can_manage_members : Bool? = nil,
+      @can_read_revisions : Bool? = nil,
+      @can_rename : Bool? = nil,
+      @can_rename_drive : Bool? = nil,
+      @can_reset_drive_restrictions : Bool? = nil,
+      @can_share : Bool? = nil,
+      @can_trash_children : Bool? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -181,6 +204,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@can_add_children, @can_change_copy_requires_writer_permission_restriction, @can_change_domain_users_only_restriction, @can_change_drive_background, @can_change_drive_members_only_restriction, @can_comment, @can_copy, @can_delete_children, @can_delete_drive, @can_download, @can_edit, @can_list_children, @can_manage_members, @can_read_revisions, @can_rename, @can_rename_drive, @can_reset_drive_restrictions, @can_share, @can_trash_children)
+    def_equals_and_hash(@can_add_children, @can_add_children_present, @can_change_copy_requires_writer_permission_restriction, @can_change_copy_requires_writer_permission_restriction_present, @can_change_domain_users_only_restriction, @can_change_domain_users_only_restriction_present, @can_change_drive_background, @can_change_drive_background_present, @can_change_drive_members_only_restriction, @can_change_drive_members_only_restriction_present, @can_comment, @can_comment_present, @can_copy, @can_copy_present, @can_delete_children, @can_delete_children_present, @can_delete_drive, @can_delete_drive_present, @can_download, @can_download_present, @can_edit, @can_edit_present, @can_list_children, @can_list_children_present, @can_manage_members, @can_manage_members_present, @can_read_revisions, @can_read_revisions_present, @can_rename, @can_rename_present, @can_rename_drive, @can_rename_drive_present, @can_reset_drive_restrictions, @can_reset_drive_restrictions_present, @can_share, @can_share_present, @can_trash_children, @can_trash_children_present)
   end
 end

@@ -18,6 +18,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Whether this permission is inherited. This field is always populated. This is an output-only field.
     @[JSON::Field(key: "inherited", type: Bool?, presence: true, ignore_serialize: inherited.nil? && !inherited_present?)]
     property inherited : Bool?
@@ -48,7 +49,14 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @inherited : Bool? = nil, @inherited_from : String? = nil, @permission_type : String? = nil, @role : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @inherited : Bool? = nil,
+      @inherited_from : String? = nil,
+      @permission_type : String? = nil,
+      @role : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -75,6 +83,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@inherited, @inherited_from, @permission_type, @role)
+    def_equals_and_hash(@inherited, @inherited_present, @inherited_from, @inherited_from_present, @permission_type, @permission_type_present, @role, @role_present)
   end
 end

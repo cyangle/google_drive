@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # The MIME type of the quoted content.
     @[JSON::Field(key: "mimeType", type: String?, presence: true, ignore_serialize: mime_type.nil? && !mime_type_present?)]
     property mime_type : String?
@@ -35,7 +36,12 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @mime_type : String? = nil, @value : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @mime_type : String? = nil,
+      @value : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -62,6 +68,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@mime_type, @value)
+    def_equals_and_hash(@mime_type, @mime_type_present, @value, @value_present)
   end
 end

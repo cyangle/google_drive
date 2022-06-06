@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # The altitude stored in the image.
     @[JSON::Field(key: "altitude", type: Float64?, presence: true, ignore_serialize: altitude.nil? && !altitude_present?)]
     property altitude : Float64?
@@ -42,7 +43,13 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @altitude : Float64? = nil, @latitude : Float64? = nil, @longitude : Float64? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @altitude : Float64? = nil,
+      @latitude : Float64? = nil,
+      @longitude : Float64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -69,6 +76,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@altitude, @latitude, @longitude)
+    def_equals_and_hash(@altitude, @altitude_present, @latitude, @latitude_present, @longitude, @longitude_present)
   end
 end

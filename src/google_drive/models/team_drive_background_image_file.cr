@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # The ID of an image file in Drive to use for the background image.
     @[JSON::Field(key: "id", type: String?, presence: true, ignore_serialize: id.nil? && !id_present?)]
     property id : String?
@@ -49,7 +50,14 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @id : String? = nil, @width : Float32? = nil, @x_coordinate : Float32? = nil, @y_coordinate : Float32? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @id : String? = nil,
+      @width : Float32? = nil,
+      @x_coordinate : Float32? = nil,
+      @y_coordinate : Float32? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -76,6 +84,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@id, @width, @x_coordinate, @y_coordinate)
+    def_equals_and_hash(@id, @id_present, @width, @width_present, @x_coordinate, @x_coordinate_present, @y_coordinate, @y_coordinate_present)
   end
 end

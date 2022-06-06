@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Whether the content of the file is read-only. If a file is read-only, a new revision of the file may not be added, comments may not be added or modified, and the title of the file may not be modified.
     @[JSON::Field(key: "readOnly", type: Bool?, presence: true, ignore_serialize: read_only.nil? && !read_only_present?)]
     property read_only : Bool?
@@ -55,7 +56,15 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @read_only : Bool? = nil, @reason : String? = nil, @restricting_user : User? = nil, @restriction_time : Time? = nil, @_type : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @read_only : Bool? = nil,
+      @reason : String? = nil,
+      @restricting_user : User? = nil,
+      @restriction_time : Time? = nil,
+      @_type : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -82,6 +91,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@read_only, @reason, @restricting_user, @restriction_time, @_type)
+    def_equals_and_hash(@read_only, @read_only_present, @reason, @reason_present, @restricting_user, @restricting_user_present, @restriction_time, @restriction_time_present, @_type, @_type_present)
   end
 end

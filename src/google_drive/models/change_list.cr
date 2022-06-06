@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # The list of changes. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.
     @[JSON::Field(key: "changes", type: Array(Change)?, presence: true, ignore_serialize: changes.nil? && !changes_present?)]
     property changes : Array(Change)?
@@ -28,7 +29,7 @@ module GoogleDrive
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#changeList\".
     @[JSON::Field(key: "kind", type: String?, default: "drive#changeList", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String?
+    property kind : String? = "drive#changeList"
 
     @[JSON::Field(ignore: true)]
     property? kind_present : Bool = false
@@ -49,7 +50,14 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @changes : Array(Change)? = nil, @kind : String? = "drive#changeList", @new_start_page_token : String? = nil, @next_page_token : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @changes : Array(Change)? = nil,
+      @kind : String? = "drive#changeList",
+      @new_start_page_token : String? = nil,
+      @next_page_token : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -76,6 +84,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@changes, @kind, @new_start_page_token, @next_page_token)
+    def_equals_and_hash(@changes, @changes_present, @kind, @kind_present, @new_start_page_token, @new_start_page_token_present, @next_page_token, @next_page_token_present)
   end
 end

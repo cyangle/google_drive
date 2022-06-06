@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Links for exporting Docs Editors files to specific formats.
     @[JSON::Field(key: "exportLinks", type: Hash(String, String)?, presence: true, ignore_serialize: export_links.nil? && !export_links_present?)]
     property export_links : Hash(String, String)?
@@ -42,7 +43,7 @@ module GoogleDrive
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#revision\".
     @[JSON::Field(key: "kind", type: String?, default: "drive#revision", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String?
+    property kind : String? = "drive#revision"
 
     @[JSON::Field(ignore: true)]
     property? kind_present : Bool = false
@@ -118,7 +119,24 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @export_links : Hash(String, String)? = nil, @id : String? = nil, @keep_forever : Bool? = nil, @kind : String? = "drive#revision", @last_modifying_user : User? = nil, @md5_checksum : String? = nil, @mime_type : String? = nil, @modified_time : Time? = nil, @original_filename : String? = nil, @publish_auto : Bool? = nil, @published : Bool? = nil, @published_link : String? = nil, @published_outside_domain : Bool? = nil, @size : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @export_links : Hash(String, String)? = nil,
+      @id : String? = nil,
+      @keep_forever : Bool? = nil,
+      @kind : String? = "drive#revision",
+      @last_modifying_user : User? = nil,
+      @md5_checksum : String? = nil,
+      @mime_type : String? = nil,
+      @modified_time : Time? = nil,
+      @original_filename : String? = nil,
+      @publish_auto : Bool? = nil,
+      @published : Bool? = nil,
+      @published_link : String? = nil,
+      @published_outside_domain : Bool? = nil,
+      @size : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -145,6 +163,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@export_links, @id, @keep_forever, @kind, @last_modifying_user, @md5_checksum, @mime_type, @modified_time, @original_filename, @publish_auto, @published, @published_link, @published_outside_domain, @size)
+    def_equals_and_hash(@export_links, @export_links_present, @id, @id_present, @keep_forever, @keep_forever_present, @kind, @kind_present, @last_modifying_user, @last_modifying_user_present, @md5_checksum, @md5_checksum_present, @mime_type, @mime_type_present, @modified_time, @modified_time_present, @original_filename, @original_filename_present, @publish_auto, @publish_auto_present, @published, @published_present, @published_link, @published_link_present, @published_outside_domain, @published_outside_domain_present, @size, @size_present)
   end
 end

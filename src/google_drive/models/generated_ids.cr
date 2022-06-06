@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # The IDs generated for the requesting user in the specified space.
     @[JSON::Field(key: "ids", type: Array(String)?, presence: true, ignore_serialize: ids.nil? && !ids_present?)]
     property ids : Array(String)?
@@ -28,7 +29,7 @@ module GoogleDrive
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#generatedIds\".
     @[JSON::Field(key: "kind", type: String?, default: "drive#generatedIds", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String?
+    property kind : String? = "drive#generatedIds"
 
     @[JSON::Field(ignore: true)]
     property? kind_present : Bool = false
@@ -42,7 +43,13 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @ids : Array(String)? = nil, @kind : String? = "drive#generatedIds", @space : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @ids : Array(String)? = nil,
+      @kind : String? = "drive#generatedIds",
+      @space : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -69,6 +76,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@ids, @kind, @space)
+    def_equals_and_hash(@ids, @ids_present, @kind, @kind_present, @space, @space_present)
   end
 end

@@ -19,6 +19,7 @@ module GoogleDrive
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # The duration of the video in milliseconds.
     @[JSON::Field(key: "durationMillis", type: String?, presence: true, ignore_serialize: duration_millis.nil? && !duration_millis_present?)]
     property duration_millis : String?
@@ -42,7 +43,13 @@ module GoogleDrive
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @duration_millis : String? = nil, @height : Int32? = nil, @width : Int32? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @duration_millis : String? = nil,
+      @height : Int32? = nil,
+      @width : Int32? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -69,6 +76,6 @@ module GoogleDrive
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@duration_millis, @height, @width)
+    def_equals_and_hash(@duration_millis, @duration_millis_present, @height, @height_present, @width, @width_present)
   end
 end
