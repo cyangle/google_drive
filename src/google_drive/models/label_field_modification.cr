@@ -85,82 +85,50 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] field_id Object to be assigned
-    def field_id=(field_id : String?)
-      if field_id.nil?
-        return @field_id = nil
-      end
-      _field_id = field_id.not_nil!
-      @field_id = _field_id
+    def field_id=(new_value : String?)
+      @field_id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] kind Object to be assigned
-    def kind=(kind : String?)
-      if kind.nil?
-        return @kind = nil
-      end
-      _kind = kind.not_nil!
-      @kind = _kind
+    def kind=(new_value : String?)
+      @kind = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] set_date_values Object to be assigned
-    def set_date_values=(set_date_values : Array(Time)?)
-      if set_date_values.nil?
-        return @set_date_values = nil
-      end
-      _set_date_values = set_date_values.not_nil!
-      @set_date_values = _set_date_values
+    def set_date_values=(new_value : Array(Time)?)
+      @set_date_values = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] set_integer_values Object to be assigned
-    def set_integer_values=(set_integer_values : Array(String)?)
-      if set_integer_values.nil?
-        return @set_integer_values = nil
-      end
-      _set_integer_values = set_integer_values.not_nil!
-      @set_integer_values = _set_integer_values
+    def set_integer_values=(new_value : Array(String)?)
+      @set_integer_values = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] set_selection_values Object to be assigned
-    def set_selection_values=(set_selection_values : Array(String)?)
-      if set_selection_values.nil?
-        return @set_selection_values = nil
-      end
-      _set_selection_values = set_selection_values.not_nil!
-      @set_selection_values = _set_selection_values
+    def set_selection_values=(new_value : Array(String)?)
+      @set_selection_values = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] set_text_values Object to be assigned
-    def set_text_values=(set_text_values : Array(String)?)
-      if set_text_values.nil?
-        return @set_text_values = nil
-      end
-      _set_text_values = set_text_values.not_nil!
-      @set_text_values = _set_text_values
+    def set_text_values=(new_value : Array(String)?)
+      @set_text_values = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] set_user_values Object to be assigned
-    def set_user_values=(set_user_values : Array(String)?)
-      if set_user_values.nil?
-        return @set_user_values = nil
-      end
-      _set_user_values = set_user_values.not_nil!
-      @set_user_values = _set_user_values
+    def set_user_values=(new_value : Array(String)?)
+      @set_user_values = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] unset_values Object to be assigned
-    def unset_values=(unset_values : Bool?)
-      if unset_values.nil?
-        return @unset_values = nil
-      end
-      _unset_values = unset_values.not_nil!
-      @unset_values = _unset_values
+    def unset_values=(new_value : Bool?)
+      @unset_values = new_value
     end
 
     # Generates #hash and #== methods from all fields

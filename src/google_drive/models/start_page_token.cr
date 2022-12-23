@@ -54,22 +54,14 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] kind Object to be assigned
-    def kind=(kind : String?)
-      if kind.nil?
-        return @kind = nil
-      end
-      _kind = kind.not_nil!
-      @kind = _kind
+    def kind=(new_value : String?)
+      @kind = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] start_page_token Object to be assigned
-    def start_page_token=(start_page_token : String?)
-      if start_page_token.nil?
-        return @start_page_token = nil
-      end
-      _start_page_token = start_page_token.not_nil!
-      @start_page_token = _start_page_token
+    def start_page_token=(new_value : String?)
+      @start_page_token = new_value
     end
 
     # Generates #hash and #== methods from all fields

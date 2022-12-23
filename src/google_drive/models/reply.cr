@@ -97,93 +97,60 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] action Object to be assigned
-    def action=(action : String?)
-      if action.nil?
-        return @action = nil
-      end
-      _action = action.not_nil!
-      @action = _action
+    def action=(new_value : String?)
+      @action = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] author Object to be assigned
-    def author=(author : GoogleDrive::User?)
-      if author.nil?
-        return @author = nil
+    def author=(new_value : GoogleDrive::User?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _author = author.not_nil!
-      _author.validate if _author.is_a?(OpenApi::Validatable)
-      @author = _author
+
+      @author = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] content Object to be assigned
-    def content=(content : String?)
-      if content.nil?
-        return @content = nil
-      end
-      _content = content.not_nil!
-      @content = _content
+    def content=(new_value : String?)
+      @content = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] created_time Object to be assigned
-    def created_time=(created_time : Time?)
-      if created_time.nil?
-        return @created_time = nil
-      end
-      _created_time = created_time.not_nil!
-      @created_time = _created_time
+    def created_time=(new_value : Time?)
+      @created_time = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] deleted Object to be assigned
-    def deleted=(deleted : Bool?)
-      if deleted.nil?
-        return @deleted = nil
-      end
-      _deleted = deleted.not_nil!
-      @deleted = _deleted
+    def deleted=(new_value : Bool?)
+      @deleted = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] html_content Object to be assigned
-    def html_content=(html_content : String?)
-      if html_content.nil?
-        return @html_content = nil
-      end
-      _html_content = html_content.not_nil!
-      @html_content = _html_content
+    def html_content=(new_value : String?)
+      @html_content = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        return @id = nil
-      end
-      _id = id.not_nil!
-      @id = _id
+    def id=(new_value : String?)
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] kind Object to be assigned
-    def kind=(kind : String?)
-      if kind.nil?
-        return @kind = nil
-      end
-      _kind = kind.not_nil!
-      @kind = _kind
+    def kind=(new_value : String?)
+      @kind = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] modified_time Object to be assigned
-    def modified_time=(modified_time : Time?)
-      if modified_time.nil?
-        return @modified_time = nil
-      end
-      _modified_time = modified_time.not_nil!
-      @modified_time = _modified_time
+    def modified_time=(new_value : Time?)
+      @modified_time = new_value
     end
 
     # Generates #hash and #== methods from all fields

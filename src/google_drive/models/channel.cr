@@ -95,102 +95,62 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address Object to be assigned
-    def address=(address : String?)
-      if address.nil?
-        return @address = nil
-      end
-      _address = address.not_nil!
-      @address = _address
+    def address=(new_value : String?)
+      @address = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expiration Object to be assigned
-    def expiration=(expiration : String?)
-      if expiration.nil?
-        return @expiration = nil
-      end
-      _expiration = expiration.not_nil!
-      @expiration = _expiration
+    def expiration=(new_value : String?)
+      @expiration = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        return @id = nil
-      end
-      _id = id.not_nil!
-      @id = _id
+    def id=(new_value : String?)
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] kind Object to be assigned
-    def kind=(kind : String?)
-      if kind.nil?
-        return @kind = nil
-      end
-      _kind = kind.not_nil!
-      @kind = _kind
+    def kind=(new_value : String?)
+      @kind = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] params Object to be assigned
-    def params=(params : Hash(String, String)?)
-      if params.nil?
-        return @params = nil
-      end
-      _params = params.not_nil!
-      @params = _params
+    def params=(new_value : Hash(String, String)?)
+      @params = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payload Object to be assigned
-    def payload=(payload : Bool?)
-      if payload.nil?
-        return @payload = nil
-      end
-      _payload = payload.not_nil!
-      @payload = _payload
+    def payload=(new_value : Bool?)
+      @payload = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] resource_id Object to be assigned
-    def resource_id=(resource_id : String?)
-      if resource_id.nil?
-        return @resource_id = nil
-      end
-      _resource_id = resource_id.not_nil!
-      @resource_id = _resource_id
+    def resource_id=(new_value : String?)
+      @resource_id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] resource_uri Object to be assigned
-    def resource_uri=(resource_uri : String?)
-      if resource_uri.nil?
-        return @resource_uri = nil
-      end
-      _resource_uri = resource_uri.not_nil!
-      @resource_uri = _resource_uri
+    def resource_uri=(new_value : String?)
+      @resource_uri = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] token Object to be assigned
-    def token=(token : String?)
-      if token.nil?
-        return @token = nil
-      end
-      _token = token.not_nil!
-      @token = _token
+    def token=(new_value : String?)
+      @token = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      if _type.nil?
-        return @_type = nil
-      end
-      __type = _type.not_nil!
-      @_type = __type
+    def _type=(new_value : String?)
+      @_type = new_value
     end
 
     # Generates #hash and #== methods from all fields

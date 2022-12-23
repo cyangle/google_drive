@@ -65,42 +65,26 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        return @id = nil
-      end
-      _id = id.not_nil!
-      @id = _id
+    def id=(new_value : String?)
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] width Object to be assigned
-    def width=(width : Float32?)
-      if width.nil?
-        return @width = nil
-      end
-      _width = width.not_nil!
-      @width = _width
+    def width=(new_value : Float32?)
+      @width = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] x_coordinate Object to be assigned
-    def x_coordinate=(x_coordinate : Float32?)
-      if x_coordinate.nil?
-        return @x_coordinate = nil
-      end
-      _x_coordinate = x_coordinate.not_nil!
-      @x_coordinate = _x_coordinate
+    def x_coordinate=(new_value : Float32?)
+      @x_coordinate = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] y_coordinate Object to be assigned
-    def y_coordinate=(y_coordinate : Float32?)
-      if y_coordinate.nil?
-        return @y_coordinate = nil
-      end
-      _y_coordinate = y_coordinate.not_nil!
-      @y_coordinate = _y_coordinate
+    def y_coordinate=(new_value : Float32?)
+      @y_coordinate = new_value
     end
 
     # Generates #hash and #== methods from all fields

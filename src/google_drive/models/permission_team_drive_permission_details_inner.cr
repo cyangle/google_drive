@@ -64,42 +64,26 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] inherited Object to be assigned
-    def inherited=(inherited : Bool?)
-      if inherited.nil?
-        return @inherited = nil
-      end
-      _inherited = inherited.not_nil!
-      @inherited = _inherited
+    def inherited=(new_value : Bool?)
+      @inherited = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] inherited_from Object to be assigned
-    def inherited_from=(inherited_from : String?)
-      if inherited_from.nil?
-        return @inherited_from = nil
-      end
-      _inherited_from = inherited_from.not_nil!
-      @inherited_from = _inherited_from
+    def inherited_from=(new_value : String?)
+      @inherited_from = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] role Object to be assigned
-    def role=(role : String?)
-      if role.nil?
-        return @role = nil
-      end
-      _role = role.not_nil!
-      @role = _role
+    def role=(new_value : String?)
+      @role = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] team_drive_permission_type Object to be assigned
-    def team_drive_permission_type=(team_drive_permission_type : String?)
-      if team_drive_permission_type.nil?
-        return @team_drive_permission_type = nil
-      end
-      _team_drive_permission_type = team_drive_permission_type.not_nil!
-      @team_drive_permission_type = _team_drive_permission_type
+    def team_drive_permission_type=(new_value : String?)
+      @team_drive_permission_type = new_value
     end
 
     # Generates #hash and #== methods from all fields

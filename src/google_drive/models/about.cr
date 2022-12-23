@@ -137,136 +137,96 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] app_installed Object to be assigned
-    def app_installed=(app_installed : Bool?)
-      if app_installed.nil?
-        return @app_installed = nil
-      end
-      _app_installed = app_installed.not_nil!
-      @app_installed = _app_installed
+    def app_installed=(new_value : Bool?)
+      @app_installed = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] can_create_drives Object to be assigned
-    def can_create_drives=(can_create_drives : Bool?)
-      if can_create_drives.nil?
-        return @can_create_drives = nil
-      end
-      _can_create_drives = can_create_drives.not_nil!
-      @can_create_drives = _can_create_drives
+    def can_create_drives=(new_value : Bool?)
+      @can_create_drives = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] can_create_team_drives Object to be assigned
-    def can_create_team_drives=(can_create_team_drives : Bool?)
-      if can_create_team_drives.nil?
-        return @can_create_team_drives = nil
-      end
-      _can_create_team_drives = can_create_team_drives.not_nil!
-      @can_create_team_drives = _can_create_team_drives
+    def can_create_team_drives=(new_value : Bool?)
+      @can_create_team_drives = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] drive_themes Object to be assigned
-    def drive_themes=(drive_themes : Array(GoogleDrive::AboutDriveThemesInner)?)
-      if drive_themes.nil?
-        return @drive_themes = nil
+    def drive_themes=(new_value : Array(GoogleDrive::AboutDriveThemesInner)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _drive_themes = drive_themes.not_nil!
-      OpenApi::ContainerValidator.validate(container: _drive_themes) if _drive_themes.is_a?(Array)
-      @drive_themes = _drive_themes
+
+      @drive_themes = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] export_formats Object to be assigned
-    def export_formats=(export_formats : Hash(String, Array(String))?)
-      if export_formats.nil?
-        return @export_formats = nil
-      end
-      _export_formats = export_formats.not_nil!
-      @export_formats = _export_formats
+    def export_formats=(new_value : Hash(String, Array(String))?)
+      @export_formats = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] folder_color_palette Object to be assigned
-    def folder_color_palette=(folder_color_palette : Array(String)?)
-      if folder_color_palette.nil?
-        return @folder_color_palette = nil
-      end
-      _folder_color_palette = folder_color_palette.not_nil!
-      @folder_color_palette = _folder_color_palette
+    def folder_color_palette=(new_value : Array(String)?)
+      @folder_color_palette = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] import_formats Object to be assigned
-    def import_formats=(import_formats : Hash(String, Array(String))?)
-      if import_formats.nil?
-        return @import_formats = nil
-      end
-      _import_formats = import_formats.not_nil!
-      @import_formats = _import_formats
+    def import_formats=(new_value : Hash(String, Array(String))?)
+      @import_formats = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] kind Object to be assigned
-    def kind=(kind : String?)
-      if kind.nil?
-        return @kind = nil
-      end
-      _kind = kind.not_nil!
-      @kind = _kind
+    def kind=(new_value : String?)
+      @kind = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] max_import_sizes Object to be assigned
-    def max_import_sizes=(max_import_sizes : Hash(String, String)?)
-      if max_import_sizes.nil?
-        return @max_import_sizes = nil
-      end
-      _max_import_sizes = max_import_sizes.not_nil!
-      @max_import_sizes = _max_import_sizes
+    def max_import_sizes=(new_value : Hash(String, String)?)
+      @max_import_sizes = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] max_upload_size Object to be assigned
-    def max_upload_size=(max_upload_size : String?)
-      if max_upload_size.nil?
-        return @max_upload_size = nil
-      end
-      _max_upload_size = max_upload_size.not_nil!
-      @max_upload_size = _max_upload_size
+    def max_upload_size=(new_value : String?)
+      @max_upload_size = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] storage_quota Object to be assigned
-    def storage_quota=(storage_quota : GoogleDrive::AboutStorageQuota?)
-      if storage_quota.nil?
-        return @storage_quota = nil
+    def storage_quota=(new_value : GoogleDrive::AboutStorageQuota?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _storage_quota = storage_quota.not_nil!
-      _storage_quota.validate if _storage_quota.is_a?(OpenApi::Validatable)
-      @storage_quota = _storage_quota
+
+      @storage_quota = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] team_drive_themes Object to be assigned
-    def team_drive_themes=(team_drive_themes : Array(GoogleDrive::AboutTeamDriveThemesInner)?)
-      if team_drive_themes.nil?
-        return @team_drive_themes = nil
+    def team_drive_themes=(new_value : Array(GoogleDrive::AboutTeamDriveThemesInner)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _team_drive_themes = team_drive_themes.not_nil!
-      OpenApi::ContainerValidator.validate(container: _team_drive_themes) if _team_drive_themes.is_a?(Array)
-      @team_drive_themes = _team_drive_themes
+
+      @team_drive_themes = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] user Object to be assigned
-    def user=(user : GoogleDrive::User?)
-      if user.nil?
-        return @user = nil
+    def user=(new_value : GoogleDrive::User?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _user = user.not_nil!
-      _user.validate if _user.is_a?(OpenApi::Validatable)
-      @user = _user
+
+      @user = new_value
     end
 
     # Generates #hash and #== methods from all fields

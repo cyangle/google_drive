@@ -61,23 +61,18 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] indexable_text Object to be assigned
-    def indexable_text=(indexable_text : String?)
-      if indexable_text.nil?
-        return @indexable_text = nil
-      end
-      _indexable_text = indexable_text.not_nil!
-      @indexable_text = _indexable_text
+    def indexable_text=(new_value : String?)
+      @indexable_text = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] thumbnail Object to be assigned
-    def thumbnail=(thumbnail : GoogleDrive::FileContentHintsThumbnail?)
-      if thumbnail.nil?
-        return @thumbnail = nil
+    def thumbnail=(new_value : GoogleDrive::FileContentHintsThumbnail?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _thumbnail = thumbnail.not_nil!
-      _thumbnail.validate if _thumbnail.is_a?(OpenApi::Validatable)
-      @thumbnail = _thumbnail
+
+      @thumbnail = new_value
     end
 
     # Generates #hash and #== methods from all fields

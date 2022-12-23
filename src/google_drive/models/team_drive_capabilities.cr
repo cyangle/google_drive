@@ -145,202 +145,122 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] can_add_children Object to be assigned
-    def can_add_children=(can_add_children : Bool?)
-      if can_add_children.nil?
-        return @can_add_children = nil
-      end
-      _can_add_children = can_add_children.not_nil!
-      @can_add_children = _can_add_children
+    def can_add_children=(new_value : Bool?)
+      @can_add_children = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] can_change_copy_requires_writer_permission_restriction Object to be assigned
-    def can_change_copy_requires_writer_permission_restriction=(can_change_copy_requires_writer_permission_restriction : Bool?)
-      if can_change_copy_requires_writer_permission_restriction.nil?
-        return @can_change_copy_requires_writer_permission_restriction = nil
-      end
-      _can_change_copy_requires_writer_permission_restriction = can_change_copy_requires_writer_permission_restriction.not_nil!
-      @can_change_copy_requires_writer_permission_restriction = _can_change_copy_requires_writer_permission_restriction
+    def can_change_copy_requires_writer_permission_restriction=(new_value : Bool?)
+      @can_change_copy_requires_writer_permission_restriction = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] can_change_domain_users_only_restriction Object to be assigned
-    def can_change_domain_users_only_restriction=(can_change_domain_users_only_restriction : Bool?)
-      if can_change_domain_users_only_restriction.nil?
-        return @can_change_domain_users_only_restriction = nil
-      end
-      _can_change_domain_users_only_restriction = can_change_domain_users_only_restriction.not_nil!
-      @can_change_domain_users_only_restriction = _can_change_domain_users_only_restriction
+    def can_change_domain_users_only_restriction=(new_value : Bool?)
+      @can_change_domain_users_only_restriction = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] can_change_team_drive_background Object to be assigned
-    def can_change_team_drive_background=(can_change_team_drive_background : Bool?)
-      if can_change_team_drive_background.nil?
-        return @can_change_team_drive_background = nil
-      end
-      _can_change_team_drive_background = can_change_team_drive_background.not_nil!
-      @can_change_team_drive_background = _can_change_team_drive_background
+    def can_change_team_drive_background=(new_value : Bool?)
+      @can_change_team_drive_background = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] can_change_team_members_only_restriction Object to be assigned
-    def can_change_team_members_only_restriction=(can_change_team_members_only_restriction : Bool?)
-      if can_change_team_members_only_restriction.nil?
-        return @can_change_team_members_only_restriction = nil
-      end
-      _can_change_team_members_only_restriction = can_change_team_members_only_restriction.not_nil!
-      @can_change_team_members_only_restriction = _can_change_team_members_only_restriction
+    def can_change_team_members_only_restriction=(new_value : Bool?)
+      @can_change_team_members_only_restriction = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] can_comment Object to be assigned
-    def can_comment=(can_comment : Bool?)
-      if can_comment.nil?
-        return @can_comment = nil
-      end
-      _can_comment = can_comment.not_nil!
-      @can_comment = _can_comment
+    def can_comment=(new_value : Bool?)
+      @can_comment = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] can_copy Object to be assigned
-    def can_copy=(can_copy : Bool?)
-      if can_copy.nil?
-        return @can_copy = nil
-      end
-      _can_copy = can_copy.not_nil!
-      @can_copy = _can_copy
+    def can_copy=(new_value : Bool?)
+      @can_copy = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] can_delete_children Object to be assigned
-    def can_delete_children=(can_delete_children : Bool?)
-      if can_delete_children.nil?
-        return @can_delete_children = nil
-      end
-      _can_delete_children = can_delete_children.not_nil!
-      @can_delete_children = _can_delete_children
+    def can_delete_children=(new_value : Bool?)
+      @can_delete_children = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] can_delete_team_drive Object to be assigned
-    def can_delete_team_drive=(can_delete_team_drive : Bool?)
-      if can_delete_team_drive.nil?
-        return @can_delete_team_drive = nil
-      end
-      _can_delete_team_drive = can_delete_team_drive.not_nil!
-      @can_delete_team_drive = _can_delete_team_drive
+    def can_delete_team_drive=(new_value : Bool?)
+      @can_delete_team_drive = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] can_download Object to be assigned
-    def can_download=(can_download : Bool?)
-      if can_download.nil?
-        return @can_download = nil
-      end
-      _can_download = can_download.not_nil!
-      @can_download = _can_download
+    def can_download=(new_value : Bool?)
+      @can_download = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] can_edit Object to be assigned
-    def can_edit=(can_edit : Bool?)
-      if can_edit.nil?
-        return @can_edit = nil
-      end
-      _can_edit = can_edit.not_nil!
-      @can_edit = _can_edit
+    def can_edit=(new_value : Bool?)
+      @can_edit = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] can_list_children Object to be assigned
-    def can_list_children=(can_list_children : Bool?)
-      if can_list_children.nil?
-        return @can_list_children = nil
-      end
-      _can_list_children = can_list_children.not_nil!
-      @can_list_children = _can_list_children
+    def can_list_children=(new_value : Bool?)
+      @can_list_children = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] can_manage_members Object to be assigned
-    def can_manage_members=(can_manage_members : Bool?)
-      if can_manage_members.nil?
-        return @can_manage_members = nil
-      end
-      _can_manage_members = can_manage_members.not_nil!
-      @can_manage_members = _can_manage_members
+    def can_manage_members=(new_value : Bool?)
+      @can_manage_members = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] can_read_revisions Object to be assigned
-    def can_read_revisions=(can_read_revisions : Bool?)
-      if can_read_revisions.nil?
-        return @can_read_revisions = nil
-      end
-      _can_read_revisions = can_read_revisions.not_nil!
-      @can_read_revisions = _can_read_revisions
+    def can_read_revisions=(new_value : Bool?)
+      @can_read_revisions = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] can_remove_children Object to be assigned
-    def can_remove_children=(can_remove_children : Bool?)
-      if can_remove_children.nil?
-        return @can_remove_children = nil
-      end
-      _can_remove_children = can_remove_children.not_nil!
-      @can_remove_children = _can_remove_children
+    def can_remove_children=(new_value : Bool?)
+      @can_remove_children = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] can_rename Object to be assigned
-    def can_rename=(can_rename : Bool?)
-      if can_rename.nil?
-        return @can_rename = nil
-      end
-      _can_rename = can_rename.not_nil!
-      @can_rename = _can_rename
+    def can_rename=(new_value : Bool?)
+      @can_rename = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] can_rename_team_drive Object to be assigned
-    def can_rename_team_drive=(can_rename_team_drive : Bool?)
-      if can_rename_team_drive.nil?
-        return @can_rename_team_drive = nil
-      end
-      _can_rename_team_drive = can_rename_team_drive.not_nil!
-      @can_rename_team_drive = _can_rename_team_drive
+    def can_rename_team_drive=(new_value : Bool?)
+      @can_rename_team_drive = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] can_reset_team_drive_restrictions Object to be assigned
-    def can_reset_team_drive_restrictions=(can_reset_team_drive_restrictions : Bool?)
-      if can_reset_team_drive_restrictions.nil?
-        return @can_reset_team_drive_restrictions = nil
-      end
-      _can_reset_team_drive_restrictions = can_reset_team_drive_restrictions.not_nil!
-      @can_reset_team_drive_restrictions = _can_reset_team_drive_restrictions
+    def can_reset_team_drive_restrictions=(new_value : Bool?)
+      @can_reset_team_drive_restrictions = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] can_share Object to be assigned
-    def can_share=(can_share : Bool?)
-      if can_share.nil?
-        return @can_share = nil
-      end
-      _can_share = can_share.not_nil!
-      @can_share = _can_share
+    def can_share=(new_value : Bool?)
+      @can_share = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] can_trash_children Object to be assigned
-    def can_trash_children=(can_trash_children : Bool?)
-      if can_trash_children.nil?
-        return @can_trash_children = nil
-      end
-      _can_trash_children = can_trash_children.not_nil!
-      @can_trash_children = _can_trash_children
+    def can_trash_children=(new_value : Bool?)
+      @can_trash_children = new_value
     end
 
     # Generates #hash and #== methods from all fields

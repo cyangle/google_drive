@@ -122,143 +122,90 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] export_links Object to be assigned
-    def export_links=(export_links : Hash(String, String)?)
-      if export_links.nil?
-        return @export_links = nil
-      end
-      _export_links = export_links.not_nil!
-      @export_links = _export_links
+    def export_links=(new_value : Hash(String, String)?)
+      @export_links = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        return @id = nil
-      end
-      _id = id.not_nil!
-      @id = _id
+    def id=(new_value : String?)
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] keep_forever Object to be assigned
-    def keep_forever=(keep_forever : Bool?)
-      if keep_forever.nil?
-        return @keep_forever = nil
-      end
-      _keep_forever = keep_forever.not_nil!
-      @keep_forever = _keep_forever
+    def keep_forever=(new_value : Bool?)
+      @keep_forever = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] kind Object to be assigned
-    def kind=(kind : String?)
-      if kind.nil?
-        return @kind = nil
-      end
-      _kind = kind.not_nil!
-      @kind = _kind
+    def kind=(new_value : String?)
+      @kind = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] last_modifying_user Object to be assigned
-    def last_modifying_user=(last_modifying_user : GoogleDrive::User?)
-      if last_modifying_user.nil?
-        return @last_modifying_user = nil
+    def last_modifying_user=(new_value : GoogleDrive::User?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _last_modifying_user = last_modifying_user.not_nil!
-      _last_modifying_user.validate if _last_modifying_user.is_a?(OpenApi::Validatable)
-      @last_modifying_user = _last_modifying_user
+
+      @last_modifying_user = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] md5_checksum Object to be assigned
-    def md5_checksum=(md5_checksum : String?)
-      if md5_checksum.nil?
-        return @md5_checksum = nil
-      end
-      _md5_checksum = md5_checksum.not_nil!
-      @md5_checksum = _md5_checksum
+    def md5_checksum=(new_value : String?)
+      @md5_checksum = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mime_type Object to be assigned
-    def mime_type=(mime_type : String?)
-      if mime_type.nil?
-        return @mime_type = nil
-      end
-      _mime_type = mime_type.not_nil!
-      @mime_type = _mime_type
+    def mime_type=(new_value : String?)
+      @mime_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] modified_time Object to be assigned
-    def modified_time=(modified_time : Time?)
-      if modified_time.nil?
-        return @modified_time = nil
-      end
-      _modified_time = modified_time.not_nil!
-      @modified_time = _modified_time
+    def modified_time=(new_value : Time?)
+      @modified_time = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] original_filename Object to be assigned
-    def original_filename=(original_filename : String?)
-      if original_filename.nil?
-        return @original_filename = nil
-      end
-      _original_filename = original_filename.not_nil!
-      @original_filename = _original_filename
+    def original_filename=(new_value : String?)
+      @original_filename = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] publish_auto Object to be assigned
-    def publish_auto=(publish_auto : Bool?)
-      if publish_auto.nil?
-        return @publish_auto = nil
-      end
-      _publish_auto = publish_auto.not_nil!
-      @publish_auto = _publish_auto
+    def publish_auto=(new_value : Bool?)
+      @publish_auto = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] published Object to be assigned
-    def published=(published : Bool?)
-      if published.nil?
-        return @published = nil
-      end
-      _published = published.not_nil!
-      @published = _published
+    def published=(new_value : Bool?)
+      @published = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] published_link Object to be assigned
-    def published_link=(published_link : String?)
-      if published_link.nil?
-        return @published_link = nil
-      end
-      _published_link = published_link.not_nil!
-      @published_link = _published_link
+    def published_link=(new_value : String?)
+      @published_link = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] published_outside_domain Object to be assigned
-    def published_outside_domain=(published_outside_domain : Bool?)
-      if published_outside_domain.nil?
-        return @published_outside_domain = nil
-      end
-      _published_outside_domain = published_outside_domain.not_nil!
-      @published_outside_domain = _published_outside_domain
+    def published_outside_domain=(new_value : Bool?)
+      @published_outside_domain = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] size Object to be assigned
-    def size=(size : String?)
-      if size.nil?
-        return @size = nil
-      end
-      _size = size.not_nil!
-      @size = _size
+    def size=(new_value : String?)
+      @size = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -444,635 +444,426 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] app_properties Object to be assigned
-    def app_properties=(app_properties : Hash(String, String)?)
-      if app_properties.nil?
-        return @app_properties = nil
-      end
-      _app_properties = app_properties.not_nil!
-      @app_properties = _app_properties
+    def app_properties=(new_value : Hash(String, String)?)
+      @app_properties = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] capabilities Object to be assigned
-    def capabilities=(capabilities : GoogleDrive::FileCapabilities?)
-      if capabilities.nil?
-        return @capabilities = nil
+    def capabilities=(new_value : GoogleDrive::FileCapabilities?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _capabilities = capabilities.not_nil!
-      _capabilities.validate if _capabilities.is_a?(OpenApi::Validatable)
-      @capabilities = _capabilities
+
+      @capabilities = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] content_hints Object to be assigned
-    def content_hints=(content_hints : GoogleDrive::FileContentHints?)
-      if content_hints.nil?
-        return @content_hints = nil
+    def content_hints=(new_value : GoogleDrive::FileContentHints?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _content_hints = content_hints.not_nil!
-      _content_hints.validate if _content_hints.is_a?(OpenApi::Validatable)
-      @content_hints = _content_hints
+
+      @content_hints = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] content_restrictions Object to be assigned
-    def content_restrictions=(content_restrictions : Array(GoogleDrive::ContentRestriction)?)
-      if content_restrictions.nil?
-        return @content_restrictions = nil
+    def content_restrictions=(new_value : Array(GoogleDrive::ContentRestriction)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _content_restrictions = content_restrictions.not_nil!
-      OpenApi::ContainerValidator.validate(container: _content_restrictions) if _content_restrictions.is_a?(Array)
-      @content_restrictions = _content_restrictions
+
+      @content_restrictions = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] copy_requires_writer_permission Object to be assigned
-    def copy_requires_writer_permission=(copy_requires_writer_permission : Bool?)
-      if copy_requires_writer_permission.nil?
-        return @copy_requires_writer_permission = nil
-      end
-      _copy_requires_writer_permission = copy_requires_writer_permission.not_nil!
-      @copy_requires_writer_permission = _copy_requires_writer_permission
+    def copy_requires_writer_permission=(new_value : Bool?)
+      @copy_requires_writer_permission = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] created_time Object to be assigned
-    def created_time=(created_time : Time?)
-      if created_time.nil?
-        return @created_time = nil
-      end
-      _created_time = created_time.not_nil!
-      @created_time = _created_time
+    def created_time=(new_value : Time?)
+      @created_time = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] description Object to be assigned
-    def description=(description : String?)
-      if description.nil?
-        return @description = nil
-      end
-      _description = description.not_nil!
-      @description = _description
+    def description=(new_value : String?)
+      @description = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] drive_id Object to be assigned
-    def drive_id=(drive_id : String?)
-      if drive_id.nil?
-        return @drive_id = nil
-      end
-      _drive_id = drive_id.not_nil!
-      @drive_id = _drive_id
+    def drive_id=(new_value : String?)
+      @drive_id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] explicitly_trashed Object to be assigned
-    def explicitly_trashed=(explicitly_trashed : Bool?)
-      if explicitly_trashed.nil?
-        return @explicitly_trashed = nil
-      end
-      _explicitly_trashed = explicitly_trashed.not_nil!
-      @explicitly_trashed = _explicitly_trashed
+    def explicitly_trashed=(new_value : Bool?)
+      @explicitly_trashed = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] export_links Object to be assigned
-    def export_links=(export_links : Hash(String, String)?)
-      if export_links.nil?
-        return @export_links = nil
-      end
-      _export_links = export_links.not_nil!
-      @export_links = _export_links
+    def export_links=(new_value : Hash(String, String)?)
+      @export_links = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] file_extension Object to be assigned
-    def file_extension=(file_extension : String?)
-      if file_extension.nil?
-        return @file_extension = nil
-      end
-      _file_extension = file_extension.not_nil!
-      @file_extension = _file_extension
+    def file_extension=(new_value : String?)
+      @file_extension = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] folder_color_rgb Object to be assigned
-    def folder_color_rgb=(folder_color_rgb : String?)
-      if folder_color_rgb.nil?
-        return @folder_color_rgb = nil
-      end
-      _folder_color_rgb = folder_color_rgb.not_nil!
-      @folder_color_rgb = _folder_color_rgb
+    def folder_color_rgb=(new_value : String?)
+      @folder_color_rgb = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] full_file_extension Object to be assigned
-    def full_file_extension=(full_file_extension : String?)
-      if full_file_extension.nil?
-        return @full_file_extension = nil
-      end
-      _full_file_extension = full_file_extension.not_nil!
-      @full_file_extension = _full_file_extension
+    def full_file_extension=(new_value : String?)
+      @full_file_extension = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] has_augmented_permissions Object to be assigned
-    def has_augmented_permissions=(has_augmented_permissions : Bool?)
-      if has_augmented_permissions.nil?
-        return @has_augmented_permissions = nil
-      end
-      _has_augmented_permissions = has_augmented_permissions.not_nil!
-      @has_augmented_permissions = _has_augmented_permissions
+    def has_augmented_permissions=(new_value : Bool?)
+      @has_augmented_permissions = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] has_thumbnail Object to be assigned
-    def has_thumbnail=(has_thumbnail : Bool?)
-      if has_thumbnail.nil?
-        return @has_thumbnail = nil
-      end
-      _has_thumbnail = has_thumbnail.not_nil!
-      @has_thumbnail = _has_thumbnail
+    def has_thumbnail=(new_value : Bool?)
+      @has_thumbnail = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] head_revision_id Object to be assigned
-    def head_revision_id=(head_revision_id : String?)
-      if head_revision_id.nil?
-        return @head_revision_id = nil
-      end
-      _head_revision_id = head_revision_id.not_nil!
-      @head_revision_id = _head_revision_id
+    def head_revision_id=(new_value : String?)
+      @head_revision_id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] icon_link Object to be assigned
-    def icon_link=(icon_link : String?)
-      if icon_link.nil?
-        return @icon_link = nil
-      end
-      _icon_link = icon_link.not_nil!
-      @icon_link = _icon_link
+    def icon_link=(new_value : String?)
+      @icon_link = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        return @id = nil
-      end
-      _id = id.not_nil!
-      @id = _id
+    def id=(new_value : String?)
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] image_media_metadata Object to be assigned
-    def image_media_metadata=(image_media_metadata : GoogleDrive::FileImageMediaMetadata?)
-      if image_media_metadata.nil?
-        return @image_media_metadata = nil
+    def image_media_metadata=(new_value : GoogleDrive::FileImageMediaMetadata?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _image_media_metadata = image_media_metadata.not_nil!
-      _image_media_metadata.validate if _image_media_metadata.is_a?(OpenApi::Validatable)
-      @image_media_metadata = _image_media_metadata
+
+      @image_media_metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] is_app_authorized Object to be assigned
-    def is_app_authorized=(is_app_authorized : Bool?)
-      if is_app_authorized.nil?
-        return @is_app_authorized = nil
-      end
-      _is_app_authorized = is_app_authorized.not_nil!
-      @is_app_authorized = _is_app_authorized
+    def is_app_authorized=(new_value : Bool?)
+      @is_app_authorized = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] kind Object to be assigned
-    def kind=(kind : String?)
-      if kind.nil?
-        return @kind = nil
-      end
-      _kind = kind.not_nil!
-      @kind = _kind
+    def kind=(new_value : String?)
+      @kind = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] label_info Object to be assigned
-    def label_info=(label_info : GoogleDrive::FileLabelInfo?)
-      if label_info.nil?
-        return @label_info = nil
+    def label_info=(new_value : GoogleDrive::FileLabelInfo?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _label_info = label_info.not_nil!
-      _label_info.validate if _label_info.is_a?(OpenApi::Validatable)
-      @label_info = _label_info
+
+      @label_info = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] last_modifying_user Object to be assigned
-    def last_modifying_user=(last_modifying_user : GoogleDrive::User?)
-      if last_modifying_user.nil?
-        return @last_modifying_user = nil
+    def last_modifying_user=(new_value : GoogleDrive::User?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _last_modifying_user = last_modifying_user.not_nil!
-      _last_modifying_user.validate if _last_modifying_user.is_a?(OpenApi::Validatable)
-      @last_modifying_user = _last_modifying_user
+
+      @last_modifying_user = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] link_share_metadata Object to be assigned
-    def link_share_metadata=(link_share_metadata : GoogleDrive::FileLinkShareMetadata?)
-      if link_share_metadata.nil?
-        return @link_share_metadata = nil
+    def link_share_metadata=(new_value : GoogleDrive::FileLinkShareMetadata?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _link_share_metadata = link_share_metadata.not_nil!
-      _link_share_metadata.validate if _link_share_metadata.is_a?(OpenApi::Validatable)
-      @link_share_metadata = _link_share_metadata
+
+      @link_share_metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] md5_checksum Object to be assigned
-    def md5_checksum=(md5_checksum : String?)
-      if md5_checksum.nil?
-        return @md5_checksum = nil
-      end
-      _md5_checksum = md5_checksum.not_nil!
-      @md5_checksum = _md5_checksum
+    def md5_checksum=(new_value : String?)
+      @md5_checksum = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mime_type Object to be assigned
-    def mime_type=(mime_type : String?)
-      if mime_type.nil?
-        return @mime_type = nil
-      end
-      _mime_type = mime_type.not_nil!
-      @mime_type = _mime_type
+    def mime_type=(new_value : String?)
+      @mime_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] modified_by_me Object to be assigned
-    def modified_by_me=(modified_by_me : Bool?)
-      if modified_by_me.nil?
-        return @modified_by_me = nil
-      end
-      _modified_by_me = modified_by_me.not_nil!
-      @modified_by_me = _modified_by_me
+    def modified_by_me=(new_value : Bool?)
+      @modified_by_me = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] modified_by_me_time Object to be assigned
-    def modified_by_me_time=(modified_by_me_time : Time?)
-      if modified_by_me_time.nil?
-        return @modified_by_me_time = nil
-      end
-      _modified_by_me_time = modified_by_me_time.not_nil!
-      @modified_by_me_time = _modified_by_me_time
+    def modified_by_me_time=(new_value : Time?)
+      @modified_by_me_time = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] modified_time Object to be assigned
-    def modified_time=(modified_time : Time?)
-      if modified_time.nil?
-        return @modified_time = nil
-      end
-      _modified_time = modified_time.not_nil!
-      @modified_time = _modified_time
+    def modified_time=(new_value : Time?)
+      @modified_time = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
-    def name=(name : String?)
-      if name.nil?
-        return @name = nil
-      end
-      _name = name.not_nil!
-      @name = _name
+    def name=(new_value : String?)
+      @name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] original_filename Object to be assigned
-    def original_filename=(original_filename : String?)
-      if original_filename.nil?
-        return @original_filename = nil
-      end
-      _original_filename = original_filename.not_nil!
-      @original_filename = _original_filename
+    def original_filename=(new_value : String?)
+      @original_filename = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] owned_by_me Object to be assigned
-    def owned_by_me=(owned_by_me : Bool?)
-      if owned_by_me.nil?
-        return @owned_by_me = nil
-      end
-      _owned_by_me = owned_by_me.not_nil!
-      @owned_by_me = _owned_by_me
+    def owned_by_me=(new_value : Bool?)
+      @owned_by_me = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] owners Object to be assigned
-    def owners=(owners : Array(GoogleDrive::User)?)
-      if owners.nil?
-        return @owners = nil
+    def owners=(new_value : Array(GoogleDrive::User)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _owners = owners.not_nil!
-      OpenApi::ContainerValidator.validate(container: _owners) if _owners.is_a?(Array)
-      @owners = _owners
+
+      @owners = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] parents Object to be assigned
-    def parents=(parents : Array(String)?)
-      if parents.nil?
-        return @parents = nil
-      end
-      _parents = parents.not_nil!
-      @parents = _parents
+    def parents=(new_value : Array(String)?)
+      @parents = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] permission_ids Object to be assigned
-    def permission_ids=(permission_ids : Array(String)?)
-      if permission_ids.nil?
-        return @permission_ids = nil
-      end
-      _permission_ids = permission_ids.not_nil!
-      @permission_ids = _permission_ids
+    def permission_ids=(new_value : Array(String)?)
+      @permission_ids = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] permissions Object to be assigned
-    def permissions=(permissions : Array(GoogleDrive::Permission)?)
-      if permissions.nil?
-        return @permissions = nil
+    def permissions=(new_value : Array(GoogleDrive::Permission)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _permissions = permissions.not_nil!
-      OpenApi::ContainerValidator.validate(container: _permissions) if _permissions.is_a?(Array)
-      @permissions = _permissions
+
+      @permissions = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] properties Object to be assigned
-    def properties=(properties : Hash(String, String)?)
-      if properties.nil?
-        return @properties = nil
-      end
-      _properties = properties.not_nil!
-      @properties = _properties
+    def properties=(new_value : Hash(String, String)?)
+      @properties = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] quota_bytes_used Object to be assigned
-    def quota_bytes_used=(quota_bytes_used : String?)
-      if quota_bytes_used.nil?
-        return @quota_bytes_used = nil
-      end
-      _quota_bytes_used = quota_bytes_used.not_nil!
-      @quota_bytes_used = _quota_bytes_used
+    def quota_bytes_used=(new_value : String?)
+      @quota_bytes_used = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] resource_key Object to be assigned
-    def resource_key=(resource_key : String?)
-      if resource_key.nil?
-        return @resource_key = nil
-      end
-      _resource_key = resource_key.not_nil!
-      @resource_key = _resource_key
+    def resource_key=(new_value : String?)
+      @resource_key = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sha1_checksum Object to be assigned
-    def sha1_checksum=(sha1_checksum : String?)
-      if sha1_checksum.nil?
-        return @sha1_checksum = nil
-      end
-      _sha1_checksum = sha1_checksum.not_nil!
-      @sha1_checksum = _sha1_checksum
+    def sha1_checksum=(new_value : String?)
+      @sha1_checksum = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sha256_checksum Object to be assigned
-    def sha256_checksum=(sha256_checksum : String?)
-      if sha256_checksum.nil?
-        return @sha256_checksum = nil
-      end
-      _sha256_checksum = sha256_checksum.not_nil!
-      @sha256_checksum = _sha256_checksum
+    def sha256_checksum=(new_value : String?)
+      @sha256_checksum = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shared Object to be assigned
-    def shared=(shared : Bool?)
-      if shared.nil?
-        return @shared = nil
-      end
-      _shared = shared.not_nil!
-      @shared = _shared
+    def shared=(new_value : Bool?)
+      @shared = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shared_with_me_time Object to be assigned
-    def shared_with_me_time=(shared_with_me_time : Time?)
-      if shared_with_me_time.nil?
-        return @shared_with_me_time = nil
-      end
-      _shared_with_me_time = shared_with_me_time.not_nil!
-      @shared_with_me_time = _shared_with_me_time
+    def shared_with_me_time=(new_value : Time?)
+      @shared_with_me_time = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sharing_user Object to be assigned
-    def sharing_user=(sharing_user : GoogleDrive::User?)
-      if sharing_user.nil?
-        return @sharing_user = nil
+    def sharing_user=(new_value : GoogleDrive::User?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _sharing_user = sharing_user.not_nil!
-      _sharing_user.validate if _sharing_user.is_a?(OpenApi::Validatable)
-      @sharing_user = _sharing_user
+
+      @sharing_user = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shortcut_details Object to be assigned
-    def shortcut_details=(shortcut_details : GoogleDrive::FileShortcutDetails?)
-      if shortcut_details.nil?
-        return @shortcut_details = nil
+    def shortcut_details=(new_value : GoogleDrive::FileShortcutDetails?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _shortcut_details = shortcut_details.not_nil!
-      _shortcut_details.validate if _shortcut_details.is_a?(OpenApi::Validatable)
-      @shortcut_details = _shortcut_details
+
+      @shortcut_details = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] size Object to be assigned
-    def size=(size : String?)
-      if size.nil?
-        return @size = nil
-      end
-      _size = size.not_nil!
-      @size = _size
+    def size=(new_value : String?)
+      @size = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] spaces Object to be assigned
-    def spaces=(spaces : Array(String)?)
-      if spaces.nil?
-        return @spaces = nil
-      end
-      _spaces = spaces.not_nil!
-      @spaces = _spaces
+    def spaces=(new_value : Array(String)?)
+      @spaces = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] starred Object to be assigned
-    def starred=(starred : Bool?)
-      if starred.nil?
-        return @starred = nil
-      end
-      _starred = starred.not_nil!
-      @starred = _starred
+    def starred=(new_value : Bool?)
+      @starred = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] team_drive_id Object to be assigned
-    def team_drive_id=(team_drive_id : String?)
-      if team_drive_id.nil?
-        return @team_drive_id = nil
-      end
-      _team_drive_id = team_drive_id.not_nil!
-      @team_drive_id = _team_drive_id
+    def team_drive_id=(new_value : String?)
+      @team_drive_id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] thumbnail_link Object to be assigned
-    def thumbnail_link=(thumbnail_link : String?)
-      if thumbnail_link.nil?
-        return @thumbnail_link = nil
-      end
-      _thumbnail_link = thumbnail_link.not_nil!
-      @thumbnail_link = _thumbnail_link
+    def thumbnail_link=(new_value : String?)
+      @thumbnail_link = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] thumbnail_version Object to be assigned
-    def thumbnail_version=(thumbnail_version : String?)
-      if thumbnail_version.nil?
-        return @thumbnail_version = nil
-      end
-      _thumbnail_version = thumbnail_version.not_nil!
-      @thumbnail_version = _thumbnail_version
+    def thumbnail_version=(new_value : String?)
+      @thumbnail_version = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] trashed Object to be assigned
-    def trashed=(trashed : Bool?)
-      if trashed.nil?
-        return @trashed = nil
-      end
-      _trashed = trashed.not_nil!
-      @trashed = _trashed
+    def trashed=(new_value : Bool?)
+      @trashed = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] trashed_time Object to be assigned
-    def trashed_time=(trashed_time : Time?)
-      if trashed_time.nil?
-        return @trashed_time = nil
-      end
-      _trashed_time = trashed_time.not_nil!
-      @trashed_time = _trashed_time
+    def trashed_time=(new_value : Time?)
+      @trashed_time = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] trashing_user Object to be assigned
-    def trashing_user=(trashing_user : GoogleDrive::User?)
-      if trashing_user.nil?
-        return @trashing_user = nil
+    def trashing_user=(new_value : GoogleDrive::User?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _trashing_user = trashing_user.not_nil!
-      _trashing_user.validate if _trashing_user.is_a?(OpenApi::Validatable)
-      @trashing_user = _trashing_user
+
+      @trashing_user = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] version Object to be assigned
-    def version=(version : String?)
-      if version.nil?
-        return @version = nil
-      end
-      _version = version.not_nil!
-      @version = _version
+    def version=(new_value : String?)
+      @version = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] video_media_metadata Object to be assigned
-    def video_media_metadata=(video_media_metadata : GoogleDrive::FileVideoMediaMetadata?)
-      if video_media_metadata.nil?
-        return @video_media_metadata = nil
+    def video_media_metadata=(new_value : GoogleDrive::FileVideoMediaMetadata?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _video_media_metadata = video_media_metadata.not_nil!
-      _video_media_metadata.validate if _video_media_metadata.is_a?(OpenApi::Validatable)
-      @video_media_metadata = _video_media_metadata
+
+      @video_media_metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] viewed_by_me Object to be assigned
-    def viewed_by_me=(viewed_by_me : Bool?)
-      if viewed_by_me.nil?
-        return @viewed_by_me = nil
-      end
-      _viewed_by_me = viewed_by_me.not_nil!
-      @viewed_by_me = _viewed_by_me
+    def viewed_by_me=(new_value : Bool?)
+      @viewed_by_me = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] viewed_by_me_time Object to be assigned
-    def viewed_by_me_time=(viewed_by_me_time : Time?)
-      if viewed_by_me_time.nil?
-        return @viewed_by_me_time = nil
-      end
-      _viewed_by_me_time = viewed_by_me_time.not_nil!
-      @viewed_by_me_time = _viewed_by_me_time
+    def viewed_by_me_time=(new_value : Time?)
+      @viewed_by_me_time = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] viewers_can_copy_content Object to be assigned
-    def viewers_can_copy_content=(viewers_can_copy_content : Bool?)
-      if viewers_can_copy_content.nil?
-        return @viewers_can_copy_content = nil
-      end
-      _viewers_can_copy_content = viewers_can_copy_content.not_nil!
-      @viewers_can_copy_content = _viewers_can_copy_content
+    def viewers_can_copy_content=(new_value : Bool?)
+      @viewers_can_copy_content = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] web_content_link Object to be assigned
-    def web_content_link=(web_content_link : String?)
-      if web_content_link.nil?
-        return @web_content_link = nil
-      end
-      _web_content_link = web_content_link.not_nil!
-      @web_content_link = _web_content_link
+    def web_content_link=(new_value : String?)
+      @web_content_link = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] web_view_link Object to be assigned
-    def web_view_link=(web_view_link : String?)
-      if web_view_link.nil?
-        return @web_view_link = nil
-      end
-      _web_view_link = web_view_link.not_nil!
-      @web_view_link = _web_view_link
+    def web_view_link=(new_value : String?)
+      @web_view_link = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] writers_can_share Object to be assigned
-    def writers_can_share=(writers_can_share : Bool?)
-      if writers_can_share.nil?
-        return @writers_can_share = nil
-      end
-      _writers_can_share = writers_can_share.not_nil!
-      @writers_can_share = _writers_can_share
+    def writers_can_share=(new_value : Bool?)
+      @writers_can_share = new_value
     end
 
     # Generates #hash and #== methods from all fields

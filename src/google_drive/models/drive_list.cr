@@ -68,33 +68,24 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] drives Object to be assigned
-    def drives=(drives : Array(GoogleDrive::Drive)?)
-      if drives.nil?
-        return @drives = nil
+    def drives=(new_value : Array(GoogleDrive::Drive)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _drives = drives.not_nil!
-      OpenApi::ContainerValidator.validate(container: _drives) if _drives.is_a?(Array)
-      @drives = _drives
+
+      @drives = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] kind Object to be assigned
-    def kind=(kind : String?)
-      if kind.nil?
-        return @kind = nil
-      end
-      _kind = kind.not_nil!
-      @kind = _kind
+    def kind=(new_value : String?)
+      @kind = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] next_page_token Object to be assigned
-    def next_page_token=(next_page_token : String?)
-      if next_page_token.nil?
-        return @next_page_token = nil
-      end
-      _next_page_token = next_page_token.not_nil!
-      @next_page_token = _next_page_token
+    def next_page_token=(new_value : String?)
+      @next_page_token = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -60,32 +60,20 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] altitude Object to be assigned
-    def altitude=(altitude : Float64?)
-      if altitude.nil?
-        return @altitude = nil
-      end
-      _altitude = altitude.not_nil!
-      @altitude = _altitude
+    def altitude=(new_value : Float64?)
+      @altitude = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] latitude Object to be assigned
-    def latitude=(latitude : Float64?)
-      if latitude.nil?
-        return @latitude = nil
-      end
-      _latitude = latitude.not_nil!
-      @latitude = _latitude
+    def latitude=(new_value : Float64?)
+      @latitude = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] longitude Object to be assigned
-    def longitude=(longitude : Float64?)
-      if longitude.nil?
-        return @longitude = nil
-      end
-      _longitude = longitude.not_nil!
-      @longitude = _longitude
+    def longitude=(new_value : Float64?)
+      @longitude = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -73,43 +73,30 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] field_modifications Object to be assigned
-    def field_modifications=(field_modifications : Array(GoogleDrive::LabelFieldModification)?)
-      if field_modifications.nil?
-        return @field_modifications = nil
+    def field_modifications=(new_value : Array(GoogleDrive::LabelFieldModification)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _field_modifications = field_modifications.not_nil!
-      OpenApi::ContainerValidator.validate(container: _field_modifications) if _field_modifications.is_a?(Array)
-      @field_modifications = _field_modifications
+
+      @field_modifications = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] kind Object to be assigned
-    def kind=(kind : String?)
-      if kind.nil?
-        return @kind = nil
-      end
-      _kind = kind.not_nil!
-      @kind = _kind
+    def kind=(new_value : String?)
+      @kind = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] label_id Object to be assigned
-    def label_id=(label_id : String?)
-      if label_id.nil?
-        return @label_id = nil
-      end
-      _label_id = label_id.not_nil!
-      @label_id = _label_id
+    def label_id=(new_value : String?)
+      @label_id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] remove_label Object to be assigned
-    def remove_label=(remove_label : Bool?)
-      if remove_label.nil?
-        return @remove_label = nil
-      end
-      _remove_label = remove_label.not_nil!
-      @remove_label = _remove_label
+    def remove_label=(new_value : Bool?)
+      @remove_label = new_value
     end
 
     # Generates #hash and #== methods from all fields

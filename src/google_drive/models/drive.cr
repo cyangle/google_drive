@@ -126,125 +126,86 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] background_image_file Object to be assigned
-    def background_image_file=(background_image_file : GoogleDrive::DriveBackgroundImageFile?)
-      if background_image_file.nil?
-        return @background_image_file = nil
+    def background_image_file=(new_value : GoogleDrive::DriveBackgroundImageFile?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _background_image_file = background_image_file.not_nil!
-      _background_image_file.validate if _background_image_file.is_a?(OpenApi::Validatable)
-      @background_image_file = _background_image_file
+
+      @background_image_file = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] background_image_link Object to be assigned
-    def background_image_link=(background_image_link : String?)
-      if background_image_link.nil?
-        return @background_image_link = nil
-      end
-      _background_image_link = background_image_link.not_nil!
-      @background_image_link = _background_image_link
+    def background_image_link=(new_value : String?)
+      @background_image_link = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] capabilities Object to be assigned
-    def capabilities=(capabilities : GoogleDrive::DriveCapabilities?)
-      if capabilities.nil?
-        return @capabilities = nil
+    def capabilities=(new_value : GoogleDrive::DriveCapabilities?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _capabilities = capabilities.not_nil!
-      _capabilities.validate if _capabilities.is_a?(OpenApi::Validatable)
-      @capabilities = _capabilities
+
+      @capabilities = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] color_rgb Object to be assigned
-    def color_rgb=(color_rgb : String?)
-      if color_rgb.nil?
-        return @color_rgb = nil
-      end
-      _color_rgb = color_rgb.not_nil!
-      @color_rgb = _color_rgb
+    def color_rgb=(new_value : String?)
+      @color_rgb = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] created_time Object to be assigned
-    def created_time=(created_time : Time?)
-      if created_time.nil?
-        return @created_time = nil
-      end
-      _created_time = created_time.not_nil!
-      @created_time = _created_time
+    def created_time=(new_value : Time?)
+      @created_time = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] hidden Object to be assigned
-    def hidden=(hidden : Bool?)
-      if hidden.nil?
-        return @hidden = nil
-      end
-      _hidden = hidden.not_nil!
-      @hidden = _hidden
+    def hidden=(new_value : Bool?)
+      @hidden = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        return @id = nil
-      end
-      _id = id.not_nil!
-      @id = _id
+    def id=(new_value : String?)
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] kind Object to be assigned
-    def kind=(kind : String?)
-      if kind.nil?
-        return @kind = nil
-      end
-      _kind = kind.not_nil!
-      @kind = _kind
+    def kind=(new_value : String?)
+      @kind = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
-    def name=(name : String?)
-      if name.nil?
-        return @name = nil
-      end
-      _name = name.not_nil!
-      @name = _name
+    def name=(new_value : String?)
+      @name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] org_unit_id Object to be assigned
-    def org_unit_id=(org_unit_id : String?)
-      if org_unit_id.nil?
-        return @org_unit_id = nil
-      end
-      _org_unit_id = org_unit_id.not_nil!
-      @org_unit_id = _org_unit_id
+    def org_unit_id=(new_value : String?)
+      @org_unit_id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] restrictions Object to be assigned
-    def restrictions=(restrictions : GoogleDrive::DriveRestrictions?)
-      if restrictions.nil?
-        return @restrictions = nil
+    def restrictions=(new_value : GoogleDrive::DriveRestrictions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _restrictions = restrictions.not_nil!
-      _restrictions.validate if _restrictions.is_a?(OpenApi::Validatable)
-      @restrictions = _restrictions
+
+      @restrictions = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] theme_id Object to be assigned
-    def theme_id=(theme_id : String?)
-      if theme_id.nil?
-        return @theme_id = nil
-      end
-      _theme_id = theme_id.not_nil!
-      @theme_id = _theme_id
+    def theme_id=(new_value : String?)
+      @theme_id = new_value
     end
 
     # Generates #hash and #== methods from all fields

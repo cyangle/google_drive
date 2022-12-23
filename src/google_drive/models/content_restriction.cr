@@ -77,53 +77,36 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] read_only Object to be assigned
-    def read_only=(read_only : Bool?)
-      if read_only.nil?
-        return @read_only = nil
-      end
-      _read_only = read_only.not_nil!
-      @read_only = _read_only
+    def read_only=(new_value : Bool?)
+      @read_only = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reason Object to be assigned
-    def reason=(reason : String?)
-      if reason.nil?
-        return @reason = nil
-      end
-      _reason = reason.not_nil!
-      @reason = _reason
+    def reason=(new_value : String?)
+      @reason = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] restricting_user Object to be assigned
-    def restricting_user=(restricting_user : GoogleDrive::User?)
-      if restricting_user.nil?
-        return @restricting_user = nil
+    def restricting_user=(new_value : GoogleDrive::User?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _restricting_user = restricting_user.not_nil!
-      _restricting_user.validate if _restricting_user.is_a?(OpenApi::Validatable)
-      @restricting_user = _restricting_user
+
+      @restricting_user = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] restriction_time Object to be assigned
-    def restriction_time=(restriction_time : Time?)
-      if restriction_time.nil?
-        return @restriction_time = nil
-      end
-      _restriction_time = restriction_time.not_nil!
-      @restriction_time = _restriction_time
+    def restriction_time=(new_value : Time?)
+      @restriction_time = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      if _type.nil?
-        return @_type = nil
-      end
-      __type = _type.not_nil!
-      @_type = __type
+    def _type=(new_value : String?)
+      @_type = new_value
     end
 
     # Generates #hash and #== methods from all fields

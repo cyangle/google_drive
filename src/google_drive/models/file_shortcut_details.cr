@@ -60,32 +60,20 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] target_id Object to be assigned
-    def target_id=(target_id : String?)
-      if target_id.nil?
-        return @target_id = nil
-      end
-      _target_id = target_id.not_nil!
-      @target_id = _target_id
+    def target_id=(new_value : String?)
+      @target_id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] target_mime_type Object to be assigned
-    def target_mime_type=(target_mime_type : String?)
-      if target_mime_type.nil?
-        return @target_mime_type = nil
-      end
-      _target_mime_type = target_mime_type.not_nil!
-      @target_mime_type = _target_mime_type
+    def target_mime_type=(new_value : String?)
+      @target_mime_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] target_resource_key Object to be assigned
-    def target_resource_key=(target_resource_key : String?)
-      if target_resource_key.nil?
-        return @target_resource_key = nil
-      end
-      _target_resource_key = target_resource_key.not_nil!
-      @target_resource_key = _target_resource_key
+    def target_resource_key=(new_value : String?)
+      @target_resource_key = new_value
     end
 
     # Generates #hash and #== methods from all fields

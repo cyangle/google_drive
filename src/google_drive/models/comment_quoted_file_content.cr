@@ -55,22 +55,14 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mime_type Object to be assigned
-    def mime_type=(mime_type : String?)
-      if mime_type.nil?
-        return @mime_type = nil
-      end
-      _mime_type = mime_type.not_nil!
-      @mime_type = _mime_type
+    def mime_type=(new_value : String?)
+      @mime_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] value Object to be assigned
-    def value=(value : String?)
-      if value.nil?
-        return @value = nil
-      end
-      _value = value.not_nil!
-      @value = _value
+    def value=(new_value : String?)
+      @value = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -60,32 +60,20 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ids Object to be assigned
-    def ids=(ids : Array(String)?)
-      if ids.nil?
-        return @ids = nil
-      end
-      _ids = ids.not_nil!
-      @ids = _ids
+    def ids=(new_value : Array(String)?)
+      @ids = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] kind Object to be assigned
-    def kind=(kind : String?)
-      if kind.nil?
-        return @kind = nil
-      end
-      _kind = kind.not_nil!
-      @kind = _kind
+    def kind=(new_value : String?)
+      @kind = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] space Object to be assigned
-    def space=(space : String?)
-      if space.nil?
-        return @space = nil
-      end
-      _space = space.not_nil!
-      @space = _space
+    def space=(new_value : String?)
+      @space = new_value
     end
 
     # Generates #hash and #== methods from all fields

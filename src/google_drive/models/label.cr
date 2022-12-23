@@ -73,43 +73,30 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fields Object to be assigned
-    def fields=(fields : Hash(String, GoogleDrive::LabelField)?)
-      if fields.nil?
-        return @fields = nil
+    def fields=(new_value : Hash(String, GoogleDrive::LabelField)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Hash)
       end
-      _fields = fields.not_nil!
-      OpenApi::ContainerValidator.validate(container: _fields) if _fields.is_a?(Hash)
-      @fields = _fields
+
+      @fields = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        return @id = nil
-      end
-      _id = id.not_nil!
-      @id = _id
+    def id=(new_value : String?)
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] kind Object to be assigned
-    def kind=(kind : String?)
-      if kind.nil?
-        return @kind = nil
-      end
-      _kind = kind.not_nil!
-      @kind = _kind
+    def kind=(new_value : String?)
+      @kind = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] revision_id Object to be assigned
-    def revision_id=(revision_id : String?)
-      if revision_id.nil?
-        return @revision_id = nil
-      end
-      _revision_id = revision_id.not_nil!
-      @revision_id = _revision_id
+    def revision_id=(new_value : String?)
+      @revision_id = new_value
     end
 
     # Generates #hash and #== methods from all fields

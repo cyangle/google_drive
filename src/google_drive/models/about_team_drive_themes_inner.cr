@@ -59,32 +59,20 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] background_image_link Object to be assigned
-    def background_image_link=(background_image_link : String?)
-      if background_image_link.nil?
-        return @background_image_link = nil
-      end
-      _background_image_link = background_image_link.not_nil!
-      @background_image_link = _background_image_link
+    def background_image_link=(new_value : String?)
+      @background_image_link = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] color_rgb Object to be assigned
-    def color_rgb=(color_rgb : String?)
-      if color_rgb.nil?
-        return @color_rgb = nil
-      end
-      _color_rgb = color_rgb.not_nil!
-      @color_rgb = _color_rgb
+    def color_rgb=(new_value : String?)
+      @color_rgb = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        return @id = nil
-      end
-      _id = id.not_nil!
-      @id = _id
+    def id=(new_value : String?)
+      @id = new_value
     end
 
     # Generates #hash and #== methods from all fields

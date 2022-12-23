@@ -93,83 +93,54 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] date_string Object to be assigned
-    def date_string=(date_string : Array(Time)?)
-      if date_string.nil?
-        return @date_string = nil
-      end
-      _date_string = date_string.not_nil!
-      @date_string = _date_string
+    def date_string=(new_value : Array(Time)?)
+      @date_string = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        return @id = nil
-      end
-      _id = id.not_nil!
-      @id = _id
+    def id=(new_value : String?)
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] integer Object to be assigned
-    def integer=(integer : Array(String)?)
-      if integer.nil?
-        return @integer = nil
-      end
-      _integer = integer.not_nil!
-      @integer = _integer
+    def integer=(new_value : Array(String)?)
+      @integer = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] kind Object to be assigned
-    def kind=(kind : String?)
-      if kind.nil?
-        return @kind = nil
-      end
-      _kind = kind.not_nil!
-      @kind = _kind
+    def kind=(new_value : String?)
+      @kind = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] selection Object to be assigned
-    def selection=(selection : Array(String)?)
-      if selection.nil?
-        return @selection = nil
-      end
-      _selection = selection.not_nil!
-      @selection = _selection
+    def selection=(new_value : Array(String)?)
+      @selection = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] text Object to be assigned
-    def text=(text : Array(String)?)
-      if text.nil?
-        return @text = nil
-      end
-      _text = text.not_nil!
-      @text = _text
+    def text=(new_value : Array(String)?)
+      @text = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] user Object to be assigned
-    def user=(user : Array(GoogleDrive::User)?)
-      if user.nil?
-        return @user = nil
+    def user=(new_value : Array(GoogleDrive::User)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _user = user.not_nil!
-      OpenApi::ContainerValidator.validate(container: _user) if _user.is_a?(Array)
-      @user = _user
+
+      @user = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] value_type Object to be assigned
-    def value_type=(value_type : String?)
-      if value_type.nil?
-        return @value_type = nil
-      end
-      _value_type = value_type.not_nil!
-      @value_type = _value_type
+    def value_type=(new_value : String?)
+      @value_type = new_value
     end
 
     # Generates #hash and #== methods from all fields

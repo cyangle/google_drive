@@ -65,42 +65,26 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] limit Object to be assigned
-    def limit=(limit : String?)
-      if limit.nil?
-        return @limit = nil
-      end
-      _limit = limit.not_nil!
-      @limit = _limit
+    def limit=(new_value : String?)
+      @limit = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] usage Object to be assigned
-    def usage=(usage : String?)
-      if usage.nil?
-        return @usage = nil
-      end
-      _usage = usage.not_nil!
-      @usage = _usage
+    def usage=(new_value : String?)
+      @usage = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] usage_in_drive Object to be assigned
-    def usage_in_drive=(usage_in_drive : String?)
-      if usage_in_drive.nil?
-        return @usage_in_drive = nil
-      end
-      _usage_in_drive = usage_in_drive.not_nil!
-      @usage_in_drive = _usage_in_drive
+    def usage_in_drive=(new_value : String?)
+      @usage_in_drive = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] usage_in_drive_trash Object to be assigned
-    def usage_in_drive_trash=(usage_in_drive_trash : String?)
-      if usage_in_drive_trash.nil?
-        return @usage_in_drive_trash = nil
-      end
-      _usage_in_drive_trash = usage_in_drive_trash.not_nil!
-      @usage_in_drive_trash = _usage_in_drive_trash
+    def usage_in_drive_trash=(new_value : String?)
+      @usage_in_drive_trash = new_value
     end
 
     # Generates #hash and #== methods from all fields

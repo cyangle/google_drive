@@ -55,22 +55,14 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] security_update_eligible Object to be assigned
-    def security_update_eligible=(security_update_eligible : Bool?)
-      if security_update_eligible.nil?
-        return @security_update_eligible = nil
-      end
-      _security_update_eligible = security_update_eligible.not_nil!
-      @security_update_eligible = _security_update_eligible
+    def security_update_eligible=(new_value : Bool?)
+      @security_update_eligible = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] security_update_enabled Object to be assigned
-    def security_update_enabled=(security_update_enabled : Bool?)
-      if security_update_enabled.nil?
-        return @security_update_enabled = nil
-      end
-      _security_update_enabled = security_update_enabled.not_nil!
-      @security_update_enabled = _security_update_enabled
+    def security_update_enabled=(new_value : Bool?)
+      @security_update_enabled = new_value
     end
 
     # Generates #hash and #== methods from all fields

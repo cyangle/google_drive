@@ -75,62 +75,38 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] display_name Object to be assigned
-    def display_name=(display_name : String?)
-      if display_name.nil?
-        return @display_name = nil
-      end
-      _display_name = display_name.not_nil!
-      @display_name = _display_name
+    def display_name=(new_value : String?)
+      @display_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] email_address Object to be assigned
-    def email_address=(email_address : String?)
-      if email_address.nil?
-        return @email_address = nil
-      end
-      _email_address = email_address.not_nil!
-      @email_address = _email_address
+    def email_address=(new_value : String?)
+      @email_address = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] kind Object to be assigned
-    def kind=(kind : String?)
-      if kind.nil?
-        return @kind = nil
-      end
-      _kind = kind.not_nil!
-      @kind = _kind
+    def kind=(new_value : String?)
+      @kind = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] me Object to be assigned
-    def me=(me : Bool?)
-      if me.nil?
-        return @me = nil
-      end
-      _me = me.not_nil!
-      @me = _me
+    def me=(new_value : Bool?)
+      @me = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] permission_id Object to be assigned
-    def permission_id=(permission_id : String?)
-      if permission_id.nil?
-        return @permission_id = nil
-      end
-      _permission_id = permission_id.not_nil!
-      @permission_id = _permission_id
+    def permission_id=(new_value : String?)
+      @permission_id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] photo_link Object to be assigned
-    def photo_link=(photo_link : String?)
-      if photo_link.nil?
-        return @photo_link = nil
-      end
-      _photo_link = photo_link.not_nil!
-      @photo_link = _photo_link
+    def photo_link=(new_value : String?)
+      @photo_link = new_value
     end
 
     # Generates #hash and #== methods from all fields

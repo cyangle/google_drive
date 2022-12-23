@@ -65,42 +65,26 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] admin_managed_restrictions Object to be assigned
-    def admin_managed_restrictions=(admin_managed_restrictions : Bool?)
-      if admin_managed_restrictions.nil?
-        return @admin_managed_restrictions = nil
-      end
-      _admin_managed_restrictions = admin_managed_restrictions.not_nil!
-      @admin_managed_restrictions = _admin_managed_restrictions
+    def admin_managed_restrictions=(new_value : Bool?)
+      @admin_managed_restrictions = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] copy_requires_writer_permission Object to be assigned
-    def copy_requires_writer_permission=(copy_requires_writer_permission : Bool?)
-      if copy_requires_writer_permission.nil?
-        return @copy_requires_writer_permission = nil
-      end
-      _copy_requires_writer_permission = copy_requires_writer_permission.not_nil!
-      @copy_requires_writer_permission = _copy_requires_writer_permission
+    def copy_requires_writer_permission=(new_value : Bool?)
+      @copy_requires_writer_permission = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] domain_users_only Object to be assigned
-    def domain_users_only=(domain_users_only : Bool?)
-      if domain_users_only.nil?
-        return @domain_users_only = nil
-      end
-      _domain_users_only = domain_users_only.not_nil!
-      @domain_users_only = _domain_users_only
+    def domain_users_only=(new_value : Bool?)
+      @domain_users_only = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] team_members_only Object to be assigned
-    def team_members_only=(team_members_only : Bool?)
-      if team_members_only.nil?
-        return @team_members_only = nil
-      end
-      _team_members_only = team_members_only.not_nil!
-      @team_members_only = _team_members_only
+    def team_members_only=(new_value : Bool?)
+      @team_members_only = new_value
     end
 
     # Generates #hash and #== methods from all fields

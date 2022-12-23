@@ -157,213 +157,132 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] aperture Object to be assigned
-    def aperture=(aperture : Float32?)
-      if aperture.nil?
-        return @aperture = nil
-      end
-      _aperture = aperture.not_nil!
-      @aperture = _aperture
+    def aperture=(new_value : Float32?)
+      @aperture = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] camera_make Object to be assigned
-    def camera_make=(camera_make : String?)
-      if camera_make.nil?
-        return @camera_make = nil
-      end
-      _camera_make = camera_make.not_nil!
-      @camera_make = _camera_make
+    def camera_make=(new_value : String?)
+      @camera_make = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] camera_model Object to be assigned
-    def camera_model=(camera_model : String?)
-      if camera_model.nil?
-        return @camera_model = nil
-      end
-      _camera_model = camera_model.not_nil!
-      @camera_model = _camera_model
+    def camera_model=(new_value : String?)
+      @camera_model = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] color_space Object to be assigned
-    def color_space=(color_space : String?)
-      if color_space.nil?
-        return @color_space = nil
-      end
-      _color_space = color_space.not_nil!
-      @color_space = _color_space
+    def color_space=(new_value : String?)
+      @color_space = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] exposure_bias Object to be assigned
-    def exposure_bias=(exposure_bias : Float32?)
-      if exposure_bias.nil?
-        return @exposure_bias = nil
-      end
-      _exposure_bias = exposure_bias.not_nil!
-      @exposure_bias = _exposure_bias
+    def exposure_bias=(new_value : Float32?)
+      @exposure_bias = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] exposure_mode Object to be assigned
-    def exposure_mode=(exposure_mode : String?)
-      if exposure_mode.nil?
-        return @exposure_mode = nil
-      end
-      _exposure_mode = exposure_mode.not_nil!
-      @exposure_mode = _exposure_mode
+    def exposure_mode=(new_value : String?)
+      @exposure_mode = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] exposure_time Object to be assigned
-    def exposure_time=(exposure_time : Float32?)
-      if exposure_time.nil?
-        return @exposure_time = nil
-      end
-      _exposure_time = exposure_time.not_nil!
-      @exposure_time = _exposure_time
+    def exposure_time=(new_value : Float32?)
+      @exposure_time = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] flash_used Object to be assigned
-    def flash_used=(flash_used : Bool?)
-      if flash_used.nil?
-        return @flash_used = nil
-      end
-      _flash_used = flash_used.not_nil!
-      @flash_used = _flash_used
+    def flash_used=(new_value : Bool?)
+      @flash_used = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] focal_length Object to be assigned
-    def focal_length=(focal_length : Float32?)
-      if focal_length.nil?
-        return @focal_length = nil
-      end
-      _focal_length = focal_length.not_nil!
-      @focal_length = _focal_length
+    def focal_length=(new_value : Float32?)
+      @focal_length = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] height Object to be assigned
-    def height=(height : Int32?)
-      if height.nil?
-        return @height = nil
-      end
-      _height = height.not_nil!
-      @height = _height
+    def height=(new_value : Int32?)
+      @height = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] iso_speed Object to be assigned
-    def iso_speed=(iso_speed : Int32?)
-      if iso_speed.nil?
-        return @iso_speed = nil
-      end
-      _iso_speed = iso_speed.not_nil!
-      @iso_speed = _iso_speed
+    def iso_speed=(new_value : Int32?)
+      @iso_speed = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] lens Object to be assigned
-    def lens=(lens : String?)
-      if lens.nil?
-        return @lens = nil
-      end
-      _lens = lens.not_nil!
-      @lens = _lens
+    def lens=(new_value : String?)
+      @lens = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] location Object to be assigned
-    def location=(location : GoogleDrive::FileImageMediaMetadataLocation?)
-      if location.nil?
-        return @location = nil
+    def location=(new_value : GoogleDrive::FileImageMediaMetadataLocation?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _location = location.not_nil!
-      _location.validate if _location.is_a?(OpenApi::Validatable)
-      @location = _location
+
+      @location = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] max_aperture_value Object to be assigned
-    def max_aperture_value=(max_aperture_value : Float32?)
-      if max_aperture_value.nil?
-        return @max_aperture_value = nil
-      end
-      _max_aperture_value = max_aperture_value.not_nil!
-      @max_aperture_value = _max_aperture_value
+    def max_aperture_value=(new_value : Float32?)
+      @max_aperture_value = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metering_mode Object to be assigned
-    def metering_mode=(metering_mode : String?)
-      if metering_mode.nil?
-        return @metering_mode = nil
-      end
-      _metering_mode = metering_mode.not_nil!
-      @metering_mode = _metering_mode
+    def metering_mode=(new_value : String?)
+      @metering_mode = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] rotation Object to be assigned
-    def rotation=(rotation : Int32?)
-      if rotation.nil?
-        return @rotation = nil
-      end
-      _rotation = rotation.not_nil!
-      @rotation = _rotation
+    def rotation=(new_value : Int32?)
+      @rotation = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sensor Object to be assigned
-    def sensor=(sensor : String?)
-      if sensor.nil?
-        return @sensor = nil
-      end
-      _sensor = sensor.not_nil!
-      @sensor = _sensor
+    def sensor=(new_value : String?)
+      @sensor = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] subject_distance Object to be assigned
-    def subject_distance=(subject_distance : Int32?)
-      if subject_distance.nil?
-        return @subject_distance = nil
-      end
-      _subject_distance = subject_distance.not_nil!
-      @subject_distance = _subject_distance
+    def subject_distance=(new_value : Int32?)
+      @subject_distance = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] time Object to be assigned
-    def time=(time : String?)
-      if time.nil?
-        return @time = nil
-      end
-      _time = time.not_nil!
-      @time = _time
+    def time=(new_value : String?)
+      @time = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] white_balance Object to be assigned
-    def white_balance=(white_balance : String?)
-      if white_balance.nil?
-        return @white_balance = nil
-      end
-      _white_balance = white_balance.not_nil!
-      @white_balance = _white_balance
+    def white_balance=(new_value : String?)
+      @white_balance = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] width Object to be assigned
-    def width=(width : Int32?)
-      if width.nil?
-        return @width = nil
-      end
-      _width = width.not_nil!
-      @width = _width
+    def width=(new_value : Int32?)
+      @width = new_value
     end
 
     # Generates #hash and #== methods from all fields

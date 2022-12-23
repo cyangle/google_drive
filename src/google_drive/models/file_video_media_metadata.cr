@@ -60,32 +60,20 @@ module GoogleDrive
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] duration_millis Object to be assigned
-    def duration_millis=(duration_millis : String?)
-      if duration_millis.nil?
-        return @duration_millis = nil
-      end
-      _duration_millis = duration_millis.not_nil!
-      @duration_millis = _duration_millis
+    def duration_millis=(new_value : String?)
+      @duration_millis = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] height Object to be assigned
-    def height=(height : Int32?)
-      if height.nil?
-        return @height = nil
-      end
-      _height = height.not_nil!
-      @height = _height
+    def height=(new_value : Int32?)
+      @height = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] width Object to be assigned
-    def width=(width : Int32?)
-      if width.nil?
-        return @width = nil
-      end
-      _width = width.not_nil!
-      @width = _width
+    def width=(new_value : Int32?)
+      @width = new_value
     end
 
     # Generates #hash and #== methods from all fields
