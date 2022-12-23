@@ -106,9 +106,10 @@ module GoogleDrive
     # Sets user agent in HTTP header
     #
     # @param [String] user_agent User agent (e.g. openapi-generator/ruby/1.0.0)
-    def user_agent=(user_agent : String) : Nil
+    def user_agent=(user_agent : String?) : Nil
+      @default_headers["User-Agent"] = user_agent unless user_agent.nil?
+
       @user_agent = user_agent
-      @default_headers["User-Agent"] = @user_agent
     end
 
     # Return Accept header based on an array of accepts provided.
