@@ -4,7 +4,9 @@ spec/spec_helper.cr
 spec/support/ext.cr
 spec/support/helpers.cr
 spec/support/vcr.cr
-src/ext/json/serialization.cr
+src/ext/open_api/json.cr
+src/ext/open_api/validatable.cr
+src/ext/primitive.cr
 src/ext/time.cr
 src/google_drive.cr
 src/google_drive/api/about_api.cr
@@ -42,11 +44,19 @@ src/google_drive/models/file_content_hints.cr
 src/google_drive/models/file_content_hints_thumbnail.cr
 src/google_drive/models/file_image_media_metadata.cr
 src/google_drive/models/file_image_media_metadata_location.cr
+src/google_drive/models/file_label_info.cr
 src/google_drive/models/file_link_share_metadata.cr
 src/google_drive/models/file_list.cr
 src/google_drive/models/file_shortcut_details.cr
 src/google_drive/models/file_video_media_metadata.cr
 src/google_drive/models/generated_ids.cr
+src/google_drive/models/label.cr
+src/google_drive/models/label_field.cr
+src/google_drive/models/label_field_modification.cr
+src/google_drive/models/label_list.cr
+src/google_drive/models/label_modification.cr
+src/google_drive/models/modify_labels_request.cr
+src/google_drive/models/modify_labels_response.cr
 src/google_drive/models/permission.cr
 src/google_drive/models/permission_list.cr
 src/google_drive/models/permission_permission_details_inner.cr
@@ -62,4 +72,6 @@ src/google_drive/models/team_drive_capabilities.cr
 src/google_drive/models/team_drive_list.cr
 src/google_drive/models/team_drive_restrictions.cr
 src/google_drive/models/user.cr
+src/validators/container_validator.cr
 src/validators/enum_validator.cr
+src/validators/primitive_validator.cr

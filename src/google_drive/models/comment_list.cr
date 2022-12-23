@@ -13,40 +13,32 @@ require "log"
 
 module GoogleDrive
   # A list of comments on a file.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class CommentList
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The list of comments. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.
-    @[JSON::Field(key: "comments", type: Array(Comment)?, presence: true, ignore_serialize: comments.nil? && !comments_present?)]
-    property comments : Array(Comment)?
-
-    @[JSON::Field(ignore: true)]
-    property? comments_present : Bool = false
+    @[JSON::Field(key: "comments", type: Array(GoogleDrive::Comment)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter comments : Array(GoogleDrive::Comment)? = nil
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#commentList\".
-    @[JSON::Field(key: "kind", type: String?, default: "drive#commentList", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String? = "drive#commentList"
-
-    @[JSON::Field(ignore: true)]
-    property? kind_present : Bool = false
+    @[JSON::Field(key: "kind", type: String?, default: "drive#commentList", required: false, nullable: false, emit_null: false)]
+    getter kind : String? = "drive#commentList"
 
     # The page token for the next page of comments. This will be absent if the end of the comments list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results.
-    @[JSON::Field(key: "nextPageToken", type: String?, presence: true, ignore_serialize: next_page_token.nil? && !next_page_token_present?)]
-    property next_page_token : String?
-
-    @[JSON::Field(ignore: true)]
-    property? next_page_token_present : Bool = false
+    @[JSON::Field(key: "nextPageToken", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter next_page_token : String? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @comments : Array(Comment)? = nil,
+      @comments : Array(GoogleDrive::Comment)? = nil,
       @kind : String? = "drive#commentList",
       @next_page_token : String? = nil
     )
@@ -54,28 +46,61 @@ module GoogleDrive
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
+      unless (_comments = @comments).nil?
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "comments", container: _comments)) if _comments.is_a?(Array)
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      unless (_comments = @comments).nil?
+        return false if _comments.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _comments)
+      end
+
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] comments Object to be assigned
+    def comments=(comments : Array(GoogleDrive::Comment)?)
+      if comments.nil?
+        return @comments = nil
+      end
+      _comments = comments.not_nil!
+      OpenApi::ContainerValidator.validate(container: _comments) if _comments.is_a?(Array)
+      @comments = _comments
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] kind Object to be assigned
+    def kind=(kind : String?)
+      if kind.nil?
+        return @kind = nil
+      end
+      _kind = kind.not_nil!
+      @kind = _kind
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] next_page_token Object to be assigned
+    def next_page_token=(next_page_token : String?)
+      if next_page_token.nil?
+        return @next_page_token = nil
+      end
+      _next_page_token = next_page_token.not_nil!
+      @next_page_token = _next_page_token
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@comments, @comments_present, @kind, @kind_present, @next_page_token, @next_page_token_present)
+    def_equals_and_hash(@comments, @kind, @next_page_token)
   end
 end

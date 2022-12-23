@@ -8,56 +8,158 @@
 #
 
 require "uri"
+require "../api_client"
 
 module GoogleDrive
   class ChangesApi
     property api_client : ApiClient
+
+    delegate client_side_validation, debugging, to: @api_client.config
 
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
 
     # Gets the starting pageToken for listing future changes.
-    # @return [StartPageToken]
-    def get_start_page_token(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, team_drive_id : String? = nil)
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param drive_id [String?] The ID of the shared drive for which the starting pageToken for listing future changes from that shared drive is returned.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param team_drive_id [String?] Deprecated use driveId instead.
+    # @return [GoogleDrive::StartPageToken]
+    def get_start_page_token(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      drive_id : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      team_drive_id : String? = nil
+    ) : GoogleDrive::StartPageToken
       data, _status_code, _headers = get_start_page_token_with_http_info(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
       data
     end
 
     # Gets the starting pageToken for listing future changes.
-    # @return [Array<(StartPageToken, Integer, Hash)>] StartPageToken data, response status code and response headers
-    def get_start_page_token_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, team_drive_id : String? = nil)
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param drive_id [String?] The ID of the shared drive for which the starting pageToken for listing future changes from that shared drive is returned.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param team_drive_id [String?] Deprecated use driveId instead.
+    # @return [Tuple(GoogleDrive::StartPageToken, Integer, Hash)] GoogleDrive::StartPageToken, response status code and response headers
+    def get_start_page_token_with_http_info(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      drive_id : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      team_drive_id : String? = nil
+    ) : Tuple(GoogleDrive::StartPageToken, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_start_page_token(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: ChangesApi#get_start_page_token\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: ChangesApi#get_start_page_token\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return StartPageToken.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::StartPageToken.from_json(body), status_code, headers)
     end
 
     # Gets the starting pageToken for listing future changes.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param drive_id [String?] The ID of the shared drive for which the starting pageToken for listing future changes from that shared drive is returned.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param team_drive_id [String?] Deprecated use driveId instead.
     # @return nil
-    def get_start_page_token(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, team_drive_id : String? = nil, &block : Crest::Response ->)
+    def get_start_page_token(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      drive_id : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      team_drive_id : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_start_page_token(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id).execute(&block)
     end
 
+    DRIVE_CHANGES_GET_START_PAGE_TOKEN_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_get_start_page_token(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, team_drive_id : String? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_get_start_page_token(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      drive_id : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      team_drive_id : String? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: ChangesApi.get_start_page_token ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_CHANGES_GET_START_PAGE_TOKEN_VALID_VALUES_FOR_ALT)
+        end
       end
+
       # resource path
       local_var_path = "/drive/v3/changes/startPageToken"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -70,16 +172,11 @@ module GoogleDrive
       query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil?
       query_params["teamDriveId"] = team_drive_id.to_s if !team_drive_id.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -91,63 +188,231 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Lists the changes for a user or shared drive.
-    # @param page_token [String] The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
-    # @return [ChangeList]
-    def list(*, page_token : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, include_corpus_removals : Bool? = nil, include_items_from_all_drives : Bool? = nil, include_permissions_for_view : String? = nil, include_removed : Bool? = nil, include_team_drive_items : Bool? = nil, page_size : Int32? = nil, restrict_to_my_drive : Bool? = nil, spaces : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, team_drive_id : String? = nil)
-      data, _status_code, _headers = list_with_http_info(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
+    # @required @param page_token [String?] The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param drive_id [String?] The shared drive from which changes are returned. If specified the change IDs will be reflective of the shared drive; use the combined drive ID and change ID as an identifier.
+    # @optional @param include_corpus_removals [Bool?] Whether changes should include the file resource if the file is still accessible by the user at the time of the request, even when a file was removed from the list of changes and there will be no further change entries for this file.
+    # @optional @param include_items_from_all_drives [Bool?] Whether both My Drive and shared drive items should be included in results.
+    # @optional @param include_labels [String?] A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param include_removed [Bool?] Whether to include changes indicating that items have been removed from the list of changes, for example by deletion or loss of access.
+    # @optional @param include_team_drive_items [Bool?] Deprecated use includeItemsFromAllDrives instead.
+    # @optional @param page_size [Int32?] The maximum number of changes to return per page.
+    # @optional @param restrict_to_my_drive [Bool?] Whether to restrict the results to changes inside the My Drive hierarchy. This omits changes to files such as those in the Application Data folder or shared files which have not been added to My Drive.
+    # @optional @param spaces [String?] A comma-separated list of spaces to query within the corpora. Supported values are 'drive' and 'appDataFolder'.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param team_drive_id [String?] Deprecated use driveId instead.
+    # @return [GoogleDrive::ChangeList]
+    def list(
+      *,
+      page_token : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      drive_id : String? = nil,
+      include_corpus_removals : Bool? = nil,
+      include_items_from_all_drives : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      include_removed : Bool? = nil,
+      include_team_drive_items : Bool? = nil,
+      page_size : Int32? = nil,
+      restrict_to_my_drive : Bool? = nil,
+      spaces : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      team_drive_id : String? = nil
+    ) : GoogleDrive::ChangeList
+      data, _status_code, _headers = list_with_http_info(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
       data
     end
 
     # Lists the changes for a user or shared drive.
-    # @param page_token [String] The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
-    # @return [Array<(ChangeList, Integer, Hash)>] ChangeList data, response status code and response headers
-    def list_with_http_info(*, page_token : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, include_corpus_removals : Bool? = nil, include_items_from_all_drives : Bool? = nil, include_permissions_for_view : String? = nil, include_removed : Bool? = nil, include_team_drive_items : Bool? = nil, page_size : Int32? = nil, restrict_to_my_drive : Bool? = nil, spaces : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, team_drive_id : String? = nil)
-      request = build_api_request_for_list(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
+    # @required @param page_token [String?] The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param drive_id [String?] The shared drive from which changes are returned. If specified the change IDs will be reflective of the shared drive; use the combined drive ID and change ID as an identifier.
+    # @optional @param include_corpus_removals [Bool?] Whether changes should include the file resource if the file is still accessible by the user at the time of the request, even when a file was removed from the list of changes and there will be no further change entries for this file.
+    # @optional @param include_items_from_all_drives [Bool?] Whether both My Drive and shared drive items should be included in results.
+    # @optional @param include_labels [String?] A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param include_removed [Bool?] Whether to include changes indicating that items have been removed from the list of changes, for example by deletion or loss of access.
+    # @optional @param include_team_drive_items [Bool?] Deprecated use includeItemsFromAllDrives instead.
+    # @optional @param page_size [Int32?] The maximum number of changes to return per page.
+    # @optional @param restrict_to_my_drive [Bool?] Whether to restrict the results to changes inside the My Drive hierarchy. This omits changes to files such as those in the Application Data folder or shared files which have not been added to My Drive.
+    # @optional @param spaces [String?] A comma-separated list of spaces to query within the corpora. Supported values are 'drive' and 'appDataFolder'.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param team_drive_id [String?] Deprecated use driveId instead.
+    # @return [Tuple(GoogleDrive::ChangeList, Integer, Hash)] GoogleDrive::ChangeList, response status code and response headers
+    def list_with_http_info(
+      *,
+      page_token : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      drive_id : String? = nil,
+      include_corpus_removals : Bool? = nil,
+      include_items_from_all_drives : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      include_removed : Bool? = nil,
+      include_team_drive_items : Bool? = nil,
+      page_size : Int32? = nil,
+      restrict_to_my_drive : Bool? = nil,
+      spaces : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      team_drive_id : String? = nil
+    ) : Tuple(GoogleDrive::ChangeList, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_list(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: ChangesApi#list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: ChangesApi#list\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return ChangeList.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::ChangeList.from_json(body), status_code, headers)
     end
 
     # Lists the changes for a user or shared drive.
-    # @param page_token [String] The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
+    # @required @param page_token [String?] The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param drive_id [String?] The shared drive from which changes are returned. If specified the change IDs will be reflective of the shared drive; use the combined drive ID and change ID as an identifier.
+    # @optional @param include_corpus_removals [Bool?] Whether changes should include the file resource if the file is still accessible by the user at the time of the request, even when a file was removed from the list of changes and there will be no further change entries for this file.
+    # @optional @param include_items_from_all_drives [Bool?] Whether both My Drive and shared drive items should be included in results.
+    # @optional @param include_labels [String?] A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param include_removed [Bool?] Whether to include changes indicating that items have been removed from the list of changes, for example by deletion or loss of access.
+    # @optional @param include_team_drive_items [Bool?] Deprecated use includeItemsFromAllDrives instead.
+    # @optional @param page_size [Int32?] The maximum number of changes to return per page.
+    # @optional @param restrict_to_my_drive [Bool?] Whether to restrict the results to changes inside the My Drive hierarchy. This omits changes to files such as those in the Application Data folder or shared files which have not been added to My Drive.
+    # @optional @param spaces [String?] A comma-separated list of spaces to query within the corpora. Supported values are 'drive' and 'appDataFolder'.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param team_drive_id [String?] Deprecated use driveId instead.
     # @return nil
-    def list(*, page_token : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, include_corpus_removals : Bool? = nil, include_items_from_all_drives : Bool? = nil, include_permissions_for_view : String? = nil, include_removed : Bool? = nil, include_team_drive_items : Bool? = nil, page_size : Int32? = nil, restrict_to_my_drive : Bool? = nil, spaces : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, team_drive_id : String? = nil, &block : Crest::Response ->)
-      build_api_request_for_list(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id).execute(&block)
+    def list(
+      *,
+      page_token : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      drive_id : String? = nil,
+      include_corpus_removals : Bool? = nil,
+      include_items_from_all_drives : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      include_removed : Bool? = nil,
+      include_team_drive_items : Bool? = nil,
+      page_size : Int32? = nil,
+      restrict_to_my_drive : Bool? = nil,
+      spaces : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      team_drive_id : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_list(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id).execute(&block)
     end
 
+    DRIVE_CHANGES_LIST_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+    DRIVE_CHANGES_LIST_MAX_FOR_PAGE_SIZE    = Int32.new("1000")
+    DRIVE_CHANGES_LIST_MIN_FOR_PAGE_SIZE    = Int32.new("1")
+
     # @return Crest::Request
-    def build_api_request_for_list(*, page_token : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, include_corpus_removals : Bool? = nil, include_items_from_all_drives : Bool? = nil, include_permissions_for_view : String? = nil, include_removed : Bool? = nil, include_team_drive_items : Bool? = nil, page_size : Int32? = nil, restrict_to_my_drive : Bool? = nil, spaces : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, team_drive_id : String? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_list(
+      *,
+      page_token : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      drive_id : String? = nil,
+      include_corpus_removals : Bool? = nil,
+      include_items_from_all_drives : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      include_removed : Bool? = nil,
+      include_team_drive_items : Bool? = nil,
+      page_size : Int32? = nil,
+      restrict_to_my_drive : Bool? = nil,
+      spaces : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      team_drive_id : String? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: ChangesApi.list ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      if @api_client.config.client_side_validation && !page_size.nil? && page_size > 1000
-        raise ArgumentError.new("invalid value for \"page_size\" when calling ChangesApi.list, must be smaller than or equal to 1000.")
-      end
 
-      if @api_client.config.client_side_validation && !page_size.nil? && page_size < 1
-        raise ArgumentError.new("invalid value for \"page_size\" when calling ChangesApi.list, must be greater than or equal to 1.")
+      if client_side_validation
+        raise ArgumentError.new("\"page_token\" is required and cannot be null") if page_token.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_CHANGES_LIST_VALID_VALUES_FOR_ALT)
+        end
+
+        unless (_page_size = page_size).nil?
+          OpenApi::PrimitiveValidator.validate_max_number("page_size", _page_size, DRIVE_CHANGES_LIST_MAX_FOR_PAGE_SIZE)
+          OpenApi::PrimitiveValidator.validate_min_number("page_size", _page_size, DRIVE_CHANGES_LIST_MIN_FOR_PAGE_SIZE)
+        end
       end
 
       # resource path
       local_var_path = "/drive/v3/changes"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -159,6 +424,7 @@ module GoogleDrive
       query_params["driveId"] = drive_id.to_s if !drive_id.nil?
       query_params["includeCorpusRemovals"] = include_corpus_removals.to_s if !include_corpus_removals.nil?
       query_params["includeItemsFromAllDrives"] = include_items_from_all_drives.to_s if !include_items_from_all_drives.nil?
+      query_params["includeLabels"] = include_labels.to_s if !include_labels.nil?
       query_params["includePermissionsForView"] = include_permissions_for_view.to_s if !include_permissions_for_view.nil?
       query_params["includeRemoved"] = include_removed.to_s if !include_removed.nil?
       query_params["includeTeamDriveItems"] = include_team_drive_items.to_s if !include_team_drive_items.nil?
@@ -169,16 +435,11 @@ module GoogleDrive
       query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil?
       query_params["teamDriveId"] = team_drive_id.to_s if !team_drive_id.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -190,63 +451,244 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Subscribes to changes for a user.
-    # @param page_token [String] The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
-    # @return [Channel]
-    def watch(*, page_token : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, include_corpus_removals : Bool? = nil, include_items_from_all_drives : Bool? = nil, include_permissions_for_view : String? = nil, include_removed : Bool? = nil, include_team_drive_items : Bool? = nil, page_size : Int32? = nil, restrict_to_my_drive : Bool? = nil, spaces : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, team_drive_id : String? = nil, channel : Channel? = nil)
-      data, _status_code, _headers = watch_with_http_info(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id, channel: channel)
+    # @required @param page_token [String?] The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param drive_id [String?] The shared drive from which changes are returned. If specified the change IDs will be reflective of the shared drive; use the combined drive ID and change ID as an identifier.
+    # @optional @param include_corpus_removals [Bool?] Whether changes should include the file resource if the file is still accessible by the user at the time of the request, even when a file was removed from the list of changes and there will be no further change entries for this file.
+    # @optional @param include_items_from_all_drives [Bool?] Whether both My Drive and shared drive items should be included in results.
+    # @optional @param include_labels [String?] A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param include_removed [Bool?] Whether to include changes indicating that items have been removed from the list of changes, for example by deletion or loss of access.
+    # @optional @param include_team_drive_items [Bool?] Deprecated use includeItemsFromAllDrives instead.
+    # @optional @param page_size [Int32?] The maximum number of changes to return per page.
+    # @optional @param restrict_to_my_drive [Bool?] Whether to restrict the results to changes inside the My Drive hierarchy. This omits changes to files such as those in the Application Data folder or shared files which have not been added to My Drive.
+    # @optional @param spaces [String?] A comma-separated list of spaces to query within the corpora. Supported values are 'drive' and 'appDataFolder'.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param team_drive_id [String?] Deprecated use driveId instead.
+    # @optional @param channel [GoogleDrive::Channel?]
+    # @return [GoogleDrive::Channel]
+    def watch(
+      *,
+      page_token : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      drive_id : String? = nil,
+      include_corpus_removals : Bool? = nil,
+      include_items_from_all_drives : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      include_removed : Bool? = nil,
+      include_team_drive_items : Bool? = nil,
+      page_size : Int32? = nil,
+      restrict_to_my_drive : Bool? = nil,
+      spaces : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      team_drive_id : String? = nil,
+      channel : GoogleDrive::Channel? = nil
+    ) : GoogleDrive::Channel
+      data, _status_code, _headers = watch_with_http_info(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id, channel: channel)
       data
     end
 
     # Subscribes to changes for a user.
-    # @param page_token [String] The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
-    # @return [Array<(Channel, Integer, Hash)>] Channel data, response status code and response headers
-    def watch_with_http_info(*, page_token : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, include_corpus_removals : Bool? = nil, include_items_from_all_drives : Bool? = nil, include_permissions_for_view : String? = nil, include_removed : Bool? = nil, include_team_drive_items : Bool? = nil, page_size : Int32? = nil, restrict_to_my_drive : Bool? = nil, spaces : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, team_drive_id : String? = nil, channel : Channel? = nil)
-      request = build_api_request_for_watch(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id, channel: channel)
+    # @required @param page_token [String?] The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param drive_id [String?] The shared drive from which changes are returned. If specified the change IDs will be reflective of the shared drive; use the combined drive ID and change ID as an identifier.
+    # @optional @param include_corpus_removals [Bool?] Whether changes should include the file resource if the file is still accessible by the user at the time of the request, even when a file was removed from the list of changes and there will be no further change entries for this file.
+    # @optional @param include_items_from_all_drives [Bool?] Whether both My Drive and shared drive items should be included in results.
+    # @optional @param include_labels [String?] A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param include_removed [Bool?] Whether to include changes indicating that items have been removed from the list of changes, for example by deletion or loss of access.
+    # @optional @param include_team_drive_items [Bool?] Deprecated use includeItemsFromAllDrives instead.
+    # @optional @param page_size [Int32?] The maximum number of changes to return per page.
+    # @optional @param restrict_to_my_drive [Bool?] Whether to restrict the results to changes inside the My Drive hierarchy. This omits changes to files such as those in the Application Data folder or shared files which have not been added to My Drive.
+    # @optional @param spaces [String?] A comma-separated list of spaces to query within the corpora. Supported values are 'drive' and 'appDataFolder'.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param team_drive_id [String?] Deprecated use driveId instead.
+    # @optional @param channel [GoogleDrive::Channel?]
+    # @return [Tuple(GoogleDrive::Channel, Integer, Hash)] GoogleDrive::Channel, response status code and response headers
+    def watch_with_http_info(
+      *,
+      page_token : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      drive_id : String? = nil,
+      include_corpus_removals : Bool? = nil,
+      include_items_from_all_drives : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      include_removed : Bool? = nil,
+      include_team_drive_items : Bool? = nil,
+      page_size : Int32? = nil,
+      restrict_to_my_drive : Bool? = nil,
+      spaces : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      team_drive_id : String? = nil,
+      channel : GoogleDrive::Channel? = nil
+    ) : Tuple(GoogleDrive::Channel, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_watch(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id, channel: channel)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: ChangesApi#watch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: ChangesApi#watch\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Channel.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::Channel.from_json(body), status_code, headers)
     end
 
     # Subscribes to changes for a user.
-    # @param page_token [String] The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
+    # @required @param page_token [String?] The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param drive_id [String?] The shared drive from which changes are returned. If specified the change IDs will be reflective of the shared drive; use the combined drive ID and change ID as an identifier.
+    # @optional @param include_corpus_removals [Bool?] Whether changes should include the file resource if the file is still accessible by the user at the time of the request, even when a file was removed from the list of changes and there will be no further change entries for this file.
+    # @optional @param include_items_from_all_drives [Bool?] Whether both My Drive and shared drive items should be included in results.
+    # @optional @param include_labels [String?] A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param include_removed [Bool?] Whether to include changes indicating that items have been removed from the list of changes, for example by deletion or loss of access.
+    # @optional @param include_team_drive_items [Bool?] Deprecated use includeItemsFromAllDrives instead.
+    # @optional @param page_size [Int32?] The maximum number of changes to return per page.
+    # @optional @param restrict_to_my_drive [Bool?] Whether to restrict the results to changes inside the My Drive hierarchy. This omits changes to files such as those in the Application Data folder or shared files which have not been added to My Drive.
+    # @optional @param spaces [String?] A comma-separated list of spaces to query within the corpora. Supported values are 'drive' and 'appDataFolder'.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param team_drive_id [String?] Deprecated use driveId instead.
+    # @optional @param channel [GoogleDrive::Channel?]
     # @return nil
-    def watch(*, page_token : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, include_corpus_removals : Bool? = nil, include_items_from_all_drives : Bool? = nil, include_permissions_for_view : String? = nil, include_removed : Bool? = nil, include_team_drive_items : Bool? = nil, page_size : Int32? = nil, restrict_to_my_drive : Bool? = nil, spaces : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, team_drive_id : String? = nil, channel : Channel? = nil, &block : Crest::Response ->)
-      build_api_request_for_watch(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id, channel: channel).execute(&block)
+    def watch(
+      *,
+      page_token : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      drive_id : String? = nil,
+      include_corpus_removals : Bool? = nil,
+      include_items_from_all_drives : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      include_removed : Bool? = nil,
+      include_team_drive_items : Bool? = nil,
+      page_size : Int32? = nil,
+      restrict_to_my_drive : Bool? = nil,
+      spaces : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      team_drive_id : String? = nil,
+      channel : GoogleDrive::Channel? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_watch(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id, channel: channel).execute(&block)
     end
 
+    DRIVE_CHANGES_WATCH_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+    DRIVE_CHANGES_WATCH_MAX_FOR_PAGE_SIZE    = Int32.new("1000")
+    DRIVE_CHANGES_WATCH_MIN_FOR_PAGE_SIZE    = Int32.new("1")
+
     # @return Crest::Request
-    def build_api_request_for_watch(*, page_token : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, drive_id : String? = nil, include_corpus_removals : Bool? = nil, include_items_from_all_drives : Bool? = nil, include_permissions_for_view : String? = nil, include_removed : Bool? = nil, include_team_drive_items : Bool? = nil, page_size : Int32? = nil, restrict_to_my_drive : Bool? = nil, spaces : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, team_drive_id : String? = nil, channel : Channel? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_watch(
+      *,
+      page_token : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      drive_id : String? = nil,
+      include_corpus_removals : Bool? = nil,
+      include_items_from_all_drives : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      include_removed : Bool? = nil,
+      include_team_drive_items : Bool? = nil,
+      page_size : Int32? = nil,
+      restrict_to_my_drive : Bool? = nil,
+      spaces : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      team_drive_id : String? = nil,
+      channel : GoogleDrive::Channel? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: ChangesApi.watch ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      if @api_client.config.client_side_validation && !page_size.nil? && page_size > 1000
-        raise ArgumentError.new("invalid value for \"page_size\" when calling ChangesApi.watch, must be smaller than or equal to 1000.")
-      end
 
-      if @api_client.config.client_side_validation && !page_size.nil? && page_size < 1
-        raise ArgumentError.new("invalid value for \"page_size\" when calling ChangesApi.watch, must be greater than or equal to 1.")
+      if client_side_validation
+        raise ArgumentError.new("\"page_token\" is required and cannot be null") if page_token.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_CHANGES_WATCH_VALID_VALUES_FOR_ALT)
+        end
+
+        unless (_page_size = page_size).nil?
+          OpenApi::PrimitiveValidator.validate_max_number("page_size", _page_size, DRIVE_CHANGES_WATCH_MAX_FOR_PAGE_SIZE)
+          OpenApi::PrimitiveValidator.validate_min_number("page_size", _page_size, DRIVE_CHANGES_WATCH_MIN_FOR_PAGE_SIZE)
+        end
+
+        unless (_channel = channel).nil?
+          _channel.validate if _channel.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/drive/v3/changes/watch"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -258,6 +700,7 @@ module GoogleDrive
       query_params["driveId"] = drive_id.to_s if !drive_id.nil?
       query_params["includeCorpusRemovals"] = include_corpus_removals.to_s if !include_corpus_removals.nil?
       query_params["includeItemsFromAllDrives"] = include_items_from_all_drives.to_s if !include_items_from_all_drives.nil?
+      query_params["includeLabels"] = include_labels.to_s if !include_labels.nil?
       query_params["includePermissionsForView"] = include_permissions_for_view.to_s if !include_permissions_for_view.nil?
       query_params["includeRemoved"] = include_removed.to_s if !include_removed.nil?
       query_params["includeTeamDriveItems"] = include_team_drive_items.to_s if !include_team_drive_items.nil?
@@ -268,18 +711,11 @@ module GoogleDrive
       query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil?
       query_params["teamDriveId"] = team_drive_id.to_s if !team_drive_id.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-      # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = channel.to_json
+      post_body : IO | String | Nil = @api_client.encode(body: channel, content_type: header_params["Content-Type"]?) if !channel.nil?
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -291,6 +727,7 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

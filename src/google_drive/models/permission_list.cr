@@ -13,33 +13,25 @@ require "log"
 
 module GoogleDrive
   # A list of permissions for a file.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class PermissionList
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#permissionList\".
-    @[JSON::Field(key: "kind", type: String?, default: "drive#permissionList", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String? = "drive#permissionList"
-
-    @[JSON::Field(ignore: true)]
-    property? kind_present : Bool = false
+    @[JSON::Field(key: "kind", type: String?, default: "drive#permissionList", required: false, nullable: false, emit_null: false)]
+    getter kind : String? = "drive#permissionList"
 
     # The page token for the next page of permissions. This field will be absent if the end of the permissions list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results.
-    @[JSON::Field(key: "nextPageToken", type: String?, presence: true, ignore_serialize: next_page_token.nil? && !next_page_token_present?)]
-    property next_page_token : String?
-
-    @[JSON::Field(ignore: true)]
-    property? next_page_token_present : Bool = false
+    @[JSON::Field(key: "nextPageToken", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter next_page_token : String? = nil
 
     # The list of permissions. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.
-    @[JSON::Field(key: "permissions", type: Array(Permission)?, presence: true, ignore_serialize: permissions.nil? && !permissions_present?)]
-    property permissions : Array(Permission)?
-
-    @[JSON::Field(ignore: true)]
-    property? permissions_present : Bool = false
+    @[JSON::Field(key: "permissions", type: Array(GoogleDrive::Permission)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter permissions : Array(GoogleDrive::Permission)? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -48,34 +40,66 @@ module GoogleDrive
       # Optional properties
       @kind : String? = "drive#permissionList",
       @next_page_token : String? = nil,
-      @permissions : Array(Permission)? = nil
+      @permissions : Array(GoogleDrive::Permission)? = nil
     )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
+      unless (_permissions = @permissions).nil?
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "permissions", container: _permissions)) if _permissions.is_a?(Array)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      unless (_permissions = @permissions).nil?
+        return false if _permissions.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _permissions)
+      end
+
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] kind Object to be assigned
+    def kind=(kind : String?)
+      if kind.nil?
+        return @kind = nil
+      end
+      _kind = kind.not_nil!
+      @kind = _kind
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] next_page_token Object to be assigned
+    def next_page_token=(next_page_token : String?)
+      if next_page_token.nil?
+        return @next_page_token = nil
+      end
+      _next_page_token = next_page_token.not_nil!
+      @next_page_token = _next_page_token
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] permissions Object to be assigned
+    def permissions=(permissions : Array(GoogleDrive::Permission)?)
+      if permissions.nil?
+        return @permissions = nil
+      end
+      _permissions = permissions.not_nil!
+      OpenApi::ContainerValidator.validate(container: _permissions) if _permissions.is_a?(Array)
+      @permissions = _permissions
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@kind, @kind_present, @next_page_token, @next_page_token_present, @permissions, @permissions_present)
+    def_equals_and_hash(@kind, @next_page_token, @permissions)
   end
 end

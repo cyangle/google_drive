@@ -13,101 +13,63 @@ require "log"
 
 module GoogleDrive
   # Information about the user, the user's Drive, and system capabilities.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class About
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Whether the user has installed the requesting app.
-    @[JSON::Field(key: "appInstalled", type: Bool?, presence: true, ignore_serialize: app_installed.nil? && !app_installed_present?)]
-    property app_installed : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? app_installed_present : Bool = false
+    @[JSON::Field(key: "appInstalled", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter app_installed : Bool? = nil
 
     # Whether the user can create shared drives.
-    @[JSON::Field(key: "canCreateDrives", type: Bool?, presence: true, ignore_serialize: can_create_drives.nil? && !can_create_drives_present?)]
-    property can_create_drives : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_create_drives_present : Bool = false
+    @[JSON::Field(key: "canCreateDrives", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_create_drives : Bool? = nil
 
     # Deprecated - use canCreateDrives instead.
-    @[JSON::Field(key: "canCreateTeamDrives", type: Bool?, presence: true, ignore_serialize: can_create_team_drives.nil? && !can_create_team_drives_present?)]
-    property can_create_team_drives : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_create_team_drives_present : Bool = false
+    @[JSON::Field(key: "canCreateTeamDrives", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_create_team_drives : Bool? = nil
 
     # A list of themes that are supported for shared drives.
-    @[JSON::Field(key: "driveThemes", type: Array(AboutDriveThemesInner)?, presence: true, ignore_serialize: drive_themes.nil? && !drive_themes_present?)]
-    property drive_themes : Array(AboutDriveThemesInner)?
-
-    @[JSON::Field(ignore: true)]
-    property? drive_themes_present : Bool = false
+    @[JSON::Field(key: "driveThemes", type: Array(GoogleDrive::AboutDriveThemesInner)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter drive_themes : Array(GoogleDrive::AboutDriveThemesInner)? = nil
 
     # A map of source MIME type to possible targets for all supported exports.
-    @[JSON::Field(key: "exportFormats", type: Hash(String, Array(String))?, presence: true, ignore_serialize: export_formats.nil? && !export_formats_present?)]
-    property export_formats : Hash(String, Array(String))?
-
-    @[JSON::Field(ignore: true)]
-    property? export_formats_present : Bool = false
+    @[JSON::Field(key: "exportFormats", type: Hash(String, Array(String))?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter export_formats : Hash(String, Array(String))? = nil
 
     # The currently supported folder colors as RGB hex strings.
-    @[JSON::Field(key: "folderColorPalette", type: Array(String)?, presence: true, ignore_serialize: folder_color_palette.nil? && !folder_color_palette_present?)]
-    property folder_color_palette : Array(String)?
-
-    @[JSON::Field(ignore: true)]
-    property? folder_color_palette_present : Bool = false
+    @[JSON::Field(key: "folderColorPalette", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter folder_color_palette : Array(String)? = nil
 
     # A map of source MIME type to possible targets for all supported imports.
-    @[JSON::Field(key: "importFormats", type: Hash(String, Array(String))?, presence: true, ignore_serialize: import_formats.nil? && !import_formats_present?)]
-    property import_formats : Hash(String, Array(String))?
-
-    @[JSON::Field(ignore: true)]
-    property? import_formats_present : Bool = false
+    @[JSON::Field(key: "importFormats", type: Hash(String, Array(String))?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter import_formats : Hash(String, Array(String))? = nil
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#about\".
-    @[JSON::Field(key: "kind", type: String?, default: "drive#about", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String? = "drive#about"
-
-    @[JSON::Field(ignore: true)]
-    property? kind_present : Bool = false
+    @[JSON::Field(key: "kind", type: String?, default: "drive#about", required: false, nullable: false, emit_null: false)]
+    getter kind : String? = "drive#about"
 
     # A map of maximum import sizes by MIME type, in bytes.
-    @[JSON::Field(key: "maxImportSizes", type: Hash(String, String)?, presence: true, ignore_serialize: max_import_sizes.nil? && !max_import_sizes_present?)]
-    property max_import_sizes : Hash(String, String)?
-
-    @[JSON::Field(ignore: true)]
-    property? max_import_sizes_present : Bool = false
+    @[JSON::Field(key: "maxImportSizes", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter max_import_sizes : Hash(String, String)? = nil
 
     # The maximum upload size in bytes.
-    @[JSON::Field(key: "maxUploadSize", type: String?, presence: true, ignore_serialize: max_upload_size.nil? && !max_upload_size_present?)]
-    property max_upload_size : String?
+    @[JSON::Field(key: "maxUploadSize", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter max_upload_size : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? max_upload_size_present : Bool = false
-
-    @[JSON::Field(key: "storageQuota", type: AboutStorageQuota?, presence: true, ignore_serialize: storage_quota.nil? && !storage_quota_present?)]
-    property storage_quota : AboutStorageQuota?
-
-    @[JSON::Field(ignore: true)]
-    property? storage_quota_present : Bool = false
+    @[JSON::Field(key: "storageQuota", type: GoogleDrive::AboutStorageQuota?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter storage_quota : GoogleDrive::AboutStorageQuota? = nil
 
     # Deprecated - use driveThemes instead.
-    @[JSON::Field(key: "teamDriveThemes", type: Array(AboutTeamDriveThemesInner)?, presence: true, ignore_serialize: team_drive_themes.nil? && !team_drive_themes_present?)]
-    property team_drive_themes : Array(AboutTeamDriveThemesInner)?
+    @[JSON::Field(key: "teamDriveThemes", type: Array(GoogleDrive::AboutTeamDriveThemesInner)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter team_drive_themes : Array(GoogleDrive::AboutTeamDriveThemesInner)? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? team_drive_themes_present : Bool = false
-
-    @[JSON::Field(key: "user", type: User?, presence: true, ignore_serialize: user.nil? && !user_present?)]
-    property user : User?
-
-    @[JSON::Field(ignore: true)]
-    property? user_present : Bool = false
+    @[JSON::Field(key: "user", type: GoogleDrive::User?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter user : GoogleDrive::User? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -117,43 +79,200 @@ module GoogleDrive
       @app_installed : Bool? = nil,
       @can_create_drives : Bool? = nil,
       @can_create_team_drives : Bool? = nil,
-      @drive_themes : Array(AboutDriveThemesInner)? = nil,
+      @drive_themes : Array(GoogleDrive::AboutDriveThemesInner)? = nil,
       @export_formats : Hash(String, Array(String))? = nil,
       @folder_color_palette : Array(String)? = nil,
       @import_formats : Hash(String, Array(String))? = nil,
       @kind : String? = "drive#about",
       @max_import_sizes : Hash(String, String)? = nil,
       @max_upload_size : String? = nil,
-      @storage_quota : AboutStorageQuota? = nil,
-      @team_drive_themes : Array(AboutTeamDriveThemesInner)? = nil,
-      @user : User? = nil
+      @storage_quota : GoogleDrive::AboutStorageQuota? = nil,
+      @team_drive_themes : Array(GoogleDrive::AboutTeamDriveThemesInner)? = nil,
+      @user : GoogleDrive::User? = nil
     )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
+      unless (_drive_themes = @drive_themes).nil?
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "drive_themes", container: _drive_themes)) if _drive_themes.is_a?(Array)
+      end
+
+      unless (_storage_quota = @storage_quota).nil?
+        invalid_properties.concat(_storage_quota.list_invalid_properties_for("storage_quota")) if _storage_quota.is_a?(OpenApi::Validatable)
+      end
+      unless (_team_drive_themes = @team_drive_themes).nil?
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "team_drive_themes", container: _team_drive_themes)) if _team_drive_themes.is_a?(Array)
+      end
+      unless (_user = @user).nil?
+        invalid_properties.concat(_user.list_invalid_properties_for("user")) if _user.is_a?(OpenApi::Validatable)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      unless (_drive_themes = @drive_themes).nil?
+        return false if _drive_themes.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _drive_themes)
+      end
+
+      unless (_storage_quota = @storage_quota).nil?
+        return false if _storage_quota.is_a?(OpenApi::Validatable) && !_storage_quota.valid?
+      end
+
+      unless (_team_drive_themes = @team_drive_themes).nil?
+        return false if _team_drive_themes.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _team_drive_themes)
+      end
+
+      unless (_user = @user).nil?
+        return false if _user.is_a?(OpenApi::Validatable) && !_user.valid?
+      end
+
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] app_installed Object to be assigned
+    def app_installed=(app_installed : Bool?)
+      if app_installed.nil?
+        return @app_installed = nil
+      end
+      _app_installed = app_installed.not_nil!
+      @app_installed = _app_installed
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_create_drives Object to be assigned
+    def can_create_drives=(can_create_drives : Bool?)
+      if can_create_drives.nil?
+        return @can_create_drives = nil
+      end
+      _can_create_drives = can_create_drives.not_nil!
+      @can_create_drives = _can_create_drives
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_create_team_drives Object to be assigned
+    def can_create_team_drives=(can_create_team_drives : Bool?)
+      if can_create_team_drives.nil?
+        return @can_create_team_drives = nil
+      end
+      _can_create_team_drives = can_create_team_drives.not_nil!
+      @can_create_team_drives = _can_create_team_drives
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] drive_themes Object to be assigned
+    def drive_themes=(drive_themes : Array(GoogleDrive::AboutDriveThemesInner)?)
+      if drive_themes.nil?
+        return @drive_themes = nil
+      end
+      _drive_themes = drive_themes.not_nil!
+      OpenApi::ContainerValidator.validate(container: _drive_themes) if _drive_themes.is_a?(Array)
+      @drive_themes = _drive_themes
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] export_formats Object to be assigned
+    def export_formats=(export_formats : Hash(String, Array(String))?)
+      if export_formats.nil?
+        return @export_formats = nil
+      end
+      _export_formats = export_formats.not_nil!
+      @export_formats = _export_formats
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] folder_color_palette Object to be assigned
+    def folder_color_palette=(folder_color_palette : Array(String)?)
+      if folder_color_palette.nil?
+        return @folder_color_palette = nil
+      end
+      _folder_color_palette = folder_color_palette.not_nil!
+      @folder_color_palette = _folder_color_palette
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] import_formats Object to be assigned
+    def import_formats=(import_formats : Hash(String, Array(String))?)
+      if import_formats.nil?
+        return @import_formats = nil
+      end
+      _import_formats = import_formats.not_nil!
+      @import_formats = _import_formats
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] kind Object to be assigned
+    def kind=(kind : String?)
+      if kind.nil?
+        return @kind = nil
+      end
+      _kind = kind.not_nil!
+      @kind = _kind
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] max_import_sizes Object to be assigned
+    def max_import_sizes=(max_import_sizes : Hash(String, String)?)
+      if max_import_sizes.nil?
+        return @max_import_sizes = nil
+      end
+      _max_import_sizes = max_import_sizes.not_nil!
+      @max_import_sizes = _max_import_sizes
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] max_upload_size Object to be assigned
+    def max_upload_size=(max_upload_size : String?)
+      if max_upload_size.nil?
+        return @max_upload_size = nil
+      end
+      _max_upload_size = max_upload_size.not_nil!
+      @max_upload_size = _max_upload_size
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] storage_quota Object to be assigned
+    def storage_quota=(storage_quota : GoogleDrive::AboutStorageQuota?)
+      if storage_quota.nil?
+        return @storage_quota = nil
+      end
+      _storage_quota = storage_quota.not_nil!
+      _storage_quota.validate if _storage_quota.is_a?(OpenApi::Validatable)
+      @storage_quota = _storage_quota
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] team_drive_themes Object to be assigned
+    def team_drive_themes=(team_drive_themes : Array(GoogleDrive::AboutTeamDriveThemesInner)?)
+      if team_drive_themes.nil?
+        return @team_drive_themes = nil
+      end
+      _team_drive_themes = team_drive_themes.not_nil!
+      OpenApi::ContainerValidator.validate(container: _team_drive_themes) if _team_drive_themes.is_a?(Array)
+      @team_drive_themes = _team_drive_themes
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] user Object to be assigned
+    def user=(user : GoogleDrive::User?)
+      if user.nil?
+        return @user = nil
+      end
+      _user = user.not_nil!
+      _user.validate if _user.is_a?(OpenApi::Validatable)
+      @user = _user
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@app_installed, @app_installed_present, @can_create_drives, @can_create_drives_present, @can_create_team_drives, @can_create_team_drives_present, @drive_themes, @drive_themes_present, @export_formats, @export_formats_present, @folder_color_palette, @folder_color_palette_present, @import_formats, @import_formats_present, @kind, @kind_present, @max_import_sizes, @max_import_sizes_present, @max_upload_size, @max_upload_size_present, @storage_quota, @storage_quota_present, @team_drive_themes, @team_drive_themes_present, @user, @user_present)
+    def_equals_and_hash(@app_installed, @can_create_drives, @can_create_team_drives, @drive_themes, @export_formats, @folder_color_palette, @import_formats, @kind, @max_import_sizes, @max_upload_size, @storage_quota, @team_drive_themes, @user)
   end
 end

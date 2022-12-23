@@ -13,40 +13,29 @@ require "log"
 
 module GoogleDrive
   # The user's storage quota limits and usage. All fields are measured in bytes.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class AboutStorageQuota
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The usage limit, if applicable. This will not be present if the user has unlimited storage.
-    @[JSON::Field(key: "limit", type: String?, presence: true, ignore_serialize: limit.nil? && !limit_present?)]
-    property limit : String?
-
-    @[JSON::Field(ignore: true)]
-    property? limit_present : Bool = false
+    @[JSON::Field(key: "limit", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter limit : String? = nil
 
     # The total usage across all services.
-    @[JSON::Field(key: "usage", type: String?, presence: true, ignore_serialize: usage.nil? && !usage_present?)]
-    property usage : String?
-
-    @[JSON::Field(ignore: true)]
-    property? usage_present : Bool = false
+    @[JSON::Field(key: "usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter usage : String? = nil
 
     # The usage by all files in Google Drive.
-    @[JSON::Field(key: "usageInDrive", type: String?, presence: true, ignore_serialize: usage_in_drive.nil? && !usage_in_drive_present?)]
-    property usage_in_drive : String?
-
-    @[JSON::Field(ignore: true)]
-    property? usage_in_drive_present : Bool = false
+    @[JSON::Field(key: "usageInDrive", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter usage_in_drive : String? = nil
 
     # The usage by trashed files in Google Drive.
-    @[JSON::Field(key: "usageInDriveTrash", type: String?, presence: true, ignore_serialize: usage_in_drive_trash.nil? && !usage_in_drive_trash_present?)]
-    property usage_in_drive_trash : String?
-
-    @[JSON::Field(ignore: true)]
-    property? usage_in_drive_trash_present : Bool = false
+    @[JSON::Field(key: "usageInDriveTrash", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter usage_in_drive_trash : String? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -62,7 +51,7 @@ module GoogleDrive
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -70,20 +59,54 @@ module GoogleDrive
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] limit Object to be assigned
+    def limit=(limit : String?)
+      if limit.nil?
+        return @limit = nil
+      end
+      _limit = limit.not_nil!
+      @limit = _limit
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] usage Object to be assigned
+    def usage=(usage : String?)
+      if usage.nil?
+        return @usage = nil
+      end
+      _usage = usage.not_nil!
+      @usage = _usage
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] usage_in_drive Object to be assigned
+    def usage_in_drive=(usage_in_drive : String?)
+      if usage_in_drive.nil?
+        return @usage_in_drive = nil
+      end
+      _usage_in_drive = usage_in_drive.not_nil!
+      @usage_in_drive = _usage_in_drive
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] usage_in_drive_trash Object to be assigned
+    def usage_in_drive_trash=(usage_in_drive_trash : String?)
+      if usage_in_drive_trash.nil?
+        return @usage_in_drive_trash = nil
+      end
+      _usage_in_drive_trash = usage_in_drive_trash.not_nil!
+      @usage_in_drive_trash = _usage_in_drive_trash
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@limit, @limit_present, @usage, @usage_present, @usage_in_drive, @usage_in_drive_present, @usage_in_drive_trash, @usage_in_drive_trash_present)
+    def_equals_and_hash(@limit, @usage, @usage_in_drive, @usage_in_drive_trash)
   end
 end

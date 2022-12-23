@@ -13,26 +13,21 @@ require "log"
 
 module GoogleDrive
   # Contains details about the link URLs that clients are using to refer to this item.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class FileLinkShareMetadata
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Whether the file is eligible for security update.
-    @[JSON::Field(key: "securityUpdateEligible", type: Bool?, presence: true, ignore_serialize: security_update_eligible.nil? && !security_update_eligible_present?)]
-    property security_update_eligible : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? security_update_eligible_present : Bool = false
+    @[JSON::Field(key: "securityUpdateEligible", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter security_update_eligible : Bool? = nil
 
     # Whether the security update is enabled for this file.
-    @[JSON::Field(key: "securityUpdateEnabled", type: Bool?, presence: true, ignore_serialize: security_update_enabled.nil? && !security_update_enabled_present?)]
-    property security_update_enabled : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? security_update_enabled_present : Bool = false
+    @[JSON::Field(key: "securityUpdateEnabled", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter security_update_enabled : Bool? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -46,7 +41,7 @@ module GoogleDrive
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -54,20 +49,34 @@ module GoogleDrive
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] security_update_eligible Object to be assigned
+    def security_update_eligible=(security_update_eligible : Bool?)
+      if security_update_eligible.nil?
+        return @security_update_eligible = nil
+      end
+      _security_update_eligible = security_update_eligible.not_nil!
+      @security_update_eligible = _security_update_eligible
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] security_update_enabled Object to be assigned
+    def security_update_enabled=(security_update_enabled : Bool?)
+      if security_update_enabled.nil?
+        return @security_update_enabled = nil
+      end
+      _security_update_enabled = security_update_enabled.not_nil!
+      @security_update_enabled = _security_update_enabled
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@security_update_eligible, @security_update_eligible_present, @security_update_enabled, @security_update_enabled_present)
+    def_equals_and_hash(@security_update_eligible, @security_update_enabled)
   end
 end

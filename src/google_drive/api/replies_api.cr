@@ -8,62 +8,161 @@
 #
 
 require "uri"
+require "../api_client"
 
 module GoogleDrive
   class RepliesApi
     property api_client : ApiClient
 
+    delegate client_side_validation, debugging, to: @api_client.config
+
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
 
-    # Creates a new reply to a comment.
-    # @param file_id [String] The ID of the file.
-    # @param comment_id [String] The ID of the comment.
-    # @return [Reply]
-    def create(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, reply : Reply? = nil)
+    # Creates a reply to a comment.
+    # @required @param file_id [String?] The ID of the file.
+    # @required @param comment_id [String?] The ID of the comment.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param reply [GoogleDrive::Reply?]
+    # @return [GoogleDrive::Reply]
+    def create(
+      *,
+      file_id : String? = nil,
+      comment_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      reply : GoogleDrive::Reply? = nil
+    ) : GoogleDrive::Reply
       data, _status_code, _headers = create_with_http_info(file_id: file_id, comment_id: comment_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, reply: reply)
       data
     end
 
-    # Creates a new reply to a comment.
-    # @param file_id [String] The ID of the file.
-    # @param comment_id [String] The ID of the comment.
-    # @return [Array<(Reply, Integer, Hash)>] Reply data, response status code and response headers
-    def create_with_http_info(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, reply : Reply? = nil)
+    # Creates a reply to a comment.
+    # @required @param file_id [String?] The ID of the file.
+    # @required @param comment_id [String?] The ID of the comment.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param reply [GoogleDrive::Reply?]
+    # @return [Tuple(GoogleDrive::Reply, Integer, Hash)] GoogleDrive::Reply, response status code and response headers
+    def create_with_http_info(
+      *,
+      file_id : String? = nil,
+      comment_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      reply : GoogleDrive::Reply? = nil
+    ) : Tuple(GoogleDrive::Reply, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_create(file_id: file_id, comment_id: comment_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, reply: reply)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: RepliesApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: RepliesApi#create\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Reply.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::Reply.from_json(body), status_code, headers)
     end
 
-    # Creates a new reply to a comment.
-    # @param file_id [String] The ID of the file.
-    # @param comment_id [String] The ID of the comment.
+    # Creates a reply to a comment.
+    # @required @param file_id [String?] The ID of the file.
+    # @required @param comment_id [String?] The ID of the comment.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param reply [GoogleDrive::Reply?]
     # @return nil
-    def create(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, reply : Reply? = nil, &block : Crest::Response ->)
+    def create(
+      *,
+      file_id : String? = nil,
+      comment_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      reply : GoogleDrive::Reply? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_create(file_id: file_id, comment_id: comment_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, reply: reply).execute(&block)
     end
 
+    DRIVE_REPLIES_CREATE_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_create(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, reply : Reply? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_create(
+      *,
+      file_id : String? = nil,
+      comment_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      reply : GoogleDrive::Reply? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: RepliesApi.create ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
+
+        raise ArgumentError.new("\"comment_id\" is required and cannot be null") if comment_id.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_REPLIES_CREATE_VALID_VALUES_FOR_ALT)
+        end
+
+        unless (_reply = reply).nil?
+          _reply.validate if _reply.is_a?(OpenApi::Validatable)
+        end
       end
+
       # resource path
       local_var_path = "/drive/v3/files/{fileId}/comments/{commentId}/replies".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s)).sub("{" + "commentId" + "}", URI.encode_path(comment_id.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -72,18 +171,11 @@ module GoogleDrive
       query_params["quotaUser"] = quota_user.to_s if !quota_user.nil?
       query_params["userIp"] = user_ip.to_s if !user_ip.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-      # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = reply.to_json
+      post_body : IO | String | Nil = @api_client.encode(body: reply, content_type: header_params["Content-Type"]?) if !reply.nil?
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -95,61 +187,149 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Deletes a reply.
-    # @param file_id [String] The ID of the file.
-    # @param comment_id [String] The ID of the comment.
-    # @param reply_id [String] The ID of the reply.
-    # @return [nil]
-    def delete(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil)
+    # @required @param file_id [String?] The ID of the file.
+    # @required @param comment_id [String?] The ID of the comment.
+    # @required @param reply_id [String?] The ID of the reply.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @return [Nil]
+    def delete(
+      *,
+      file_id : String? = nil,
+      comment_id : String? = nil,
+      reply_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil
+    ) : Nil
       delete_with_http_info(file_id: file_id, comment_id: comment_id, reply_id: reply_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
       nil
     end
 
     # Deletes a reply.
-    # @param file_id [String] The ID of the file.
-    # @param comment_id [String] The ID of the comment.
-    # @param reply_id [String] The ID of the reply.
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def delete_with_http_info(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil)
+    # @required @param file_id [String?] The ID of the file.
+    # @required @param comment_id [String?] The ID of the comment.
+    # @required @param reply_id [String?] The ID of the reply.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
+    def delete_with_http_info(
+      *,
+      file_id : String? = nil,
+      comment_id : String? = nil,
+      reply_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil
+    ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete(file_id: file_id, comment_id: comment_id, reply_id: reply_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: RepliesApi#delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: RepliesApi#delete\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return nil, status_code, headers
+      Tuple.new(nil, status_code, headers)
     end
 
     # Deletes a reply.
-    # @param file_id [String] The ID of the file.
-    # @param comment_id [String] The ID of the comment.
-    # @param reply_id [String] The ID of the reply.
+    # @required @param file_id [String?] The ID of the file.
+    # @required @param comment_id [String?] The ID of the comment.
+    # @required @param reply_id [String?] The ID of the reply.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
     # @return nil
-    def delete(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, &block : Crest::Response ->)
+    def delete(
+      *,
+      file_id : String? = nil,
+      comment_id : String? = nil,
+      reply_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_delete(file_id: file_id, comment_id: comment_id, reply_id: reply_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip).execute(&block)
     end
 
+    DRIVE_REPLIES_DELETE_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_delete(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_delete(
+      *,
+      file_id : String? = nil,
+      comment_id : String? = nil,
+      reply_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: RepliesApi.delete ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
+
+        raise ArgumentError.new("\"comment_id\" is required and cannot be null") if comment_id.nil?
+
+        raise ArgumentError.new("\"reply_id\" is required and cannot be null") if reply_id.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_REPLIES_DELETE_VALID_VALUES_FOR_ALT)
+        end
       end
+
       # resource path
       local_var_path = "/drive/v3/files/{fileId}/comments/{commentId}/replies/{replyId}".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s)).sub("{" + "commentId" + "}", URI.encode_path(comment_id.to_s)).sub("{" + "replyId" + "}", URI.encode_path(reply_id.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -158,14 +338,11 @@ module GoogleDrive
       query_params["quotaUser"] = quota_user.to_s if !quota_user.nil?
       query_params["userIp"] = user_ip.to_s if !user_ip.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -177,61 +354,158 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Gets a reply by ID.
-    # @param file_id [String] The ID of the file.
-    # @param comment_id [String] The ID of the comment.
-    # @param reply_id [String] The ID of the reply.
-    # @return [Reply]
-    def get(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = nil)
+    # @required @param file_id [String?] The ID of the file.
+    # @required @param comment_id [String?] The ID of the comment.
+    # @required @param reply_id [String?] The ID of the reply.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param include_deleted [Bool?] Whether to return deleted replies. Deleted replies will not include their original content.
+    # @return [GoogleDrive::Reply]
+    def get(
+      *,
+      file_id : String? = nil,
+      comment_id : String? = nil,
+      reply_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      include_deleted : Bool? = nil
+    ) : GoogleDrive::Reply
       data, _status_code, _headers = get_with_http_info(file_id: file_id, comment_id: comment_id, reply_id: reply_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, include_deleted: include_deleted)
       data
     end
 
     # Gets a reply by ID.
-    # @param file_id [String] The ID of the file.
-    # @param comment_id [String] The ID of the comment.
-    # @param reply_id [String] The ID of the reply.
-    # @return [Array<(Reply, Integer, Hash)>] Reply data, response status code and response headers
-    def get_with_http_info(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = nil)
+    # @required @param file_id [String?] The ID of the file.
+    # @required @param comment_id [String?] The ID of the comment.
+    # @required @param reply_id [String?] The ID of the reply.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param include_deleted [Bool?] Whether to return deleted replies. Deleted replies will not include their original content.
+    # @return [Tuple(GoogleDrive::Reply, Integer, Hash)] GoogleDrive::Reply, response status code and response headers
+    def get_with_http_info(
+      *,
+      file_id : String? = nil,
+      comment_id : String? = nil,
+      reply_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      include_deleted : Bool? = nil
+    ) : Tuple(GoogleDrive::Reply, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get(file_id: file_id, comment_id: comment_id, reply_id: reply_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, include_deleted: include_deleted)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: RepliesApi#get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: RepliesApi#get\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Reply.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::Reply.from_json(body), status_code, headers)
     end
 
     # Gets a reply by ID.
-    # @param file_id [String] The ID of the file.
-    # @param comment_id [String] The ID of the comment.
-    # @param reply_id [String] The ID of the reply.
+    # @required @param file_id [String?] The ID of the file.
+    # @required @param comment_id [String?] The ID of the comment.
+    # @required @param reply_id [String?] The ID of the reply.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param include_deleted [Bool?] Whether to return deleted replies. Deleted replies will not include their original content.
     # @return nil
-    def get(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = nil, &block : Crest::Response ->)
+    def get(
+      *,
+      file_id : String? = nil,
+      comment_id : String? = nil,
+      reply_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      include_deleted : Bool? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get(file_id: file_id, comment_id: comment_id, reply_id: reply_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, include_deleted: include_deleted).execute(&block)
     end
 
+    DRIVE_REPLIES_GET_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_get(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_get(
+      *,
+      file_id : String? = nil,
+      comment_id : String? = nil,
+      reply_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      include_deleted : Bool? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: RepliesApi.get ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
+
+        raise ArgumentError.new("\"comment_id\" is required and cannot be null") if comment_id.nil?
+
+        raise ArgumentError.new("\"reply_id\" is required and cannot be null") if reply_id.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_REPLIES_GET_VALID_VALUES_FOR_ALT)
+        end
       end
+
       # resource path
       local_var_path = "/drive/v3/files/{fileId}/comments/{commentId}/replies/{replyId}".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s)).sub("{" + "commentId" + "}", URI.encode_path(comment_id.to_s)).sub("{" + "replyId" + "}", URI.encode_path(reply_id.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -241,16 +515,11 @@ module GoogleDrive
       query_params["userIp"] = user_ip.to_s if !user_ip.nil?
       query_params["includeDeleted"] = include_deleted.to_s if !include_deleted.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -262,66 +531,170 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Lists a comment's replies.
-    # @param file_id [String] The ID of the file.
-    # @param comment_id [String] The ID of the comment.
-    # @return [ReplyList]
-    def list(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = nil, page_size : Int32? = nil, page_token : String? = nil)
+    # @required @param file_id [String?] The ID of the file.
+    # @required @param comment_id [String?] The ID of the comment.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param include_deleted [Bool?] Whether to include deleted replies. Deleted replies will not include their original content.
+    # @optional @param page_size [Int32?] The maximum number of replies to return per page.
+    # @optional @param page_token [String?] The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
+    # @return [GoogleDrive::ReplyList]
+    def list(
+      *,
+      file_id : String? = nil,
+      comment_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      include_deleted : Bool? = nil,
+      page_size : Int32? = nil,
+      page_token : String? = nil
+    ) : GoogleDrive::ReplyList
       data, _status_code, _headers = list_with_http_info(file_id: file_id, comment_id: comment_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, include_deleted: include_deleted, page_size: page_size, page_token: page_token)
       data
     end
 
     # Lists a comment&#39;s replies.
-    # @param file_id [String] The ID of the file.
-    # @param comment_id [String] The ID of the comment.
-    # @return [Array<(ReplyList, Integer, Hash)>] ReplyList data, response status code and response headers
-    def list_with_http_info(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = nil, page_size : Int32? = nil, page_token : String? = nil)
+    # @required @param file_id [String?] The ID of the file.
+    # @required @param comment_id [String?] The ID of the comment.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param include_deleted [Bool?] Whether to include deleted replies. Deleted replies will not include their original content.
+    # @optional @param page_size [Int32?] The maximum number of replies to return per page.
+    # @optional @param page_token [String?] The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
+    # @return [Tuple(GoogleDrive::ReplyList, Integer, Hash)] GoogleDrive::ReplyList, response status code and response headers
+    def list_with_http_info(
+      *,
+      file_id : String? = nil,
+      comment_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      include_deleted : Bool? = nil,
+      page_size : Int32? = nil,
+      page_token : String? = nil
+    ) : Tuple(GoogleDrive::ReplyList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_list(file_id: file_id, comment_id: comment_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, include_deleted: include_deleted, page_size: page_size, page_token: page_token)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: RepliesApi#list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: RepliesApi#list\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return ReplyList.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::ReplyList.from_json(body), status_code, headers)
     end
 
     # Lists a comment&#39;s replies.
-    # @param file_id [String] The ID of the file.
-    # @param comment_id [String] The ID of the comment.
+    # @required @param file_id [String?] The ID of the file.
+    # @required @param comment_id [String?] The ID of the comment.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param include_deleted [Bool?] Whether to include deleted replies. Deleted replies will not include their original content.
+    # @optional @param page_size [Int32?] The maximum number of replies to return per page.
+    # @optional @param page_token [String?] The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
     # @return nil
-    def list(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = nil, page_size : Int32? = nil, page_token : String? = nil, &block : Crest::Response ->)
+    def list(
+      *,
+      file_id : String? = nil,
+      comment_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      include_deleted : Bool? = nil,
+      page_size : Int32? = nil,
+      page_token : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_list(file_id: file_id, comment_id: comment_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, include_deleted: include_deleted, page_size: page_size, page_token: page_token).execute(&block)
     end
 
+    DRIVE_REPLIES_LIST_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+    DRIVE_REPLIES_LIST_MAX_FOR_PAGE_SIZE    = Int32.new("100")
+    DRIVE_REPLIES_LIST_MIN_FOR_PAGE_SIZE    = Int32.new("1")
+
     # @return Crest::Request
-    def build_api_request_for_list(*, file_id : String, comment_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, include_deleted : Bool? = nil, page_size : Int32? = nil, page_token : String? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_list(
+      *,
+      file_id : String? = nil,
+      comment_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      include_deleted : Bool? = nil,
+      page_size : Int32? = nil,
+      page_token : String? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: RepliesApi.list ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      if @api_client.config.client_side_validation && !page_size.nil? && page_size > 100
-        raise ArgumentError.new("invalid value for \"page_size\" when calling RepliesApi.list, must be smaller than or equal to 100.")
-      end
 
-      if @api_client.config.client_side_validation && !page_size.nil? && page_size < 1
-        raise ArgumentError.new("invalid value for \"page_size\" when calling RepliesApi.list, must be greater than or equal to 1.")
+      if client_side_validation
+        raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
+
+        raise ArgumentError.new("\"comment_id\" is required and cannot be null") if comment_id.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_REPLIES_LIST_VALID_VALUES_FOR_ALT)
+        end
+
+        unless (_page_size = page_size).nil?
+          OpenApi::PrimitiveValidator.validate_max_number("page_size", _page_size, DRIVE_REPLIES_LIST_MAX_FOR_PAGE_SIZE)
+          OpenApi::PrimitiveValidator.validate_min_number("page_size", _page_size, DRIVE_REPLIES_LIST_MIN_FOR_PAGE_SIZE)
+        end
       end
 
       # resource path
       local_var_path = "/drive/v3/files/{fileId}/comments/{commentId}/replies".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s)).sub("{" + "commentId" + "}", URI.encode_path(comment_id.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -333,16 +706,11 @@ module GoogleDrive
       query_params["pageSize"] = page_size.to_s if !page_size.nil?
       query_params["pageToken"] = page_token.to_s if !page_token.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -354,61 +722,164 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Updates a reply with patch semantics.
-    # @param file_id [String] The ID of the file.
-    # @param comment_id [String] The ID of the comment.
-    # @param reply_id [String] The ID of the reply.
-    # @return [Reply]
-    def update(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, reply : Reply? = nil)
+    # @required @param file_id [String?] The ID of the file.
+    # @required @param comment_id [String?] The ID of the comment.
+    # @required @param reply_id [String?] The ID of the reply.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param reply [GoogleDrive::Reply?]
+    # @return [GoogleDrive::Reply]
+    def update(
+      *,
+      file_id : String? = nil,
+      comment_id : String? = nil,
+      reply_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      reply : GoogleDrive::Reply? = nil
+    ) : GoogleDrive::Reply
       data, _status_code, _headers = update_with_http_info(file_id: file_id, comment_id: comment_id, reply_id: reply_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, reply: reply)
       data
     end
 
     # Updates a reply with patch semantics.
-    # @param file_id [String] The ID of the file.
-    # @param comment_id [String] The ID of the comment.
-    # @param reply_id [String] The ID of the reply.
-    # @return [Array<(Reply, Integer, Hash)>] Reply data, response status code and response headers
-    def update_with_http_info(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, reply : Reply? = nil)
+    # @required @param file_id [String?] The ID of the file.
+    # @required @param comment_id [String?] The ID of the comment.
+    # @required @param reply_id [String?] The ID of the reply.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param reply [GoogleDrive::Reply?]
+    # @return [Tuple(GoogleDrive::Reply, Integer, Hash)] GoogleDrive::Reply, response status code and response headers
+    def update_with_http_info(
+      *,
+      file_id : String? = nil,
+      comment_id : String? = nil,
+      reply_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      reply : GoogleDrive::Reply? = nil
+    ) : Tuple(GoogleDrive::Reply, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_update(file_id: file_id, comment_id: comment_id, reply_id: reply_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, reply: reply)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: RepliesApi#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: RepliesApi#update\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Reply.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::Reply.from_json(body), status_code, headers)
     end
 
     # Updates a reply with patch semantics.
-    # @param file_id [String] The ID of the file.
-    # @param comment_id [String] The ID of the comment.
-    # @param reply_id [String] The ID of the reply.
+    # @required @param file_id [String?] The ID of the file.
+    # @required @param comment_id [String?] The ID of the comment.
+    # @required @param reply_id [String?] The ID of the reply.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param reply [GoogleDrive::Reply?]
     # @return nil
-    def update(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, reply : Reply? = nil, &block : Crest::Response ->)
+    def update(
+      *,
+      file_id : String? = nil,
+      comment_id : String? = nil,
+      reply_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      reply : GoogleDrive::Reply? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_update(file_id: file_id, comment_id: comment_id, reply_id: reply_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, reply: reply).execute(&block)
     end
 
+    DRIVE_REPLIES_UPDATE_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_update(*, file_id : String, comment_id : String, reply_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, reply : Reply? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_update(
+      *,
+      file_id : String? = nil,
+      comment_id : String? = nil,
+      reply_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      reply : GoogleDrive::Reply? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: RepliesApi.update ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
+
+        raise ArgumentError.new("\"comment_id\" is required and cannot be null") if comment_id.nil?
+
+        raise ArgumentError.new("\"reply_id\" is required and cannot be null") if reply_id.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_REPLIES_UPDATE_VALID_VALUES_FOR_ALT)
+        end
+
+        unless (_reply = reply).nil?
+          _reply.validate if _reply.is_a?(OpenApi::Validatable)
+        end
       end
+
       # resource path
       local_var_path = "/drive/v3/files/{fileId}/comments/{commentId}/replies/{replyId}".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s)).sub("{" + "commentId" + "}", URI.encode_path(comment_id.to_s)).sub("{" + "replyId" + "}", URI.encode_path(reply_id.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -417,18 +888,11 @@ module GoogleDrive
       query_params["quotaUser"] = quota_user.to_s if !quota_user.nil?
       query_params["userIp"] = user_ip.to_s if !user_ip.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-      # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = reply.to_json
+      post_body : IO | String | Nil = @api_client.encode(body: reply, content_type: header_params["Content-Type"]?) if !reply.nil?
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -440,6 +904,7 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

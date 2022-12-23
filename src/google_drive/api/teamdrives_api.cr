@@ -8,59 +8,152 @@
 #
 
 require "uri"
+require "../api_client"
 
 module GoogleDrive
   class TeamdrivesApi
     property api_client : ApiClient
+
+    delegate client_side_validation, debugging, to: @api_client.config
 
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
 
     # Deprecated use drives.create instead.
-    # @param request_id [String] An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned.
-    # @return [TeamDrive]
-    def create(*, request_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, team_drive : TeamDrive? = nil)
+    # @required @param request_id [String?] An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param team_drive [GoogleDrive::TeamDrive?]
+    # @return [GoogleDrive::TeamDrive]
+    def create(
+      *,
+      request_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      team_drive : GoogleDrive::TeamDrive? = nil
+    ) : GoogleDrive::TeamDrive
       data, _status_code, _headers = create_with_http_info(request_id: request_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, team_drive: team_drive)
       data
     end
 
     # Deprecated use drives.create instead.
-    # @param request_id [String] An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned.
-    # @return [Array<(TeamDrive, Integer, Hash)>] TeamDrive data, response status code and response headers
-    def create_with_http_info(*, request_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, team_drive : TeamDrive? = nil)
+    # @required @param request_id [String?] An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param team_drive [GoogleDrive::TeamDrive?]
+    # @return [Tuple(GoogleDrive::TeamDrive, Integer, Hash)] GoogleDrive::TeamDrive, response status code and response headers
+    def create_with_http_info(
+      *,
+      request_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      team_drive : GoogleDrive::TeamDrive? = nil
+    ) : Tuple(GoogleDrive::TeamDrive, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_create(request_id: request_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, team_drive: team_drive)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: TeamdrivesApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: TeamdrivesApi#create\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return TeamDrive.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::TeamDrive.from_json(body), status_code, headers)
     end
 
     # Deprecated use drives.create instead.
-    # @param request_id [String] An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned.
+    # @required @param request_id [String?] An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param team_drive [GoogleDrive::TeamDrive?]
     # @return nil
-    def create(*, request_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, team_drive : TeamDrive? = nil, &block : Crest::Response ->)
+    def create(
+      *,
+      request_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      team_drive : GoogleDrive::TeamDrive? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_create(request_id: request_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, team_drive: team_drive).execute(&block)
     end
 
+    DRIVE_TEAMDRIVES_CREATE_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_create(*, request_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, team_drive : TeamDrive? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_create(
+      *,
+      request_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      team_drive : GoogleDrive::TeamDrive? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: TeamdrivesApi.create ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        raise ArgumentError.new("\"request_id\" is required and cannot be null") if request_id.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_TEAMDRIVES_CREATE_VALID_VALUES_FOR_ALT)
+        end
+
+        unless (_team_drive = team_drive).nil?
+          _team_drive.validate if _team_drive.is_a?(OpenApi::Validatable)
+        end
       end
+
       # resource path
       local_var_path = "/drive/v3/teamdrives"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -70,18 +163,11 @@ module GoogleDrive
       query_params["userIp"] = user_ip.to_s if !user_ip.nil?
       query_params["requestId"] = request_id.to_s if !request_id.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-      # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = team_drive.to_json
+      post_body : IO | String | Nil = @api_client.encode(body: team_drive, content_type: header_params["Content-Type"]?) if !team_drive.nil?
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -93,55 +179,131 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Deprecated use drives.delete instead.
-    # @param team_drive_id [String] The ID of the Team Drive
-    # @return [nil]
-    def delete(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil)
+    # @required @param team_drive_id [String?] The ID of the Team Drive
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @return [Nil]
+    def delete(
+      *,
+      team_drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil
+    ) : Nil
       delete_with_http_info(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
       nil
     end
 
     # Deprecated use drives.delete instead.
-    # @param team_drive_id [String] The ID of the Team Drive
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def delete_with_http_info(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil)
+    # @required @param team_drive_id [String?] The ID of the Team Drive
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
+    def delete_with_http_info(
+      *,
+      team_drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil
+    ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: TeamdrivesApi#delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: TeamdrivesApi#delete\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return nil, status_code, headers
+      Tuple.new(nil, status_code, headers)
     end
 
     # Deprecated use drives.delete instead.
-    # @param team_drive_id [String] The ID of the Team Drive
+    # @required @param team_drive_id [String?] The ID of the Team Drive
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
     # @return nil
-    def delete(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, &block : Crest::Response ->)
+    def delete(
+      *,
+      team_drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_delete(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip).execute(&block)
     end
 
+    DRIVE_TEAMDRIVES_DELETE_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_delete(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_delete(
+      *,
+      team_drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: TeamdrivesApi.delete ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        raise ArgumentError.new("\"team_drive_id\" is required and cannot be null") if team_drive_id.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_TEAMDRIVES_DELETE_VALID_VALUES_FOR_ALT)
+        end
       end
+
       # resource path
       local_var_path = "/drive/v3/teamdrives/{teamDriveId}".sub("{" + "teamDriveId" + "}", URI.encode_path(team_drive_id.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -150,14 +312,11 @@ module GoogleDrive
       query_params["quotaUser"] = quota_user.to_s if !quota_user.nil?
       query_params["userIp"] = user_ip.to_s if !user_ip.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -169,55 +328,140 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Deprecated use drives.get instead.
-    # @param team_drive_id [String] The ID of the Team Drive
-    # @return [TeamDrive]
-    def get(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = nil)
+    # @required @param team_drive_id [String?] The ID of the Team Drive
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param use_domain_admin_access [Bool?] Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the Team Drive belongs.
+    # @return [GoogleDrive::TeamDrive]
+    def get(
+      *,
+      team_drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      use_domain_admin_access : Bool? = nil
+    ) : GoogleDrive::TeamDrive
       data, _status_code, _headers = get_with_http_info(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access)
       data
     end
 
     # Deprecated use drives.get instead.
-    # @param team_drive_id [String] The ID of the Team Drive
-    # @return [Array<(TeamDrive, Integer, Hash)>] TeamDrive data, response status code and response headers
-    def get_with_http_info(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = nil)
+    # @required @param team_drive_id [String?] The ID of the Team Drive
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param use_domain_admin_access [Bool?] Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the Team Drive belongs.
+    # @return [Tuple(GoogleDrive::TeamDrive, Integer, Hash)] GoogleDrive::TeamDrive, response status code and response headers
+    def get_with_http_info(
+      *,
+      team_drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      use_domain_admin_access : Bool? = nil
+    ) : Tuple(GoogleDrive::TeamDrive, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: TeamdrivesApi#get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: TeamdrivesApi#get\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return TeamDrive.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::TeamDrive.from_json(body), status_code, headers)
     end
 
     # Deprecated use drives.get instead.
-    # @param team_drive_id [String] The ID of the Team Drive
+    # @required @param team_drive_id [String?] The ID of the Team Drive
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param use_domain_admin_access [Bool?] Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the Team Drive belongs.
     # @return nil
-    def get(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = nil, &block : Crest::Response ->)
+    def get(
+      *,
+      team_drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      use_domain_admin_access : Bool? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access).execute(&block)
     end
 
+    DRIVE_TEAMDRIVES_GET_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_get(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_get(
+      *,
+      team_drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      use_domain_admin_access : Bool? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: TeamdrivesApi.get ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        raise ArgumentError.new("\"team_drive_id\" is required and cannot be null") if team_drive_id.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_TEAMDRIVES_GET_VALID_VALUES_FOR_ALT)
+        end
       end
+
       # resource path
       local_var_path = "/drive/v3/teamdrives/{teamDriveId}".sub("{" + "teamDriveId" + "}", URI.encode_path(team_drive_id.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -227,16 +471,11 @@ module GoogleDrive
       query_params["userIp"] = user_ip.to_s if !user_ip.nil?
       query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -248,60 +487,159 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Deprecated use drives.list instead.
-    # @return [TeamDriveList]
-    def list(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = nil, page_token : String? = nil, q : String? = nil, use_domain_admin_access : Bool? = nil)
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param page_size [Int32?] Maximum number of Team Drives to return.
+    # @optional @param page_token [String?] Page token for Team Drives.
+    # @optional @param q [String?] Query string for searching Team Drives.
+    # @optional @param use_domain_admin_access [Bool?] Issue the request as a domain administrator; if set to true, then all Team Drives of the domain in which the requester is an administrator are returned.
+    # @return [GoogleDrive::TeamDriveList]
+    def list(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      page_size : Int32? = nil,
+      page_token : String? = nil,
+      q : String? = nil,
+      use_domain_admin_access : Bool? = nil
+    ) : GoogleDrive::TeamDriveList
       data, _status_code, _headers = list_with_http_info(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token, q: q, use_domain_admin_access: use_domain_admin_access)
       data
     end
 
     # Deprecated use drives.list instead.
-    # @return [Array<(TeamDriveList, Integer, Hash)>] TeamDriveList data, response status code and response headers
-    def list_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = nil, page_token : String? = nil, q : String? = nil, use_domain_admin_access : Bool? = nil)
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param page_size [Int32?] Maximum number of Team Drives to return.
+    # @optional @param page_token [String?] Page token for Team Drives.
+    # @optional @param q [String?] Query string for searching Team Drives.
+    # @optional @param use_domain_admin_access [Bool?] Issue the request as a domain administrator; if set to true, then all Team Drives of the domain in which the requester is an administrator are returned.
+    # @return [Tuple(GoogleDrive::TeamDriveList, Integer, Hash)] GoogleDrive::TeamDriveList, response status code and response headers
+    def list_with_http_info(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      page_size : Int32? = nil,
+      page_token : String? = nil,
+      q : String? = nil,
+      use_domain_admin_access : Bool? = nil
+    ) : Tuple(GoogleDrive::TeamDriveList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_list(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token, q: q, use_domain_admin_access: use_domain_admin_access)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: TeamdrivesApi#list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: TeamdrivesApi#list\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return TeamDriveList.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::TeamDriveList.from_json(body), status_code, headers)
     end
 
     # Deprecated use drives.list instead.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param page_size [Int32?] Maximum number of Team Drives to return.
+    # @optional @param page_token [String?] Page token for Team Drives.
+    # @optional @param q [String?] Query string for searching Team Drives.
+    # @optional @param use_domain_admin_access [Bool?] Issue the request as a domain administrator; if set to true, then all Team Drives of the domain in which the requester is an administrator are returned.
     # @return nil
-    def list(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = nil, page_token : String? = nil, q : String? = nil, use_domain_admin_access : Bool? = nil, &block : Crest::Response ->)
+    def list(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      page_size : Int32? = nil,
+      page_token : String? = nil,
+      q : String? = nil,
+      use_domain_admin_access : Bool? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_list(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token, q: q, use_domain_admin_access: use_domain_admin_access).execute(&block)
     end
 
+    DRIVE_TEAMDRIVES_LIST_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+    DRIVE_TEAMDRIVES_LIST_MAX_FOR_PAGE_SIZE    = Int32.new("100")
+    DRIVE_TEAMDRIVES_LIST_MIN_FOR_PAGE_SIZE    = Int32.new("1")
+
     # @return Crest::Request
-    def build_api_request_for_list(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = nil, page_token : String? = nil, q : String? = nil, use_domain_admin_access : Bool? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_list(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      page_size : Int32? = nil,
+      page_token : String? = nil,
+      q : String? = nil,
+      use_domain_admin_access : Bool? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: TeamdrivesApi.list ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      if @api_client.config.client_side_validation && !page_size.nil? && page_size > 100
-        raise ArgumentError.new("invalid value for \"page_size\" when calling TeamdrivesApi.list, must be smaller than or equal to 100.")
-      end
 
-      if @api_client.config.client_side_validation && !page_size.nil? && page_size < 1
-        raise ArgumentError.new("invalid value for \"page_size\" when calling TeamdrivesApi.list, must be greater than or equal to 1.")
+      if client_side_validation
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_TEAMDRIVES_LIST_VALID_VALUES_FOR_ALT)
+        end
+
+        unless (_page_size = page_size).nil?
+          OpenApi::PrimitiveValidator.validate_max_number("page_size", _page_size, DRIVE_TEAMDRIVES_LIST_MAX_FOR_PAGE_SIZE)
+          OpenApi::PrimitiveValidator.validate_min_number("page_size", _page_size, DRIVE_TEAMDRIVES_LIST_MIN_FOR_PAGE_SIZE)
+        end
       end
 
       # resource path
       local_var_path = "/drive/v3/teamdrives"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -314,16 +652,11 @@ module GoogleDrive
       query_params["q"] = q.to_s if !q.nil?
       query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -335,55 +668,153 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Deprecated use drives.update instead
-    # @param team_drive_id [String] The ID of the Team Drive
-    # @return [TeamDrive]
-    def update(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = nil, team_drive : TeamDrive? = nil)
+    # @required @param team_drive_id [String?] The ID of the Team Drive
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param use_domain_admin_access [Bool?] Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the Team Drive belongs.
+    # @optional @param team_drive [GoogleDrive::TeamDrive?]
+    # @return [GoogleDrive::TeamDrive]
+    def update(
+      *,
+      team_drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      use_domain_admin_access : Bool? = nil,
+      team_drive : GoogleDrive::TeamDrive? = nil
+    ) : GoogleDrive::TeamDrive
       data, _status_code, _headers = update_with_http_info(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access, team_drive: team_drive)
       data
     end
 
     # Deprecated use drives.update instead
-    # @param team_drive_id [String] The ID of the Team Drive
-    # @return [Array<(TeamDrive, Integer, Hash)>] TeamDrive data, response status code and response headers
-    def update_with_http_info(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = nil, team_drive : TeamDrive? = nil)
+    # @required @param team_drive_id [String?] The ID of the Team Drive
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param use_domain_admin_access [Bool?] Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the Team Drive belongs.
+    # @optional @param team_drive [GoogleDrive::TeamDrive?]
+    # @return [Tuple(GoogleDrive::TeamDrive, Integer, Hash)] GoogleDrive::TeamDrive, response status code and response headers
+    def update_with_http_info(
+      *,
+      team_drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      use_domain_admin_access : Bool? = nil,
+      team_drive : GoogleDrive::TeamDrive? = nil
+    ) : Tuple(GoogleDrive::TeamDrive, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_update(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access, team_drive: team_drive)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: TeamdrivesApi#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: TeamdrivesApi#update\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return TeamDrive.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::TeamDrive.from_json(body), status_code, headers)
     end
 
     # Deprecated use drives.update instead
-    # @param team_drive_id [String] The ID of the Team Drive
+    # @required @param team_drive_id [String?] The ID of the Team Drive
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param use_domain_admin_access [Bool?] Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the Team Drive belongs.
+    # @optional @param team_drive [GoogleDrive::TeamDrive?]
     # @return nil
-    def update(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = nil, team_drive : TeamDrive? = nil, &block : Crest::Response ->)
+    def update(
+      *,
+      team_drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      use_domain_admin_access : Bool? = nil,
+      team_drive : GoogleDrive::TeamDrive? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_update(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access, team_drive: team_drive).execute(&block)
     end
 
+    DRIVE_TEAMDRIVES_UPDATE_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_update(*, team_drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = nil, team_drive : TeamDrive? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_update(
+      *,
+      team_drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      use_domain_admin_access : Bool? = nil,
+      team_drive : GoogleDrive::TeamDrive? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: TeamdrivesApi.update ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        raise ArgumentError.new("\"team_drive_id\" is required and cannot be null") if team_drive_id.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_TEAMDRIVES_UPDATE_VALID_VALUES_FOR_ALT)
+        end
+
+        unless (_team_drive = team_drive).nil?
+          _team_drive.validate if _team_drive.is_a?(OpenApi::Validatable)
+        end
       end
+
       # resource path
       local_var_path = "/drive/v3/teamdrives/{teamDriveId}".sub("{" + "teamDriveId" + "}", URI.encode_path(team_drive_id.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -393,18 +824,11 @@ module GoogleDrive
       query_params["userIp"] = user_ip.to_s if !user_ip.nil?
       query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-      # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = team_drive.to_json
+      post_body : IO | String | Nil = @api_client.encode(body: team_drive, content_type: header_params["Content-Type"]?) if !team_drive.nil?
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -416,6 +840,7 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

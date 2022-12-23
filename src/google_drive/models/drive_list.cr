@@ -13,40 +13,32 @@ require "log"
 
 module GoogleDrive
   # A list of shared drives.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class DriveList
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The list of shared drives. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.
-    @[JSON::Field(key: "drives", type: Array(Drive)?, presence: true, ignore_serialize: drives.nil? && !drives_present?)]
-    property drives : Array(Drive)?
-
-    @[JSON::Field(ignore: true)]
-    property? drives_present : Bool = false
+    @[JSON::Field(key: "drives", type: Array(GoogleDrive::Drive)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter drives : Array(GoogleDrive::Drive)? = nil
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#driveList\".
-    @[JSON::Field(key: "kind", type: String?, default: "drive#driveList", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String? = "drive#driveList"
-
-    @[JSON::Field(ignore: true)]
-    property? kind_present : Bool = false
+    @[JSON::Field(key: "kind", type: String?, default: "drive#driveList", required: false, nullable: false, emit_null: false)]
+    getter kind : String? = "drive#driveList"
 
     # The page token for the next page of shared drives. This will be absent if the end of the list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results.
-    @[JSON::Field(key: "nextPageToken", type: String?, presence: true, ignore_serialize: next_page_token.nil? && !next_page_token_present?)]
-    property next_page_token : String?
-
-    @[JSON::Field(ignore: true)]
-    property? next_page_token_present : Bool = false
+    @[JSON::Field(key: "nextPageToken", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter next_page_token : String? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @drives : Array(Drive)? = nil,
+      @drives : Array(GoogleDrive::Drive)? = nil,
       @kind : String? = "drive#driveList",
       @next_page_token : String? = nil
     )
@@ -54,28 +46,61 @@ module GoogleDrive
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
+      unless (_drives = @drives).nil?
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "drives", container: _drives)) if _drives.is_a?(Array)
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      unless (_drives = @drives).nil?
+        return false if _drives.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _drives)
+      end
+
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] drives Object to be assigned
+    def drives=(drives : Array(GoogleDrive::Drive)?)
+      if drives.nil?
+        return @drives = nil
+      end
+      _drives = drives.not_nil!
+      OpenApi::ContainerValidator.validate(container: _drives) if _drives.is_a?(Array)
+      @drives = _drives
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] kind Object to be assigned
+    def kind=(kind : String?)
+      if kind.nil?
+        return @kind = nil
+      end
+      _kind = kind.not_nil!
+      @kind = _kind
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] next_page_token Object to be assigned
+    def next_page_token=(next_page_token : String?)
+      if next_page_token.nil?
+        return @next_page_token = nil
+      end
+      _next_page_token = next_page_token.not_nil!
+      @next_page_token = _next_page_token
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@drives, @drives_present, @kind, @kind_present, @next_page_token, @next_page_token_present)
+    def_equals_and_hash(@drives, @kind, @next_page_token)
   end
 end

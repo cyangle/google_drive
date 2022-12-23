@@ -13,158 +13,96 @@ require "log"
 
 module GoogleDrive
   # Additional metadata about image media, if available.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class FileImageMediaMetadata
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The aperture used to create the photo (f-number).
-    @[JSON::Field(key: "aperture", type: Float32?, presence: true, ignore_serialize: aperture.nil? && !aperture_present?)]
-    property aperture : Float32?
-
-    @[JSON::Field(ignore: true)]
-    property? aperture_present : Bool = false
+    @[JSON::Field(key: "aperture", type: Float32?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter aperture : Float32? = nil
 
     # The make of the camera used to create the photo.
-    @[JSON::Field(key: "cameraMake", type: String?, presence: true, ignore_serialize: camera_make.nil? && !camera_make_present?)]
-    property camera_make : String?
-
-    @[JSON::Field(ignore: true)]
-    property? camera_make_present : Bool = false
+    @[JSON::Field(key: "cameraMake", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter camera_make : String? = nil
 
     # The model of the camera used to create the photo.
-    @[JSON::Field(key: "cameraModel", type: String?, presence: true, ignore_serialize: camera_model.nil? && !camera_model_present?)]
-    property camera_model : String?
-
-    @[JSON::Field(ignore: true)]
-    property? camera_model_present : Bool = false
+    @[JSON::Field(key: "cameraModel", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter camera_model : String? = nil
 
     # The color space of the photo.
-    @[JSON::Field(key: "colorSpace", type: String?, presence: true, ignore_serialize: color_space.nil? && !color_space_present?)]
-    property color_space : String?
-
-    @[JSON::Field(ignore: true)]
-    property? color_space_present : Bool = false
+    @[JSON::Field(key: "colorSpace", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter color_space : String? = nil
 
     # The exposure bias of the photo (APEX value).
-    @[JSON::Field(key: "exposureBias", type: Float32?, presence: true, ignore_serialize: exposure_bias.nil? && !exposure_bias_present?)]
-    property exposure_bias : Float32?
-
-    @[JSON::Field(ignore: true)]
-    property? exposure_bias_present : Bool = false
+    @[JSON::Field(key: "exposureBias", type: Float32?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter exposure_bias : Float32? = nil
 
     # The exposure mode used to create the photo.
-    @[JSON::Field(key: "exposureMode", type: String?, presence: true, ignore_serialize: exposure_mode.nil? && !exposure_mode_present?)]
-    property exposure_mode : String?
-
-    @[JSON::Field(ignore: true)]
-    property? exposure_mode_present : Bool = false
+    @[JSON::Field(key: "exposureMode", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter exposure_mode : String? = nil
 
     # The length of the exposure, in seconds.
-    @[JSON::Field(key: "exposureTime", type: Float32?, presence: true, ignore_serialize: exposure_time.nil? && !exposure_time_present?)]
-    property exposure_time : Float32?
-
-    @[JSON::Field(ignore: true)]
-    property? exposure_time_present : Bool = false
+    @[JSON::Field(key: "exposureTime", type: Float32?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter exposure_time : Float32? = nil
 
     # Whether a flash was used to create the photo.
-    @[JSON::Field(key: "flashUsed", type: Bool?, presence: true, ignore_serialize: flash_used.nil? && !flash_used_present?)]
-    property flash_used : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? flash_used_present : Bool = false
+    @[JSON::Field(key: "flashUsed", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter flash_used : Bool? = nil
 
     # The focal length used to create the photo, in millimeters.
-    @[JSON::Field(key: "focalLength", type: Float32?, presence: true, ignore_serialize: focal_length.nil? && !focal_length_present?)]
-    property focal_length : Float32?
-
-    @[JSON::Field(ignore: true)]
-    property? focal_length_present : Bool = false
+    @[JSON::Field(key: "focalLength", type: Float32?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter focal_length : Float32? = nil
 
     # The height of the image in pixels.
-    @[JSON::Field(key: "height", type: Int32?, presence: true, ignore_serialize: height.nil? && !height_present?)]
-    property height : Int32?
-
-    @[JSON::Field(ignore: true)]
-    property? height_present : Bool = false
+    @[JSON::Field(key: "height", type: Int32?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter height : Int32? = nil
 
     # The ISO speed used to create the photo.
-    @[JSON::Field(key: "isoSpeed", type: Int32?, presence: true, ignore_serialize: iso_speed.nil? && !iso_speed_present?)]
-    property iso_speed : Int32?
-
-    @[JSON::Field(ignore: true)]
-    property? iso_speed_present : Bool = false
+    @[JSON::Field(key: "isoSpeed", type: Int32?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter iso_speed : Int32? = nil
 
     # The lens used to create the photo.
-    @[JSON::Field(key: "lens", type: String?, presence: true, ignore_serialize: lens.nil? && !lens_present?)]
-    property lens : String?
+    @[JSON::Field(key: "lens", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter lens : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? lens_present : Bool = false
-
-    @[JSON::Field(key: "location", type: FileImageMediaMetadataLocation?, presence: true, ignore_serialize: location.nil? && !location_present?)]
-    property location : FileImageMediaMetadataLocation?
-
-    @[JSON::Field(ignore: true)]
-    property? location_present : Bool = false
+    @[JSON::Field(key: "location", type: GoogleDrive::FileImageMediaMetadataLocation?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter location : GoogleDrive::FileImageMediaMetadataLocation? = nil
 
     # The smallest f-number of the lens at the focal length used to create the photo (APEX value).
-    @[JSON::Field(key: "maxApertureValue", type: Float32?, presence: true, ignore_serialize: max_aperture_value.nil? && !max_aperture_value_present?)]
-    property max_aperture_value : Float32?
-
-    @[JSON::Field(ignore: true)]
-    property? max_aperture_value_present : Bool = false
+    @[JSON::Field(key: "maxApertureValue", type: Float32?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter max_aperture_value : Float32? = nil
 
     # The metering mode used to create the photo.
-    @[JSON::Field(key: "meteringMode", type: String?, presence: true, ignore_serialize: metering_mode.nil? && !metering_mode_present?)]
-    property metering_mode : String?
-
-    @[JSON::Field(ignore: true)]
-    property? metering_mode_present : Bool = false
+    @[JSON::Field(key: "meteringMode", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metering_mode : String? = nil
 
     # The number of clockwise 90 degree rotations applied from the image's original orientation.
-    @[JSON::Field(key: "rotation", type: Int32?, presence: true, ignore_serialize: rotation.nil? && !rotation_present?)]
-    property rotation : Int32?
-
-    @[JSON::Field(ignore: true)]
-    property? rotation_present : Bool = false
+    @[JSON::Field(key: "rotation", type: Int32?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter rotation : Int32? = nil
 
     # The type of sensor used to create the photo.
-    @[JSON::Field(key: "sensor", type: String?, presence: true, ignore_serialize: sensor.nil? && !sensor_present?)]
-    property sensor : String?
-
-    @[JSON::Field(ignore: true)]
-    property? sensor_present : Bool = false
+    @[JSON::Field(key: "sensor", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter sensor : String? = nil
 
     # The distance to the subject of the photo, in meters.
-    @[JSON::Field(key: "subjectDistance", type: Int32?, presence: true, ignore_serialize: subject_distance.nil? && !subject_distance_present?)]
-    property subject_distance : Int32?
-
-    @[JSON::Field(ignore: true)]
-    property? subject_distance_present : Bool = false
+    @[JSON::Field(key: "subjectDistance", type: Int32?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter subject_distance : Int32? = nil
 
     # The date and time the photo was taken (EXIF DateTime).
-    @[JSON::Field(key: "time", type: String?, presence: true, ignore_serialize: time.nil? && !time_present?)]
-    property time : String?
-
-    @[JSON::Field(ignore: true)]
-    property? time_present : Bool = false
+    @[JSON::Field(key: "time", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter time : String? = nil
 
     # The white balance mode used to create the photo.
-    @[JSON::Field(key: "whiteBalance", type: String?, presence: true, ignore_serialize: white_balance.nil? && !white_balance_present?)]
-    property white_balance : String?
-
-    @[JSON::Field(ignore: true)]
-    property? white_balance_present : Bool = false
+    @[JSON::Field(key: "whiteBalance", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter white_balance : String? = nil
 
     # The width of the image in pixels.
-    @[JSON::Field(key: "width", type: Int32?, presence: true, ignore_serialize: width.nil? && !width_present?)]
-    property width : Int32?
-
-    @[JSON::Field(ignore: true)]
-    property? width_present : Bool = false
+    @[JSON::Field(key: "width", type: Int32?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter width : Int32? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -183,7 +121,7 @@ module GoogleDrive
       @height : Int32? = nil,
       @iso_speed : Int32? = nil,
       @lens : String? = nil,
-      @location : FileImageMediaMetadataLocation? = nil,
+      @location : GoogleDrive::FileImageMediaMetadataLocation? = nil,
       @max_aperture_value : Float32? = nil,
       @metering_mode : String? = nil,
       @rotation : Int32? = nil,
@@ -197,28 +135,241 @@ module GoogleDrive
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
+      unless (_location = @location).nil?
+        invalid_properties.concat(_location.list_invalid_properties_for("location")) if _location.is_a?(OpenApi::Validatable)
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      unless (_location = @location).nil?
+        return false if _location.is_a?(OpenApi::Validatable) && !_location.valid?
+      end
+
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] aperture Object to be assigned
+    def aperture=(aperture : Float32?)
+      if aperture.nil?
+        return @aperture = nil
+      end
+      _aperture = aperture.not_nil!
+      @aperture = _aperture
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] camera_make Object to be assigned
+    def camera_make=(camera_make : String?)
+      if camera_make.nil?
+        return @camera_make = nil
+      end
+      _camera_make = camera_make.not_nil!
+      @camera_make = _camera_make
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] camera_model Object to be assigned
+    def camera_model=(camera_model : String?)
+      if camera_model.nil?
+        return @camera_model = nil
+      end
+      _camera_model = camera_model.not_nil!
+      @camera_model = _camera_model
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] color_space Object to be assigned
+    def color_space=(color_space : String?)
+      if color_space.nil?
+        return @color_space = nil
+      end
+      _color_space = color_space.not_nil!
+      @color_space = _color_space
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] exposure_bias Object to be assigned
+    def exposure_bias=(exposure_bias : Float32?)
+      if exposure_bias.nil?
+        return @exposure_bias = nil
+      end
+      _exposure_bias = exposure_bias.not_nil!
+      @exposure_bias = _exposure_bias
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] exposure_mode Object to be assigned
+    def exposure_mode=(exposure_mode : String?)
+      if exposure_mode.nil?
+        return @exposure_mode = nil
+      end
+      _exposure_mode = exposure_mode.not_nil!
+      @exposure_mode = _exposure_mode
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] exposure_time Object to be assigned
+    def exposure_time=(exposure_time : Float32?)
+      if exposure_time.nil?
+        return @exposure_time = nil
+      end
+      _exposure_time = exposure_time.not_nil!
+      @exposure_time = _exposure_time
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] flash_used Object to be assigned
+    def flash_used=(flash_used : Bool?)
+      if flash_used.nil?
+        return @flash_used = nil
+      end
+      _flash_used = flash_used.not_nil!
+      @flash_used = _flash_used
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] focal_length Object to be assigned
+    def focal_length=(focal_length : Float32?)
+      if focal_length.nil?
+        return @focal_length = nil
+      end
+      _focal_length = focal_length.not_nil!
+      @focal_length = _focal_length
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] height Object to be assigned
+    def height=(height : Int32?)
+      if height.nil?
+        return @height = nil
+      end
+      _height = height.not_nil!
+      @height = _height
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] iso_speed Object to be assigned
+    def iso_speed=(iso_speed : Int32?)
+      if iso_speed.nil?
+        return @iso_speed = nil
+      end
+      _iso_speed = iso_speed.not_nil!
+      @iso_speed = _iso_speed
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] lens Object to be assigned
+    def lens=(lens : String?)
+      if lens.nil?
+        return @lens = nil
+      end
+      _lens = lens.not_nil!
+      @lens = _lens
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] location Object to be assigned
+    def location=(location : GoogleDrive::FileImageMediaMetadataLocation?)
+      if location.nil?
+        return @location = nil
+      end
+      _location = location.not_nil!
+      _location.validate if _location.is_a?(OpenApi::Validatable)
+      @location = _location
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] max_aperture_value Object to be assigned
+    def max_aperture_value=(max_aperture_value : Float32?)
+      if max_aperture_value.nil?
+        return @max_aperture_value = nil
+      end
+      _max_aperture_value = max_aperture_value.not_nil!
+      @max_aperture_value = _max_aperture_value
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] metering_mode Object to be assigned
+    def metering_mode=(metering_mode : String?)
+      if metering_mode.nil?
+        return @metering_mode = nil
+      end
+      _metering_mode = metering_mode.not_nil!
+      @metering_mode = _metering_mode
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] rotation Object to be assigned
+    def rotation=(rotation : Int32?)
+      if rotation.nil?
+        return @rotation = nil
+      end
+      _rotation = rotation.not_nil!
+      @rotation = _rotation
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] sensor Object to be assigned
+    def sensor=(sensor : String?)
+      if sensor.nil?
+        return @sensor = nil
+      end
+      _sensor = sensor.not_nil!
+      @sensor = _sensor
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] subject_distance Object to be assigned
+    def subject_distance=(subject_distance : Int32?)
+      if subject_distance.nil?
+        return @subject_distance = nil
+      end
+      _subject_distance = subject_distance.not_nil!
+      @subject_distance = _subject_distance
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] time Object to be assigned
+    def time=(time : String?)
+      if time.nil?
+        return @time = nil
+      end
+      _time = time.not_nil!
+      @time = _time
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] white_balance Object to be assigned
+    def white_balance=(white_balance : String?)
+      if white_balance.nil?
+        return @white_balance = nil
+      end
+      _white_balance = white_balance.not_nil!
+      @white_balance = _white_balance
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] width Object to be assigned
+    def width=(width : Int32?)
+      if width.nil?
+        return @width = nil
+      end
+      _width = width.not_nil!
+      @width = _width
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@aperture, @aperture_present, @camera_make, @camera_make_present, @camera_model, @camera_model_present, @color_space, @color_space_present, @exposure_bias, @exposure_bias_present, @exposure_mode, @exposure_mode_present, @exposure_time, @exposure_time_present, @flash_used, @flash_used_present, @focal_length, @focal_length_present, @height, @height_present, @iso_speed, @iso_speed_present, @lens, @lens_present, @location, @location_present, @max_aperture_value, @max_aperture_value_present, @metering_mode, @metering_mode_present, @rotation, @rotation_present, @sensor, @sensor_present, @subject_distance, @subject_distance_present, @time, @time_present, @white_balance, @white_balance_present, @width, @width_present)
+    def_equals_and_hash(@aperture, @camera_make, @camera_model, @color_space, @exposure_bias, @exposure_mode, @exposure_time, @flash_used, @focal_length, @height, @iso_speed, @lens, @location, @max_aperture_value, @metering_mode, @rotation, @sensor, @subject_distance, @time, @white_balance, @width)
   end
 end

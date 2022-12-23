@@ -13,33 +13,25 @@ require "log"
 
 module GoogleDrive
   # Additional metadata about video media. This may not be available immediately upon upload.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class FileVideoMediaMetadata
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The duration of the video in milliseconds.
-    @[JSON::Field(key: "durationMillis", type: String?, presence: true, ignore_serialize: duration_millis.nil? && !duration_millis_present?)]
-    property duration_millis : String?
-
-    @[JSON::Field(ignore: true)]
-    property? duration_millis_present : Bool = false
+    @[JSON::Field(key: "durationMillis", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter duration_millis : String? = nil
 
     # The height of the video in pixels.
-    @[JSON::Field(key: "height", type: Int32?, presence: true, ignore_serialize: height.nil? && !height_present?)]
-    property height : Int32?
-
-    @[JSON::Field(ignore: true)]
-    property? height_present : Bool = false
+    @[JSON::Field(key: "height", type: Int32?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter height : Int32? = nil
 
     # The width of the video in pixels.
-    @[JSON::Field(key: "width", type: Int32?, presence: true, ignore_serialize: width.nil? && !width_present?)]
-    property width : Int32?
-
-    @[JSON::Field(ignore: true)]
-    property? width_present : Bool = false
+    @[JSON::Field(key: "width", type: Int32?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter width : Int32? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -54,7 +46,7 @@ module GoogleDrive
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -62,20 +54,44 @@ module GoogleDrive
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] duration_millis Object to be assigned
+    def duration_millis=(duration_millis : String?)
+      if duration_millis.nil?
+        return @duration_millis = nil
+      end
+      _duration_millis = duration_millis.not_nil!
+      @duration_millis = _duration_millis
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] height Object to be assigned
+    def height=(height : Int32?)
+      if height.nil?
+        return @height = nil
+      end
+      _height = height.not_nil!
+      @height = _height
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] width Object to be assigned
+    def width=(width : Int32?)
+      if width.nil?
+        return @width = nil
+      end
+      _width = width.not_nil!
+      @width = _width
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@duration_millis, @duration_millis_present, @height, @height_present, @width, @width_present)
+    def_equals_and_hash(@duration_millis, @height, @width)
   end
 end

@@ -13,33 +13,25 @@ require "log"
 
 module GoogleDrive
   # Geographic location information stored in the image.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class FileImageMediaMetadataLocation
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The altitude stored in the image.
-    @[JSON::Field(key: "altitude", type: Float64?, presence: true, ignore_serialize: altitude.nil? && !altitude_present?)]
-    property altitude : Float64?
-
-    @[JSON::Field(ignore: true)]
-    property? altitude_present : Bool = false
+    @[JSON::Field(key: "altitude", type: Float64?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter altitude : Float64? = nil
 
     # The latitude stored in the image.
-    @[JSON::Field(key: "latitude", type: Float64?, presence: true, ignore_serialize: latitude.nil? && !latitude_present?)]
-    property latitude : Float64?
-
-    @[JSON::Field(ignore: true)]
-    property? latitude_present : Bool = false
+    @[JSON::Field(key: "latitude", type: Float64?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter latitude : Float64? = nil
 
     # The longitude stored in the image.
-    @[JSON::Field(key: "longitude", type: Float64?, presence: true, ignore_serialize: longitude.nil? && !longitude_present?)]
-    property longitude : Float64?
-
-    @[JSON::Field(ignore: true)]
-    property? longitude_present : Bool = false
+    @[JSON::Field(key: "longitude", type: Float64?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter longitude : Float64? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -54,7 +46,7 @@ module GoogleDrive
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -62,20 +54,44 @@ module GoogleDrive
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] altitude Object to be assigned
+    def altitude=(altitude : Float64?)
+      if altitude.nil?
+        return @altitude = nil
+      end
+      _altitude = altitude.not_nil!
+      @altitude = _altitude
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] latitude Object to be assigned
+    def latitude=(latitude : Float64?)
+      if latitude.nil?
+        return @latitude = nil
+      end
+      _latitude = latitude.not_nil!
+      @latitude = _latitude
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] longitude Object to be assigned
+    def longitude=(longitude : Float64?)
+      if longitude.nil?
+        return @longitude = nil
+      end
+      _longitude = longitude.not_nil!
+      @longitude = _longitude
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@altitude, @altitude_present, @latitude, @latitude_present, @longitude, @longitude_present)
+    def_equals_and_hash(@altitude, @latitude, @longitude)
   end
 end

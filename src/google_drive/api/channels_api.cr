@@ -8,56 +8,141 @@
 #
 
 require "uri"
+require "../api_client"
 
 module GoogleDrive
   class ChannelsApi
     property api_client : ApiClient
+
+    delegate client_side_validation, debugging, to: @api_client.config
 
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
 
     # Stop watching resources through this channel
-    # @return [nil]
-    def stop(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, channel : Channel? = nil)
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param channel [GoogleDrive::Channel?]
+    # @return [Nil]
+    def stop(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      channel : GoogleDrive::Channel? = nil
+    ) : Nil
       stop_with_http_info(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, channel: channel)
       nil
     end
 
     # Stop watching resources through this channel
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def stop_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, channel : Channel? = nil)
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param channel [GoogleDrive::Channel?]
+    # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
+    def stop_with_http_info(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      channel : GoogleDrive::Channel? = nil
+    ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_stop(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, channel: channel)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: ChannelsApi#stop\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: ChannelsApi#stop\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return nil, status_code, headers
+      Tuple.new(nil, status_code, headers)
     end
 
     # Stop watching resources through this channel
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param channel [GoogleDrive::Channel?]
     # @return nil
-    def stop(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, channel : Channel? = nil, &block : Crest::Response ->)
+    def stop(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      channel : GoogleDrive::Channel? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_stop(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, channel: channel).execute(&block)
     end
 
+    DRIVE_CHANNELS_STOP_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_stop(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, channel : Channel? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_stop(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      channel : GoogleDrive::Channel? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: ChannelsApi.stop ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_CHANNELS_STOP_VALID_VALUES_FOR_ALT)
+        end
+
+        unless (_channel = channel).nil?
+          _channel.validate if _channel.is_a?(OpenApi::Validatable)
+        end
       end
+
       # resource path
       local_var_path = "/drive/v3/channels/stop"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -66,16 +151,11 @@ module GoogleDrive
       query_params["quotaUser"] = quota_user.to_s if !quota_user.nil?
       query_params["userIp"] = user_ip.to_s if !user_ip.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = channel.to_json
+      post_body : IO | String | Nil = @api_client.encode(body: channel, content_type: header_params["Content-Type"]?) if !channel.nil?
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -87,6 +167,7 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

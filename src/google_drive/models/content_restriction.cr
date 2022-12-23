@@ -13,46 +13,32 @@ require "log"
 
 module GoogleDrive
   # A restriction for accessing the content of the file.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class ContentRestriction
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Whether the content of the file is read-only. If a file is read-only, a new revision of the file may not be added, comments may not be added or modified, and the title of the file may not be modified.
-    @[JSON::Field(key: "readOnly", type: Bool?, presence: true, ignore_serialize: read_only.nil? && !read_only_present?)]
-    property read_only : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? read_only_present : Bool = false
+    @[JSON::Field(key: "readOnly", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter read_only : Bool? = nil
 
     # Reason for why the content of the file is restricted. This is only mutable on requests that also set readOnly=true.
-    @[JSON::Field(key: "reason", type: String?, presence: true, ignore_serialize: reason.nil? && !reason_present?)]
-    property reason : String?
+    @[JSON::Field(key: "reason", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter reason : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? reason_present : Bool = false
-
-    @[JSON::Field(key: "restrictingUser", type: User?, presence: true, ignore_serialize: restricting_user.nil? && !restricting_user_present?)]
-    property restricting_user : User?
-
-    @[JSON::Field(ignore: true)]
-    property? restricting_user_present : Bool = false
+    @[JSON::Field(key: "restrictingUser", type: GoogleDrive::User?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter restricting_user : GoogleDrive::User? = nil
 
     # The time at which the content restriction was set (formatted RFC 3339 timestamp). Only populated if readOnly is true.
-    @[JSON::Field(key: "restrictionTime", type: Time?, converter: Time::RFC3339Converter, presence: true, ignore_serialize: restriction_time.nil? && !restriction_time_present?)]
-    property restriction_time : Time?
-
-    @[JSON::Field(ignore: true)]
-    property? restriction_time_present : Bool = false
+    @[JSON::Field(key: "restrictionTime", type: Time?, default: nil, required: false, nullable: false, emit_null: false, converter: Time::RFC3339Converter)]
+    getter restriction_time : Time? = nil
 
     # The type of the content restriction. Currently the only possible value is globalContentRestriction.
-    @[JSON::Field(key: "type", type: String?, presence: true, ignore_serialize: _type.nil? && !_type_present?)]
-    property _type : String?
-
-    @[JSON::Field(ignore: true)]
-    property? _type_present : Bool = false
+    @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter _type : String? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -61,7 +47,7 @@ module GoogleDrive
       # Optional properties
       @read_only : Bool? = nil,
       @reason : String? = nil,
-      @restricting_user : User? = nil,
+      @restricting_user : GoogleDrive::User? = nil,
       @restriction_time : Time? = nil,
       @_type : String? = nil
     )
@@ -69,28 +55,81 @@ module GoogleDrive
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
+      unless (_restricting_user = @restricting_user).nil?
+        invalid_properties.concat(_restricting_user.list_invalid_properties_for("restricting_user")) if _restricting_user.is_a?(OpenApi::Validatable)
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      unless (_restricting_user = @restricting_user).nil?
+        return false if _restricting_user.is_a?(OpenApi::Validatable) && !_restricting_user.valid?
+      end
+
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] read_only Object to be assigned
+    def read_only=(read_only : Bool?)
+      if read_only.nil?
+        return @read_only = nil
+      end
+      _read_only = read_only.not_nil!
+      @read_only = _read_only
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] reason Object to be assigned
+    def reason=(reason : String?)
+      if reason.nil?
+        return @reason = nil
+      end
+      _reason = reason.not_nil!
+      @reason = _reason
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] restricting_user Object to be assigned
+    def restricting_user=(restricting_user : GoogleDrive::User?)
+      if restricting_user.nil?
+        return @restricting_user = nil
+      end
+      _restricting_user = restricting_user.not_nil!
+      _restricting_user.validate if _restricting_user.is_a?(OpenApi::Validatable)
+      @restricting_user = _restricting_user
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] restriction_time Object to be assigned
+    def restriction_time=(restriction_time : Time?)
+      if restriction_time.nil?
+        return @restriction_time = nil
+      end
+      _restriction_time = restriction_time.not_nil!
+      @restriction_time = _restriction_time
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] _type Object to be assigned
+    def _type=(_type : String?)
+      if _type.nil?
+        return @_type = nil
+      end
+      __type = _type.not_nil!
+      @_type = __type
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@read_only, @read_only_present, @reason, @reason_present, @restricting_user, @restricting_user_present, @restriction_time, @restriction_time_present, @_type, @_type_present)
+    def_equals_and_hash(@read_only, @reason, @restricting_user, @restriction_time, @_type)
   end
 end

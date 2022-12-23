@@ -13,117 +13,73 @@ require "log"
 
 module GoogleDrive
   # A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class Permission
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Whether the permission allows the file to be discovered through search. This is only applicable for permissions of type domain or anyone.
-    @[JSON::Field(key: "allowFileDiscovery", type: Bool?, presence: true, ignore_serialize: allow_file_discovery.nil? && !allow_file_discovery_present?)]
-    property allow_file_discovery : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? allow_file_discovery_present : Bool = false
+    @[JSON::Field(key: "allowFileDiscovery", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter allow_file_discovery : Bool? = nil
 
     # Whether the account associated with this permission has been deleted. This field only pertains to user and group permissions.
-    @[JSON::Field(key: "deleted", type: Bool?, presence: true, ignore_serialize: deleted.nil? && !deleted_present?)]
-    property deleted : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? deleted_present : Bool = false
+    @[JSON::Field(key: "deleted", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter deleted : Bool? = nil
 
     # The \"pretty\" name of the value of the permission. The following is a list of examples for each type of permission:   - user - User's full name, as defined for their Google account, such as \"Joe Smith.\"  - group - Name of the Google Group, such as \"The Company Administrators.\"  - domain - String domain name, such as \"thecompany.com.\"  - anyone - No displayName is present.
-    @[JSON::Field(key: "displayName", type: String?, presence: true, ignore_serialize: display_name.nil? && !display_name_present?)]
-    property display_name : String?
-
-    @[JSON::Field(ignore: true)]
-    property? display_name_present : Bool = false
+    @[JSON::Field(key: "displayName", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter display_name : String? = nil
 
     # The domain to which this permission refers.
-    @[JSON::Field(key: "domain", type: String?, presence: true, ignore_serialize: domain.nil? && !domain_present?)]
-    property domain : String?
-
-    @[JSON::Field(ignore: true)]
-    property? domain_present : Bool = false
+    @[JSON::Field(key: "domain", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter domain : String? = nil
 
     # The email address of the user or group to which this permission refers.
-    @[JSON::Field(key: "emailAddress", type: String?, presence: true, ignore_serialize: email_address.nil? && !email_address_present?)]
-    property email_address : String?
+    @[JSON::Field(key: "emailAddress", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter email_address : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? email_address_present : Bool = false
-
-    # The time at which this permission will expire (RFC 3339 date-time). Expiration times have the following restrictions:   - They can only be set on user and group permissions  - The time must be in the future  - The time cannot be more than a year in the future
-    @[JSON::Field(key: "expirationTime", type: Time?, converter: Time::RFC3339Converter, presence: true, ignore_serialize: expiration_time.nil? && !expiration_time_present?)]
-    property expiration_time : Time?
-
-    @[JSON::Field(ignore: true)]
-    property? expiration_time_present : Bool = false
+    # The time at which this permission will expire (RFC 3339 date-time). Expiration times have the following restrictions:   - They cannot be set on shared drive items  - They can only be set on user and group permissions  - The time must be in the future  - The time cannot be more than a year in the future
+    @[JSON::Field(key: "expirationTime", type: Time?, default: nil, required: false, nullable: false, emit_null: false, converter: Time::RFC3339Converter)]
+    getter expiration_time : Time? = nil
 
     # The ID of this permission. This is a unique identifier for the grantee, and is published in User resources as permissionId. IDs should be treated as opaque values.
-    @[JSON::Field(key: "id", type: String?, presence: true, ignore_serialize: id.nil? && !id_present?)]
-    property id : String?
-
-    @[JSON::Field(ignore: true)]
-    property? id_present : Bool = false
+    @[JSON::Field(key: "id", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter id : String? = nil
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#permission\".
-    @[JSON::Field(key: "kind", type: String?, default: "drive#permission", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String? = "drive#permission"
-
-    @[JSON::Field(ignore: true)]
-    property? kind_present : Bool = false
+    @[JSON::Field(key: "kind", type: String?, default: "drive#permission", required: false, nullable: false, emit_null: false)]
+    getter kind : String? = "drive#permission"
 
     # Whether the account associated with this permission is a pending owner. Only populated for user type permissions for files that are not in a shared drive.
-    @[JSON::Field(key: "pendingOwner", type: Bool?, presence: true, ignore_serialize: pending_owner.nil? && !pending_owner_present?)]
-    property pending_owner : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? pending_owner_present : Bool = false
+    @[JSON::Field(key: "pendingOwner", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter pending_owner : Bool? = nil
 
     # Details of whether the permissions on this shared drive item are inherited or directly on this item. This is an output-only field which is present only for shared drive items.
-    @[JSON::Field(key: "permissionDetails", type: Array(PermissionPermissionDetailsInner)?, presence: true, ignore_serialize: permission_details.nil? && !permission_details_present?)]
-    property permission_details : Array(PermissionPermissionDetailsInner)?
-
-    @[JSON::Field(ignore: true)]
-    property? permission_details_present : Bool = false
+    @[JSON::Field(key: "permissionDetails", type: Array(GoogleDrive::PermissionPermissionDetailsInner)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter permission_details : Array(GoogleDrive::PermissionPermissionDetailsInner)? = nil
 
     # A link to the user's profile photo, if available.
-    @[JSON::Field(key: "photoLink", type: String?, presence: true, ignore_serialize: photo_link.nil? && !photo_link_present?)]
-    property photo_link : String?
-
-    @[JSON::Field(ignore: true)]
-    property? photo_link_present : Bool = false
+    @[JSON::Field(key: "photoLink", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter photo_link : String? = nil
 
     # The role granted by this permission. While new values may be supported in the future, the following are currently allowed:   - owner  - organizer  - fileOrganizer  - writer  - commenter  - reader
-    @[JSON::Field(key: "role", type: String?, presence: true, ignore_serialize: role.nil? && !role_present?)]
-    property role : String?
-
-    @[JSON::Field(ignore: true)]
-    property? role_present : Bool = false
+    @[JSON::Field(key: "role", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter role : String? = nil
 
     # Deprecated - use permissionDetails instead.
-    @[JSON::Field(key: "teamDrivePermissionDetails", type: Array(PermissionTeamDrivePermissionDetailsInner)?, presence: true, ignore_serialize: team_drive_permission_details.nil? && !team_drive_permission_details_present?)]
-    property team_drive_permission_details : Array(PermissionTeamDrivePermissionDetailsInner)?
-
-    @[JSON::Field(ignore: true)]
-    property? team_drive_permission_details_present : Bool = false
+    @[JSON::Field(key: "teamDrivePermissionDetails", type: Array(GoogleDrive::PermissionTeamDrivePermissionDetailsInner)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter team_drive_permission_details : Array(GoogleDrive::PermissionTeamDrivePermissionDetailsInner)? = nil
 
     # The type of the grantee. Valid values are:   - user  - group  - domain  - anyone  When creating a permission, if type is user or group, you must provide an emailAddress for the user or group. When type is domain, you must provide a domain. There isn't extra information required for a anyone type.
-    @[JSON::Field(key: "type", type: String?, presence: true, ignore_serialize: _type.nil? && !_type_present?)]
-    property _type : String?
-
-    @[JSON::Field(ignore: true)]
-    property? _type_present : Bool = false
+    @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter _type : String? = nil
 
     # Indicates the view for this permission. Only populated for permissions that belong to a view. published is the only supported value.
-    @[JSON::Field(key: "view", type: String?, presence: true, ignore_serialize: view.nil? && !view_present?)]
-    property view : String?
-
-    @[JSON::Field(ignore: true)]
-    property? view_present : Bool = false
+    @[JSON::Field(key: "view", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter view : String? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -139,10 +95,10 @@ module GoogleDrive
       @id : String? = nil,
       @kind : String? = "drive#permission",
       @pending_owner : Bool? = nil,
-      @permission_details : Array(PermissionPermissionDetailsInner)? = nil,
+      @permission_details : Array(GoogleDrive::PermissionPermissionDetailsInner)? = nil,
       @photo_link : String? = nil,
       @role : String? = nil,
-      @team_drive_permission_details : Array(PermissionTeamDrivePermissionDetailsInner)? = nil,
+      @team_drive_permission_details : Array(GoogleDrive::PermissionTeamDrivePermissionDetailsInner)? = nil,
       @_type : String? = nil,
       @view : String? = nil
     )
@@ -150,28 +106,190 @@ module GoogleDrive
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
+      unless (_permission_details = @permission_details).nil?
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "permission_details", container: _permission_details)) if _permission_details.is_a?(Array)
+      end
+
+      unless (_team_drive_permission_details = @team_drive_permission_details).nil?
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "team_drive_permission_details", container: _team_drive_permission_details)) if _team_drive_permission_details.is_a?(Array)
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      unless (_permission_details = @permission_details).nil?
+        return false if _permission_details.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _permission_details)
+      end
+
+      unless (_team_drive_permission_details = @team_drive_permission_details).nil?
+        return false if _team_drive_permission_details.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _team_drive_permission_details)
+      end
+
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] allow_file_discovery Object to be assigned
+    def allow_file_discovery=(allow_file_discovery : Bool?)
+      if allow_file_discovery.nil?
+        return @allow_file_discovery = nil
+      end
+      _allow_file_discovery = allow_file_discovery.not_nil!
+      @allow_file_discovery = _allow_file_discovery
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] deleted Object to be assigned
+    def deleted=(deleted : Bool?)
+      if deleted.nil?
+        return @deleted = nil
+      end
+      _deleted = deleted.not_nil!
+      @deleted = _deleted
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] display_name Object to be assigned
+    def display_name=(display_name : String?)
+      if display_name.nil?
+        return @display_name = nil
+      end
+      _display_name = display_name.not_nil!
+      @display_name = _display_name
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] domain Object to be assigned
+    def domain=(domain : String?)
+      if domain.nil?
+        return @domain = nil
+      end
+      _domain = domain.not_nil!
+      @domain = _domain
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] email_address Object to be assigned
+    def email_address=(email_address : String?)
+      if email_address.nil?
+        return @email_address = nil
+      end
+      _email_address = email_address.not_nil!
+      @email_address = _email_address
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] expiration_time Object to be assigned
+    def expiration_time=(expiration_time : Time?)
+      if expiration_time.nil?
+        return @expiration_time = nil
+      end
+      _expiration_time = expiration_time.not_nil!
+      @expiration_time = _expiration_time
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] id Object to be assigned
+    def id=(id : String?)
+      if id.nil?
+        return @id = nil
+      end
+      _id = id.not_nil!
+      @id = _id
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] kind Object to be assigned
+    def kind=(kind : String?)
+      if kind.nil?
+        return @kind = nil
+      end
+      _kind = kind.not_nil!
+      @kind = _kind
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] pending_owner Object to be assigned
+    def pending_owner=(pending_owner : Bool?)
+      if pending_owner.nil?
+        return @pending_owner = nil
+      end
+      _pending_owner = pending_owner.not_nil!
+      @pending_owner = _pending_owner
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] permission_details Object to be assigned
+    def permission_details=(permission_details : Array(GoogleDrive::PermissionPermissionDetailsInner)?)
+      if permission_details.nil?
+        return @permission_details = nil
+      end
+      _permission_details = permission_details.not_nil!
+      OpenApi::ContainerValidator.validate(container: _permission_details) if _permission_details.is_a?(Array)
+      @permission_details = _permission_details
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] photo_link Object to be assigned
+    def photo_link=(photo_link : String?)
+      if photo_link.nil?
+        return @photo_link = nil
+      end
+      _photo_link = photo_link.not_nil!
+      @photo_link = _photo_link
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] role Object to be assigned
+    def role=(role : String?)
+      if role.nil?
+        return @role = nil
+      end
+      _role = role.not_nil!
+      @role = _role
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] team_drive_permission_details Object to be assigned
+    def team_drive_permission_details=(team_drive_permission_details : Array(GoogleDrive::PermissionTeamDrivePermissionDetailsInner)?)
+      if team_drive_permission_details.nil?
+        return @team_drive_permission_details = nil
+      end
+      _team_drive_permission_details = team_drive_permission_details.not_nil!
+      OpenApi::ContainerValidator.validate(container: _team_drive_permission_details) if _team_drive_permission_details.is_a?(Array)
+      @team_drive_permission_details = _team_drive_permission_details
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] _type Object to be assigned
+    def _type=(_type : String?)
+      if _type.nil?
+        return @_type = nil
+      end
+      __type = _type.not_nil!
+      @_type = __type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] view Object to be assigned
+    def view=(view : String?)
+      if view.nil?
+        return @view = nil
+      end
+      _view = view.not_nil!
+      @view = _view
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@allow_file_discovery, @allow_file_discovery_present, @deleted, @deleted_present, @display_name, @display_name_present, @domain, @domain_present, @email_address, @email_address_present, @expiration_time, @expiration_time_present, @id, @id_present, @kind, @kind_present, @pending_owner, @pending_owner_present, @permission_details, @permission_details_present, @photo_link, @photo_link_present, @role, @role_present, @team_drive_permission_details, @team_drive_permission_details_present, @_type, @_type_present, @view, @view_present)
+    def_equals_and_hash(@allow_file_discovery, @deleted, @display_name, @domain, @email_address, @expiration_time, @id, @kind, @pending_owner, @permission_details, @photo_link, @role, @team_drive_permission_details, @_type, @view)
   end
 end

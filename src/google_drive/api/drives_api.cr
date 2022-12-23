@@ -8,59 +8,152 @@
 #
 
 require "uri"
+require "../api_client"
 
 module GoogleDrive
   class DrivesApi
     property api_client : ApiClient
 
+    delegate client_side_validation, debugging, to: @api_client.config
+
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
 
-    # Creates a new shared drive.
-    # @param request_id [String] An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a shared drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same shared drive. If the shared drive already exists a 409 error will be returned.
-    # @return [Drive]
-    def create(*, request_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, drive : Drive? = nil)
+    # Creates a shared drive.
+    # @required @param request_id [String?] An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a shared drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same shared drive. If the shared drive already exists a 409 error will be returned.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param drive [GoogleDrive::Drive?]
+    # @return [GoogleDrive::Drive]
+    def create(
+      *,
+      request_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      drive : GoogleDrive::Drive? = nil
+    ) : GoogleDrive::Drive
       data, _status_code, _headers = create_with_http_info(request_id: request_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive: drive)
       data
     end
 
-    # Creates a new shared drive.
-    # @param request_id [String] An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a shared drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same shared drive. If the shared drive already exists a 409 error will be returned.
-    # @return [Array<(Drive, Integer, Hash)>] Drive data, response status code and response headers
-    def create_with_http_info(*, request_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, drive : Drive? = nil)
+    # Creates a shared drive.
+    # @required @param request_id [String?] An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a shared drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same shared drive. If the shared drive already exists a 409 error will be returned.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param drive [GoogleDrive::Drive?]
+    # @return [Tuple(GoogleDrive::Drive, Integer, Hash)] GoogleDrive::Drive, response status code and response headers
+    def create_with_http_info(
+      *,
+      request_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      drive : GoogleDrive::Drive? = nil
+    ) : Tuple(GoogleDrive::Drive, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_create(request_id: request_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive: drive)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: DrivesApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: DrivesApi#create\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Drive.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::Drive.from_json(body), status_code, headers)
     end
 
-    # Creates a new shared drive.
-    # @param request_id [String] An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a shared drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same shared drive. If the shared drive already exists a 409 error will be returned.
+    # Creates a shared drive.
+    # @required @param request_id [String?] An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a shared drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same shared drive. If the shared drive already exists a 409 error will be returned.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param drive [GoogleDrive::Drive?]
     # @return nil
-    def create(*, request_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, drive : Drive? = nil, &block : Crest::Response ->)
+    def create(
+      *,
+      request_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      drive : GoogleDrive::Drive? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_create(request_id: request_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive: drive).execute(&block)
     end
 
+    DRIVE_DRIVES_CREATE_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_create(*, request_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, drive : Drive? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_create(
+      *,
+      request_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      drive : GoogleDrive::Drive? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: DrivesApi.create ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        raise ArgumentError.new("\"request_id\" is required and cannot be null") if request_id.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_DRIVES_CREATE_VALID_VALUES_FOR_ALT)
+        end
+
+        unless (_drive = drive).nil?
+          _drive.validate if _drive.is_a?(OpenApi::Validatable)
+        end
       end
+
       # resource path
       local_var_path = "/drive/v3/drives"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -70,18 +163,11 @@ module GoogleDrive
       query_params["userIp"] = user_ip.to_s if !user_ip.nil?
       query_params["requestId"] = request_id.to_s if !request_id.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-      # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = drive.to_json
+      post_body : IO | String | Nil = @api_client.encode(body: drive, content_type: header_params["Content-Type"]?) if !drive.nil?
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -93,55 +179,145 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Permanently deletes a shared drive for which the user is an organizer. The shared drive cannot contain any untrashed items.
-    # @param drive_id [String] The ID of the shared drive.
-    # @return [nil]
-    def delete(*, drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, allow_item_deletion : Bool? = nil, use_domain_admin_access : Bool? = nil)
+    # @required @param drive_id [String?] The ID of the shared drive.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param allow_item_deletion [Bool?] Whether any items inside the shared drive should also be deleted. This option is only supported when useDomainAdminAccess is also set to true.
+    # @optional @param use_domain_admin_access [Bool?] Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the shared drive belongs.
+    # @return [Nil]
+    def delete(
+      *,
+      drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      allow_item_deletion : Bool? = nil,
+      use_domain_admin_access : Bool? = nil
+    ) : Nil
       delete_with_http_info(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, allow_item_deletion: allow_item_deletion, use_domain_admin_access: use_domain_admin_access)
       nil
     end
 
     # Permanently deletes a shared drive for which the user is an organizer. The shared drive cannot contain any untrashed items.
-    # @param drive_id [String] The ID of the shared drive.
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def delete_with_http_info(*, drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, allow_item_deletion : Bool? = nil, use_domain_admin_access : Bool? = nil)
+    # @required @param drive_id [String?] The ID of the shared drive.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param allow_item_deletion [Bool?] Whether any items inside the shared drive should also be deleted. This option is only supported when useDomainAdminAccess is also set to true.
+    # @optional @param use_domain_admin_access [Bool?] Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the shared drive belongs.
+    # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
+    def delete_with_http_info(
+      *,
+      drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      allow_item_deletion : Bool? = nil,
+      use_domain_admin_access : Bool? = nil
+    ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, allow_item_deletion: allow_item_deletion, use_domain_admin_access: use_domain_admin_access)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: DrivesApi#delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: DrivesApi#delete\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return nil, status_code, headers
+      Tuple.new(nil, status_code, headers)
     end
 
     # Permanently deletes a shared drive for which the user is an organizer. The shared drive cannot contain any untrashed items.
-    # @param drive_id [String] The ID of the shared drive.
+    # @required @param drive_id [String?] The ID of the shared drive.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param allow_item_deletion [Bool?] Whether any items inside the shared drive should also be deleted. This option is only supported when useDomainAdminAccess is also set to true.
+    # @optional @param use_domain_admin_access [Bool?] Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the shared drive belongs.
     # @return nil
-    def delete(*, drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, allow_item_deletion : Bool? = nil, use_domain_admin_access : Bool? = nil, &block : Crest::Response ->)
+    def delete(
+      *,
+      drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      allow_item_deletion : Bool? = nil,
+      use_domain_admin_access : Bool? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_delete(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, allow_item_deletion: allow_item_deletion, use_domain_admin_access: use_domain_admin_access).execute(&block)
     end
 
+    DRIVE_DRIVES_DELETE_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_delete(*, drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, allow_item_deletion : Bool? = nil, use_domain_admin_access : Bool? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_delete(
+      *,
+      drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      allow_item_deletion : Bool? = nil,
+      use_domain_admin_access : Bool? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: DrivesApi.delete ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        raise ArgumentError.new("\"drive_id\" is required and cannot be null") if drive_id.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_DRIVES_DELETE_VALID_VALUES_FOR_ALT)
+        end
       end
+
       # resource path
       local_var_path = "/drive/v3/drives/{driveId}".sub("{" + "driveId" + "}", URI.encode_path(drive_id.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -152,14 +328,11 @@ module GoogleDrive
       query_params["allowItemDeletion"] = allow_item_deletion.to_s if !allow_item_deletion.nil?
       query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -171,55 +344,140 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Gets a shared drive's metadata by ID.
-    # @param drive_id [String] The ID of the shared drive.
-    # @return [Drive]
-    def get(*, drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = nil)
+    # @required @param drive_id [String?] The ID of the shared drive.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param use_domain_admin_access [Bool?] Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the shared drive belongs.
+    # @return [GoogleDrive::Drive]
+    def get(
+      *,
+      drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      use_domain_admin_access : Bool? = nil
+    ) : GoogleDrive::Drive
       data, _status_code, _headers = get_with_http_info(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access)
       data
     end
 
     # Gets a shared drive&#39;s metadata by ID.
-    # @param drive_id [String] The ID of the shared drive.
-    # @return [Array<(Drive, Integer, Hash)>] Drive data, response status code and response headers
-    def get_with_http_info(*, drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = nil)
+    # @required @param drive_id [String?] The ID of the shared drive.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param use_domain_admin_access [Bool?] Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the shared drive belongs.
+    # @return [Tuple(GoogleDrive::Drive, Integer, Hash)] GoogleDrive::Drive, response status code and response headers
+    def get_with_http_info(
+      *,
+      drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      use_domain_admin_access : Bool? = nil
+    ) : Tuple(GoogleDrive::Drive, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: DrivesApi#get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: DrivesApi#get\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Drive.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::Drive.from_json(body), status_code, headers)
     end
 
     # Gets a shared drive&#39;s metadata by ID.
-    # @param drive_id [String] The ID of the shared drive.
+    # @required @param drive_id [String?] The ID of the shared drive.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param use_domain_admin_access [Bool?] Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the shared drive belongs.
     # @return nil
-    def get(*, drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = nil, &block : Crest::Response ->)
+    def get(
+      *,
+      drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      use_domain_admin_access : Bool? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access).execute(&block)
     end
 
+    DRIVE_DRIVES_GET_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_get(*, drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_get(
+      *,
+      drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      use_domain_admin_access : Bool? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: DrivesApi.get ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        raise ArgumentError.new("\"drive_id\" is required and cannot be null") if drive_id.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_DRIVES_GET_VALID_VALUES_FOR_ALT)
+        end
       end
+
       # resource path
       local_var_path = "/drive/v3/drives/{driveId}".sub("{" + "driveId" + "}", URI.encode_path(drive_id.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -229,16 +487,11 @@ module GoogleDrive
       query_params["userIp"] = user_ip.to_s if !user_ip.nil?
       query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -250,55 +503,133 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Hides a shared drive from the default view.
-    # @param drive_id [String] The ID of the shared drive.
-    # @return [Drive]
-    def hide(*, drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil)
+    # @required @param drive_id [String?] The ID of the shared drive.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @return [GoogleDrive::Drive]
+    def hide(
+      *,
+      drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil
+    ) : GoogleDrive::Drive
       data, _status_code, _headers = hide_with_http_info(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
       data
     end
 
     # Hides a shared drive from the default view.
-    # @param drive_id [String] The ID of the shared drive.
-    # @return [Array<(Drive, Integer, Hash)>] Drive data, response status code and response headers
-    def hide_with_http_info(*, drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil)
+    # @required @param drive_id [String?] The ID of the shared drive.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @return [Tuple(GoogleDrive::Drive, Integer, Hash)] GoogleDrive::Drive, response status code and response headers
+    def hide_with_http_info(
+      *,
+      drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil
+    ) : Tuple(GoogleDrive::Drive, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_hide(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: DrivesApi#hide\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: DrivesApi#hide\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Drive.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::Drive.from_json(body), status_code, headers)
     end
 
     # Hides a shared drive from the default view.
-    # @param drive_id [String] The ID of the shared drive.
+    # @required @param drive_id [String?] The ID of the shared drive.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
     # @return nil
-    def hide(*, drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, &block : Crest::Response ->)
+    def hide(
+      *,
+      drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_hide(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip).execute(&block)
     end
 
+    DRIVE_DRIVES_HIDE_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_hide(*, drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_hide(
+      *,
+      drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: DrivesApi.hide ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        raise ArgumentError.new("\"drive_id\" is required and cannot be null") if drive_id.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_DRIVES_HIDE_VALID_VALUES_FOR_ALT)
+        end
       end
+
       # resource path
       local_var_path = "/drive/v3/drives/{driveId}/hide".sub("{" + "driveId" + "}", URI.encode_path(drive_id.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -307,16 +638,11 @@ module GoogleDrive
       query_params["quotaUser"] = quota_user.to_s if !quota_user.nil?
       query_params["userIp"] = user_ip.to_s if !user_ip.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -328,60 +654,159 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Lists the user's shared drives.
-    # @return [DriveList]
-    def list(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = nil, page_token : String? = nil, q : String? = nil, use_domain_admin_access : Bool? = nil)
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param page_size [Int32?] Maximum number of shared drives to return per page.
+    # @optional @param page_token [String?] Page token for shared drives.
+    # @optional @param q [String?] Query string for searching shared drives.
+    # @optional @param use_domain_admin_access [Bool?] Issue the request as a domain administrator; if set to true, then all shared drives of the domain in which the requester is an administrator are returned.
+    # @return [GoogleDrive::DriveList]
+    def list(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      page_size : Int32? = nil,
+      page_token : String? = nil,
+      q : String? = nil,
+      use_domain_admin_access : Bool? = nil
+    ) : GoogleDrive::DriveList
       data, _status_code, _headers = list_with_http_info(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token, q: q, use_domain_admin_access: use_domain_admin_access)
       data
     end
 
     # Lists the user&#39;s shared drives.
-    # @return [Array<(DriveList, Integer, Hash)>] DriveList data, response status code and response headers
-    def list_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = nil, page_token : String? = nil, q : String? = nil, use_domain_admin_access : Bool? = nil)
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param page_size [Int32?] Maximum number of shared drives to return per page.
+    # @optional @param page_token [String?] Page token for shared drives.
+    # @optional @param q [String?] Query string for searching shared drives.
+    # @optional @param use_domain_admin_access [Bool?] Issue the request as a domain administrator; if set to true, then all shared drives of the domain in which the requester is an administrator are returned.
+    # @return [Tuple(GoogleDrive::DriveList, Integer, Hash)] GoogleDrive::DriveList, response status code and response headers
+    def list_with_http_info(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      page_size : Int32? = nil,
+      page_token : String? = nil,
+      q : String? = nil,
+      use_domain_admin_access : Bool? = nil
+    ) : Tuple(GoogleDrive::DriveList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_list(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token, q: q, use_domain_admin_access: use_domain_admin_access)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: DrivesApi#list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: DrivesApi#list\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return DriveList.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::DriveList.from_json(body), status_code, headers)
     end
 
     # Lists the user&#39;s shared drives.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param page_size [Int32?] Maximum number of shared drives to return per page.
+    # @optional @param page_token [String?] Page token for shared drives.
+    # @optional @param q [String?] Query string for searching shared drives.
+    # @optional @param use_domain_admin_access [Bool?] Issue the request as a domain administrator; if set to true, then all shared drives of the domain in which the requester is an administrator are returned.
     # @return nil
-    def list(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = nil, page_token : String? = nil, q : String? = nil, use_domain_admin_access : Bool? = nil, &block : Crest::Response ->)
+    def list(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      page_size : Int32? = nil,
+      page_token : String? = nil,
+      q : String? = nil,
+      use_domain_admin_access : Bool? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_list(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token, q: q, use_domain_admin_access: use_domain_admin_access).execute(&block)
     end
 
+    DRIVE_DRIVES_LIST_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+    DRIVE_DRIVES_LIST_MAX_FOR_PAGE_SIZE    = Int32.new("100")
+    DRIVE_DRIVES_LIST_MIN_FOR_PAGE_SIZE    = Int32.new("1")
+
     # @return Crest::Request
-    def build_api_request_for_list(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, page_size : Int32? = nil, page_token : String? = nil, q : String? = nil, use_domain_admin_access : Bool? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_list(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      page_size : Int32? = nil,
+      page_token : String? = nil,
+      q : String? = nil,
+      use_domain_admin_access : Bool? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: DrivesApi.list ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      if @api_client.config.client_side_validation && !page_size.nil? && page_size > 100
-        raise ArgumentError.new("invalid value for \"page_size\" when calling DrivesApi.list, must be smaller than or equal to 100.")
-      end
 
-      if @api_client.config.client_side_validation && !page_size.nil? && page_size < 1
-        raise ArgumentError.new("invalid value for \"page_size\" when calling DrivesApi.list, must be greater than or equal to 1.")
+      if client_side_validation
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_DRIVES_LIST_VALID_VALUES_FOR_ALT)
+        end
+
+        unless (_page_size = page_size).nil?
+          OpenApi::PrimitiveValidator.validate_max_number("page_size", _page_size, DRIVE_DRIVES_LIST_MAX_FOR_PAGE_SIZE)
+          OpenApi::PrimitiveValidator.validate_min_number("page_size", _page_size, DRIVE_DRIVES_LIST_MIN_FOR_PAGE_SIZE)
+        end
       end
 
       # resource path
       local_var_path = "/drive/v3/drives"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -394,16 +819,11 @@ module GoogleDrive
       query_params["q"] = q.to_s if !q.nil?
       query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -415,55 +835,133 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Restores a shared drive to the default view.
-    # @param drive_id [String] The ID of the shared drive.
-    # @return [Drive]
-    def unhide(*, drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil)
+    # @required @param drive_id [String?] The ID of the shared drive.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @return [GoogleDrive::Drive]
+    def unhide(
+      *,
+      drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil
+    ) : GoogleDrive::Drive
       data, _status_code, _headers = unhide_with_http_info(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
       data
     end
 
     # Restores a shared drive to the default view.
-    # @param drive_id [String] The ID of the shared drive.
-    # @return [Array<(Drive, Integer, Hash)>] Drive data, response status code and response headers
-    def unhide_with_http_info(*, drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil)
+    # @required @param drive_id [String?] The ID of the shared drive.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @return [Tuple(GoogleDrive::Drive, Integer, Hash)] GoogleDrive::Drive, response status code and response headers
+    def unhide_with_http_info(
+      *,
+      drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil
+    ) : Tuple(GoogleDrive::Drive, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_unhide(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: DrivesApi#unhide\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: DrivesApi#unhide\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Drive.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::Drive.from_json(body), status_code, headers)
     end
 
     # Restores a shared drive to the default view.
-    # @param drive_id [String] The ID of the shared drive.
+    # @required @param drive_id [String?] The ID of the shared drive.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
     # @return nil
-    def unhide(*, drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, &block : Crest::Response ->)
+    def unhide(
+      *,
+      drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_unhide(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip).execute(&block)
     end
 
+    DRIVE_DRIVES_UNHIDE_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_unhide(*, drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_unhide(
+      *,
+      drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: DrivesApi.unhide ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        raise ArgumentError.new("\"drive_id\" is required and cannot be null") if drive_id.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_DRIVES_UNHIDE_VALID_VALUES_FOR_ALT)
+        end
       end
+
       # resource path
       local_var_path = "/drive/v3/drives/{driveId}/unhide".sub("{" + "driveId" + "}", URI.encode_path(drive_id.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -472,16 +970,11 @@ module GoogleDrive
       query_params["quotaUser"] = quota_user.to_s if !quota_user.nil?
       query_params["userIp"] = user_ip.to_s if !user_ip.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -493,55 +986,153 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Updates the metadate for a shared drive.
-    # @param drive_id [String] The ID of the shared drive.
-    # @return [Drive]
-    def update(*, drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = nil, drive : Drive? = nil)
+    # @required @param drive_id [String?] The ID of the shared drive.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param use_domain_admin_access [Bool?] Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the shared drive belongs.
+    # @optional @param drive [GoogleDrive::Drive?]
+    # @return [GoogleDrive::Drive]
+    def update(
+      *,
+      drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      use_domain_admin_access : Bool? = nil,
+      drive : GoogleDrive::Drive? = nil
+    ) : GoogleDrive::Drive
       data, _status_code, _headers = update_with_http_info(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access, drive: drive)
       data
     end
 
     # Updates the metadate for a shared drive.
-    # @param drive_id [String] The ID of the shared drive.
-    # @return [Array<(Drive, Integer, Hash)>] Drive data, response status code and response headers
-    def update_with_http_info(*, drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = nil, drive : Drive? = nil)
+    # @required @param drive_id [String?] The ID of the shared drive.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param use_domain_admin_access [Bool?] Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the shared drive belongs.
+    # @optional @param drive [GoogleDrive::Drive?]
+    # @return [Tuple(GoogleDrive::Drive, Integer, Hash)] GoogleDrive::Drive, response status code and response headers
+    def update_with_http_info(
+      *,
+      drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      use_domain_admin_access : Bool? = nil,
+      drive : GoogleDrive::Drive? = nil
+    ) : Tuple(GoogleDrive::Drive, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_update(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access, drive: drive)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: DrivesApi#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: DrivesApi#update\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Drive.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::Drive.from_json(body), status_code, headers)
     end
 
     # Updates the metadate for a shared drive.
-    # @param drive_id [String] The ID of the shared drive.
+    # @required @param drive_id [String?] The ID of the shared drive.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param use_domain_admin_access [Bool?] Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the shared drive belongs.
+    # @optional @param drive [GoogleDrive::Drive?]
     # @return nil
-    def update(*, drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = nil, drive : Drive? = nil, &block : Crest::Response ->)
+    def update(
+      *,
+      drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      use_domain_admin_access : Bool? = nil,
+      drive : GoogleDrive::Drive? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_update(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access, drive: drive).execute(&block)
     end
 
+    DRIVE_DRIVES_UPDATE_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_update(*, drive_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, use_domain_admin_access : Bool? = nil, drive : Drive? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_update(
+      *,
+      drive_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      use_domain_admin_access : Bool? = nil,
+      drive : GoogleDrive::Drive? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: DrivesApi.update ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        raise ArgumentError.new("\"drive_id\" is required and cannot be null") if drive_id.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_DRIVES_UPDATE_VALID_VALUES_FOR_ALT)
+        end
+
+        unless (_drive = drive).nil?
+          _drive.validate if _drive.is_a?(OpenApi::Validatable)
+        end
       end
+
       # resource path
       local_var_path = "/drive/v3/drives/{driveId}".sub("{" + "driveId" + "}", URI.encode_path(drive_id.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -551,18 +1142,11 @@ module GoogleDrive
       query_params["userIp"] = user_ip.to_s if !user_ip.nil?
       query_params["useDomainAdminAccess"] = use_domain_admin_access.to_s if !use_domain_admin_access.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-      # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = drive.to_json
+      post_body : IO | String | Nil = @api_client.encode(body: drive, content_type: header_params["Content-Type"]?) if !drive.nil?
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -574,6 +1158,7 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

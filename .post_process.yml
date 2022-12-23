@@ -14,3 +14,32 @@ tasks:
         name: "Update ::File to IO | String"
         pattern: ': ::File'
         new_value: ': IO | String'
+  - name: 'Update all'
+    file_glob: './src/google_drive/**/*.cr'
+    changes:
+      -
+        name: 'Correct JSON::Any?'
+        pattern: 'JSON::Any\?'
+        new_value: 'JSON::Any?'
+      -
+        name: 'Correct JSONAny'
+        pattern: 'JSONAny'
+        new_value: 'JSON::Any'
+      -
+        name: 'Correct GoogleDrive::String'
+        pattern: 'GoogleDrive::String'
+        new_value: 'String'
+      -
+        name: 'Correct ::::'
+        pattern: '::::'
+        new_value: '::'
+      -
+        name: "Remove empty if blocks"
+        pattern: '^\s+if _[^\s]+ = [^\s]+$\n^\s+end$'
+        new_value: ''
+        multi_line: true
+      -
+        name: "Remove empty unless blocks"
+        pattern: '(^\s+unless [^\s]+ = [^\s]+$\n^\s+end$|^\s+unless [^\s]+$\n^\s+end$)'
+        new_value: ''
+        multi_line: true

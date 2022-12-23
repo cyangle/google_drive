@@ -13,26 +13,21 @@ require "log"
 
 module GoogleDrive
   # A thumbnail for the file. This will only be used if Google Drive cannot generate a standard thumbnail.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class FileContentHintsThumbnail
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The thumbnail data encoded with URL-safe Base64 (RFC 4648 section 5).
-    @[JSON::Field(key: "image", type: String?, presence: true, ignore_serialize: image.nil? && !image_present?)]
-    property image : String?
-
-    @[JSON::Field(ignore: true)]
-    property? image_present : Bool = false
+    @[JSON::Field(key: "image", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter image : String? = nil
 
     # The MIME type of the thumbnail.
-    @[JSON::Field(key: "mimeType", type: String?, presence: true, ignore_serialize: mime_type.nil? && !mime_type_present?)]
-    property mime_type : String?
-
-    @[JSON::Field(ignore: true)]
-    property? mime_type_present : Bool = false
+    @[JSON::Field(key: "mimeType", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter mime_type : String? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -46,7 +41,7 @@ module GoogleDrive
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -54,20 +49,34 @@ module GoogleDrive
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] image Object to be assigned
+    def image=(image : String?)
+      if image.nil?
+        return @image = nil
+      end
+      _image = image.not_nil!
+      @image = _image
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] mime_type Object to be assigned
+    def mime_type=(mime_type : String?)
+      if mime_type.nil?
+        return @mime_type = nil
+      end
+      _mime_type = mime_type.not_nil!
+      @mime_type = _mime_type
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@image, @image_present, @mime_type, @mime_type_present)
+    def_equals_and_hash(@image, @mime_type)
   end
 end

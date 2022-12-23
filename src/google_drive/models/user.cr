@@ -13,54 +13,37 @@ require "log"
 
 module GoogleDrive
   # Information about a Drive user.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class User
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # A plain text displayable name for this user.
-    @[JSON::Field(key: "displayName", type: String?, presence: true, ignore_serialize: display_name.nil? && !display_name_present?)]
-    property display_name : String?
-
-    @[JSON::Field(ignore: true)]
-    property? display_name_present : Bool = false
+    @[JSON::Field(key: "displayName", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter display_name : String? = nil
 
     # The email address of the user. This may not be present in certain contexts if the user has not made their email address visible to the requester.
-    @[JSON::Field(key: "emailAddress", type: String?, presence: true, ignore_serialize: email_address.nil? && !email_address_present?)]
-    property email_address : String?
-
-    @[JSON::Field(ignore: true)]
-    property? email_address_present : Bool = false
+    @[JSON::Field(key: "emailAddress", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter email_address : String? = nil
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#user\".
-    @[JSON::Field(key: "kind", type: String?, default: "drive#user", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String? = "drive#user"
-
-    @[JSON::Field(ignore: true)]
-    property? kind_present : Bool = false
+    @[JSON::Field(key: "kind", type: String?, default: "drive#user", required: false, nullable: false, emit_null: false)]
+    getter kind : String? = "drive#user"
 
     # Whether this user is the requesting user.
-    @[JSON::Field(key: "me", type: Bool?, presence: true, ignore_serialize: me.nil? && !me_present?)]
-    property me : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? me_present : Bool = false
+    @[JSON::Field(key: "me", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter me : Bool? = nil
 
     # The user's ID as visible in Permission resources.
-    @[JSON::Field(key: "permissionId", type: String?, presence: true, ignore_serialize: permission_id.nil? && !permission_id_present?)]
-    property permission_id : String?
-
-    @[JSON::Field(ignore: true)]
-    property? permission_id_present : Bool = false
+    @[JSON::Field(key: "permissionId", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter permission_id : String? = nil
 
     # A link to the user's profile photo, if available.
-    @[JSON::Field(key: "photoLink", type: String?, presence: true, ignore_serialize: photo_link.nil? && !photo_link_present?)]
-    property photo_link : String?
-
-    @[JSON::Field(ignore: true)]
-    property? photo_link_present : Bool = false
+    @[JSON::Field(key: "photoLink", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter photo_link : String? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -78,7 +61,7 @@ module GoogleDrive
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -86,20 +69,74 @@ module GoogleDrive
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] display_name Object to be assigned
+    def display_name=(display_name : String?)
+      if display_name.nil?
+        return @display_name = nil
+      end
+      _display_name = display_name.not_nil!
+      @display_name = _display_name
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] email_address Object to be assigned
+    def email_address=(email_address : String?)
+      if email_address.nil?
+        return @email_address = nil
+      end
+      _email_address = email_address.not_nil!
+      @email_address = _email_address
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] kind Object to be assigned
+    def kind=(kind : String?)
+      if kind.nil?
+        return @kind = nil
+      end
+      _kind = kind.not_nil!
+      @kind = _kind
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] me Object to be assigned
+    def me=(me : Bool?)
+      if me.nil?
+        return @me = nil
+      end
+      _me = me.not_nil!
+      @me = _me
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] permission_id Object to be assigned
+    def permission_id=(permission_id : String?)
+      if permission_id.nil?
+        return @permission_id = nil
+      end
+      _permission_id = permission_id.not_nil!
+      @permission_id = _permission_id
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] photo_link Object to be assigned
+    def photo_link=(photo_link : String?)
+      if photo_link.nil?
+        return @photo_link = nil
+      end
+      _photo_link = photo_link.not_nil!
+      @photo_link = _photo_link
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@display_name, @display_name_present, @email_address, @email_address_present, @kind, @kind_present, @me, @me_present, @permission_id, @permission_id_present, @photo_link, @photo_link_present)
+    def_equals_and_hash(@display_name, @email_address, @kind, @me, @permission_id, @photo_link)
   end
 end

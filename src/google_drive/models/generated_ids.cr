@@ -13,33 +13,25 @@ require "log"
 
 module GoogleDrive
   # A list of generated file IDs which can be provided in create requests.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class GeneratedIds
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The IDs generated for the requesting user in the specified space.
-    @[JSON::Field(key: "ids", type: Array(String)?, presence: true, ignore_serialize: ids.nil? && !ids_present?)]
-    property ids : Array(String)?
-
-    @[JSON::Field(ignore: true)]
-    property? ids_present : Bool = false
+    @[JSON::Field(key: "ids", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter ids : Array(String)? = nil
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#generatedIds\".
-    @[JSON::Field(key: "kind", type: String?, default: "drive#generatedIds", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String? = "drive#generatedIds"
-
-    @[JSON::Field(ignore: true)]
-    property? kind_present : Bool = false
+    @[JSON::Field(key: "kind", type: String?, default: "drive#generatedIds", required: false, nullable: false, emit_null: false)]
+    getter kind : String? = "drive#generatedIds"
 
     # The type of file that can be created with these IDs.
-    @[JSON::Field(key: "space", type: String?, presence: true, ignore_serialize: space.nil? && !space_present?)]
-    property space : String?
-
-    @[JSON::Field(ignore: true)]
-    property? space_present : Bool = false
+    @[JSON::Field(key: "space", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter space : String? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -54,7 +46,7 @@ module GoogleDrive
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -62,20 +54,44 @@ module GoogleDrive
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] ids Object to be assigned
+    def ids=(ids : Array(String)?)
+      if ids.nil?
+        return @ids = nil
+      end
+      _ids = ids.not_nil!
+      @ids = _ids
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] kind Object to be assigned
+    def kind=(kind : String?)
+      if kind.nil?
+        return @kind = nil
+      end
+      _kind = kind.not_nil!
+      @kind = _kind
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] space Object to be assigned
+    def space=(space : String?)
+      if space.nil?
+        return @space = nil
+      end
+      _space = space.not_nil!
+      @space = _space
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@ids, @ids_present, @kind, @kind_present, @space, @space_present)
+    def_equals_and_hash(@ids, @kind, @space)
   end
 end

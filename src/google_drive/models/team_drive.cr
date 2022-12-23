@@ -13,130 +13,229 @@ require "log"
 
 module GoogleDrive
   # Deprecated: use the drive collection instead.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class TeamDrive
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
-    @[JSON::Field(key: "backgroundImageFile", type: TeamDriveBackgroundImageFile?, presence: true, ignore_serialize: background_image_file.nil? && !background_image_file_present?)]
-    property background_image_file : TeamDriveBackgroundImageFile?
-
-    @[JSON::Field(ignore: true)]
-    property? background_image_file_present : Bool = false
+    @[JSON::Field(key: "backgroundImageFile", type: GoogleDrive::TeamDriveBackgroundImageFile?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter background_image_file : GoogleDrive::TeamDriveBackgroundImageFile? = nil
 
     # A short-lived link to this Team Drive's background image.
-    @[JSON::Field(key: "backgroundImageLink", type: String?, presence: true, ignore_serialize: background_image_link.nil? && !background_image_link_present?)]
-    property background_image_link : String?
+    @[JSON::Field(key: "backgroundImageLink", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter background_image_link : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? background_image_link_present : Bool = false
-
-    @[JSON::Field(key: "capabilities", type: TeamDriveCapabilities?, presence: true, ignore_serialize: capabilities.nil? && !capabilities_present?)]
-    property capabilities : TeamDriveCapabilities?
-
-    @[JSON::Field(ignore: true)]
-    property? capabilities_present : Bool = false
+    @[JSON::Field(key: "capabilities", type: GoogleDrive::TeamDriveCapabilities?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter capabilities : GoogleDrive::TeamDriveCapabilities? = nil
 
     # The color of this Team Drive as an RGB hex string. It can only be set on a drive.teamdrives.update request that does not set themeId.
-    @[JSON::Field(key: "colorRgb", type: String?, presence: true, ignore_serialize: color_rgb.nil? && !color_rgb_present?)]
-    property color_rgb : String?
-
-    @[JSON::Field(ignore: true)]
-    property? color_rgb_present : Bool = false
+    @[JSON::Field(key: "colorRgb", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter color_rgb : String? = nil
 
     # The time at which the Team Drive was created (RFC 3339 date-time).
-    @[JSON::Field(key: "createdTime", type: Time?, converter: Time::RFC3339Converter, presence: true, ignore_serialize: created_time.nil? && !created_time_present?)]
-    property created_time : Time?
-
-    @[JSON::Field(ignore: true)]
-    property? created_time_present : Bool = false
+    @[JSON::Field(key: "createdTime", type: Time?, default: nil, required: false, nullable: false, emit_null: false, converter: Time::RFC3339Converter)]
+    getter created_time : Time? = nil
 
     # The ID of this Team Drive which is also the ID of the top level folder of this Team Drive.
-    @[JSON::Field(key: "id", type: String?, presence: true, ignore_serialize: id.nil? && !id_present?)]
-    property id : String?
-
-    @[JSON::Field(ignore: true)]
-    property? id_present : Bool = false
+    @[JSON::Field(key: "id", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter id : String? = nil
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#teamDrive\".
-    @[JSON::Field(key: "kind", type: String?, default: "drive#teamDrive", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String? = "drive#teamDrive"
-
-    @[JSON::Field(ignore: true)]
-    property? kind_present : Bool = false
+    @[JSON::Field(key: "kind", type: String?, default: "drive#teamDrive", required: false, nullable: false, emit_null: false)]
+    getter kind : String? = "drive#teamDrive"
 
     # The name of this Team Drive.
-    @[JSON::Field(key: "name", type: String?, presence: true, ignore_serialize: name.nil? && !name_present?)]
-    property name : String?
-
-    @[JSON::Field(ignore: true)]
-    property? name_present : Bool = false
+    @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter name : String? = nil
 
     # The organizational unit of this shared drive. This field is only populated on drives.list responses when the useDomainAdminAccess parameter is set to true.
-    @[JSON::Field(key: "orgUnitId", type: String?, presence: true, ignore_serialize: org_unit_id.nil? && !org_unit_id_present?)]
-    property org_unit_id : String?
+    @[JSON::Field(key: "orgUnitId", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter org_unit_id : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? org_unit_id_present : Bool = false
-
-    @[JSON::Field(key: "restrictions", type: TeamDriveRestrictions?, presence: true, ignore_serialize: restrictions.nil? && !restrictions_present?)]
-    property restrictions : TeamDriveRestrictions?
-
-    @[JSON::Field(ignore: true)]
-    property? restrictions_present : Bool = false
+    @[JSON::Field(key: "restrictions", type: GoogleDrive::TeamDriveRestrictions?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter restrictions : GoogleDrive::TeamDriveRestrictions? = nil
 
     # The ID of the theme from which the background image and color will be set. The set of possible teamDriveThemes can be retrieved from a drive.about.get response. When not specified on a drive.teamdrives.create request, a random theme is chosen from which the background image and color are set. This is a write-only field; it can only be set on requests that don't set colorRgb or backgroundImageFile.
-    @[JSON::Field(key: "themeId", type: String?, presence: true, ignore_serialize: theme_id.nil? && !theme_id_present?)]
-    property theme_id : String?
-
-    @[JSON::Field(ignore: true)]
-    property? theme_id_present : Bool = false
+    @[JSON::Field(key: "themeId", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter theme_id : String? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @background_image_file : TeamDriveBackgroundImageFile? = nil,
+      @background_image_file : GoogleDrive::TeamDriveBackgroundImageFile? = nil,
       @background_image_link : String? = nil,
-      @capabilities : TeamDriveCapabilities? = nil,
+      @capabilities : GoogleDrive::TeamDriveCapabilities? = nil,
       @color_rgb : String? = nil,
       @created_time : Time? = nil,
       @id : String? = nil,
       @kind : String? = "drive#teamDrive",
       @name : String? = nil,
       @org_unit_id : String? = nil,
-      @restrictions : TeamDriveRestrictions? = nil,
+      @restrictions : GoogleDrive::TeamDriveRestrictions? = nil,
       @theme_id : String? = nil
     )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
+      unless (_background_image_file = @background_image_file).nil?
+        invalid_properties.concat(_background_image_file.list_invalid_properties_for("background_image_file")) if _background_image_file.is_a?(OpenApi::Validatable)
+      end
+
+      unless (_capabilities = @capabilities).nil?
+        invalid_properties.concat(_capabilities.list_invalid_properties_for("capabilities")) if _capabilities.is_a?(OpenApi::Validatable)
+      end
+
+      unless (_restrictions = @restrictions).nil?
+        invalid_properties.concat(_restrictions.list_invalid_properties_for("restrictions")) if _restrictions.is_a?(OpenApi::Validatable)
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      unless (_background_image_file = @background_image_file).nil?
+        return false if _background_image_file.is_a?(OpenApi::Validatable) && !_background_image_file.valid?
+      end
+
+      unless (_capabilities = @capabilities).nil?
+        return false if _capabilities.is_a?(OpenApi::Validatable) && !_capabilities.valid?
+      end
+
+      unless (_restrictions = @restrictions).nil?
+        return false if _restrictions.is_a?(OpenApi::Validatable) && !_restrictions.valid?
+      end
+
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] background_image_file Object to be assigned
+    def background_image_file=(background_image_file : GoogleDrive::TeamDriveBackgroundImageFile?)
+      if background_image_file.nil?
+        return @background_image_file = nil
+      end
+      _background_image_file = background_image_file.not_nil!
+      _background_image_file.validate if _background_image_file.is_a?(OpenApi::Validatable)
+      @background_image_file = _background_image_file
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] background_image_link Object to be assigned
+    def background_image_link=(background_image_link : String?)
+      if background_image_link.nil?
+        return @background_image_link = nil
+      end
+      _background_image_link = background_image_link.not_nil!
+      @background_image_link = _background_image_link
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] capabilities Object to be assigned
+    def capabilities=(capabilities : GoogleDrive::TeamDriveCapabilities?)
+      if capabilities.nil?
+        return @capabilities = nil
+      end
+      _capabilities = capabilities.not_nil!
+      _capabilities.validate if _capabilities.is_a?(OpenApi::Validatable)
+      @capabilities = _capabilities
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] color_rgb Object to be assigned
+    def color_rgb=(color_rgb : String?)
+      if color_rgb.nil?
+        return @color_rgb = nil
+      end
+      _color_rgb = color_rgb.not_nil!
+      @color_rgb = _color_rgb
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] created_time Object to be assigned
+    def created_time=(created_time : Time?)
+      if created_time.nil?
+        return @created_time = nil
+      end
+      _created_time = created_time.not_nil!
+      @created_time = _created_time
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] id Object to be assigned
+    def id=(id : String?)
+      if id.nil?
+        return @id = nil
+      end
+      _id = id.not_nil!
+      @id = _id
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] kind Object to be assigned
+    def kind=(kind : String?)
+      if kind.nil?
+        return @kind = nil
+      end
+      _kind = kind.not_nil!
+      @kind = _kind
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] name Object to be assigned
+    def name=(name : String?)
+      if name.nil?
+        return @name = nil
+      end
+      _name = name.not_nil!
+      @name = _name
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] org_unit_id Object to be assigned
+    def org_unit_id=(org_unit_id : String?)
+      if org_unit_id.nil?
+        return @org_unit_id = nil
+      end
+      _org_unit_id = org_unit_id.not_nil!
+      @org_unit_id = _org_unit_id
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] restrictions Object to be assigned
+    def restrictions=(restrictions : GoogleDrive::TeamDriveRestrictions?)
+      if restrictions.nil?
+        return @restrictions = nil
+      end
+      _restrictions = restrictions.not_nil!
+      _restrictions.validate if _restrictions.is_a?(OpenApi::Validatable)
+      @restrictions = _restrictions
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] theme_id Object to be assigned
+    def theme_id=(theme_id : String?)
+      if theme_id.nil?
+        return @theme_id = nil
+      end
+      _theme_id = theme_id.not_nil!
+      @theme_id = _theme_id
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@background_image_file, @background_image_file_present, @background_image_link, @background_image_link_present, @capabilities, @capabilities_present, @color_rgb, @color_rgb_present, @created_time, @created_time_present, @id, @id_present, @kind, @kind_present, @name, @name_present, @org_unit_id, @org_unit_id_present, @restrictions, @restrictions_present, @theme_id, @theme_id_present)
+    def_equals_and_hash(@background_image_file, @background_image_link, @capabilities, @color_rgb, @created_time, @id, @kind, @name, @org_unit_id, @restrictions, @theme_id)
   end
 end

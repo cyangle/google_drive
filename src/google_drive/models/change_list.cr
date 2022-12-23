@@ -13,47 +13,36 @@ require "log"
 
 module GoogleDrive
   # A list of changes for a user.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class ChangeList
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The list of changes. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.
-    @[JSON::Field(key: "changes", type: Array(Change)?, presence: true, ignore_serialize: changes.nil? && !changes_present?)]
-    property changes : Array(Change)?
-
-    @[JSON::Field(ignore: true)]
-    property? changes_present : Bool = false
+    @[JSON::Field(key: "changes", type: Array(GoogleDrive::Change)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter changes : Array(GoogleDrive::Change)? = nil
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#changeList\".
-    @[JSON::Field(key: "kind", type: String?, default: "drive#changeList", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String? = "drive#changeList"
-
-    @[JSON::Field(ignore: true)]
-    property? kind_present : Bool = false
+    @[JSON::Field(key: "kind", type: String?, default: "drive#changeList", required: false, nullable: false, emit_null: false)]
+    getter kind : String? = "drive#changeList"
 
     # The starting page token for future changes. This will be present only if the end of the current changes list has been reached.
-    @[JSON::Field(key: "newStartPageToken", type: String?, presence: true, ignore_serialize: new_start_page_token.nil? && !new_start_page_token_present?)]
-    property new_start_page_token : String?
-
-    @[JSON::Field(ignore: true)]
-    property? new_start_page_token_present : Bool = false
+    @[JSON::Field(key: "newStartPageToken", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter new_start_page_token : String? = nil
 
     # The page token for the next page of changes. This will be absent if the end of the changes list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results.
-    @[JSON::Field(key: "nextPageToken", type: String?, presence: true, ignore_serialize: next_page_token.nil? && !next_page_token_present?)]
-    property next_page_token : String?
-
-    @[JSON::Field(ignore: true)]
-    property? next_page_token_present : Bool = false
+    @[JSON::Field(key: "nextPageToken", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter next_page_token : String? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @changes : Array(Change)? = nil,
+      @changes : Array(GoogleDrive::Change)? = nil,
       @kind : String? = "drive#changeList",
       @new_start_page_token : String? = nil,
       @next_page_token : String? = nil
@@ -62,28 +51,71 @@ module GoogleDrive
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
+      unless (_changes = @changes).nil?
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "changes", container: _changes)) if _changes.is_a?(Array)
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      unless (_changes = @changes).nil?
+        return false if _changes.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _changes)
+      end
+
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] changes Object to be assigned
+    def changes=(changes : Array(GoogleDrive::Change)?)
+      if changes.nil?
+        return @changes = nil
+      end
+      _changes = changes.not_nil!
+      OpenApi::ContainerValidator.validate(container: _changes) if _changes.is_a?(Array)
+      @changes = _changes
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] kind Object to be assigned
+    def kind=(kind : String?)
+      if kind.nil?
+        return @kind = nil
+      end
+      _kind = kind.not_nil!
+      @kind = _kind
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] new_start_page_token Object to be assigned
+    def new_start_page_token=(new_start_page_token : String?)
+      if new_start_page_token.nil?
+        return @new_start_page_token = nil
+      end
+      _new_start_page_token = new_start_page_token.not_nil!
+      @new_start_page_token = _new_start_page_token
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] next_page_token Object to be assigned
+    def next_page_token=(next_page_token : String?)
+      if next_page_token.nil?
+        return @next_page_token = nil
+      end
+      _next_page_token = next_page_token.not_nil!
+      @next_page_token = _next_page_token
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@changes, @changes_present, @kind, @kind_present, @new_start_page_token, @new_start_page_token_present, @next_page_token, @next_page_token_present)
+    def_equals_and_hash(@changes, @kind, @new_start_page_token, @next_page_token)
   end
 end

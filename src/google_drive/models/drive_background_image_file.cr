@@ -13,40 +13,29 @@ require "log"
 
 module GoogleDrive
   # An image file and cropping parameters from which a background image for this shared drive is set. This is a write only field; it can only be set on drive.drives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class DriveBackgroundImageFile
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The ID of an image file in Google Drive to use for the background image.
-    @[JSON::Field(key: "id", type: String?, presence: true, ignore_serialize: id.nil? && !id_present?)]
-    property id : String?
-
-    @[JSON::Field(ignore: true)]
-    property? id_present : Bool = false
+    @[JSON::Field(key: "id", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter id : String? = nil
 
     # The width of the cropped image in the closed range of 0 to 1. This value represents the width of the cropped image divided by the width of the entire image. The height is computed by applying a width to height aspect ratio of 80 to 9. The resulting image must be at least 1280 pixels wide and 144 pixels high.
-    @[JSON::Field(key: "width", type: Float32?, presence: true, ignore_serialize: width.nil? && !width_present?)]
-    property width : Float32?
-
-    @[JSON::Field(ignore: true)]
-    property? width_present : Bool = false
+    @[JSON::Field(key: "width", type: Float32?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter width : Float32? = nil
 
     # The X coordinate of the upper left corner of the cropping area in the background image. This is a value in the closed range of 0 to 1. This value represents the horizontal distance from the left side of the entire image to the left side of the cropping area divided by the width of the entire image.
-    @[JSON::Field(key: "xCoordinate", type: Float32?, presence: true, ignore_serialize: x_coordinate.nil? && !x_coordinate_present?)]
-    property x_coordinate : Float32?
-
-    @[JSON::Field(ignore: true)]
-    property? x_coordinate_present : Bool = false
+    @[JSON::Field(key: "xCoordinate", type: Float32?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter x_coordinate : Float32? = nil
 
     # The Y coordinate of the upper left corner of the cropping area in the background image. This is a value in the closed range of 0 to 1. This value represents the vertical distance from the top side of the entire image to the top side of the cropping area divided by the height of the entire image.
-    @[JSON::Field(key: "yCoordinate", type: Float32?, presence: true, ignore_serialize: y_coordinate.nil? && !y_coordinate_present?)]
-    property y_coordinate : Float32?
-
-    @[JSON::Field(ignore: true)]
-    property? y_coordinate_present : Bool = false
+    @[JSON::Field(key: "yCoordinate", type: Float32?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter y_coordinate : Float32? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -62,7 +51,7 @@ module GoogleDrive
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -70,20 +59,54 @@ module GoogleDrive
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] id Object to be assigned
+    def id=(id : String?)
+      if id.nil?
+        return @id = nil
+      end
+      _id = id.not_nil!
+      @id = _id
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] width Object to be assigned
+    def width=(width : Float32?)
+      if width.nil?
+        return @width = nil
+      end
+      _width = width.not_nil!
+      @width = _width
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] x_coordinate Object to be assigned
+    def x_coordinate=(x_coordinate : Float32?)
+      if x_coordinate.nil?
+        return @x_coordinate = nil
+      end
+      _x_coordinate = x_coordinate.not_nil!
+      @x_coordinate = _x_coordinate
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] y_coordinate Object to be assigned
+    def y_coordinate=(y_coordinate : Float32?)
+      if y_coordinate.nil?
+        return @y_coordinate = nil
+      end
+      _y_coordinate = y_coordinate.not_nil!
+      @y_coordinate = _y_coordinate
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@id, @id_present, @width, @width_present, @x_coordinate, @x_coordinate_present, @y_coordinate, @y_coordinate_present)
+    def_equals_and_hash(@id, @width, @x_coordinate, @y_coordinate)
   end
 end

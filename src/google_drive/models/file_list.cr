@@ -13,47 +13,36 @@ require "log"
 
 module GoogleDrive
   # A list of files.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class FileList
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The list of files. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.
-    @[JSON::Field(key: "files", type: Array(File)?, presence: true, ignore_serialize: files.nil? && !files_present?)]
-    property files : Array(File)?
-
-    @[JSON::Field(ignore: true)]
-    property? files_present : Bool = false
+    @[JSON::Field(key: "files", type: Array(GoogleDrive::File)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter files : Array(GoogleDrive::File)? = nil
 
     # Whether the search process was incomplete. If true, then some search results may be missing, since all documents were not searched. This may occur when searching multiple drives with the \"allDrives\" corpora, but all corpora could not be searched. When this happens, it is suggested that clients narrow their query by choosing a different corpus such as \"user\" or \"drive\".
-    @[JSON::Field(key: "incompleteSearch", type: Bool?, presence: true, ignore_serialize: incomplete_search.nil? && !incomplete_search_present?)]
-    property incomplete_search : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? incomplete_search_present : Bool = false
+    @[JSON::Field(key: "incompleteSearch", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter incomplete_search : Bool? = nil
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#fileList\".
-    @[JSON::Field(key: "kind", type: String?, default: "drive#fileList", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String? = "drive#fileList"
-
-    @[JSON::Field(ignore: true)]
-    property? kind_present : Bool = false
+    @[JSON::Field(key: "kind", type: String?, default: "drive#fileList", required: false, nullable: false, emit_null: false)]
+    getter kind : String? = "drive#fileList"
 
     # The page token for the next page of files. This will be absent if the end of the files list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results.
-    @[JSON::Field(key: "nextPageToken", type: String?, presence: true, ignore_serialize: next_page_token.nil? && !next_page_token_present?)]
-    property next_page_token : String?
-
-    @[JSON::Field(ignore: true)]
-    property? next_page_token_present : Bool = false
+    @[JSON::Field(key: "nextPageToken", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter next_page_token : String? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @files : Array(File)? = nil,
+      @files : Array(GoogleDrive::File)? = nil,
       @incomplete_search : Bool? = nil,
       @kind : String? = "drive#fileList",
       @next_page_token : String? = nil
@@ -62,28 +51,71 @@ module GoogleDrive
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
+      unless (_files = @files).nil?
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "files", container: _files)) if _files.is_a?(Array)
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      unless (_files = @files).nil?
+        return false if _files.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _files)
+      end
+
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] files Object to be assigned
+    def files=(files : Array(GoogleDrive::File)?)
+      if files.nil?
+        return @files = nil
+      end
+      _files = files.not_nil!
+      OpenApi::ContainerValidator.validate(container: _files) if _files.is_a?(Array)
+      @files = _files
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] incomplete_search Object to be assigned
+    def incomplete_search=(incomplete_search : Bool?)
+      if incomplete_search.nil?
+        return @incomplete_search = nil
+      end
+      _incomplete_search = incomplete_search.not_nil!
+      @incomplete_search = _incomplete_search
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] kind Object to be assigned
+    def kind=(kind : String?)
+      if kind.nil?
+        return @kind = nil
+      end
+      _kind = kind.not_nil!
+      @kind = _kind
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] next_page_token Object to be assigned
+    def next_page_token=(next_page_token : String?)
+      if next_page_token.nil?
+        return @next_page_token = nil
+      end
+      _next_page_token = next_page_token.not_nil!
+      @next_page_token = _next_page_token
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@files, @files_present, @incomplete_search, @incomplete_search_present, @kind, @kind_present, @next_page_token, @next_page_token_present)
+    def_equals_and_hash(@files, @incomplete_search, @kind, @next_page_token)
   end
 end

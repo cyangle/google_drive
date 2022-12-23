@@ -12,40 +12,29 @@ require "time"
 require "log"
 
 module GoogleDrive
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class PermissionPermissionDetailsInner
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Whether this permission is inherited. This field is always populated. This is an output-only field.
-    @[JSON::Field(key: "inherited", type: Bool?, presence: true, ignore_serialize: inherited.nil? && !inherited_present?)]
-    property inherited : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? inherited_present : Bool = false
+    @[JSON::Field(key: "inherited", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter inherited : Bool? = nil
 
     # The ID of the item from which this permission is inherited. This is an output-only field.
-    @[JSON::Field(key: "inheritedFrom", type: String?, presence: true, ignore_serialize: inherited_from.nil? && !inherited_from_present?)]
-    property inherited_from : String?
-
-    @[JSON::Field(ignore: true)]
-    property? inherited_from_present : Bool = false
+    @[JSON::Field(key: "inheritedFrom", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter inherited_from : String? = nil
 
     # The permission type for this user. While new values may be added in future, the following are currently possible:   - file  - member
-    @[JSON::Field(key: "permissionType", type: String?, presence: true, ignore_serialize: permission_type.nil? && !permission_type_present?)]
-    property permission_type : String?
-
-    @[JSON::Field(ignore: true)]
-    property? permission_type_present : Bool = false
+    @[JSON::Field(key: "permissionType", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter permission_type : String? = nil
 
     # The primary role for this user. While new values may be added in the future, the following are currently possible:   - organizer  - fileOrganizer  - writer  - commenter  - reader
-    @[JSON::Field(key: "role", type: String?, presence: true, ignore_serialize: role.nil? && !role_present?)]
-    property role : String?
-
-    @[JSON::Field(ignore: true)]
-    property? role_present : Bool = false
+    @[JSON::Field(key: "role", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter role : String? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -61,7 +50,7 @@ module GoogleDrive
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -69,20 +58,54 @@ module GoogleDrive
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] inherited Object to be assigned
+    def inherited=(inherited : Bool?)
+      if inherited.nil?
+        return @inherited = nil
+      end
+      _inherited = inherited.not_nil!
+      @inherited = _inherited
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] inherited_from Object to be assigned
+    def inherited_from=(inherited_from : String?)
+      if inherited_from.nil?
+        return @inherited_from = nil
+      end
+      _inherited_from = inherited_from.not_nil!
+      @inherited_from = _inherited_from
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] permission_type Object to be assigned
+    def permission_type=(permission_type : String?)
+      if permission_type.nil?
+        return @permission_type = nil
+      end
+      _permission_type = permission_type.not_nil!
+      @permission_type = _permission_type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] role Object to be assigned
+    def role=(role : String?)
+      if role.nil?
+        return @role = nil
+      end
+      _role = role.not_nil!
+      @role = _role
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@inherited, @inherited_present, @inherited_from, @inherited_from_present, @permission_type, @permission_type_present, @role, @role_present)
+    def_equals_and_hash(@inherited, @inherited_from, @permission_type, @role)
   end
 end

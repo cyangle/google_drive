@@ -10,7 +10,7 @@ license: MIT
 dependencies:
   crest:
     github: mamantoha/crest
-    version: ">= 1.3.1"
+    branch: master
 
 development_dependencies:
   kemal:
@@ -23,4 +23,4 @@ development_dependencies:
     version: ~> 0.2.2
   vcr:
     github: spoved/vcr.cr
-    version: ~> 0.5.2
+    version: ~> 0.5.3

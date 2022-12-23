@@ -8,59 +8,208 @@
 #
 
 require "uri"
+require "../api_client"
 
 module GoogleDrive
   class FilesApi
     property api_client : ApiClient
+
+    delegate client_side_validation, debugging, to: @api_client.config
 
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
 
     # Creates a copy of a file and applies any requested updates with patch semantics. Folders cannot be copied.
-    # @param file_id [String] The ID of the file.
-    # @return [File]
-    def copy(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = nil, ignore_default_visibility : Bool? = nil, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = nil, ocr_language : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, file : File? = nil)
-      data, _status_code, _headers = copy_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, file: file)
+    # @required @param file_id [String?] The ID of the file.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param enforce_single_parent [Bool?] Deprecated. Copying files into multiple folders is no longer supported. Use shortcuts instead.
+    # @optional @param ignore_default_visibility [Bool?] Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.
+    # @optional @param include_labels [String?] A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param keep_revision_forever [Bool?] Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
+    # @optional @param ocr_language [String?] A language hint for OCR processing during image import (ISO 639-1 code).
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param file [GoogleDrive::File?]
+    # @return [GoogleDrive::File]
+    def copy(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      ignore_default_visibility : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      keep_revision_forever : Bool? = nil,
+      ocr_language : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      file : GoogleDrive::File? = nil
+    ) : GoogleDrive::File
+      data, _status_code, _headers = copy_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, file: file)
       data
     end
 
     # Creates a copy of a file and applies any requested updates with patch semantics. Folders cannot be copied.
-    # @param file_id [String] The ID of the file.
-    # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
-    def copy_with_http_info(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = nil, ignore_default_visibility : Bool? = nil, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = nil, ocr_language : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, file : File? = nil)
-      request = build_api_request_for_copy(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, file: file)
+    # @required @param file_id [String?] The ID of the file.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param enforce_single_parent [Bool?] Deprecated. Copying files into multiple folders is no longer supported. Use shortcuts instead.
+    # @optional @param ignore_default_visibility [Bool?] Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.
+    # @optional @param include_labels [String?] A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param keep_revision_forever [Bool?] Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
+    # @optional @param ocr_language [String?] A language hint for OCR processing during image import (ISO 639-1 code).
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param file [GoogleDrive::File?]
+    # @return [Tuple(GoogleDrive::File, Integer, Hash)] GoogleDrive::File, response status code and response headers
+    def copy_with_http_info(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      ignore_default_visibility : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      keep_revision_forever : Bool? = nil,
+      ocr_language : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      file : GoogleDrive::File? = nil
+    ) : Tuple(GoogleDrive::File, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_copy(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, file: file)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: FilesApi#copy\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: FilesApi#copy\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return File.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::File.from_json(body), status_code, headers)
     end
 
     # Creates a copy of a file and applies any requested updates with patch semantics. Folders cannot be copied.
-    # @param file_id [String] The ID of the file.
+    # @required @param file_id [String?] The ID of the file.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param enforce_single_parent [Bool?] Deprecated. Copying files into multiple folders is no longer supported. Use shortcuts instead.
+    # @optional @param ignore_default_visibility [Bool?] Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.
+    # @optional @param include_labels [String?] A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param keep_revision_forever [Bool?] Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
+    # @optional @param ocr_language [String?] A language hint for OCR processing during image import (ISO 639-1 code).
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param file [GoogleDrive::File?]
     # @return nil
-    def copy(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = nil, ignore_default_visibility : Bool? = nil, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = nil, ocr_language : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, file : File? = nil, &block : Crest::Response ->)
-      build_api_request_for_copy(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, file: file).execute(&block)
+    def copy(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      ignore_default_visibility : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      keep_revision_forever : Bool? = nil,
+      ocr_language : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      file : GoogleDrive::File? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_copy(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, file: file).execute(&block)
     end
 
+    DRIVE_FILES_COPY_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_copy(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = nil, ignore_default_visibility : Bool? = nil, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = nil, ocr_language : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, file : File? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_copy(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      ignore_default_visibility : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      keep_revision_forever : Bool? = nil,
+      ocr_language : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      file : GoogleDrive::File? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: FilesApi.copy ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_FILES_COPY_VALID_VALUES_FOR_ALT)
+        end
+
+        unless (_file = file).nil?
+          _file.validate if _file.is_a?(OpenApi::Validatable)
+        end
       end
+
       # resource path
       local_var_path = "/drive/v3/files/{fileId}/copy".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -70,24 +219,18 @@ module GoogleDrive
       query_params["userIp"] = user_ip.to_s if !user_ip.nil?
       query_params["enforceSingleParent"] = enforce_single_parent.to_s if !enforce_single_parent.nil?
       query_params["ignoreDefaultVisibility"] = ignore_default_visibility.to_s if !ignore_default_visibility.nil?
+      query_params["includeLabels"] = include_labels.to_s if !include_labels.nil?
       query_params["includePermissionsForView"] = include_permissions_for_view.to_s if !include_permissions_for_view.nil?
       query_params["keepRevisionForever"] = keep_revision_forever.to_s if !keep_revision_forever.nil?
       query_params["ocrLanguage"] = ocr_language.to_s if !ocr_language.nil?
       query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil?
       query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-      # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = file.to_json
+      post_body : IO | String | Nil = @api_client.encode(body: file, content_type: header_params["Content-Type"]?) if !file.nil?
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -99,52 +242,200 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
-    # Creates a new file.
-    # @return [File]
-    def create(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = nil, ignore_default_visibility : Bool? = nil, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = nil, ocr_language : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, use_content_as_indexable_text : Bool? = nil, file : File? = nil)
-      data, _status_code, _headers = create_with_http_info(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file)
+    # Creates a file.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param enforce_single_parent [Bool?] Deprecated. Creating files in multiple folders is no longer supported.
+    # @optional @param ignore_default_visibility [Bool?] Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.
+    # @optional @param include_labels [String?] A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param keep_revision_forever [Bool?] Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
+    # @optional @param ocr_language [String?] A language hint for OCR processing during image import (ISO 639-1 code).
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param use_content_as_indexable_text [Bool?] Whether to use the uploaded content as indexable text.
+    # @optional @param file [GoogleDrive::File?]
+    # @return [GoogleDrive::File]
+    def create(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      ignore_default_visibility : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      keep_revision_forever : Bool? = nil,
+      ocr_language : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      use_content_as_indexable_text : Bool? = nil,
+      file : GoogleDrive::File? = nil
+    ) : GoogleDrive::File
+      data, _status_code, _headers = create_with_http_info(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file)
       data
     end
 
-    # Creates a new file.
-    # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
-    def create_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = nil, ignore_default_visibility : Bool? = nil, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = nil, ocr_language : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, use_content_as_indexable_text : Bool? = nil, file : File? = nil)
-      request = build_api_request_for_create(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file)
+    # Creates a file.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param enforce_single_parent [Bool?] Deprecated. Creating files in multiple folders is no longer supported.
+    # @optional @param ignore_default_visibility [Bool?] Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.
+    # @optional @param include_labels [String?] A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param keep_revision_forever [Bool?] Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
+    # @optional @param ocr_language [String?] A language hint for OCR processing during image import (ISO 639-1 code).
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param use_content_as_indexable_text [Bool?] Whether to use the uploaded content as indexable text.
+    # @optional @param file [GoogleDrive::File?]
+    # @return [Tuple(GoogleDrive::File, Integer, Hash)] GoogleDrive::File, response status code and response headers
+    def create_with_http_info(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      ignore_default_visibility : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      keep_revision_forever : Bool? = nil,
+      ocr_language : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      use_content_as_indexable_text : Bool? = nil,
+      file : GoogleDrive::File? = nil
+    ) : Tuple(GoogleDrive::File, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_create(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: FilesApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: FilesApi#create\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return File.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::File.from_json(body), status_code, headers)
     end
 
-    # Creates a new file.
+    # Creates a file.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param enforce_single_parent [Bool?] Deprecated. Creating files in multiple folders is no longer supported.
+    # @optional @param ignore_default_visibility [Bool?] Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.
+    # @optional @param include_labels [String?] A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param keep_revision_forever [Bool?] Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
+    # @optional @param ocr_language [String?] A language hint for OCR processing during image import (ISO 639-1 code).
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param use_content_as_indexable_text [Bool?] Whether to use the uploaded content as indexable text.
+    # @optional @param file [GoogleDrive::File?]
     # @return nil
-    def create(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = nil, ignore_default_visibility : Bool? = nil, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = nil, ocr_language : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, use_content_as_indexable_text : Bool? = nil, file : File? = nil, &block : Crest::Response ->)
-      build_api_request_for_create(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file).execute(&block)
+    def create(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      ignore_default_visibility : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      keep_revision_forever : Bool? = nil,
+      ocr_language : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      use_content_as_indexable_text : Bool? = nil,
+      file : GoogleDrive::File? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_create(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file).execute(&block)
     end
+
+    DRIVE_FILES_CREATE_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
 
     # @return Crest::Request
-    def build_api_request_for_create(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = nil, ignore_default_visibility : Bool? = nil, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = nil, ocr_language : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, use_content_as_indexable_text : Bool? = nil, file : File? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_create(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      ignore_default_visibility : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      keep_revision_forever : Bool? = nil,
+      ocr_language : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      use_content_as_indexable_text : Bool? = nil,
+      file : GoogleDrive::File? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: FilesApi.create ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_FILES_CREATE_VALID_VALUES_FOR_ALT)
+        end
+
+        unless (_file = file).nil?
+          _file.validate if _file.is_a?(OpenApi::Validatable)
+        end
       end
+
       # resource path
       local_var_path = "/drive/v3/files"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/octet-stream"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -154,6 +445,7 @@ module GoogleDrive
       query_params["userIp"] = user_ip.to_s if !user_ip.nil?
       query_params["enforceSingleParent"] = enforce_single_parent.to_s if !enforce_single_parent.nil?
       query_params["ignoreDefaultVisibility"] = ignore_default_visibility.to_s if !ignore_default_visibility.nil?
+      query_params["includeLabels"] = include_labels.to_s if !include_labels.nil?
       query_params["includePermissionsForView"] = include_permissions_for_view.to_s if !include_permissions_for_view.nil?
       query_params["keepRevisionForever"] = keep_revision_forever.to_s if !keep_revision_forever.nil?
       query_params["ocrLanguage"] = ocr_language.to_s if !ocr_language.nil?
@@ -161,18 +453,11 @@ module GoogleDrive
       query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil?
       query_params["useContentAsIndexableText"] = use_content_as_indexable_text.to_s if !use_content_as_indexable_text.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-      # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["application/octet-stream"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = file.to_json
+      post_body : IO | String | Nil = @api_client.encode(body: file, content_type: header_params["Content-Type"]?) if !file.nil?
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -184,55 +469,152 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Permanently deletes a file owned by the user without moving it to the trash. If the file belongs to a shared drive the user must be an organizer on the parent. If the target is a folder, all descendants owned by the user are also deleted.
-    # @param file_id [String] The ID of the file.
-    # @return [nil]
-    def delete(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil)
+    # @required @param file_id [String?] The ID of the file.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param enforce_single_parent [Bool?] Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @return [Nil]
+    def delete(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil
+    ) : Nil
       delete_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives)
       nil
     end
 
     # Permanently deletes a file owned by the user without moving it to the trash. If the file belongs to a shared drive the user must be an organizer on the parent. If the target is a folder, all descendants owned by the user are also deleted.
-    # @param file_id [String] The ID of the file.
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def delete_with_http_info(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil)
+    # @required @param file_id [String?] The ID of the file.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param enforce_single_parent [Bool?] Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
+    def delete_with_http_info(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil
+    ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: FilesApi#delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: FilesApi#delete\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return nil, status_code, headers
+      Tuple.new(nil, status_code, headers)
     end
 
     # Permanently deletes a file owned by the user without moving it to the trash. If the file belongs to a shared drive the user must be an organizer on the parent. If the target is a folder, all descendants owned by the user are also deleted.
-    # @param file_id [String] The ID of the file.
+    # @required @param file_id [String?] The ID of the file.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param enforce_single_parent [Bool?] Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
     # @return nil
-    def delete(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, &block : Crest::Response ->)
+    def delete(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_delete(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives).execute(&block)
     end
 
+    DRIVE_FILES_DELETE_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_delete(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_delete(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: FilesApi.delete ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_FILES_DELETE_VALID_VALUES_FOR_ALT)
+        end
       end
+
       # resource path
       local_var_path = "/drive/v3/files/{fileId}".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -244,14 +626,11 @@ module GoogleDrive
       query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil?
       query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -263,52 +642,129 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Permanently deletes all of the user's trashed files.
-    # @return [nil]
-    def empty_trash(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = nil)
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param enforce_single_parent [Bool?] Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.
+    # @return [Nil]
+    def empty_trash(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      enforce_single_parent : Bool? = nil
+    ) : Nil
       empty_trash_with_http_info(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent)
       nil
     end
 
     # Permanently deletes all of the user&#39;s trashed files.
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def empty_trash_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = nil)
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param enforce_single_parent [Bool?] Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.
+    # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
+    def empty_trash_with_http_info(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      enforce_single_parent : Bool? = nil
+    ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_empty_trash(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: FilesApi#empty_trash\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: FilesApi#empty_trash\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return nil, status_code, headers
+      Tuple.new(nil, status_code, headers)
     end
 
     # Permanently deletes all of the user&#39;s trashed files.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param enforce_single_parent [Bool?] Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.
     # @return nil
-    def empty_trash(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = nil, &block : Crest::Response ->)
+    def empty_trash(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_empty_trash(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent).execute(&block)
     end
 
+    DRIVE_FILES_EMPTY_TRASH_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_empty_trash(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_empty_trash(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      enforce_single_parent : Bool? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: FilesApi.empty_trash ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_FILES_EMPTY_TRASH_VALID_VALUES_FOR_ALT)
+        end
       end
+
       # resource path
       local_var_path = "/drive/v3/files/trash"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -318,14 +774,11 @@ module GoogleDrive
       query_params["userIp"] = user_ip.to_s if !user_ip.nil?
       query_params["enforceSingleParent"] = enforce_single_parent.to_s if !enforce_single_parent.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -337,58 +790,140 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Exports a Google Workspace document to the requested MIME type and returns exported byte content. Note that the exported content is limited to 10MB.
-    # @param file_id [String] The ID of the file.
-    # @param mime_type [String] The MIME type of the format requested for this export.
-    # @return [nil]
-    def export(*, file_id : String, mime_type : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil)
+    # @required @param file_id [String?] The ID of the file.
+    # @required @param mime_type [String?] The MIME type of the format requested for this export.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @return [Nil]
+    def export(
+      *,
+      file_id : String? = nil,
+      mime_type : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil
+    ) : Nil
       export_with_http_info(file_id: file_id, mime_type: mime_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
       nil
     end
 
     # Exports a Google Workspace document to the requested MIME type and returns exported byte content. Note that the exported content is limited to 10MB.
-    # @param file_id [String] The ID of the file.
-    # @param mime_type [String] The MIME type of the format requested for this export.
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def export_with_http_info(*, file_id : String, mime_type : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil)
+    # @required @param file_id [String?] The ID of the file.
+    # @required @param mime_type [String?] The MIME type of the format requested for this export.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
+    def export_with_http_info(
+      *,
+      file_id : String? = nil,
+      mime_type : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil
+    ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_export(file_id: file_id, mime_type: mime_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: FilesApi#export\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: FilesApi#export\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return nil, status_code, headers
+      Tuple.new(nil, status_code, headers)
     end
 
     # Exports a Google Workspace document to the requested MIME type and returns exported byte content. Note that the exported content is limited to 10MB.
-    # @param file_id [String] The ID of the file.
-    # @param mime_type [String] The MIME type of the format requested for this export.
+    # @required @param file_id [String?] The ID of the file.
+    # @required @param mime_type [String?] The MIME type of the format requested for this export.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
     # @return nil
-    def export(*, file_id : String, mime_type : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, &block : Crest::Response ->)
+    def export(
+      *,
+      file_id : String? = nil,
+      mime_type : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_export(file_id: file_id, mime_type: mime_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip).execute(&block)
     end
 
+    DRIVE_FILES_EXPORT_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_export(*, file_id : String, mime_type : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_export(
+      *,
+      file_id : String? = nil,
+      mime_type : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: FilesApi.export ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
+
+        raise ArgumentError.new("\"mime_type\" is required and cannot be null") if mime_type.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_FILES_EXPORT_VALID_VALUES_FOR_ALT)
+        end
       end
+
       # resource path
       local_var_path = "/drive/v3/files/{fileId}/export".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -398,14 +933,11 @@ module GoogleDrive
       query_params["userIp"] = user_ip.to_s if !user_ip.nil?
       query_params["mimeType"] = mime_type.to_s if !mime_type.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -417,60 +949,152 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Generates a set of file IDs which can be provided in create or copy requests.
-    # @return [GeneratedIds]
-    def generate_ids(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, count : Int32? = nil, space : String? = nil, _type : String? = nil)
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param count [Int32?] The number of IDs to return.
+    # @optional @param space [String?] The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'. (Default: 'drive')
+    # @optional @param _type [String?] The type of items which the IDs can be used for. Supported values are 'files' and 'shortcuts'. Note that 'shortcuts' are only supported in the drive 'space'. (Default: 'files')
+    # @return [GoogleDrive::GeneratedIds]
+    def generate_ids(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      count : Int32? = nil,
+      space : String? = nil,
+      _type : String? = nil
+    ) : GoogleDrive::GeneratedIds
       data, _status_code, _headers = generate_ids_with_http_info(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, count: count, space: space, _type: _type)
       data
     end
 
     # Generates a set of file IDs which can be provided in create or copy requests.
-    # @return [Array<(GeneratedIds, Integer, Hash)>] GeneratedIds data, response status code and response headers
-    def generate_ids_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, count : Int32? = nil, space : String? = nil, _type : String? = nil)
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param count [Int32?] The number of IDs to return.
+    # @optional @param space [String?] The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'. (Default: 'drive')
+    # @optional @param _type [String?] The type of items which the IDs can be used for. Supported values are 'files' and 'shortcuts'. Note that 'shortcuts' are only supported in the drive 'space'. (Default: 'files')
+    # @return [Tuple(GoogleDrive::GeneratedIds, Integer, Hash)] GoogleDrive::GeneratedIds, response status code and response headers
+    def generate_ids_with_http_info(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      count : Int32? = nil,
+      space : String? = nil,
+      _type : String? = nil
+    ) : Tuple(GoogleDrive::GeneratedIds, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_generate_ids(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, count: count, space: space, _type: _type)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: FilesApi#generate_ids\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: FilesApi#generate_ids\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return GeneratedIds.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::GeneratedIds.from_json(body), status_code, headers)
     end
 
     # Generates a set of file IDs which can be provided in create or copy requests.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param count [Int32?] The number of IDs to return.
+    # @optional @param space [String?] The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'. (Default: 'drive')
+    # @optional @param _type [String?] The type of items which the IDs can be used for. Supported values are 'files' and 'shortcuts'. Note that 'shortcuts' are only supported in the drive 'space'. (Default: 'files')
     # @return nil
-    def generate_ids(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, count : Int32? = nil, space : String? = nil, _type : String? = nil, &block : Crest::Response ->)
+    def generate_ids(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      count : Int32? = nil,
+      space : String? = nil,
+      _type : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_generate_ids(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, count: count, space: space, _type: _type).execute(&block)
     end
 
+    DRIVE_FILES_GENERATE_IDS_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+    DRIVE_FILES_GENERATE_IDS_MAX_FOR_COUNT        = Int32.new("1000")
+    DRIVE_FILES_GENERATE_IDS_MIN_FOR_COUNT        = Int32.new("1")
+
     # @return Crest::Request
-    def build_api_request_for_generate_ids(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, count : Int32? = nil, space : String? = nil, _type : String? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_generate_ids(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      count : Int32? = nil,
+      space : String? = nil,
+      _type : String? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: FilesApi.generate_ids ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      if @api_client.config.client_side_validation && !count.nil? && count > 1000
-        raise ArgumentError.new("invalid value for \"count\" when calling FilesApi.generate_ids, must be smaller than or equal to 1000.")
-      end
 
-      if @api_client.config.client_side_validation && !count.nil? && count < 1
-        raise ArgumentError.new("invalid value for \"count\" when calling FilesApi.generate_ids, must be greater than or equal to 1.")
+      if client_side_validation
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_FILES_GENERATE_IDS_VALID_VALUES_FOR_ALT)
+        end
+
+        unless (_count = count).nil?
+          OpenApi::PrimitiveValidator.validate_max_number("count", _count, DRIVE_FILES_GENERATE_IDS_MAX_FOR_COUNT)
+          OpenApi::PrimitiveValidator.validate_min_number("count", _count, DRIVE_FILES_GENERATE_IDS_MIN_FOR_COUNT)
+        end
       end
 
       # resource path
       local_var_path = "/drive/v3/files/generateIds"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -482,16 +1106,11 @@ module GoogleDrive
       query_params["space"] = space.to_s if !space.nil?
       query_params["type"] = _type.to_s if !_type.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -503,55 +1122,168 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Gets a file's metadata or content by ID.
-    # @param file_id [String] The ID of the file.
-    # @return [File]
-    def get(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = nil, include_permissions_for_view : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil)
-      data, _status_code, _headers = get_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives)
+    # @required @param file_id [String?] The ID of the file.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param acknowledge_abuse [Bool?] Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.
+    # @optional @param include_labels [String?] A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @return [GoogleDrive::File]
+    def get(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      acknowledge_abuse : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil
+    ) : GoogleDrive::File
+      data, _status_code, _headers = get_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives)
       data
     end
 
     # Gets a file&#39;s metadata or content by ID.
-    # @param file_id [String] The ID of the file.
-    # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
-    def get_with_http_info(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = nil, include_permissions_for_view : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil)
-      request = build_api_request_for_get(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives)
+    # @required @param file_id [String?] The ID of the file.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param acknowledge_abuse [Bool?] Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.
+    # @optional @param include_labels [String?] A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @return [Tuple(GoogleDrive::File, Integer, Hash)] GoogleDrive::File, response status code and response headers
+    def get_with_http_info(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      acknowledge_abuse : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil
+    ) : Tuple(GoogleDrive::File, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_get(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: FilesApi#get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: FilesApi#get\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return File.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::File.from_json(body), status_code, headers)
     end
 
     # Gets a file&#39;s metadata or content by ID.
-    # @param file_id [String] The ID of the file.
+    # @required @param file_id [String?] The ID of the file.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param acknowledge_abuse [Bool?] Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.
+    # @optional @param include_labels [String?] A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
     # @return nil
-    def get(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = nil, include_permissions_for_view : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, &block : Crest::Response ->)
-      build_api_request_for_get(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives).execute(&block)
+    def get(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      acknowledge_abuse : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_get(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives).execute(&block)
     end
 
+    DRIVE_FILES_GET_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_get(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = nil, include_permissions_for_view : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_get(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      acknowledge_abuse : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: FilesApi.get ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_FILES_GET_VALID_VALUES_FOR_ALT)
+        end
       end
+
       # resource path
       local_var_path = "/drive/v3/files/{fileId}".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -560,20 +1292,16 @@ module GoogleDrive
       query_params["quotaUser"] = quota_user.to_s if !quota_user.nil?
       query_params["userIp"] = user_ip.to_s if !user_ip.nil?
       query_params["acknowledgeAbuse"] = acknowledge_abuse.to_s if !acknowledge_abuse.nil?
+      query_params["includeLabels"] = include_labels.to_s if !include_labels.nil?
       query_params["includePermissionsForView"] = include_permissions_for_view.to_s if !include_permissions_for_view.nil?
       query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil?
       query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -585,64 +1313,241 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Lists or searches files.
-    # @return [FileList]
-    def list(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, corpora : String? = nil, corpus : String? = nil, drive_id : String? = nil, include_items_from_all_drives : Bool? = nil, include_permissions_for_view : String? = nil, include_team_drive_items : Bool? = nil, order_by : String? = nil, page_size : Int32? = nil, page_token : String? = nil, q : String? = nil, spaces : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, team_drive_id : String? = nil)
-      data, _status_code, _headers = list_with_http_info(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, corpora: corpora, corpus: corpus, drive_id: drive_id, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_team_drive_items: include_team_drive_items, order_by: order_by, page_size: page_size, page_token: page_token, q: q, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param corpora [String?] Groupings of files to which the query applies. Supported groupings are: 'user' (files created by, opened by, or shared directly with the user), 'drive' (files in the specified shared drive as indicated by the 'driveId'), 'domain' (files shared to the user's domain), and 'allDrives' (A combination of 'user' and 'drive' for all drives where the user is a member). When able, use 'user' or 'drive', instead of 'allDrives', for efficiency.
+    # @optional @param corpus [String?] The source of files to list. Deprecated: use 'corpora' instead.
+    # @optional @param drive_id [String?] ID of the shared drive to search.
+    # @optional @param include_items_from_all_drives [Bool?] Whether both My Drive and shared drive items should be included in results.
+    # @optional @param include_labels [String?] A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param include_team_drive_items [Bool?] Deprecated use includeItemsFromAllDrives instead.
+    # @optional @param order_by [String?] A comma-separated list of sort keys. Valid keys are 'createdTime', 'folder', 'modifiedByMeTime', 'modifiedTime', 'name', 'name_natural', 'quotaBytesUsed', 'recency', 'sharedWithMeTime', 'starred', and 'viewedByMeTime'. Each key sorts ascending by default, but may be reversed with the 'desc' modifier. Example usage: ?orderBy=folder,modifiedTime desc,name. Please note that there is a current limitation for users with approximately one million files in which the requested sort order is ignored.
+    # @optional @param page_size [Int32?] The maximum number of files to return per page. Partial or empty result pages are possible even before the end of the files list has been reached.
+    # @optional @param page_token [String?] The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
+    # @optional @param q [String?] A query for filtering the file results. See the \"Search for Files\" guide for supported syntax.
+    # @optional @param spaces [String?] A comma-separated list of spaces to query within the corpora. Supported values are 'drive' and 'appDataFolder'.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param team_drive_id [String?] Deprecated use driveId instead.
+    # @return [GoogleDrive::FileList]
+    def list(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      corpora : String? = nil,
+      corpus : String? = nil,
+      drive_id : String? = nil,
+      include_items_from_all_drives : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      include_team_drive_items : Bool? = nil,
+      order_by : String? = nil,
+      page_size : Int32? = nil,
+      page_token : String? = nil,
+      q : String? = nil,
+      spaces : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      team_drive_id : String? = nil
+    ) : GoogleDrive::FileList
+      data, _status_code, _headers = list_with_http_info(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, corpora: corpora, corpus: corpus, drive_id: drive_id, include_items_from_all_drives: include_items_from_all_drives, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, include_team_drive_items: include_team_drive_items, order_by: order_by, page_size: page_size, page_token: page_token, q: q, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
       data
     end
 
     # Lists or searches files.
-    # @return [Array<(FileList, Integer, Hash)>] FileList data, response status code and response headers
-    def list_with_http_info(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, corpora : String? = nil, corpus : String? = nil, drive_id : String? = nil, include_items_from_all_drives : Bool? = nil, include_permissions_for_view : String? = nil, include_team_drive_items : Bool? = nil, order_by : String? = nil, page_size : Int32? = nil, page_token : String? = nil, q : String? = nil, spaces : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, team_drive_id : String? = nil)
-      request = build_api_request_for_list(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, corpora: corpora, corpus: corpus, drive_id: drive_id, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_team_drive_items: include_team_drive_items, order_by: order_by, page_size: page_size, page_token: page_token, q: q, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param corpora [String?] Groupings of files to which the query applies. Supported groupings are: 'user' (files created by, opened by, or shared directly with the user), 'drive' (files in the specified shared drive as indicated by the 'driveId'), 'domain' (files shared to the user's domain), and 'allDrives' (A combination of 'user' and 'drive' for all drives where the user is a member). When able, use 'user' or 'drive', instead of 'allDrives', for efficiency.
+    # @optional @param corpus [String?] The source of files to list. Deprecated: use 'corpora' instead.
+    # @optional @param drive_id [String?] ID of the shared drive to search.
+    # @optional @param include_items_from_all_drives [Bool?] Whether both My Drive and shared drive items should be included in results.
+    # @optional @param include_labels [String?] A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param include_team_drive_items [Bool?] Deprecated use includeItemsFromAllDrives instead.
+    # @optional @param order_by [String?] A comma-separated list of sort keys. Valid keys are 'createdTime', 'folder', 'modifiedByMeTime', 'modifiedTime', 'name', 'name_natural', 'quotaBytesUsed', 'recency', 'sharedWithMeTime', 'starred', and 'viewedByMeTime'. Each key sorts ascending by default, but may be reversed with the 'desc' modifier. Example usage: ?orderBy=folder,modifiedTime desc,name. Please note that there is a current limitation for users with approximately one million files in which the requested sort order is ignored.
+    # @optional @param page_size [Int32?] The maximum number of files to return per page. Partial or empty result pages are possible even before the end of the files list has been reached.
+    # @optional @param page_token [String?] The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
+    # @optional @param q [String?] A query for filtering the file results. See the \"Search for Files\" guide for supported syntax.
+    # @optional @param spaces [String?] A comma-separated list of spaces to query within the corpora. Supported values are 'drive' and 'appDataFolder'.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param team_drive_id [String?] Deprecated use driveId instead.
+    # @return [Tuple(GoogleDrive::FileList, Integer, Hash)] GoogleDrive::FileList, response status code and response headers
+    def list_with_http_info(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      corpora : String? = nil,
+      corpus : String? = nil,
+      drive_id : String? = nil,
+      include_items_from_all_drives : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      include_team_drive_items : Bool? = nil,
+      order_by : String? = nil,
+      page_size : Int32? = nil,
+      page_token : String? = nil,
+      q : String? = nil,
+      spaces : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      team_drive_id : String? = nil
+    ) : Tuple(GoogleDrive::FileList, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_list(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, corpora: corpora, corpus: corpus, drive_id: drive_id, include_items_from_all_drives: include_items_from_all_drives, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, include_team_drive_items: include_team_drive_items, order_by: order_by, page_size: page_size, page_token: page_token, q: q, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: FilesApi#list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: FilesApi#list\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return FileList.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::FileList.from_json(body), status_code, headers)
     end
 
     # Lists or searches files.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param corpora [String?] Groupings of files to which the query applies. Supported groupings are: 'user' (files created by, opened by, or shared directly with the user), 'drive' (files in the specified shared drive as indicated by the 'driveId'), 'domain' (files shared to the user's domain), and 'allDrives' (A combination of 'user' and 'drive' for all drives where the user is a member). When able, use 'user' or 'drive', instead of 'allDrives', for efficiency.
+    # @optional @param corpus [String?] The source of files to list. Deprecated: use 'corpora' instead.
+    # @optional @param drive_id [String?] ID of the shared drive to search.
+    # @optional @param include_items_from_all_drives [Bool?] Whether both My Drive and shared drive items should be included in results.
+    # @optional @param include_labels [String?] A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param include_team_drive_items [Bool?] Deprecated use includeItemsFromAllDrives instead.
+    # @optional @param order_by [String?] A comma-separated list of sort keys. Valid keys are 'createdTime', 'folder', 'modifiedByMeTime', 'modifiedTime', 'name', 'name_natural', 'quotaBytesUsed', 'recency', 'sharedWithMeTime', 'starred', and 'viewedByMeTime'. Each key sorts ascending by default, but may be reversed with the 'desc' modifier. Example usage: ?orderBy=folder,modifiedTime desc,name. Please note that there is a current limitation for users with approximately one million files in which the requested sort order is ignored.
+    # @optional @param page_size [Int32?] The maximum number of files to return per page. Partial or empty result pages are possible even before the end of the files list has been reached.
+    # @optional @param page_token [String?] The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
+    # @optional @param q [String?] A query for filtering the file results. See the \"Search for Files\" guide for supported syntax.
+    # @optional @param spaces [String?] A comma-separated list of spaces to query within the corpora. Supported values are 'drive' and 'appDataFolder'.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param team_drive_id [String?] Deprecated use driveId instead.
     # @return nil
-    def list(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, corpora : String? = nil, corpus : String? = nil, drive_id : String? = nil, include_items_from_all_drives : Bool? = nil, include_permissions_for_view : String? = nil, include_team_drive_items : Bool? = nil, order_by : String? = nil, page_size : Int32? = nil, page_token : String? = nil, q : String? = nil, spaces : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, team_drive_id : String? = nil, &block : Crest::Response ->)
-      build_api_request_for_list(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, corpora: corpora, corpus: corpus, drive_id: drive_id, include_items_from_all_drives: include_items_from_all_drives, include_permissions_for_view: include_permissions_for_view, include_team_drive_items: include_team_drive_items, order_by: order_by, page_size: page_size, page_token: page_token, q: q, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id).execute(&block)
+    def list(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      corpora : String? = nil,
+      corpus : String? = nil,
+      drive_id : String? = nil,
+      include_items_from_all_drives : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      include_team_drive_items : Bool? = nil,
+      order_by : String? = nil,
+      page_size : Int32? = nil,
+      page_token : String? = nil,
+      q : String? = nil,
+      spaces : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      team_drive_id : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_list(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, corpora: corpora, corpus: corpus, drive_id: drive_id, include_items_from_all_drives: include_items_from_all_drives, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, include_team_drive_items: include_team_drive_items, order_by: order_by, page_size: page_size, page_token: page_token, q: q, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id).execute(&block)
     end
 
+    DRIVE_FILES_LIST_VALID_VALUES_FOR_ALT    = String.static_array("json", "media")
+    DRIVE_FILES_LIST_VALID_VALUES_FOR_CORPUS = String.static_array("domain", "user")
+    DRIVE_FILES_LIST_MAX_FOR_PAGE_SIZE       = Int32.new("1000")
+    DRIVE_FILES_LIST_MIN_FOR_PAGE_SIZE       = Int32.new("1")
+
     # @return Crest::Request
-    def build_api_request_for_list(*, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, corpora : String? = nil, corpus : String? = nil, drive_id : String? = nil, include_items_from_all_drives : Bool? = nil, include_permissions_for_view : String? = nil, include_team_drive_items : Bool? = nil, order_by : String? = nil, page_size : Int32? = nil, page_token : String? = nil, q : String? = nil, spaces : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, team_drive_id : String? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_list(
+      *,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      corpora : String? = nil,
+      corpus : String? = nil,
+      drive_id : String? = nil,
+      include_items_from_all_drives : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      include_team_drive_items : Bool? = nil,
+      order_by : String? = nil,
+      page_size : Int32? = nil,
+      page_token : String? = nil,
+      q : String? = nil,
+      spaces : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      team_drive_id : String? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: FilesApi.list ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
-      allowable_values = ["domain", "user"]
-      if @api_client.config.client_side_validation && !corpus.nil? && !allowable_values.includes?(corpus)
-        raise ArgumentError.new("invalid value for \"corpus\", must be one of #{allowable_values}")
-      end
-      if @api_client.config.client_side_validation && !page_size.nil? && page_size > 1000
-        raise ArgumentError.new("invalid value for \"page_size\" when calling FilesApi.list, must be smaller than or equal to 1000.")
-      end
 
-      if @api_client.config.client_side_validation && !page_size.nil? && page_size < 1
-        raise ArgumentError.new("invalid value for \"page_size\" when calling FilesApi.list, must be greater than or equal to 1.")
+      if client_side_validation
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_FILES_LIST_VALID_VALUES_FOR_ALT)
+        end
+
+        unless (_corpus = corpus).nil?
+          OpenApi::EnumValidator.validate("corpus", _corpus, DRIVE_FILES_LIST_VALID_VALUES_FOR_CORPUS)
+        end
+
+        unless (_page_size = page_size).nil?
+          OpenApi::PrimitiveValidator.validate_max_number("page_size", _page_size, DRIVE_FILES_LIST_MAX_FOR_PAGE_SIZE)
+          OpenApi::PrimitiveValidator.validate_min_number("page_size", _page_size, DRIVE_FILES_LIST_MIN_FOR_PAGE_SIZE)
+        end
       end
 
       # resource path
       local_var_path = "/drive/v3/files"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -654,6 +1559,7 @@ module GoogleDrive
       query_params["corpus"] = corpus.to_s if !corpus.nil?
       query_params["driveId"] = drive_id.to_s if !drive_id.nil?
       query_params["includeItemsFromAllDrives"] = include_items_from_all_drives.to_s if !include_items_from_all_drives.nil?
+      query_params["includeLabels"] = include_labels.to_s if !include_labels.nil?
       query_params["includePermissionsForView"] = include_permissions_for_view.to_s if !include_permissions_for_view.nil?
       query_params["includeTeamDriveItems"] = include_team_drive_items.to_s if !include_team_drive_items.nil?
       query_params["orderBy"] = order_by.to_s if !order_by.nil?
@@ -665,16 +1571,11 @@ module GoogleDrive
       query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil?
       query_params["teamDriveId"] = team_drive_id.to_s if !team_drive_id.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -686,55 +1587,554 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # Lists the labels on a file.
+    # @required @param file_id [String?] The ID of the file.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param max_results [Int32?] The maximum number of labels to return per page. When not set, this defaults to 100.
+    # @optional @param page_token [String?] The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
+    # @return [GoogleDrive::LabelList]
+    def list_labels(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      max_results : Int32? = nil,
+      page_token : String? = nil
+    ) : GoogleDrive::LabelList
+      data, _status_code, _headers = list_labels_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, max_results: max_results, page_token: page_token)
+      data
+    end
+
+    # Lists the labels on a file.
+    # @required @param file_id [String?] The ID of the file.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param max_results [Int32?] The maximum number of labels to return per page. When not set, this defaults to 100.
+    # @optional @param page_token [String?] The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
+    # @return [Tuple(GoogleDrive::LabelList, Integer, Hash)] GoogleDrive::LabelList, response status code and response headers
+    def list_labels_with_http_info(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      max_results : Int32? = nil,
+      page_token : String? = nil
+    ) : Tuple(GoogleDrive::LabelList, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_list_labels(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, max_results: max_results, page_token: page_token)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging
+        Log.debug { "API called: FilesApi#list_labels\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(GoogleDrive::LabelList.from_json(body), status_code, headers)
+    end
+
+    # Lists the labels on a file.
+    # @required @param file_id [String?] The ID of the file.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param max_results [Int32?] The maximum number of labels to return per page. When not set, this defaults to 100.
+    # @optional @param page_token [String?] The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
+    # @return nil
+    def list_labels(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      max_results : Int32? = nil,
+      page_token : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_list_labels(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, max_results: max_results, page_token: page_token).execute(&block)
+    end
+
+    DRIVE_FILES_LIST_LABELS_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+    DRIVE_FILES_LIST_LABELS_MAX_FOR_MAX_RESULTS  = Int32.new("100")
+    DRIVE_FILES_LIST_LABELS_MIN_FOR_MAX_RESULTS  = Int32.new("1")
+
+    # @return Crest::Request
+    def build_api_request_for_list_labels(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      max_results : Int32? = nil,
+      page_token : String? = nil
+    ) : Crest::Request
+      if debugging
+        Log.debug { "Calling API: FilesApi.list_labels ..." }
+      end
+
+      if client_side_validation
+        raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_FILES_LIST_LABELS_VALID_VALUES_FOR_ALT)
+        end
+
+        unless (_max_results = max_results).nil?
+          OpenApi::PrimitiveValidator.validate_max_number("max_results", _max_results, DRIVE_FILES_LIST_LABELS_MAX_FOR_MAX_RESULTS)
+          OpenApi::PrimitiveValidator.validate_min_number("max_results", _max_results, DRIVE_FILES_LIST_LABELS_MIN_FOR_MAX_RESULTS)
+        end
+      end
+
+      # resource path
+      local_var_path = "/drive/v3/files/{fileId}/listLabels".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["alt"] = alt.to_s if !alt.nil?
+      query_params["fields"] = fields.to_s if !fields.nil?
+      query_params["key"] = key.to_s if !key.nil?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil?
+      query_params["maxResults"] = max_results.to_s if !max_results.nil?
+      query_params["pageToken"] = page_token.to_s if !page_token.nil?
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["Oauth2", "Oauth2c"]
+
+      @api_client.build_api_request(
+        http_method: :"GET",
+        path: local_var_path,
+        operation: "FilesApi.drive_files_list_labels",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # Modifies the set of labels on a file.
+    # @required @param file_id [String?] The ID of the file for which the labels are modified.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param modify_labels_request [GoogleDrive::ModifyLabelsRequest?]
+    # @return [GoogleDrive::ModifyLabelsResponse]
+    def modify_labels(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      modify_labels_request : GoogleDrive::ModifyLabelsRequest? = nil
+    ) : GoogleDrive::ModifyLabelsResponse
+      data, _status_code, _headers = modify_labels_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, modify_labels_request: modify_labels_request)
+      data
+    end
+
+    # Modifies the set of labels on a file.
+    # @required @param file_id [String?] The ID of the file for which the labels are modified.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param modify_labels_request [GoogleDrive::ModifyLabelsRequest?]
+    # @return [Tuple(GoogleDrive::ModifyLabelsResponse, Integer, Hash)] GoogleDrive::ModifyLabelsResponse, response status code and response headers
+    def modify_labels_with_http_info(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      modify_labels_request : GoogleDrive::ModifyLabelsRequest? = nil
+    ) : Tuple(GoogleDrive::ModifyLabelsResponse, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_modify_labels(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, modify_labels_request: modify_labels_request)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging
+        Log.debug { "API called: FilesApi#modify_labels\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(GoogleDrive::ModifyLabelsResponse.from_json(body), status_code, headers)
+    end
+
+    # Modifies the set of labels on a file.
+    # @required @param file_id [String?] The ID of the file for which the labels are modified.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param modify_labels_request [GoogleDrive::ModifyLabelsRequest?]
+    # @return nil
+    def modify_labels(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      modify_labels_request : GoogleDrive::ModifyLabelsRequest? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_modify_labels(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, modify_labels_request: modify_labels_request).execute(&block)
+    end
+
+    DRIVE_FILES_MODIFY_LABELS_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+
+    # @return Crest::Request
+    def build_api_request_for_modify_labels(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      modify_labels_request : GoogleDrive::ModifyLabelsRequest? = nil
+    ) : Crest::Request
+      if debugging
+        Log.debug { "Calling API: FilesApi.modify_labels ..." }
+      end
+
+      if client_side_validation
+        raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_FILES_MODIFY_LABELS_VALID_VALUES_FOR_ALT)
+        end
+
+        unless (_modify_labels_request = modify_labels_request).nil?
+          _modify_labels_request.validate if _modify_labels_request.is_a?(OpenApi::Validatable)
+        end
+      end
+
+      # resource path
+      local_var_path = "/drive/v3/files/{fileId}/modifyLabels".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["alt"] = alt.to_s if !alt.nil?
+      query_params["fields"] = fields.to_s if !fields.nil?
+      query_params["key"] = key.to_s if !key.nil?
+      query_params["oauth_token"] = oauth_token.to_s if !oauth_token.nil?
+      query_params["prettyPrint"] = pretty_print.to_s if !pretty_print.nil?
+      query_params["quotaUser"] = quota_user.to_s if !quota_user.nil?
+      query_params["userIp"] = user_ip.to_s if !user_ip.nil?
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
+
+      # http body (model)
+      post_body : IO | String | Nil = @api_client.encode(body: modify_labels_request, content_type: header_params["Content-Type"]?) if !modify_labels_request.nil?
+
+      # auth_names
+      auth_names = ["Oauth2", "Oauth2c"]
+
+      @api_client.build_api_request(
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "FilesApi.drive_files_modify_labels",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Updates a file's metadata and/or content. When calling this method, only populate fields in the request that you want to modify. When updating fields, some fields might change automatically, such as modifiedDate. This method supports patch semantics.
-    # @param file_id [String] The ID of the file.
-    # @return [File]
-    def update(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = nil, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = nil, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, use_content_as_indexable_text : Bool? = nil, file : File? = nil)
-      data, _status_code, _headers = update_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file)
+    # @required @param file_id [String?] The ID of the file.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param add_parents [String?] A comma-separated list of parent IDs to add.
+    # @optional @param enforce_single_parent [Bool?] Deprecated. Adding files to multiple folders is no longer supported. Use shortcuts instead.
+    # @optional @param include_labels [String?] A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param keep_revision_forever [Bool?] Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
+    # @optional @param ocr_language [String?] A language hint for OCR processing during image import (ISO 639-1 code).
+    # @optional @param remove_parents [String?] A comma-separated list of parent IDs to remove.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param use_content_as_indexable_text [Bool?] Whether to use the uploaded content as indexable text.
+    # @optional @param file [GoogleDrive::File?]
+    # @return [GoogleDrive::File]
+    def update(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      add_parents : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      keep_revision_forever : Bool? = nil,
+      ocr_language : String? = nil,
+      remove_parents : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      use_content_as_indexable_text : Bool? = nil,
+      file : GoogleDrive::File? = nil
+    ) : GoogleDrive::File
+      data, _status_code, _headers = update_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file)
       data
     end
 
     # Updates a file&#39;s metadata and/or content. When calling this method, only populate fields in the request that you want to modify. When updating fields, some fields might change automatically, such as modifiedDate. This method supports patch semantics.
-    # @param file_id [String] The ID of the file.
-    # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
-    def update_with_http_info(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = nil, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = nil, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, use_content_as_indexable_text : Bool? = nil, file : File? = nil)
-      request = build_api_request_for_update(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file)
+    # @required @param file_id [String?] The ID of the file.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param add_parents [String?] A comma-separated list of parent IDs to add.
+    # @optional @param enforce_single_parent [Bool?] Deprecated. Adding files to multiple folders is no longer supported. Use shortcuts instead.
+    # @optional @param include_labels [String?] A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param keep_revision_forever [Bool?] Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
+    # @optional @param ocr_language [String?] A language hint for OCR processing during image import (ISO 639-1 code).
+    # @optional @param remove_parents [String?] A comma-separated list of parent IDs to remove.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param use_content_as_indexable_text [Bool?] Whether to use the uploaded content as indexable text.
+    # @optional @param file [GoogleDrive::File?]
+    # @return [Tuple(GoogleDrive::File, Integer, Hash)] GoogleDrive::File, response status code and response headers
+    def update_with_http_info(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      add_parents : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      keep_revision_forever : Bool? = nil,
+      ocr_language : String? = nil,
+      remove_parents : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      use_content_as_indexable_text : Bool? = nil,
+      file : GoogleDrive::File? = nil
+    ) : Tuple(GoogleDrive::File, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_update(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: FilesApi#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: FilesApi#update\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return File.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::File.from_json(body), status_code, headers)
     end
 
     # Updates a file&#39;s metadata and/or content. When calling this method, only populate fields in the request that you want to modify. When updating fields, some fields might change automatically, such as modifiedDate. This method supports patch semantics.
-    # @param file_id [String] The ID of the file.
+    # @required @param file_id [String?] The ID of the file.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param add_parents [String?] A comma-separated list of parent IDs to add.
+    # @optional @param enforce_single_parent [Bool?] Deprecated. Adding files to multiple folders is no longer supported. Use shortcuts instead.
+    # @optional @param include_labels [String?] A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param keep_revision_forever [Bool?] Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
+    # @optional @param ocr_language [String?] A language hint for OCR processing during image import (ISO 639-1 code).
+    # @optional @param remove_parents [String?] A comma-separated list of parent IDs to remove.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param use_content_as_indexable_text [Bool?] Whether to use the uploaded content as indexable text.
+    # @optional @param file [GoogleDrive::File?]
     # @return nil
-    def update(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = nil, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = nil, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, use_content_as_indexable_text : Bool? = nil, file : File? = nil, &block : Crest::Response ->)
-      build_api_request_for_update(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file).execute(&block)
+    def update(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      add_parents : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      keep_revision_forever : Bool? = nil,
+      ocr_language : String? = nil,
+      remove_parents : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      use_content_as_indexable_text : Bool? = nil,
+      file : GoogleDrive::File? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_update(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file).execute(&block)
     end
 
+    DRIVE_FILES_UPDATE_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_update(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = nil, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = nil, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, use_content_as_indexable_text : Bool? = nil, file : File? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_update(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      add_parents : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      keep_revision_forever : Bool? = nil,
+      ocr_language : String? = nil,
+      remove_parents : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      use_content_as_indexable_text : Bool? = nil,
+      file : GoogleDrive::File? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: FilesApi.update ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_FILES_UPDATE_VALID_VALUES_FOR_ALT)
+        end
+
+        unless (_file = file).nil?
+          _file.validate if _file.is_a?(OpenApi::Validatable)
+        end
       end
+
       # resource path
       local_var_path = "/drive/v3/files/{fileId}".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -744,6 +2144,7 @@ module GoogleDrive
       query_params["userIp"] = user_ip.to_s if !user_ip.nil?
       query_params["addParents"] = add_parents.to_s if !add_parents.nil?
       query_params["enforceSingleParent"] = enforce_single_parent.to_s if !enforce_single_parent.nil?
+      query_params["includeLabels"] = include_labels.to_s if !include_labels.nil?
       query_params["includePermissionsForView"] = include_permissions_for_view.to_s if !include_permissions_for_view.nil?
       query_params["keepRevisionForever"] = keep_revision_forever.to_s if !keep_revision_forever.nil?
       query_params["ocrLanguage"] = ocr_language.to_s if !ocr_language.nil?
@@ -752,18 +2153,11 @@ module GoogleDrive
       query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil?
       query_params["useContentAsIndexableText"] = use_content_as_indexable_text.to_s if !use_content_as_indexable_text.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-      # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = file.to_json
+      post_body : IO | String | Nil = @api_client.encode(body: file, content_type: header_params["Content-Type"]?) if !file.nil?
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -775,62 +2169,217 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Updates a file's metadata and/or content. When calling this method, only populate fields in the request that you want to modify. When updating fields, some fields might change automatically, such as modifiedDate. This method supports patch semantics.
-    # @param upload_type [String] The type of upload request to the /upload URI
-    # @param file_id [String] The ID of the file.
-    # @return [File]
-    def update_content(*, upload_type : String = "media", file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = nil, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = nil, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, use_content_as_indexable_text : Bool? = nil, body : IO | String? = nil)
+    # @required @param upload_type [String?] The type of upload request to the /upload URI
+    # @required @param file_id [String?] The ID of the file.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param add_parents [String?] A comma-separated list of parent IDs to add.
+    # @optional @param enforce_single_parent [Bool?] Deprecated. Adding files to multiple folders is no longer supported. Use shortcuts instead.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param keep_revision_forever [Bool?] Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
+    # @optional @param ocr_language [String?] A language hint for OCR processing during image import (ISO 639-1 code).
+    # @optional @param remove_parents [String?] A comma-separated list of parent IDs to remove.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param use_content_as_indexable_text [Bool?] Whether to use the uploaded content as indexable text.
+    # @optional @param body [::File?]
+    # @return [GoogleDrive::File]
+    def update_content(
+      *,
+      upload_type : String? = "media",
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      add_parents : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      include_permissions_for_view : String? = nil,
+      keep_revision_forever : Bool? = nil,
+      ocr_language : String? = nil,
+      remove_parents : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      use_content_as_indexable_text : Bool? = nil,
+      body : IO | String? = nil
+    ) : GoogleDrive::File
       data, _status_code, _headers = update_content_with_http_info(upload_type: upload_type, file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, body: body)
       data
     end
 
     # Updates a file&#39;s metadata and/or content. When calling this method, only populate fields in the request that you want to modify. When updating fields, some fields might change automatically, such as modifiedDate. This method supports patch semantics.
-    # @param upload_type [String] The type of upload request to the /upload URI
-    # @param file_id [String] The ID of the file.
-    # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
-    def update_content_with_http_info(*, upload_type : String = "media", file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = nil, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = nil, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, use_content_as_indexable_text : Bool? = nil, body : IO | String? = nil)
+    # @required @param upload_type [String?] The type of upload request to the /upload URI
+    # @required @param file_id [String?] The ID of the file.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param add_parents [String?] A comma-separated list of parent IDs to add.
+    # @optional @param enforce_single_parent [Bool?] Deprecated. Adding files to multiple folders is no longer supported. Use shortcuts instead.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param keep_revision_forever [Bool?] Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
+    # @optional @param ocr_language [String?] A language hint for OCR processing during image import (ISO 639-1 code).
+    # @optional @param remove_parents [String?] A comma-separated list of parent IDs to remove.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param use_content_as_indexable_text [Bool?] Whether to use the uploaded content as indexable text.
+    # @optional @param body [::File?]
+    # @return [Tuple(GoogleDrive::File, Integer, Hash)] GoogleDrive::File, response status code and response headers
+    def update_content_with_http_info(
+      *,
+      upload_type : String? = "media",
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      add_parents : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      include_permissions_for_view : String? = nil,
+      keep_revision_forever : Bool? = nil,
+      ocr_language : String? = nil,
+      remove_parents : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      use_content_as_indexable_text : Bool? = nil,
+      body : IO | String? = nil
+    ) : Tuple(GoogleDrive::File, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_update_content(upload_type: upload_type, file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, body: body)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: FilesApi#update_content\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: FilesApi#update_content\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return File.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::File.from_json(body), status_code, headers)
     end
 
     # Updates a file&#39;s metadata and/or content. When calling this method, only populate fields in the request that you want to modify. When updating fields, some fields might change automatically, such as modifiedDate. This method supports patch semantics.
-    # @param upload_type [String] The type of upload request to the /upload URI
-    # @param file_id [String] The ID of the file.
+    # @required @param upload_type [String?] The type of upload request to the /upload URI
+    # @required @param file_id [String?] The ID of the file.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param add_parents [String?] A comma-separated list of parent IDs to add.
+    # @optional @param enforce_single_parent [Bool?] Deprecated. Adding files to multiple folders is no longer supported. Use shortcuts instead.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param keep_revision_forever [Bool?] Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
+    # @optional @param ocr_language [String?] A language hint for OCR processing during image import (ISO 639-1 code).
+    # @optional @param remove_parents [String?] A comma-separated list of parent IDs to remove.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param use_content_as_indexable_text [Bool?] Whether to use the uploaded content as indexable text.
+    # @optional @param body [::File?]
     # @return nil
-    def update_content(*, upload_type : String = "media", file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = nil, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = nil, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, use_content_as_indexable_text : Bool? = nil, body : IO | String? = nil, &block : Crest::Response ->)
+    def update_content(
+      *,
+      upload_type : String? = "media",
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      add_parents : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      include_permissions_for_view : String? = nil,
+      keep_revision_forever : Bool? = nil,
+      ocr_language : String? = nil,
+      remove_parents : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      use_content_as_indexable_text : Bool? = nil,
+      body : IO | String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_update_content(upload_type: upload_type, file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, body: body).execute(&block)
     end
 
+    DRIVE_FILES_UPDATE_CONTENT_VALID_VALUES_FOR_UPLOAD_TYPE = String.static_array("media", "multipart", "resumable")
+    DRIVE_FILES_UPDATE_CONTENT_VALID_VALUES_FOR_ALT         = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_update_content(*, upload_type : String = "media", file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, add_parents : String? = nil, enforce_single_parent : Bool? = nil, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = nil, ocr_language : String? = nil, remove_parents : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, use_content_as_indexable_text : Bool? = nil, body : IO | String? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_update_content(
+      *,
+      upload_type : String? = "media",
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      add_parents : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      include_permissions_for_view : String? = nil,
+      keep_revision_forever : Bool? = nil,
+      ocr_language : String? = nil,
+      remove_parents : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      use_content_as_indexable_text : Bool? = nil,
+      body : IO | String? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: FilesApi.update_content ..." }
       end
-      allowable_values = ["media", "multipart", "resumable"]
-      if @api_client.config.client_side_validation && !allowable_values.includes?(upload_type)
-        raise ArgumentError.new("invalid value for \"upload_type\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        raise ArgumentError.new("\"upload_type\" is required and cannot be null") if upload_type.nil?
+        unless (_upload_type = upload_type).nil?
+          OpenApi::EnumValidator.validate("upload_type", _upload_type, DRIVE_FILES_UPDATE_CONTENT_VALID_VALUES_FOR_UPLOAD_TYPE)
+        end
+        raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_FILES_UPDATE_CONTENT_VALID_VALUES_FOR_ALT)
+        end
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
+
       # resource path
       local_var_path = "/upload/drive/v3/files/{fileId}".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/octet-stream"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -849,18 +2398,11 @@ module GoogleDrive
       query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil?
       query_params["useContentAsIndexableText"] = use_content_as_indexable_text.to_s if !use_content_as_indexable_text.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-      # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["application/octet-stream"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = body
+      post_body : IO | String | Nil = body
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -872,59 +2414,208 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Creates a new file.
-    # @param upload_type [String] The type of upload request to the /upload URI
-    # @return [File]
-    def upload(*, upload_type : String = "multipart", alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = nil, ignore_default_visibility : Bool? = nil, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = nil, ocr_language : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, use_content_as_indexable_text : Bool? = nil, metadata : IO | String? = nil, media : IO | String? = nil)
-      data, _status_code, _headers = upload_with_http_info(upload_type: upload_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, metadata: metadata, media: media)
+    # @required @param upload_type [String?] The type of upload request to the /upload URI
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param enforce_single_parent [Bool?] Deprecated. Creating files in multiple folders is no longer supported.
+    # @optional @param ignore_default_visibility [Bool?] Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param keep_revision_forever [Bool?] Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
+    # @optional @param ocr_language [String?] A language hint for OCR processing during image import (ISO 639-1 code).
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param use_content_as_indexable_text [Bool?] Whether to use the uploaded content as indexable text.
+    # @optional @param media [::File?]
+    # @optional @param metadata [::File?]
+    # @return [GoogleDrive::File]
+    def upload(
+      *,
+      upload_type : String? = "multipart",
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      ignore_default_visibility : Bool? = nil,
+      include_permissions_for_view : String? = nil,
+      keep_revision_forever : Bool? = nil,
+      ocr_language : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      use_content_as_indexable_text : Bool? = nil,
+      media : IO | String? = nil,
+      metadata : IO | String? = nil
+    ) : GoogleDrive::File
+      data, _status_code, _headers = upload_with_http_info(upload_type: upload_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, media: media, metadata: metadata)
       data
     end
 
     # Creates a new file.
-    # @param upload_type [String] The type of upload request to the /upload URI
-    # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
-    def upload_with_http_info(*, upload_type : String = "multipart", alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = nil, ignore_default_visibility : Bool? = nil, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = nil, ocr_language : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, use_content_as_indexable_text : Bool? = nil, metadata : IO | String? = nil, media : IO | String? = nil)
-      request = build_api_request_for_upload(upload_type: upload_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, metadata: metadata, media: media)
+    # @required @param upload_type [String?] The type of upload request to the /upload URI
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param enforce_single_parent [Bool?] Deprecated. Creating files in multiple folders is no longer supported.
+    # @optional @param ignore_default_visibility [Bool?] Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param keep_revision_forever [Bool?] Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
+    # @optional @param ocr_language [String?] A language hint for OCR processing during image import (ISO 639-1 code).
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param use_content_as_indexable_text [Bool?] Whether to use the uploaded content as indexable text.
+    # @optional @param media [::File?]
+    # @optional @param metadata [::File?]
+    # @return [Tuple(GoogleDrive::File, Integer, Hash)] GoogleDrive::File, response status code and response headers
+    def upload_with_http_info(
+      *,
+      upload_type : String? = "multipart",
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      ignore_default_visibility : Bool? = nil,
+      include_permissions_for_view : String? = nil,
+      keep_revision_forever : Bool? = nil,
+      ocr_language : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      use_content_as_indexable_text : Bool? = nil,
+      media : IO | String? = nil,
+      metadata : IO | String? = nil
+    ) : Tuple(GoogleDrive::File, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_upload(upload_type: upload_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, media: media, metadata: metadata)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: FilesApi#upload\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: FilesApi#upload\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return File.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::File.from_json(body), status_code, headers)
     end
 
     # Creates a new file.
-    # @param upload_type [String] The type of upload request to the /upload URI
+    # @required @param upload_type [String?] The type of upload request to the /upload URI
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param enforce_single_parent [Bool?] Deprecated. Creating files in multiple folders is no longer supported.
+    # @optional @param ignore_default_visibility [Bool?] Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param keep_revision_forever [Bool?] Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
+    # @optional @param ocr_language [String?] A language hint for OCR processing during image import (ISO 639-1 code).
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param use_content_as_indexable_text [Bool?] Whether to use the uploaded content as indexable text.
+    # @optional @param media [::File?]
+    # @optional @param metadata [::File?]
     # @return nil
-    def upload(*, upload_type : String = "multipart", alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = nil, ignore_default_visibility : Bool? = nil, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = nil, ocr_language : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, use_content_as_indexable_text : Bool? = nil, metadata : IO | String? = nil, media : IO | String? = nil, &block : Crest::Response ->)
-      build_api_request_for_upload(upload_type: upload_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, metadata: metadata, media: media).execute(&block)
+    def upload(
+      *,
+      upload_type : String? = "multipart",
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      ignore_default_visibility : Bool? = nil,
+      include_permissions_for_view : String? = nil,
+      keep_revision_forever : Bool? = nil,
+      ocr_language : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      use_content_as_indexable_text : Bool? = nil,
+      media : IO | String? = nil,
+      metadata : IO | String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_upload(upload_type: upload_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, media: media, metadata: metadata).execute(&block)
     end
 
+    DRIVE_FILES_UPLOAD_VALID_VALUES_FOR_UPLOAD_TYPE = String.static_array("media", "multipart", "resumable")
+    DRIVE_FILES_UPLOAD_VALID_VALUES_FOR_ALT         = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_upload(*, upload_type : String = "multipart", alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, enforce_single_parent : Bool? = nil, ignore_default_visibility : Bool? = nil, include_permissions_for_view : String? = nil, keep_revision_forever : Bool? = nil, ocr_language : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, use_content_as_indexable_text : Bool? = nil, metadata : IO | String? = nil, media : IO | String? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_upload(
+      *,
+      upload_type : String? = "multipart",
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      enforce_single_parent : Bool? = nil,
+      ignore_default_visibility : Bool? = nil,
+      include_permissions_for_view : String? = nil,
+      keep_revision_forever : Bool? = nil,
+      ocr_language : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      use_content_as_indexable_text : Bool? = nil,
+      media : IO | String? = nil,
+      metadata : IO | String? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: FilesApi.upload ..." }
       end
-      allowable_values = ["media", "multipart", "resumable"]
-      if @api_client.config.client_side_validation && !allowable_values.includes?(upload_type)
-        raise ArgumentError.new("invalid value for \"upload_type\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        raise ArgumentError.new("\"upload_type\" is required and cannot be null") if upload_type.nil?
+        unless (_upload_type = upload_type).nil?
+          OpenApi::EnumValidator.validate("upload_type", _upload_type, DRIVE_FILES_UPLOAD_VALID_VALUES_FOR_UPLOAD_TYPE)
+        end
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_FILES_UPLOAD_VALID_VALUES_FOR_ALT)
+        end
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
-      end
+
       # resource path
       local_var_path = "/upload/drive/v3/files"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = upload_type == "media" ? MIME.from_filename(media.not_nil!.path) : @api_client.select_header_content_type(["multipart/form-data"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -942,20 +2633,13 @@ module GoogleDrive
       query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil?
       query_params["useContentAsIndexableText"] = use_content_as_indexable_text.to_s if !use_content_as_indexable_text.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-      # HTTP header "Content-Type"
-      header_params["Content-Type"] = upload_type == "media" ? MIME.from_filename(media.not_nil!.path) : @api_client.select_header_content_type(["multipart/form-data"])
-
       # form parameters
-      form_params = upload_type == "multipart" ? Hash(String, (String | Array(String) | IO)).new : nil
-      form_params["Metadata.json"] = metadata if form_params && !metadata.nil? && upload_type == "multipart"
-      form_params["Media"] = media if form_params && !media.nil? && upload_type == "multipart"
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = upload_type == "multipart" ? Array(Tuple(String, Crest::ParamsValue)).new : nil
+      form_params << Tuple(String, Crest::ParamsValue).new("Metadata.json", metadata) if form_params && !metadata.nil? && upload_type == "multipart"
+      form_params << Tuple(String, Crest::ParamsValue).new("Media", media) if form_params && !media.nil? && upload_type == "multipart"
 
       # http body (model)
-      post_body = upload_type == "multipart" ? nil : media.not_nil!
+      post_body : IO | String | Nil = upload_type == "multipart" ? nil : media.not_nil!
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -967,55 +2651,181 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
     end
 
     # Subscribes to changes to a file. While you can establish a channel for changes to a file on a shared drive, a change to a shared drive file won't create a notification.
-    # @param file_id [String] The ID of the file.
-    # @return [Channel]
-    def watch(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = nil, include_permissions_for_view : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, channel : Channel? = nil)
-      data, _status_code, _headers = watch_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, channel: channel)
+    # @required @param file_id [String?] The ID of the file.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param acknowledge_abuse [Bool?] Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.
+    # @optional @param include_labels [String?] A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param channel [GoogleDrive::Channel?]
+    # @return [GoogleDrive::Channel]
+    def watch(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      acknowledge_abuse : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      channel : GoogleDrive::Channel? = nil
+    ) : GoogleDrive::Channel
+      data, _status_code, _headers = watch_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, channel: channel)
       data
     end
 
     # Subscribes to changes to a file. While you can establish a channel for changes to a file on a shared drive, a change to a shared drive file won&#39;t create a notification.
-    # @param file_id [String] The ID of the file.
-    # @return [Array<(Channel, Integer, Hash)>] Channel data, response status code and response headers
-    def watch_with_http_info(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = nil, include_permissions_for_view : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, channel : Channel? = nil)
-      request = build_api_request_for_watch(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, channel: channel)
+    # @required @param file_id [String?] The ID of the file.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param acknowledge_abuse [Bool?] Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.
+    # @optional @param include_labels [String?] A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param channel [GoogleDrive::Channel?]
+    # @return [Tuple(GoogleDrive::Channel, Integer, Hash)] GoogleDrive::Channel, response status code and response headers
+    def watch_with_http_info(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      acknowledge_abuse : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      channel : GoogleDrive::Channel? = nil
+    ) : Tuple(GoogleDrive::Channel, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_watch(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, channel: channel)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
-        Log.debug { "API called: FilesApi#watch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      if debugging
+        Log.debug { "API called: FilesApi#watch\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Channel.from_json(data), status_code, headers
+      Tuple.new(GoogleDrive::Channel.from_json(body), status_code, headers)
     end
 
     # Subscribes to changes to a file. While you can establish a channel for changes to a file on a shared drive, a change to a shared drive file won&#39;t create a notification.
-    # @param file_id [String] The ID of the file.
+    # @required @param file_id [String?] The ID of the file.
+    # @optional @param alt [String?] Data format for the response.
+    # @optional @param fields [String?] Selector specifying which fields to include in a partial response.
+    # @optional @param key [String?] API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    # @optional @param oauth_token [String?] OAuth 2.0 token for the current user.
+    # @optional @param pretty_print [Bool?] Returns response with indentations and line breaks.
+    # @optional @param quota_user [String?] An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    # @optional @param user_ip [String?] Deprecated. Please use quotaUser instead.
+    # @optional @param acknowledge_abuse [Bool?] Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.
+    # @optional @param include_labels [String?] A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    # @optional @param include_permissions_for_view [String?] Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+    # @optional @param supports_all_drives [Bool?] Whether the requesting application supports both My Drives and shared drives.
+    # @optional @param supports_team_drives [Bool?] Deprecated use supportsAllDrives instead.
+    # @optional @param channel [GoogleDrive::Channel?]
     # @return nil
-    def watch(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = nil, include_permissions_for_view : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, channel : Channel? = nil, &block : Crest::Response ->)
-      build_api_request_for_watch(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, channel: channel).execute(&block)
+    def watch(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      acknowledge_abuse : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      channel : GoogleDrive::Channel? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_watch(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, channel: channel).execute(&block)
     end
 
+    DRIVE_FILES_WATCH_VALID_VALUES_FOR_ALT = String.static_array("json", "media")
+
     # @return Crest::Request
-    def build_api_request_for_watch(*, file_id : String, alt : String? = "json", fields : String? = nil, key : String? = nil, oauth_token : String? = nil, pretty_print : Bool? = nil, quota_user : String? = nil, user_ip : String? = nil, acknowledge_abuse : Bool? = nil, include_permissions_for_view : String? = nil, supports_all_drives : Bool? = nil, supports_team_drives : Bool? = nil, channel : Channel? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_watch(
+      *,
+      file_id : String? = nil,
+      alt : String? = "json",
+      fields : String? = nil,
+      key : String? = nil,
+      oauth_token : String? = nil,
+      pretty_print : Bool? = nil,
+      quota_user : String? = nil,
+      user_ip : String? = nil,
+      acknowledge_abuse : Bool? = nil,
+      include_labels : String? = nil,
+      include_permissions_for_view : String? = nil,
+      supports_all_drives : Bool? = nil,
+      supports_team_drives : Bool? = nil,
+      channel : GoogleDrive::Channel? = nil
+    ) : Crest::Request
+      if debugging
         Log.debug { "Calling API: FilesApi.watch ..." }
       end
-      allowable_values = ["json", "media"]
-      if @api_client.config.client_side_validation && !alt.nil? && !allowable_values.includes?(alt)
-        raise ArgumentError.new("invalid value for \"alt\", must be one of #{allowable_values}")
+
+      if client_side_validation
+        raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
+
+        unless (_alt = alt).nil?
+          OpenApi::EnumValidator.validate("alt", _alt, DRIVE_FILES_WATCH_VALID_VALUES_FOR_ALT)
+        end
+
+        unless (_channel = channel).nil?
+          _channel.validate if _channel.is_a?(OpenApi::Validatable)
+        end
       end
+
       # resource path
       local_var_path = "/drive/v3/files/{fileId}/watch".sub("{" + "fileId" + "}", URI.encode_path(file_id.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["alt"] = alt.to_s if !alt.nil?
       query_params["fields"] = fields.to_s if !fields.nil?
       query_params["key"] = key.to_s if !key.nil?
@@ -1024,22 +2834,16 @@ module GoogleDrive
       query_params["quotaUser"] = quota_user.to_s if !quota_user.nil?
       query_params["userIp"] = user_ip.to_s if !user_ip.nil?
       query_params["acknowledgeAbuse"] = acknowledge_abuse.to_s if !acknowledge_abuse.nil?
+      query_params["includeLabels"] = include_labels.to_s if !include_labels.nil?
       query_params["includePermissionsForView"] = include_permissions_for_view.to_s if !include_permissions_for_view.nil?
       query_params["supportsAllDrives"] = supports_all_drives.to_s if !supports_all_drives.nil?
       query_params["supportsTeamDrives"] = supports_team_drives.to_s if !supports_team_drives.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-      # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = channel.to_json
+      post_body : IO | String | Nil = @api_client.encode(body: channel, content_type: header_params["Content-Type"]?) if !channel.nil?
 
       # auth_names
       auth_names = ["Oauth2", "Oauth2c"]
@@ -1051,6 +2855,7 @@ module GoogleDrive
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

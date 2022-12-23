@@ -12,33 +12,25 @@ require "time"
 require "log"
 
 module GoogleDrive
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class AboutTeamDriveThemesInner
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Deprecated - use driveThemes/backgroundImageLink instead.
-    @[JSON::Field(key: "backgroundImageLink", type: String?, presence: true, ignore_serialize: background_image_link.nil? && !background_image_link_present?)]
-    property background_image_link : String?
-
-    @[JSON::Field(ignore: true)]
-    property? background_image_link_present : Bool = false
+    @[JSON::Field(key: "backgroundImageLink", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter background_image_link : String? = nil
 
     # Deprecated - use driveThemes/colorRgb instead.
-    @[JSON::Field(key: "colorRgb", type: String?, presence: true, ignore_serialize: color_rgb.nil? && !color_rgb_present?)]
-    property color_rgb : String?
-
-    @[JSON::Field(ignore: true)]
-    property? color_rgb_present : Bool = false
+    @[JSON::Field(key: "colorRgb", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter color_rgb : String? = nil
 
     # Deprecated - use driveThemes/id instead.
-    @[JSON::Field(key: "id", type: String?, presence: true, ignore_serialize: id.nil? && !id_present?)]
-    property id : String?
-
-    @[JSON::Field(ignore: true)]
-    property? id_present : Bool = false
+    @[JSON::Field(key: "id", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter id : String? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -53,7 +45,7 @@ module GoogleDrive
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -61,20 +53,44 @@ module GoogleDrive
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] background_image_link Object to be assigned
+    def background_image_link=(background_image_link : String?)
+      if background_image_link.nil?
+        return @background_image_link = nil
+      end
+      _background_image_link = background_image_link.not_nil!
+      @background_image_link = _background_image_link
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] color_rgb Object to be assigned
+    def color_rgb=(color_rgb : String?)
+      if color_rgb.nil?
+        return @color_rgb = nil
+      end
+      _color_rgb = color_rgb.not_nil!
+      @color_rgb = _color_rgb
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] id Object to be assigned
+    def id=(id : String?)
+      if id.nil?
+        return @id = nil
+      end
+      _id = id.not_nil!
+      @id = _id
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@background_image_link, @background_image_link_present, @color_rgb, @color_rgb_present, @id, @id_present)
+    def_equals_and_hash(@background_image_link, @color_rgb, @id)
   end
 end

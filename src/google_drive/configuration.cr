@@ -202,10 +202,11 @@ module GoogleDrive
     # Gets API key (with prefix if set).
     # @param [String] param_name the parameter name of API key auth
     def api_key_with_prefix(param_name)
-      if prefix = @api_key_prefix[param_name]?
-        "#{prefix} #{@api_key[param_name]}"
-      else
+      prefix = @api_key_prefix[param_name]?
+      if prefix.nil?
         @api_key[param_name]? || ""
+      else
+        "#{prefix} #{@api_key[param_name]}"
       end
     end
 
@@ -216,7 +217,7 @@ module GoogleDrive
 
     # Returns Auth Settings hash for api client.
     def auth_settings
-      Hash{
+      {
         "Oauth2" => {
           "type"  => "oauth2",
           "in"    => "header",
@@ -229,7 +230,7 @@ module GoogleDrive
           "key"   => "Authorization",
           "value" => "Bearer #{access_token}",
         },
-      }
+      } of String => Hash(String, String)
     end
 
     # Returns an array of Server setting

@@ -13,82 +13,53 @@ require "log"
 
 module GoogleDrive
   # An notification channel used to watch for resource changes.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class Channel
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The address where notifications are delivered for this channel.
-    @[JSON::Field(key: "address", type: String?, presence: true, ignore_serialize: address.nil? && !address_present?)]
-    property address : String?
-
-    @[JSON::Field(ignore: true)]
-    property? address_present : Bool = false
+    @[JSON::Field(key: "address", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter address : String? = nil
 
     # Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
-    @[JSON::Field(key: "expiration", type: String?, presence: true, ignore_serialize: expiration.nil? && !expiration_present?)]
-    property expiration : String?
-
-    @[JSON::Field(ignore: true)]
-    property? expiration_present : Bool = false
+    @[JSON::Field(key: "expiration", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter expiration : String? = nil
 
     # A UUID or similar unique string that identifies this channel.
-    @[JSON::Field(key: "id", type: String?, presence: true, ignore_serialize: id.nil? && !id_present?)]
-    property id : String?
-
-    @[JSON::Field(ignore: true)]
-    property? id_present : Bool = false
+    @[JSON::Field(key: "id", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter id : String? = nil
 
     # Identifies this as a notification channel used to watch for changes to a resource, which is \"api#channel\".
-    @[JSON::Field(key: "kind", type: String?, default: "api#channel", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String? = "api#channel"
-
-    @[JSON::Field(ignore: true)]
-    property? kind_present : Bool = false
+    @[JSON::Field(key: "kind", type: String?, default: "api#channel", required: false, nullable: false, emit_null: false)]
+    getter kind : String? = "api#channel"
 
     # Additional parameters controlling delivery channel behavior. Optional.
-    @[JSON::Field(key: "params", type: Hash(String, String)?, presence: true, ignore_serialize: params.nil? && !params_present?)]
-    property params : Hash(String, String)?
-
-    @[JSON::Field(ignore: true)]
-    property? params_present : Bool = false
+    @[JSON::Field(key: "params", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter params : Hash(String, String)? = nil
 
     # A Boolean value to indicate whether payload is wanted. Optional.
-    @[JSON::Field(key: "payload", type: Bool?, presence: true, ignore_serialize: payload.nil? && !payload_present?)]
-    property payload : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? payload_present : Bool = false
+    @[JSON::Field(key: "payload", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter payload : Bool? = nil
 
     # An opaque ID that identifies the resource being watched on this channel. Stable across different API versions.
-    @[JSON::Field(key: "resourceId", type: String?, presence: true, ignore_serialize: resource_id.nil? && !resource_id_present?)]
-    property resource_id : String?
-
-    @[JSON::Field(ignore: true)]
-    property? resource_id_present : Bool = false
+    @[JSON::Field(key: "resourceId", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter resource_id : String? = nil
 
     # A version-specific identifier for the watched resource.
-    @[JSON::Field(key: "resourceUri", type: String?, presence: true, ignore_serialize: resource_uri.nil? && !resource_uri_present?)]
-    property resource_uri : String?
-
-    @[JSON::Field(ignore: true)]
-    property? resource_uri_present : Bool = false
+    @[JSON::Field(key: "resourceUri", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter resource_uri : String? = nil
 
     # An arbitrary string delivered to the target address with each notification delivered over this channel. Optional.
-    @[JSON::Field(key: "token", type: String?, presence: true, ignore_serialize: token.nil? && !token_present?)]
-    property token : String?
-
-    @[JSON::Field(ignore: true)]
-    property? token_present : Bool = false
+    @[JSON::Field(key: "token", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter token : String? = nil
 
     # The type of delivery mechanism used for this channel. Valid values are \"web_hook\" (or \"webhook\"). Both values refer to a channel where Http requests are used to deliver messages.
-    @[JSON::Field(key: "type", type: String?, presence: true, ignore_serialize: _type.nil? && !_type_present?)]
-    property _type : String?
-
-    @[JSON::Field(ignore: true)]
-    property? _type_present : Bool = false
+    @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter _type : String? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -110,7 +81,7 @@ module GoogleDrive
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -118,20 +89,114 @@ module GoogleDrive
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] address Object to be assigned
+    def address=(address : String?)
+      if address.nil?
+        return @address = nil
+      end
+      _address = address.not_nil!
+      @address = _address
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] expiration Object to be assigned
+    def expiration=(expiration : String?)
+      if expiration.nil?
+        return @expiration = nil
+      end
+      _expiration = expiration.not_nil!
+      @expiration = _expiration
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] id Object to be assigned
+    def id=(id : String?)
+      if id.nil?
+        return @id = nil
+      end
+      _id = id.not_nil!
+      @id = _id
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] kind Object to be assigned
+    def kind=(kind : String?)
+      if kind.nil?
+        return @kind = nil
+      end
+      _kind = kind.not_nil!
+      @kind = _kind
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] params Object to be assigned
+    def params=(params : Hash(String, String)?)
+      if params.nil?
+        return @params = nil
+      end
+      _params = params.not_nil!
+      @params = _params
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] payload Object to be assigned
+    def payload=(payload : Bool?)
+      if payload.nil?
+        return @payload = nil
+      end
+      _payload = payload.not_nil!
+      @payload = _payload
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] resource_id Object to be assigned
+    def resource_id=(resource_id : String?)
+      if resource_id.nil?
+        return @resource_id = nil
+      end
+      _resource_id = resource_id.not_nil!
+      @resource_id = _resource_id
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] resource_uri Object to be assigned
+    def resource_uri=(resource_uri : String?)
+      if resource_uri.nil?
+        return @resource_uri = nil
+      end
+      _resource_uri = resource_uri.not_nil!
+      @resource_uri = _resource_uri
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] token Object to be assigned
+    def token=(token : String?)
+      if token.nil?
+        return @token = nil
+      end
+      _token = token.not_nil!
+      @token = _token
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] _type Object to be assigned
+    def _type=(_type : String?)
+      if _type.nil?
+        return @_type = nil
+      end
+      __type = _type.not_nil!
+      @_type = __type
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@address, @address_present, @expiration, @expiration_present, @id, @id_present, @kind, @kind_present, @params, @params_present, @payload, @payload_present, @resource_id, @resource_id_present, @resource_uri, @resource_uri_present, @token, @token_present, @_type, @_type_present)
+    def_equals_and_hash(@address, @expiration, @id, @kind, @params, @payload, @resource_id, @resource_uri, @token, @_type)
   end
 end

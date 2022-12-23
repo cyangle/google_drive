@@ -13,416 +13,251 @@ require "log"
 
 module GoogleDrive
   # The metadata for a file.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class File
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # A collection of arbitrary key-value pairs which are private to the requesting app. Entries with null values are cleared in update and copy requests. These properties can only be retrieved using an authenticated request. An authenticated request uses an access token obtained with a OAuth 2 client ID. You cannot use an API key to retrieve private properties.
-    @[JSON::Field(key: "appProperties", type: Hash(String, String)?, presence: true, ignore_serialize: app_properties.nil? && !app_properties_present?)]
-    property app_properties : Hash(String, String)?
+    @[JSON::Field(key: "appProperties", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter app_properties : Hash(String, String)? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? app_properties_present : Bool = false
+    @[JSON::Field(key: "capabilities", type: GoogleDrive::FileCapabilities?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter capabilities : GoogleDrive::FileCapabilities? = nil
 
-    @[JSON::Field(key: "capabilities", type: FileCapabilities?, presence: true, ignore_serialize: capabilities.nil? && !capabilities_present?)]
-    property capabilities : FileCapabilities?
-
-    @[JSON::Field(ignore: true)]
-    property? capabilities_present : Bool = false
-
-    @[JSON::Field(key: "contentHints", type: FileContentHints?, presence: true, ignore_serialize: content_hints.nil? && !content_hints_present?)]
-    property content_hints : FileContentHints?
-
-    @[JSON::Field(ignore: true)]
-    property? content_hints_present : Bool = false
+    @[JSON::Field(key: "contentHints", type: GoogleDrive::FileContentHints?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter content_hints : GoogleDrive::FileContentHints? = nil
 
     # Restrictions for accessing the content of the file. Only populated if such a restriction exists.
-    @[JSON::Field(key: "contentRestrictions", type: Array(ContentRestriction)?, presence: true, ignore_serialize: content_restrictions.nil? && !content_restrictions_present?)]
-    property content_restrictions : Array(ContentRestriction)?
-
-    @[JSON::Field(ignore: true)]
-    property? content_restrictions_present : Bool = false
+    @[JSON::Field(key: "contentRestrictions", type: Array(GoogleDrive::ContentRestriction)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter content_restrictions : Array(GoogleDrive::ContentRestriction)? = nil
 
     # Whether the options to copy, print, or download this file, should be disabled for readers and commenters.
-    @[JSON::Field(key: "copyRequiresWriterPermission", type: Bool?, presence: true, ignore_serialize: copy_requires_writer_permission.nil? && !copy_requires_writer_permission_present?)]
-    property copy_requires_writer_permission : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? copy_requires_writer_permission_present : Bool = false
+    @[JSON::Field(key: "copyRequiresWriterPermission", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter copy_requires_writer_permission : Bool? = nil
 
     # The time at which the file was created (RFC 3339 date-time).
-    @[JSON::Field(key: "createdTime", type: Time?, converter: Time::RFC3339Converter, presence: true, ignore_serialize: created_time.nil? && !created_time_present?)]
-    property created_time : Time?
-
-    @[JSON::Field(ignore: true)]
-    property? created_time_present : Bool = false
+    @[JSON::Field(key: "createdTime", type: Time?, default: nil, required: false, nullable: false, emit_null: false, converter: Time::RFC3339Converter)]
+    getter created_time : Time? = nil
 
     # A short description of the file.
-    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
-    property description : String?
-
-    @[JSON::Field(ignore: true)]
-    property? description_present : Bool = false
+    @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter description : String? = nil
 
     # ID of the shared drive the file resides in. Only populated for items in shared drives.
-    @[JSON::Field(key: "driveId", type: String?, presence: true, ignore_serialize: drive_id.nil? && !drive_id_present?)]
-    property drive_id : String?
-
-    @[JSON::Field(ignore: true)]
-    property? drive_id_present : Bool = false
+    @[JSON::Field(key: "driveId", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter drive_id : String? = nil
 
     # Whether the file has been explicitly trashed, as opposed to recursively trashed from a parent folder.
-    @[JSON::Field(key: "explicitlyTrashed", type: Bool?, presence: true, ignore_serialize: explicitly_trashed.nil? && !explicitly_trashed_present?)]
-    property explicitly_trashed : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? explicitly_trashed_present : Bool = false
+    @[JSON::Field(key: "explicitlyTrashed", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter explicitly_trashed : Bool? = nil
 
     # Links for exporting Docs Editors files to specific formats.
-    @[JSON::Field(key: "exportLinks", type: Hash(String, String)?, presence: true, ignore_serialize: export_links.nil? && !export_links_present?)]
-    property export_links : Hash(String, String)?
-
-    @[JSON::Field(ignore: true)]
-    property? export_links_present : Bool = false
+    @[JSON::Field(key: "exportLinks", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter export_links : Hash(String, String)? = nil
 
     # The final component of fullFileExtension. This is only available for files with binary content in Google Drive.
-    @[JSON::Field(key: "fileExtension", type: String?, presence: true, ignore_serialize: file_extension.nil? && !file_extension_present?)]
-    property file_extension : String?
-
-    @[JSON::Field(ignore: true)]
-    property? file_extension_present : Bool = false
+    @[JSON::Field(key: "fileExtension", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter file_extension : String? = nil
 
     # The color for a folder or shortcut to a folder as an RGB hex string. The supported colors are published in the folderColorPalette field of the About resource. If an unsupported color is specified, the closest color in the palette will be used instead.
-    @[JSON::Field(key: "folderColorRgb", type: String?, presence: true, ignore_serialize: folder_color_rgb.nil? && !folder_color_rgb_present?)]
-    property folder_color_rgb : String?
+    @[JSON::Field(key: "folderColorRgb", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter folder_color_rgb : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? folder_color_rgb_present : Bool = false
-
-    # The full file extension extracted from the name field. May contain multiple concatenated extensions, such as \"tar.gz\". This is only available for files with binary content in Google Drive. This is automatically updated when the name field changes, however it is not cleared if the new name does not contain a valid extension.
-    @[JSON::Field(key: "fullFileExtension", type: String?, presence: true, ignore_serialize: full_file_extension.nil? && !full_file_extension_present?)]
-    property full_file_extension : String?
-
-    @[JSON::Field(ignore: true)]
-    property? full_file_extension_present : Bool = false
+    # The full file extension extracted from the name field. May contain multiple concatenated extensions, such as \"tar.gz\". This is only available for files with binary content in Google Drive. This is automatically updated when the name field changes, however it isn't cleared if the new name does not contain a valid extension.
+    @[JSON::Field(key: "fullFileExtension", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter full_file_extension : String? = nil
 
     # Whether there are permissions directly on this file. This field is only populated for items in shared drives.
-    @[JSON::Field(key: "hasAugmentedPermissions", type: Bool?, presence: true, ignore_serialize: has_augmented_permissions.nil? && !has_augmented_permissions_present?)]
-    property has_augmented_permissions : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? has_augmented_permissions_present : Bool = false
+    @[JSON::Field(key: "hasAugmentedPermissions", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter has_augmented_permissions : Bool? = nil
 
     # Whether this file has a thumbnail. This does not indicate whether the requesting app has access to the thumbnail. To check access, look for the presence of the thumbnailLink field.
-    @[JSON::Field(key: "hasThumbnail", type: Bool?, presence: true, ignore_serialize: has_thumbnail.nil? && !has_thumbnail_present?)]
-    property has_thumbnail : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? has_thumbnail_present : Bool = false
+    @[JSON::Field(key: "hasThumbnail", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter has_thumbnail : Bool? = nil
 
     # The ID of the file's head revision. This is currently only available for files with binary content in Google Drive.
-    @[JSON::Field(key: "headRevisionId", type: String?, presence: true, ignore_serialize: head_revision_id.nil? && !head_revision_id_present?)]
-    property head_revision_id : String?
-
-    @[JSON::Field(ignore: true)]
-    property? head_revision_id_present : Bool = false
+    @[JSON::Field(key: "headRevisionId", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter head_revision_id : String? = nil
 
     # A static, unauthenticated link to the file's icon.
-    @[JSON::Field(key: "iconLink", type: String?, presence: true, ignore_serialize: icon_link.nil? && !icon_link_present?)]
-    property icon_link : String?
-
-    @[JSON::Field(ignore: true)]
-    property? icon_link_present : Bool = false
+    @[JSON::Field(key: "iconLink", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter icon_link : String? = nil
 
     # The ID of the file.
-    @[JSON::Field(key: "id", type: String?, presence: true, ignore_serialize: id.nil? && !id_present?)]
-    property id : String?
+    @[JSON::Field(key: "id", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter id : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? id_present : Bool = false
-
-    @[JSON::Field(key: "imageMediaMetadata", type: FileImageMediaMetadata?, presence: true, ignore_serialize: image_media_metadata.nil? && !image_media_metadata_present?)]
-    property image_media_metadata : FileImageMediaMetadata?
-
-    @[JSON::Field(ignore: true)]
-    property? image_media_metadata_present : Bool = false
+    @[JSON::Field(key: "imageMediaMetadata", type: GoogleDrive::FileImageMediaMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter image_media_metadata : GoogleDrive::FileImageMediaMetadata? = nil
 
     # Whether the file was created or opened by the requesting app.
-    @[JSON::Field(key: "isAppAuthorized", type: Bool?, presence: true, ignore_serialize: is_app_authorized.nil? && !is_app_authorized_present?)]
-    property is_app_authorized : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? is_app_authorized_present : Bool = false
+    @[JSON::Field(key: "isAppAuthorized", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter is_app_authorized : Bool? = nil
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#file\".
-    @[JSON::Field(key: "kind", type: String?, default: "drive#file", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String? = "drive#file"
+    @[JSON::Field(key: "kind", type: String?, default: "drive#file", required: false, nullable: false, emit_null: false)]
+    getter kind : String? = "drive#file"
 
-    @[JSON::Field(ignore: true)]
-    property? kind_present : Bool = false
+    @[JSON::Field(key: "labelInfo", type: GoogleDrive::FileLabelInfo?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter label_info : GoogleDrive::FileLabelInfo? = nil
 
-    @[JSON::Field(key: "lastModifyingUser", type: User?, presence: true, ignore_serialize: last_modifying_user.nil? && !last_modifying_user_present?)]
-    property last_modifying_user : User?
+    @[JSON::Field(key: "lastModifyingUser", type: GoogleDrive::User?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter last_modifying_user : GoogleDrive::User? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? last_modifying_user_present : Bool = false
-
-    @[JSON::Field(key: "linkShareMetadata", type: FileLinkShareMetadata?, presence: true, ignore_serialize: link_share_metadata.nil? && !link_share_metadata_present?)]
-    property link_share_metadata : FileLinkShareMetadata?
-
-    @[JSON::Field(ignore: true)]
-    property? link_share_metadata_present : Bool = false
+    @[JSON::Field(key: "linkShareMetadata", type: GoogleDrive::FileLinkShareMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter link_share_metadata : GoogleDrive::FileLinkShareMetadata? = nil
 
     # The MD5 checksum for the content of the file. This is only applicable to files with binary content in Google Drive.
-    @[JSON::Field(key: "md5Checksum", type: String?, presence: true, ignore_serialize: md5_checksum.nil? && !md5_checksum_present?)]
-    property md5_checksum : String?
-
-    @[JSON::Field(ignore: true)]
-    property? md5_checksum_present : Bool = false
+    @[JSON::Field(key: "md5Checksum", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter md5_checksum : String? = nil
 
     # The MIME type of the file. Google Drive will attempt to automatically detect an appropriate value from uploaded content if no value is provided. The value cannot be changed unless a new revision is uploaded. If a file is created with a Google Doc MIME type, the uploaded content will be imported if possible. The supported import formats are published in the About resource.
-    @[JSON::Field(key: "mimeType", type: String?, presence: true, ignore_serialize: mime_type.nil? && !mime_type_present?)]
-    property mime_type : String?
-
-    @[JSON::Field(ignore: true)]
-    property? mime_type_present : Bool = false
+    @[JSON::Field(key: "mimeType", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter mime_type : String? = nil
 
     # Whether the file has been modified by this user.
-    @[JSON::Field(key: "modifiedByMe", type: Bool?, presence: true, ignore_serialize: modified_by_me.nil? && !modified_by_me_present?)]
-    property modified_by_me : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? modified_by_me_present : Bool = false
+    @[JSON::Field(key: "modifiedByMe", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter modified_by_me : Bool? = nil
 
     # The last time the file was modified by the user (RFC 3339 date-time).
-    @[JSON::Field(key: "modifiedByMeTime", type: Time?, converter: Time::RFC3339Converter, presence: true, ignore_serialize: modified_by_me_time.nil? && !modified_by_me_time_present?)]
-    property modified_by_me_time : Time?
-
-    @[JSON::Field(ignore: true)]
-    property? modified_by_me_time_present : Bool = false
+    @[JSON::Field(key: "modifiedByMeTime", type: Time?, default: nil, required: false, nullable: false, emit_null: false, converter: Time::RFC3339Converter)]
+    getter modified_by_me_time : Time? = nil
 
     # The last time the file was modified by anyone (RFC 3339 date-time). Note that setting modifiedTime will also update modifiedByMeTime for the user.
-    @[JSON::Field(key: "modifiedTime", type: Time?, converter: Time::RFC3339Converter, presence: true, ignore_serialize: modified_time.nil? && !modified_time_present?)]
-    property modified_time : Time?
-
-    @[JSON::Field(ignore: true)]
-    property? modified_time_present : Bool = false
+    @[JSON::Field(key: "modifiedTime", type: Time?, default: nil, required: false, nullable: false, emit_null: false, converter: Time::RFC3339Converter)]
+    getter modified_time : Time? = nil
 
     # The name of the file. This is not necessarily unique within a folder. Note that for immutable items such as the top level folders of shared drives, My Drive root folder, and Application Data folder the name is constant.
-    @[JSON::Field(key: "name", type: String?, presence: true, ignore_serialize: name.nil? && !name_present?)]
-    property name : String?
-
-    @[JSON::Field(ignore: true)]
-    property? name_present : Bool = false
+    @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter name : String? = nil
 
     # The original filename of the uploaded content if available, or else the original value of the name field. This is only available for files with binary content in Google Drive.
-    @[JSON::Field(key: "originalFilename", type: String?, presence: true, ignore_serialize: original_filename.nil? && !original_filename_present?)]
-    property original_filename : String?
-
-    @[JSON::Field(ignore: true)]
-    property? original_filename_present : Bool = false
+    @[JSON::Field(key: "originalFilename", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter original_filename : String? = nil
 
     # Whether the user owns the file. Not populated for items in shared drives.
-    @[JSON::Field(key: "ownedByMe", type: Bool?, presence: true, ignore_serialize: owned_by_me.nil? && !owned_by_me_present?)]
-    property owned_by_me : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? owned_by_me_present : Bool = false
+    @[JSON::Field(key: "ownedByMe", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter owned_by_me : Bool? = nil
 
     # The owner of this file. Only certain legacy files may have more than one owner. This field isn't populated for items in shared drives.
-    @[JSON::Field(key: "owners", type: Array(User)?, presence: true, ignore_serialize: owners.nil? && !owners_present?)]
-    property owners : Array(User)?
-
-    @[JSON::Field(ignore: true)]
-    property? owners_present : Bool = false
+    @[JSON::Field(key: "owners", type: Array(GoogleDrive::User)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter owners : Array(GoogleDrive::User)? = nil
 
     # The IDs of the parent folders which contain the file. If not specified as part of a create request, the file will be placed directly in the user's My Drive folder. If not specified as part of a copy request, the file will inherit any discoverable parents of the source file. Update requests must use the addParents and removeParents parameters to modify the parents list.
-    @[JSON::Field(key: "parents", type: Array(String)?, presence: true, ignore_serialize: parents.nil? && !parents_present?)]
-    property parents : Array(String)?
-
-    @[JSON::Field(ignore: true)]
-    property? parents_present : Bool = false
+    @[JSON::Field(key: "parents", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter parents : Array(String)? = nil
 
     # List of permission IDs for users with access to this file.
-    @[JSON::Field(key: "permissionIds", type: Array(String)?, presence: true, ignore_serialize: permission_ids.nil? && !permission_ids_present?)]
-    property permission_ids : Array(String)?
-
-    @[JSON::Field(ignore: true)]
-    property? permission_ids_present : Bool = false
+    @[JSON::Field(key: "permissionIds", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter permission_ids : Array(String)? = nil
 
     # The full list of permissions for the file. This is only available if the requesting user can share the file. Not populated for items in shared drives.
-    @[JSON::Field(key: "permissions", type: Array(Permission)?, presence: true, ignore_serialize: permissions.nil? && !permissions_present?)]
-    property permissions : Array(Permission)?
-
-    @[JSON::Field(ignore: true)]
-    property? permissions_present : Bool = false
+    @[JSON::Field(key: "permissions", type: Array(GoogleDrive::Permission)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter permissions : Array(GoogleDrive::Permission)? = nil
 
     # A collection of arbitrary key-value pairs which are visible to all apps. Entries with null values are cleared in update and copy requests.
-    @[JSON::Field(key: "properties", type: Hash(String, String)?, presence: true, ignore_serialize: properties.nil? && !properties_present?)]
-    property properties : Hash(String, String)?
-
-    @[JSON::Field(ignore: true)]
-    property? properties_present : Bool = false
+    @[JSON::Field(key: "properties", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter properties : Hash(String, String)? = nil
 
     # The number of storage quota bytes used by the file. This includes the head revision as well as previous revisions with keepForever enabled.
-    @[JSON::Field(key: "quotaBytesUsed", type: String?, presence: true, ignore_serialize: quota_bytes_used.nil? && !quota_bytes_used_present?)]
-    property quota_bytes_used : String?
-
-    @[JSON::Field(ignore: true)]
-    property? quota_bytes_used_present : Bool = false
+    @[JSON::Field(key: "quotaBytesUsed", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter quota_bytes_used : String? = nil
 
     # A key needed to access the item via a shared link.
-    @[JSON::Field(key: "resourceKey", type: String?, presence: true, ignore_serialize: resource_key.nil? && !resource_key_present?)]
-    property resource_key : String?
+    @[JSON::Field(key: "resourceKey", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter resource_key : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? resource_key_present : Bool = false
+    # The SHA1 checksum associated with this file, if available. This field is only populated for files with content stored in Google Drive; it isn't populated for Docs Editors or shortcut files.
+    @[JSON::Field(key: "sha1Checksum", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter sha1_checksum : String? = nil
+
+    # The SHA256 checksum associated with this file, if available. This field is only populated for files with content stored in Google Drive; it isn't populated for Docs Editors or shortcut files.
+    @[JSON::Field(key: "sha256Checksum", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter sha256_checksum : String? = nil
 
     # Whether the file has been shared. Not populated for items in shared drives.
-    @[JSON::Field(key: "shared", type: Bool?, presence: true, ignore_serialize: shared.nil? && !shared_present?)]
-    property shared : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? shared_present : Bool = false
+    @[JSON::Field(key: "shared", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter shared : Bool? = nil
 
     # The time at which the file was shared with the user, if applicable (RFC 3339 date-time).
-    @[JSON::Field(key: "sharedWithMeTime", type: Time?, converter: Time::RFC3339Converter, presence: true, ignore_serialize: shared_with_me_time.nil? && !shared_with_me_time_present?)]
-    property shared_with_me_time : Time?
+    @[JSON::Field(key: "sharedWithMeTime", type: Time?, default: nil, required: false, nullable: false, emit_null: false, converter: Time::RFC3339Converter)]
+    getter shared_with_me_time : Time? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? shared_with_me_time_present : Bool = false
+    @[JSON::Field(key: "sharingUser", type: GoogleDrive::User?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter sharing_user : GoogleDrive::User? = nil
 
-    @[JSON::Field(key: "sharingUser", type: User?, presence: true, ignore_serialize: sharing_user.nil? && !sharing_user_present?)]
-    property sharing_user : User?
-
-    @[JSON::Field(ignore: true)]
-    property? sharing_user_present : Bool = false
-
-    @[JSON::Field(key: "shortcutDetails", type: FileShortcutDetails?, presence: true, ignore_serialize: shortcut_details.nil? && !shortcut_details_present?)]
-    property shortcut_details : FileShortcutDetails?
-
-    @[JSON::Field(ignore: true)]
-    property? shortcut_details_present : Bool = false
+    @[JSON::Field(key: "shortcutDetails", type: GoogleDrive::FileShortcutDetails?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter shortcut_details : GoogleDrive::FileShortcutDetails? = nil
 
     # The size of the file's content in bytes. This is applicable to binary files in Google Drive and Google Docs files.
-    @[JSON::Field(key: "size", type: String?, presence: true, ignore_serialize: size.nil? && !size_present?)]
-    property size : String?
-
-    @[JSON::Field(ignore: true)]
-    property? size_present : Bool = false
+    @[JSON::Field(key: "size", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter size : String? = nil
 
     # The list of spaces which contain the file. The currently supported values are 'drive', 'appDataFolder' and 'photos'.
-    @[JSON::Field(key: "spaces", type: Array(String)?, presence: true, ignore_serialize: spaces.nil? && !spaces_present?)]
-    property spaces : Array(String)?
-
-    @[JSON::Field(ignore: true)]
-    property? spaces_present : Bool = false
+    @[JSON::Field(key: "spaces", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter spaces : Array(String)? = nil
 
     # Whether the user has starred the file.
-    @[JSON::Field(key: "starred", type: Bool?, presence: true, ignore_serialize: starred.nil? && !starred_present?)]
-    property starred : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? starred_present : Bool = false
+    @[JSON::Field(key: "starred", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter starred : Bool? = nil
 
     # Deprecated - use driveId instead.
-    @[JSON::Field(key: "teamDriveId", type: String?, presence: true, ignore_serialize: team_drive_id.nil? && !team_drive_id_present?)]
-    property team_drive_id : String?
-
-    @[JSON::Field(ignore: true)]
-    property? team_drive_id_present : Bool = false
+    @[JSON::Field(key: "teamDriveId", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter team_drive_id : String? = nil
 
     # A short-lived link to the file's thumbnail, if available. Typically lasts on the order of hours. Only populated when the requesting app can access the file's content. If the file isn't shared publicly, the URL returned in Files.thumbnailLink must be fetched using a credentialed request.
-    @[JSON::Field(key: "thumbnailLink", type: String?, presence: true, ignore_serialize: thumbnail_link.nil? && !thumbnail_link_present?)]
-    property thumbnail_link : String?
-
-    @[JSON::Field(ignore: true)]
-    property? thumbnail_link_present : Bool = false
+    @[JSON::Field(key: "thumbnailLink", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter thumbnail_link : String? = nil
 
     # The thumbnail version for use in thumbnail cache invalidation.
-    @[JSON::Field(key: "thumbnailVersion", type: String?, presence: true, ignore_serialize: thumbnail_version.nil? && !thumbnail_version_present?)]
-    property thumbnail_version : String?
-
-    @[JSON::Field(ignore: true)]
-    property? thumbnail_version_present : Bool = false
+    @[JSON::Field(key: "thumbnailVersion", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter thumbnail_version : String? = nil
 
     # Whether the file has been trashed, either explicitly or from a trashed parent folder. Only the owner may trash a file. The trashed item is excluded from all files.list responses returned for any user who does not own the file. However, all users with access to the file can see the trashed item metadata in an API response. All users with access can copy, download, export, and share the file.
-    @[JSON::Field(key: "trashed", type: Bool?, presence: true, ignore_serialize: trashed.nil? && !trashed_present?)]
-    property trashed : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? trashed_present : Bool = false
+    @[JSON::Field(key: "trashed", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter trashed : Bool? = nil
 
     # The time that the item was trashed (RFC 3339 date-time). Only populated for items in shared drives.
-    @[JSON::Field(key: "trashedTime", type: Time?, converter: Time::RFC3339Converter, presence: true, ignore_serialize: trashed_time.nil? && !trashed_time_present?)]
-    property trashed_time : Time?
+    @[JSON::Field(key: "trashedTime", type: Time?, default: nil, required: false, nullable: false, emit_null: false, converter: Time::RFC3339Converter)]
+    getter trashed_time : Time? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? trashed_time_present : Bool = false
-
-    @[JSON::Field(key: "trashingUser", type: User?, presence: true, ignore_serialize: trashing_user.nil? && !trashing_user_present?)]
-    property trashing_user : User?
-
-    @[JSON::Field(ignore: true)]
-    property? trashing_user_present : Bool = false
+    @[JSON::Field(key: "trashingUser", type: GoogleDrive::User?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter trashing_user : GoogleDrive::User? = nil
 
     # A monotonically increasing version number for the file. This reflects every change made to the file on the server, even those not visible to the user.
-    @[JSON::Field(key: "version", type: String?, presence: true, ignore_serialize: version.nil? && !version_present?)]
-    property version : String?
+    @[JSON::Field(key: "version", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter version : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? version_present : Bool = false
-
-    @[JSON::Field(key: "videoMediaMetadata", type: FileVideoMediaMetadata?, presence: true, ignore_serialize: video_media_metadata.nil? && !video_media_metadata_present?)]
-    property video_media_metadata : FileVideoMediaMetadata?
-
-    @[JSON::Field(ignore: true)]
-    property? video_media_metadata_present : Bool = false
+    @[JSON::Field(key: "videoMediaMetadata", type: GoogleDrive::FileVideoMediaMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter video_media_metadata : GoogleDrive::FileVideoMediaMetadata? = nil
 
     # Whether the file has been viewed by this user.
-    @[JSON::Field(key: "viewedByMe", type: Bool?, presence: true, ignore_serialize: viewed_by_me.nil? && !viewed_by_me_present?)]
-    property viewed_by_me : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? viewed_by_me_present : Bool = false
+    @[JSON::Field(key: "viewedByMe", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter viewed_by_me : Bool? = nil
 
     # The last time the file was viewed by the user (RFC 3339 date-time).
-    @[JSON::Field(key: "viewedByMeTime", type: Time?, converter: Time::RFC3339Converter, presence: true, ignore_serialize: viewed_by_me_time.nil? && !viewed_by_me_time_present?)]
-    property viewed_by_me_time : Time?
-
-    @[JSON::Field(ignore: true)]
-    property? viewed_by_me_time_present : Bool = false
+    @[JSON::Field(key: "viewedByMeTime", type: Time?, default: nil, required: false, nullable: false, emit_null: false, converter: Time::RFC3339Converter)]
+    getter viewed_by_me_time : Time? = nil
 
     # Deprecated - use copyRequiresWriterPermission instead.
-    @[JSON::Field(key: "viewersCanCopyContent", type: Bool?, presence: true, ignore_serialize: viewers_can_copy_content.nil? && !viewers_can_copy_content_present?)]
-    property viewers_can_copy_content : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? viewers_can_copy_content_present : Bool = false
+    @[JSON::Field(key: "viewersCanCopyContent", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter viewers_can_copy_content : Bool? = nil
 
     # A link for downloading the content of the file in a browser. This is only available for files with binary content in Google Drive.
-    @[JSON::Field(key: "webContentLink", type: String?, presence: true, ignore_serialize: web_content_link.nil? && !web_content_link_present?)]
-    property web_content_link : String?
-
-    @[JSON::Field(ignore: true)]
-    property? web_content_link_present : Bool = false
+    @[JSON::Field(key: "webContentLink", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter web_content_link : String? = nil
 
     # A link for opening the file in a relevant Google editor or viewer in a browser.
-    @[JSON::Field(key: "webViewLink", type: String?, presence: true, ignore_serialize: web_view_link.nil? && !web_view_link_present?)]
-    property web_view_link : String?
-
-    @[JSON::Field(ignore: true)]
-    property? web_view_link_present : Bool = false
+    @[JSON::Field(key: "webViewLink", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter web_view_link : String? = nil
 
     # Whether users with only writer permission can modify the file's permissions. Not populated for items in shared drives.
-    @[JSON::Field(key: "writersCanShare", type: Bool?, presence: true, ignore_serialize: writers_can_share.nil? && !writers_can_share_present?)]
-    property writers_can_share : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? writers_can_share_present : Bool = false
+    @[JSON::Field(key: "writersCanShare", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter writers_can_share : Bool? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -430,9 +265,9 @@ module GoogleDrive
       *,
       # Optional properties
       @app_properties : Hash(String, String)? = nil,
-      @capabilities : FileCapabilities? = nil,
-      @content_hints : FileContentHints? = nil,
-      @content_restrictions : Array(ContentRestriction)? = nil,
+      @capabilities : GoogleDrive::FileCapabilities? = nil,
+      @content_hints : GoogleDrive::FileContentHints? = nil,
+      @content_restrictions : Array(GoogleDrive::ContentRestriction)? = nil,
       @copy_requires_writer_permission : Bool? = nil,
       @created_time : Time? = nil,
       @description : String? = nil,
@@ -447,11 +282,12 @@ module GoogleDrive
       @head_revision_id : String? = nil,
       @icon_link : String? = nil,
       @id : String? = nil,
-      @image_media_metadata : FileImageMediaMetadata? = nil,
+      @image_media_metadata : GoogleDrive::FileImageMediaMetadata? = nil,
       @is_app_authorized : Bool? = nil,
       @kind : String? = "drive#file",
-      @last_modifying_user : User? = nil,
-      @link_share_metadata : FileLinkShareMetadata? = nil,
+      @label_info : GoogleDrive::FileLabelInfo? = nil,
+      @last_modifying_user : GoogleDrive::User? = nil,
+      @link_share_metadata : GoogleDrive::FileLinkShareMetadata? = nil,
       @md5_checksum : String? = nil,
       @mime_type : String? = nil,
       @modified_by_me : Bool? = nil,
@@ -460,17 +296,19 @@ module GoogleDrive
       @name : String? = nil,
       @original_filename : String? = nil,
       @owned_by_me : Bool? = nil,
-      @owners : Array(User)? = nil,
+      @owners : Array(GoogleDrive::User)? = nil,
       @parents : Array(String)? = nil,
       @permission_ids : Array(String)? = nil,
-      @permissions : Array(Permission)? = nil,
+      @permissions : Array(GoogleDrive::Permission)? = nil,
       @properties : Hash(String, String)? = nil,
       @quota_bytes_used : String? = nil,
       @resource_key : String? = nil,
+      @sha1_checksum : String? = nil,
+      @sha256_checksum : String? = nil,
       @shared : Bool? = nil,
       @shared_with_me_time : Time? = nil,
-      @sharing_user : User? = nil,
-      @shortcut_details : FileShortcutDetails? = nil,
+      @sharing_user : GoogleDrive::User? = nil,
+      @shortcut_details : GoogleDrive::FileShortcutDetails? = nil,
       @size : String? = nil,
       @spaces : Array(String)? = nil,
       @starred : Bool? = nil,
@@ -479,9 +317,9 @@ module GoogleDrive
       @thumbnail_version : String? = nil,
       @trashed : Bool? = nil,
       @trashed_time : Time? = nil,
-      @trashing_user : User? = nil,
+      @trashing_user : GoogleDrive::User? = nil,
       @version : String? = nil,
-      @video_media_metadata : FileVideoMediaMetadata? = nil,
+      @video_media_metadata : GoogleDrive::FileVideoMediaMetadata? = nil,
       @viewed_by_me : Bool? = nil,
       @viewed_by_me_time : Time? = nil,
       @viewers_can_copy_content : Bool? = nil,
@@ -493,28 +331,754 @@ module GoogleDrive
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
+      unless (_capabilities = @capabilities).nil?
+        invalid_properties.concat(_capabilities.list_invalid_properties_for("capabilities")) if _capabilities.is_a?(OpenApi::Validatable)
+      end
+      unless (_content_hints = @content_hints).nil?
+        invalid_properties.concat(_content_hints.list_invalid_properties_for("content_hints")) if _content_hints.is_a?(OpenApi::Validatable)
+      end
+      unless (_content_restrictions = @content_restrictions).nil?
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "content_restrictions", container: _content_restrictions)) if _content_restrictions.is_a?(Array)
+      end
+
+      unless (_image_media_metadata = @image_media_metadata).nil?
+        invalid_properties.concat(_image_media_metadata.list_invalid_properties_for("image_media_metadata")) if _image_media_metadata.is_a?(OpenApi::Validatable)
+      end
+
+      unless (_label_info = @label_info).nil?
+        invalid_properties.concat(_label_info.list_invalid_properties_for("label_info")) if _label_info.is_a?(OpenApi::Validatable)
+      end
+      unless (_last_modifying_user = @last_modifying_user).nil?
+        invalid_properties.concat(_last_modifying_user.list_invalid_properties_for("last_modifying_user")) if _last_modifying_user.is_a?(OpenApi::Validatable)
+      end
+      unless (_link_share_metadata = @link_share_metadata).nil?
+        invalid_properties.concat(_link_share_metadata.list_invalid_properties_for("link_share_metadata")) if _link_share_metadata.is_a?(OpenApi::Validatable)
+      end
+
+      unless (_owners = @owners).nil?
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "owners", container: _owners)) if _owners.is_a?(Array)
+      end
+
+      unless (_permissions = @permissions).nil?
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "permissions", container: _permissions)) if _permissions.is_a?(Array)
+      end
+
+      unless (_sharing_user = @sharing_user).nil?
+        invalid_properties.concat(_sharing_user.list_invalid_properties_for("sharing_user")) if _sharing_user.is_a?(OpenApi::Validatable)
+      end
+      unless (_shortcut_details = @shortcut_details).nil?
+        invalid_properties.concat(_shortcut_details.list_invalid_properties_for("shortcut_details")) if _shortcut_details.is_a?(OpenApi::Validatable)
+      end
+
+      unless (_trashing_user = @trashing_user).nil?
+        invalid_properties.concat(_trashing_user.list_invalid_properties_for("trashing_user")) if _trashing_user.is_a?(OpenApi::Validatable)
+      end
+
+      unless (_video_media_metadata = @video_media_metadata).nil?
+        invalid_properties.concat(_video_media_metadata.list_invalid_properties_for("video_media_metadata")) if _video_media_metadata.is_a?(OpenApi::Validatable)
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      unless (_capabilities = @capabilities).nil?
+        return false if _capabilities.is_a?(OpenApi::Validatable) && !_capabilities.valid?
+      end
+
+      unless (_content_hints = @content_hints).nil?
+        return false if _content_hints.is_a?(OpenApi::Validatable) && !_content_hints.valid?
+      end
+
+      unless (_content_restrictions = @content_restrictions).nil?
+        return false if _content_restrictions.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _content_restrictions)
+      end
+
+      unless (_image_media_metadata = @image_media_metadata).nil?
+        return false if _image_media_metadata.is_a?(OpenApi::Validatable) && !_image_media_metadata.valid?
+      end
+
+      unless (_label_info = @label_info).nil?
+        return false if _label_info.is_a?(OpenApi::Validatable) && !_label_info.valid?
+      end
+
+      unless (_last_modifying_user = @last_modifying_user).nil?
+        return false if _last_modifying_user.is_a?(OpenApi::Validatable) && !_last_modifying_user.valid?
+      end
+
+      unless (_link_share_metadata = @link_share_metadata).nil?
+        return false if _link_share_metadata.is_a?(OpenApi::Validatable) && !_link_share_metadata.valid?
+      end
+
+      unless (_owners = @owners).nil?
+        return false if _owners.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _owners)
+      end
+
+      unless (_permissions = @permissions).nil?
+        return false if _permissions.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _permissions)
+      end
+
+      unless (_sharing_user = @sharing_user).nil?
+        return false if _sharing_user.is_a?(OpenApi::Validatable) && !_sharing_user.valid?
+      end
+
+      unless (_shortcut_details = @shortcut_details).nil?
+        return false if _shortcut_details.is_a?(OpenApi::Validatable) && !_shortcut_details.valid?
+      end
+
+      unless (_trashing_user = @trashing_user).nil?
+        return false if _trashing_user.is_a?(OpenApi::Validatable) && !_trashing_user.valid?
+      end
+
+      unless (_video_media_metadata = @video_media_metadata).nil?
+        return false if _video_media_metadata.is_a?(OpenApi::Validatable) && !_video_media_metadata.valid?
+      end
+
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] app_properties Object to be assigned
+    def app_properties=(app_properties : Hash(String, String)?)
+      if app_properties.nil?
+        return @app_properties = nil
+      end
+      _app_properties = app_properties.not_nil!
+      @app_properties = _app_properties
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] capabilities Object to be assigned
+    def capabilities=(capabilities : GoogleDrive::FileCapabilities?)
+      if capabilities.nil?
+        return @capabilities = nil
+      end
+      _capabilities = capabilities.not_nil!
+      _capabilities.validate if _capabilities.is_a?(OpenApi::Validatable)
+      @capabilities = _capabilities
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] content_hints Object to be assigned
+    def content_hints=(content_hints : GoogleDrive::FileContentHints?)
+      if content_hints.nil?
+        return @content_hints = nil
+      end
+      _content_hints = content_hints.not_nil!
+      _content_hints.validate if _content_hints.is_a?(OpenApi::Validatable)
+      @content_hints = _content_hints
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] content_restrictions Object to be assigned
+    def content_restrictions=(content_restrictions : Array(GoogleDrive::ContentRestriction)?)
+      if content_restrictions.nil?
+        return @content_restrictions = nil
+      end
+      _content_restrictions = content_restrictions.not_nil!
+      OpenApi::ContainerValidator.validate(container: _content_restrictions) if _content_restrictions.is_a?(Array)
+      @content_restrictions = _content_restrictions
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] copy_requires_writer_permission Object to be assigned
+    def copy_requires_writer_permission=(copy_requires_writer_permission : Bool?)
+      if copy_requires_writer_permission.nil?
+        return @copy_requires_writer_permission = nil
+      end
+      _copy_requires_writer_permission = copy_requires_writer_permission.not_nil!
+      @copy_requires_writer_permission = _copy_requires_writer_permission
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] created_time Object to be assigned
+    def created_time=(created_time : Time?)
+      if created_time.nil?
+        return @created_time = nil
+      end
+      _created_time = created_time.not_nil!
+      @created_time = _created_time
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] description Object to be assigned
+    def description=(description : String?)
+      if description.nil?
+        return @description = nil
+      end
+      _description = description.not_nil!
+      @description = _description
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] drive_id Object to be assigned
+    def drive_id=(drive_id : String?)
+      if drive_id.nil?
+        return @drive_id = nil
+      end
+      _drive_id = drive_id.not_nil!
+      @drive_id = _drive_id
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] explicitly_trashed Object to be assigned
+    def explicitly_trashed=(explicitly_trashed : Bool?)
+      if explicitly_trashed.nil?
+        return @explicitly_trashed = nil
+      end
+      _explicitly_trashed = explicitly_trashed.not_nil!
+      @explicitly_trashed = _explicitly_trashed
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] export_links Object to be assigned
+    def export_links=(export_links : Hash(String, String)?)
+      if export_links.nil?
+        return @export_links = nil
+      end
+      _export_links = export_links.not_nil!
+      @export_links = _export_links
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] file_extension Object to be assigned
+    def file_extension=(file_extension : String?)
+      if file_extension.nil?
+        return @file_extension = nil
+      end
+      _file_extension = file_extension.not_nil!
+      @file_extension = _file_extension
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] folder_color_rgb Object to be assigned
+    def folder_color_rgb=(folder_color_rgb : String?)
+      if folder_color_rgb.nil?
+        return @folder_color_rgb = nil
+      end
+      _folder_color_rgb = folder_color_rgb.not_nil!
+      @folder_color_rgb = _folder_color_rgb
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] full_file_extension Object to be assigned
+    def full_file_extension=(full_file_extension : String?)
+      if full_file_extension.nil?
+        return @full_file_extension = nil
+      end
+      _full_file_extension = full_file_extension.not_nil!
+      @full_file_extension = _full_file_extension
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] has_augmented_permissions Object to be assigned
+    def has_augmented_permissions=(has_augmented_permissions : Bool?)
+      if has_augmented_permissions.nil?
+        return @has_augmented_permissions = nil
+      end
+      _has_augmented_permissions = has_augmented_permissions.not_nil!
+      @has_augmented_permissions = _has_augmented_permissions
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] has_thumbnail Object to be assigned
+    def has_thumbnail=(has_thumbnail : Bool?)
+      if has_thumbnail.nil?
+        return @has_thumbnail = nil
+      end
+      _has_thumbnail = has_thumbnail.not_nil!
+      @has_thumbnail = _has_thumbnail
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] head_revision_id Object to be assigned
+    def head_revision_id=(head_revision_id : String?)
+      if head_revision_id.nil?
+        return @head_revision_id = nil
+      end
+      _head_revision_id = head_revision_id.not_nil!
+      @head_revision_id = _head_revision_id
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] icon_link Object to be assigned
+    def icon_link=(icon_link : String?)
+      if icon_link.nil?
+        return @icon_link = nil
+      end
+      _icon_link = icon_link.not_nil!
+      @icon_link = _icon_link
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] id Object to be assigned
+    def id=(id : String?)
+      if id.nil?
+        return @id = nil
+      end
+      _id = id.not_nil!
+      @id = _id
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] image_media_metadata Object to be assigned
+    def image_media_metadata=(image_media_metadata : GoogleDrive::FileImageMediaMetadata?)
+      if image_media_metadata.nil?
+        return @image_media_metadata = nil
+      end
+      _image_media_metadata = image_media_metadata.not_nil!
+      _image_media_metadata.validate if _image_media_metadata.is_a?(OpenApi::Validatable)
+      @image_media_metadata = _image_media_metadata
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] is_app_authorized Object to be assigned
+    def is_app_authorized=(is_app_authorized : Bool?)
+      if is_app_authorized.nil?
+        return @is_app_authorized = nil
+      end
+      _is_app_authorized = is_app_authorized.not_nil!
+      @is_app_authorized = _is_app_authorized
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] kind Object to be assigned
+    def kind=(kind : String?)
+      if kind.nil?
+        return @kind = nil
+      end
+      _kind = kind.not_nil!
+      @kind = _kind
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] label_info Object to be assigned
+    def label_info=(label_info : GoogleDrive::FileLabelInfo?)
+      if label_info.nil?
+        return @label_info = nil
+      end
+      _label_info = label_info.not_nil!
+      _label_info.validate if _label_info.is_a?(OpenApi::Validatable)
+      @label_info = _label_info
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] last_modifying_user Object to be assigned
+    def last_modifying_user=(last_modifying_user : GoogleDrive::User?)
+      if last_modifying_user.nil?
+        return @last_modifying_user = nil
+      end
+      _last_modifying_user = last_modifying_user.not_nil!
+      _last_modifying_user.validate if _last_modifying_user.is_a?(OpenApi::Validatable)
+      @last_modifying_user = _last_modifying_user
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] link_share_metadata Object to be assigned
+    def link_share_metadata=(link_share_metadata : GoogleDrive::FileLinkShareMetadata?)
+      if link_share_metadata.nil?
+        return @link_share_metadata = nil
+      end
+      _link_share_metadata = link_share_metadata.not_nil!
+      _link_share_metadata.validate if _link_share_metadata.is_a?(OpenApi::Validatable)
+      @link_share_metadata = _link_share_metadata
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] md5_checksum Object to be assigned
+    def md5_checksum=(md5_checksum : String?)
+      if md5_checksum.nil?
+        return @md5_checksum = nil
+      end
+      _md5_checksum = md5_checksum.not_nil!
+      @md5_checksum = _md5_checksum
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] mime_type Object to be assigned
+    def mime_type=(mime_type : String?)
+      if mime_type.nil?
+        return @mime_type = nil
+      end
+      _mime_type = mime_type.not_nil!
+      @mime_type = _mime_type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] modified_by_me Object to be assigned
+    def modified_by_me=(modified_by_me : Bool?)
+      if modified_by_me.nil?
+        return @modified_by_me = nil
+      end
+      _modified_by_me = modified_by_me.not_nil!
+      @modified_by_me = _modified_by_me
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] modified_by_me_time Object to be assigned
+    def modified_by_me_time=(modified_by_me_time : Time?)
+      if modified_by_me_time.nil?
+        return @modified_by_me_time = nil
+      end
+      _modified_by_me_time = modified_by_me_time.not_nil!
+      @modified_by_me_time = _modified_by_me_time
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] modified_time Object to be assigned
+    def modified_time=(modified_time : Time?)
+      if modified_time.nil?
+        return @modified_time = nil
+      end
+      _modified_time = modified_time.not_nil!
+      @modified_time = _modified_time
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] name Object to be assigned
+    def name=(name : String?)
+      if name.nil?
+        return @name = nil
+      end
+      _name = name.not_nil!
+      @name = _name
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] original_filename Object to be assigned
+    def original_filename=(original_filename : String?)
+      if original_filename.nil?
+        return @original_filename = nil
+      end
+      _original_filename = original_filename.not_nil!
+      @original_filename = _original_filename
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] owned_by_me Object to be assigned
+    def owned_by_me=(owned_by_me : Bool?)
+      if owned_by_me.nil?
+        return @owned_by_me = nil
+      end
+      _owned_by_me = owned_by_me.not_nil!
+      @owned_by_me = _owned_by_me
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] owners Object to be assigned
+    def owners=(owners : Array(GoogleDrive::User)?)
+      if owners.nil?
+        return @owners = nil
+      end
+      _owners = owners.not_nil!
+      OpenApi::ContainerValidator.validate(container: _owners) if _owners.is_a?(Array)
+      @owners = _owners
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] parents Object to be assigned
+    def parents=(parents : Array(String)?)
+      if parents.nil?
+        return @parents = nil
+      end
+      _parents = parents.not_nil!
+      @parents = _parents
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] permission_ids Object to be assigned
+    def permission_ids=(permission_ids : Array(String)?)
+      if permission_ids.nil?
+        return @permission_ids = nil
+      end
+      _permission_ids = permission_ids.not_nil!
+      @permission_ids = _permission_ids
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] permissions Object to be assigned
+    def permissions=(permissions : Array(GoogleDrive::Permission)?)
+      if permissions.nil?
+        return @permissions = nil
+      end
+      _permissions = permissions.not_nil!
+      OpenApi::ContainerValidator.validate(container: _permissions) if _permissions.is_a?(Array)
+      @permissions = _permissions
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] properties Object to be assigned
+    def properties=(properties : Hash(String, String)?)
+      if properties.nil?
+        return @properties = nil
+      end
+      _properties = properties.not_nil!
+      @properties = _properties
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] quota_bytes_used Object to be assigned
+    def quota_bytes_used=(quota_bytes_used : String?)
+      if quota_bytes_used.nil?
+        return @quota_bytes_used = nil
+      end
+      _quota_bytes_used = quota_bytes_used.not_nil!
+      @quota_bytes_used = _quota_bytes_used
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] resource_key Object to be assigned
+    def resource_key=(resource_key : String?)
+      if resource_key.nil?
+        return @resource_key = nil
+      end
+      _resource_key = resource_key.not_nil!
+      @resource_key = _resource_key
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] sha1_checksum Object to be assigned
+    def sha1_checksum=(sha1_checksum : String?)
+      if sha1_checksum.nil?
+        return @sha1_checksum = nil
+      end
+      _sha1_checksum = sha1_checksum.not_nil!
+      @sha1_checksum = _sha1_checksum
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] sha256_checksum Object to be assigned
+    def sha256_checksum=(sha256_checksum : String?)
+      if sha256_checksum.nil?
+        return @sha256_checksum = nil
+      end
+      _sha256_checksum = sha256_checksum.not_nil!
+      @sha256_checksum = _sha256_checksum
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] shared Object to be assigned
+    def shared=(shared : Bool?)
+      if shared.nil?
+        return @shared = nil
+      end
+      _shared = shared.not_nil!
+      @shared = _shared
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] shared_with_me_time Object to be assigned
+    def shared_with_me_time=(shared_with_me_time : Time?)
+      if shared_with_me_time.nil?
+        return @shared_with_me_time = nil
+      end
+      _shared_with_me_time = shared_with_me_time.not_nil!
+      @shared_with_me_time = _shared_with_me_time
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] sharing_user Object to be assigned
+    def sharing_user=(sharing_user : GoogleDrive::User?)
+      if sharing_user.nil?
+        return @sharing_user = nil
+      end
+      _sharing_user = sharing_user.not_nil!
+      _sharing_user.validate if _sharing_user.is_a?(OpenApi::Validatable)
+      @sharing_user = _sharing_user
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] shortcut_details Object to be assigned
+    def shortcut_details=(shortcut_details : GoogleDrive::FileShortcutDetails?)
+      if shortcut_details.nil?
+        return @shortcut_details = nil
+      end
+      _shortcut_details = shortcut_details.not_nil!
+      _shortcut_details.validate if _shortcut_details.is_a?(OpenApi::Validatable)
+      @shortcut_details = _shortcut_details
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] size Object to be assigned
+    def size=(size : String?)
+      if size.nil?
+        return @size = nil
+      end
+      _size = size.not_nil!
+      @size = _size
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] spaces Object to be assigned
+    def spaces=(spaces : Array(String)?)
+      if spaces.nil?
+        return @spaces = nil
+      end
+      _spaces = spaces.not_nil!
+      @spaces = _spaces
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] starred Object to be assigned
+    def starred=(starred : Bool?)
+      if starred.nil?
+        return @starred = nil
+      end
+      _starred = starred.not_nil!
+      @starred = _starred
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] team_drive_id Object to be assigned
+    def team_drive_id=(team_drive_id : String?)
+      if team_drive_id.nil?
+        return @team_drive_id = nil
+      end
+      _team_drive_id = team_drive_id.not_nil!
+      @team_drive_id = _team_drive_id
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] thumbnail_link Object to be assigned
+    def thumbnail_link=(thumbnail_link : String?)
+      if thumbnail_link.nil?
+        return @thumbnail_link = nil
+      end
+      _thumbnail_link = thumbnail_link.not_nil!
+      @thumbnail_link = _thumbnail_link
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] thumbnail_version Object to be assigned
+    def thumbnail_version=(thumbnail_version : String?)
+      if thumbnail_version.nil?
+        return @thumbnail_version = nil
+      end
+      _thumbnail_version = thumbnail_version.not_nil!
+      @thumbnail_version = _thumbnail_version
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] trashed Object to be assigned
+    def trashed=(trashed : Bool?)
+      if trashed.nil?
+        return @trashed = nil
+      end
+      _trashed = trashed.not_nil!
+      @trashed = _trashed
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] trashed_time Object to be assigned
+    def trashed_time=(trashed_time : Time?)
+      if trashed_time.nil?
+        return @trashed_time = nil
+      end
+      _trashed_time = trashed_time.not_nil!
+      @trashed_time = _trashed_time
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] trashing_user Object to be assigned
+    def trashing_user=(trashing_user : GoogleDrive::User?)
+      if trashing_user.nil?
+        return @trashing_user = nil
+      end
+      _trashing_user = trashing_user.not_nil!
+      _trashing_user.validate if _trashing_user.is_a?(OpenApi::Validatable)
+      @trashing_user = _trashing_user
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] version Object to be assigned
+    def version=(version : String?)
+      if version.nil?
+        return @version = nil
+      end
+      _version = version.not_nil!
+      @version = _version
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] video_media_metadata Object to be assigned
+    def video_media_metadata=(video_media_metadata : GoogleDrive::FileVideoMediaMetadata?)
+      if video_media_metadata.nil?
+        return @video_media_metadata = nil
+      end
+      _video_media_metadata = video_media_metadata.not_nil!
+      _video_media_metadata.validate if _video_media_metadata.is_a?(OpenApi::Validatable)
+      @video_media_metadata = _video_media_metadata
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] viewed_by_me Object to be assigned
+    def viewed_by_me=(viewed_by_me : Bool?)
+      if viewed_by_me.nil?
+        return @viewed_by_me = nil
+      end
+      _viewed_by_me = viewed_by_me.not_nil!
+      @viewed_by_me = _viewed_by_me
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] viewed_by_me_time Object to be assigned
+    def viewed_by_me_time=(viewed_by_me_time : Time?)
+      if viewed_by_me_time.nil?
+        return @viewed_by_me_time = nil
+      end
+      _viewed_by_me_time = viewed_by_me_time.not_nil!
+      @viewed_by_me_time = _viewed_by_me_time
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] viewers_can_copy_content Object to be assigned
+    def viewers_can_copy_content=(viewers_can_copy_content : Bool?)
+      if viewers_can_copy_content.nil?
+        return @viewers_can_copy_content = nil
+      end
+      _viewers_can_copy_content = viewers_can_copy_content.not_nil!
+      @viewers_can_copy_content = _viewers_can_copy_content
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] web_content_link Object to be assigned
+    def web_content_link=(web_content_link : String?)
+      if web_content_link.nil?
+        return @web_content_link = nil
+      end
+      _web_content_link = web_content_link.not_nil!
+      @web_content_link = _web_content_link
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] web_view_link Object to be assigned
+    def web_view_link=(web_view_link : String?)
+      if web_view_link.nil?
+        return @web_view_link = nil
+      end
+      _web_view_link = web_view_link.not_nil!
+      @web_view_link = _web_view_link
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] writers_can_share Object to be assigned
+    def writers_can_share=(writers_can_share : Bool?)
+      if writers_can_share.nil?
+        return @writers_can_share = nil
+      end
+      _writers_can_share = writers_can_share.not_nil!
+      @writers_can_share = _writers_can_share
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@app_properties, @app_properties_present, @capabilities, @capabilities_present, @content_hints, @content_hints_present, @content_restrictions, @content_restrictions_present, @copy_requires_writer_permission, @copy_requires_writer_permission_present, @created_time, @created_time_present, @description, @description_present, @drive_id, @drive_id_present, @explicitly_trashed, @explicitly_trashed_present, @export_links, @export_links_present, @file_extension, @file_extension_present, @folder_color_rgb, @folder_color_rgb_present, @full_file_extension, @full_file_extension_present, @has_augmented_permissions, @has_augmented_permissions_present, @has_thumbnail, @has_thumbnail_present, @head_revision_id, @head_revision_id_present, @icon_link, @icon_link_present, @id, @id_present, @image_media_metadata, @image_media_metadata_present, @is_app_authorized, @is_app_authorized_present, @kind, @kind_present, @last_modifying_user, @last_modifying_user_present, @link_share_metadata, @link_share_metadata_present, @md5_checksum, @md5_checksum_present, @mime_type, @mime_type_present, @modified_by_me, @modified_by_me_present, @modified_by_me_time, @modified_by_me_time_present, @modified_time, @modified_time_present, @name, @name_present, @original_filename, @original_filename_present, @owned_by_me, @owned_by_me_present, @owners, @owners_present, @parents, @parents_present, @permission_ids, @permission_ids_present, @permissions, @permissions_present, @properties, @properties_present, @quota_bytes_used, @quota_bytes_used_present, @resource_key, @resource_key_present, @shared, @shared_present, @shared_with_me_time, @shared_with_me_time_present, @sharing_user, @sharing_user_present, @shortcut_details, @shortcut_details_present, @size, @size_present, @spaces, @spaces_present, @starred, @starred_present, @team_drive_id, @team_drive_id_present, @thumbnail_link, @thumbnail_link_present, @thumbnail_version, @thumbnail_version_present, @trashed, @trashed_present, @trashed_time, @trashed_time_present, @trashing_user, @trashing_user_present, @version, @version_present, @video_media_metadata, @video_media_metadata_present, @viewed_by_me, @viewed_by_me_present, @viewed_by_me_time, @viewed_by_me_time_present, @viewers_can_copy_content, @viewers_can_copy_content_present, @web_content_link, @web_content_link_present, @web_view_link, @web_view_link_present, @writers_can_share, @writers_can_share_present)
+    def_equals_and_hash(@app_properties, @capabilities, @content_hints, @content_restrictions, @copy_requires_writer_permission, @created_time, @description, @drive_id, @explicitly_trashed, @export_links, @file_extension, @folder_color_rgb, @full_file_extension, @has_augmented_permissions, @has_thumbnail, @head_revision_id, @icon_link, @id, @image_media_metadata, @is_app_authorized, @kind, @label_info, @last_modifying_user, @link_share_metadata, @md5_checksum, @mime_type, @modified_by_me, @modified_by_me_time, @modified_time, @name, @original_filename, @owned_by_me, @owners, @parents, @permission_ids, @permissions, @properties, @quota_bytes_used, @resource_key, @sha1_checksum, @sha256_checksum, @shared, @shared_with_me_time, @sharing_user, @shortcut_details, @size, @spaces, @starred, @team_drive_id, @thumbnail_link, @thumbnail_version, @trashed, @trashed_time, @trashing_user, @version, @video_media_metadata, @viewed_by_me, @viewed_by_me_time, @viewers_can_copy_content, @web_content_link, @web_view_link, @writers_can_share)
   end
 end

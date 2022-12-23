@@ -12,26 +12,21 @@ require "time"
 require "log"
 
 module GoogleDrive
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class StartPageToken
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Identifies what kind of resource this is. Value: the fixed string \"drive#startPageToken\".
-    @[JSON::Field(key: "kind", type: String?, default: "drive#startPageToken", presence: true, ignore_serialize: kind.nil? && !kind_present?)]
-    property kind : String? = "drive#startPageToken"
-
-    @[JSON::Field(ignore: true)]
-    property? kind_present : Bool = false
+    @[JSON::Field(key: "kind", type: String?, default: "drive#startPageToken", required: false, nullable: false, emit_null: false)]
+    getter kind : String? = "drive#startPageToken"
 
     # The starting page token for listing changes.
-    @[JSON::Field(key: "startPageToken", type: String?, presence: true, ignore_serialize: start_page_token.nil? && !start_page_token_present?)]
-    property start_page_token : String?
-
-    @[JSON::Field(ignore: true)]
-    property? start_page_token_present : Bool = false
+    @[JSON::Field(key: "startPageToken", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter start_page_token : String? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -45,7 +40,7 @@ module GoogleDrive
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -53,20 +48,34 @@ module GoogleDrive
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] kind Object to be assigned
+    def kind=(kind : String?)
+      if kind.nil?
+        return @kind = nil
+      end
+      _kind = kind.not_nil!
+      @kind = _kind
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] start_page_token Object to be assigned
+    def start_page_token=(start_page_token : String?)
+      if start_page_token.nil?
+        return @start_page_token = nil
+      end
+      _start_page_token = start_page_token.not_nil!
+      @start_page_token = _start_page_token
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@kind, @kind_present, @start_page_token, @start_page_token_present)
+    def_equals_and_hash(@kind, @start_page_token)
   end
 end

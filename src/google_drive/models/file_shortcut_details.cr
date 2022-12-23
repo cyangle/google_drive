@@ -13,33 +13,25 @@ require "log"
 
 module GoogleDrive
   # Shortcut file details. Only populated for shortcut files, which have the mimeType field set to application/vnd.google-apps.shortcut.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class FileShortcutDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The ID of the file that this shortcut points to.
-    @[JSON::Field(key: "targetId", type: String?, presence: true, ignore_serialize: target_id.nil? && !target_id_present?)]
-    property target_id : String?
-
-    @[JSON::Field(ignore: true)]
-    property? target_id_present : Bool = false
+    @[JSON::Field(key: "targetId", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter target_id : String? = nil
 
     # The MIME type of the file that this shortcut points to. The value of this field is a snapshot of the target's MIME type, captured when the shortcut is created.
-    @[JSON::Field(key: "targetMimeType", type: String?, presence: true, ignore_serialize: target_mime_type.nil? && !target_mime_type_present?)]
-    property target_mime_type : String?
-
-    @[JSON::Field(ignore: true)]
-    property? target_mime_type_present : Bool = false
+    @[JSON::Field(key: "targetMimeType", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter target_mime_type : String? = nil
 
     # The ResourceKey for the target file.
-    @[JSON::Field(key: "targetResourceKey", type: String?, presence: true, ignore_serialize: target_resource_key.nil? && !target_resource_key_present?)]
-    property target_resource_key : String?
-
-    @[JSON::Field(ignore: true)]
-    property? target_resource_key_present : Bool = false
+    @[JSON::Field(key: "targetResourceKey", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter target_resource_key : String? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -54,7 +46,7 @@ module GoogleDrive
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -62,20 +54,44 @@ module GoogleDrive
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] target_id Object to be assigned
+    def target_id=(target_id : String?)
+      if target_id.nil?
+        return @target_id = nil
+      end
+      _target_id = target_id.not_nil!
+      @target_id = _target_id
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] target_mime_type Object to be assigned
+    def target_mime_type=(target_mime_type : String?)
+      if target_mime_type.nil?
+        return @target_mime_type = nil
+      end
+      _target_mime_type = target_mime_type.not_nil!
+      @target_mime_type = _target_mime_type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] target_resource_key Object to be assigned
+    def target_resource_key=(target_resource_key : String?)
+      if target_resource_key.nil?
+        return @target_resource_key = nil
+      end
+      _target_resource_key = target_resource_key.not_nil!
+      @target_resource_key = _target_resource_key
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@target_id, @target_id_present, @target_mime_type, @target_mime_type_present, @target_resource_key, @target_resource_key_present)
+    def_equals_and_hash(@target_id, @target_mime_type, @target_resource_key)
   end
 end

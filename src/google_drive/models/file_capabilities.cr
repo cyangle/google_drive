@@ -13,264 +13,165 @@ require "log"
 
 module GoogleDrive
   # Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class FileCapabilities
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Whether the current user is the pending owner of the file. Not populated for shared drive files.
-    @[JSON::Field(key: "canAcceptOwnership", type: Bool?, presence: true, ignore_serialize: can_accept_ownership.nil? && !can_accept_ownership_present?)]
-    property can_accept_ownership : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_accept_ownership_present : Bool = false
+    @[JSON::Field(key: "canAcceptOwnership", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_accept_ownership : Bool? = nil
 
     # Whether the current user can add children to this folder. This is always false when the item is not a folder.
-    @[JSON::Field(key: "canAddChildren", type: Bool?, presence: true, ignore_serialize: can_add_children.nil? && !can_add_children_present?)]
-    property can_add_children : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_add_children_present : Bool = false
+    @[JSON::Field(key: "canAddChildren", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_add_children : Bool? = nil
 
     # Whether the current user can add a folder from another drive (different shared drive or My Drive) to this folder. This is false when the item is not a folder. Only populated for items in shared drives.
-    @[JSON::Field(key: "canAddFolderFromAnotherDrive", type: Bool?, presence: true, ignore_serialize: can_add_folder_from_another_drive.nil? && !can_add_folder_from_another_drive_present?)]
-    property can_add_folder_from_another_drive : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_add_folder_from_another_drive_present : Bool = false
+    @[JSON::Field(key: "canAddFolderFromAnotherDrive", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_add_folder_from_another_drive : Bool? = nil
 
     # Whether the current user can add a parent for the item without removing an existing parent in the same request. Not populated for shared drive files.
-    @[JSON::Field(key: "canAddMyDriveParent", type: Bool?, presence: true, ignore_serialize: can_add_my_drive_parent.nil? && !can_add_my_drive_parent_present?)]
-    property can_add_my_drive_parent : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_add_my_drive_parent_present : Bool = false
+    @[JSON::Field(key: "canAddMyDriveParent", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_add_my_drive_parent : Bool? = nil
 
     # Whether the current user can change the copyRequiresWriterPermission restriction of this file.
-    @[JSON::Field(key: "canChangeCopyRequiresWriterPermission", type: Bool?, presence: true, ignore_serialize: can_change_copy_requires_writer_permission.nil? && !can_change_copy_requires_writer_permission_present?)]
-    property can_change_copy_requires_writer_permission : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_change_copy_requires_writer_permission_present : Bool = false
+    @[JSON::Field(key: "canChangeCopyRequiresWriterPermission", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_change_copy_requires_writer_permission : Bool? = nil
 
     # Whether the current user can change the securityUpdateEnabled field on link share metadata.
-    @[JSON::Field(key: "canChangeSecurityUpdateEnabled", type: Bool?, presence: true, ignore_serialize: can_change_security_update_enabled.nil? && !can_change_security_update_enabled_present?)]
-    property can_change_security_update_enabled : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_change_security_update_enabled_present : Bool = false
+    @[JSON::Field(key: "canChangeSecurityUpdateEnabled", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_change_security_update_enabled : Bool? = nil
 
     # Deprecated
-    @[JSON::Field(key: "canChangeViewersCanCopyContent", type: Bool?, presence: true, ignore_serialize: can_change_viewers_can_copy_content.nil? && !can_change_viewers_can_copy_content_present?)]
-    property can_change_viewers_can_copy_content : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_change_viewers_can_copy_content_present : Bool = false
+    @[JSON::Field(key: "canChangeViewersCanCopyContent", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_change_viewers_can_copy_content : Bool? = nil
 
     # Whether the current user can comment on this file.
-    @[JSON::Field(key: "canComment", type: Bool?, presence: true, ignore_serialize: can_comment.nil? && !can_comment_present?)]
-    property can_comment : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_comment_present : Bool = false
+    @[JSON::Field(key: "canComment", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_comment : Bool? = nil
 
     # Whether the current user can copy this file. For an item in a shared drive, whether the current user can copy non-folder descendants of this item, or this item itself if it is not a folder.
-    @[JSON::Field(key: "canCopy", type: Bool?, presence: true, ignore_serialize: can_copy.nil? && !can_copy_present?)]
-    property can_copy : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_copy_present : Bool = false
+    @[JSON::Field(key: "canCopy", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_copy : Bool? = nil
 
     # Whether the current user can delete this file.
-    @[JSON::Field(key: "canDelete", type: Bool?, presence: true, ignore_serialize: can_delete.nil? && !can_delete_present?)]
-    property can_delete : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_delete_present : Bool = false
+    @[JSON::Field(key: "canDelete", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_delete : Bool? = nil
 
     # Whether the current user can delete children of this folder. This is false when the item is not a folder. Only populated for items in shared drives.
-    @[JSON::Field(key: "canDeleteChildren", type: Bool?, presence: true, ignore_serialize: can_delete_children.nil? && !can_delete_children_present?)]
-    property can_delete_children : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_delete_children_present : Bool = false
+    @[JSON::Field(key: "canDeleteChildren", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_delete_children : Bool? = nil
 
     # Whether the current user can download this file.
-    @[JSON::Field(key: "canDownload", type: Bool?, presence: true, ignore_serialize: can_download.nil? && !can_download_present?)]
-    property can_download : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_download_present : Bool = false
+    @[JSON::Field(key: "canDownload", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_download : Bool? = nil
 
     # Whether the current user can edit this file. Other factors may limit the type of changes a user can make to a file. For example, see canChangeCopyRequiresWriterPermission or canModifyContent.
-    @[JSON::Field(key: "canEdit", type: Bool?, presence: true, ignore_serialize: can_edit.nil? && !can_edit_present?)]
-    property can_edit : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_edit_present : Bool = false
+    @[JSON::Field(key: "canEdit", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_edit : Bool? = nil
 
     # Whether the current user can list the children of this folder. This is always false when the item is not a folder.
-    @[JSON::Field(key: "canListChildren", type: Bool?, presence: true, ignore_serialize: can_list_children.nil? && !can_list_children_present?)]
-    property can_list_children : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_list_children_present : Bool = false
+    @[JSON::Field(key: "canListChildren", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_list_children : Bool? = nil
 
     # Whether the current user can modify the content of this file.
-    @[JSON::Field(key: "canModifyContent", type: Bool?, presence: true, ignore_serialize: can_modify_content.nil? && !can_modify_content_present?)]
-    property can_modify_content : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_modify_content_present : Bool = false
+    @[JSON::Field(key: "canModifyContent", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_modify_content : Bool? = nil
 
     # Whether the current user can modify restrictions on content of this file.
-    @[JSON::Field(key: "canModifyContentRestriction", type: Bool?, presence: true, ignore_serialize: can_modify_content_restriction.nil? && !can_modify_content_restriction_present?)]
-    property can_modify_content_restriction : Bool?
+    @[JSON::Field(key: "canModifyContentRestriction", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_modify_content_restriction : Bool? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? can_modify_content_restriction_present : Bool = false
+    # Whether the current user can modify the labels on this file.
+    @[JSON::Field(key: "canModifyLabels", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_modify_labels : Bool? = nil
 
     # Whether the current user can move children of this folder outside of the shared drive. This is false when the item is not a folder. Only populated for items in shared drives.
-    @[JSON::Field(key: "canMoveChildrenOutOfDrive", type: Bool?, presence: true, ignore_serialize: can_move_children_out_of_drive.nil? && !can_move_children_out_of_drive_present?)]
-    property can_move_children_out_of_drive : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_move_children_out_of_drive_present : Bool = false
+    @[JSON::Field(key: "canMoveChildrenOutOfDrive", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_move_children_out_of_drive : Bool? = nil
 
     # Deprecated - use canMoveChildrenOutOfDrive instead.
-    @[JSON::Field(key: "canMoveChildrenOutOfTeamDrive", type: Bool?, presence: true, ignore_serialize: can_move_children_out_of_team_drive.nil? && !can_move_children_out_of_team_drive_present?)]
-    property can_move_children_out_of_team_drive : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_move_children_out_of_team_drive_present : Bool = false
+    @[JSON::Field(key: "canMoveChildrenOutOfTeamDrive", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_move_children_out_of_team_drive : Bool? = nil
 
     # Whether the current user can move children of this folder within this drive. This is false when the item is not a folder. Note that a request to move the child may still fail depending on the current user's access to the child and to the destination folder.
-    @[JSON::Field(key: "canMoveChildrenWithinDrive", type: Bool?, presence: true, ignore_serialize: can_move_children_within_drive.nil? && !can_move_children_within_drive_present?)]
-    property can_move_children_within_drive : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_move_children_within_drive_present : Bool = false
+    @[JSON::Field(key: "canMoveChildrenWithinDrive", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_move_children_within_drive : Bool? = nil
 
     # Deprecated - use canMoveChildrenWithinDrive instead.
-    @[JSON::Field(key: "canMoveChildrenWithinTeamDrive", type: Bool?, presence: true, ignore_serialize: can_move_children_within_team_drive.nil? && !can_move_children_within_team_drive_present?)]
-    property can_move_children_within_team_drive : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_move_children_within_team_drive_present : Bool = false
+    @[JSON::Field(key: "canMoveChildrenWithinTeamDrive", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_move_children_within_team_drive : Bool? = nil
 
     # Deprecated - use canMoveItemOutOfDrive instead.
-    @[JSON::Field(key: "canMoveItemIntoTeamDrive", type: Bool?, presence: true, ignore_serialize: can_move_item_into_team_drive.nil? && !can_move_item_into_team_drive_present?)]
-    property can_move_item_into_team_drive : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_move_item_into_team_drive_present : Bool = false
+    @[JSON::Field(key: "canMoveItemIntoTeamDrive", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_move_item_into_team_drive : Bool? = nil
 
     # Whether the current user can move this item outside of this drive by changing its parent. Note that a request to change the parent of the item may still fail depending on the new parent that is being added.
-    @[JSON::Field(key: "canMoveItemOutOfDrive", type: Bool?, presence: true, ignore_serialize: can_move_item_out_of_drive.nil? && !can_move_item_out_of_drive_present?)]
-    property can_move_item_out_of_drive : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_move_item_out_of_drive_present : Bool = false
+    @[JSON::Field(key: "canMoveItemOutOfDrive", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_move_item_out_of_drive : Bool? = nil
 
     # Deprecated - use canMoveItemOutOfDrive instead.
-    @[JSON::Field(key: "canMoveItemOutOfTeamDrive", type: Bool?, presence: true, ignore_serialize: can_move_item_out_of_team_drive.nil? && !can_move_item_out_of_team_drive_present?)]
-    property can_move_item_out_of_team_drive : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_move_item_out_of_team_drive_present : Bool = false
+    @[JSON::Field(key: "canMoveItemOutOfTeamDrive", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_move_item_out_of_team_drive : Bool? = nil
 
     # Whether the current user can move this item within this drive. Note that a request to change the parent of the item may still fail depending on the new parent that is being added and the parent that is being removed.
-    @[JSON::Field(key: "canMoveItemWithinDrive", type: Bool?, presence: true, ignore_serialize: can_move_item_within_drive.nil? && !can_move_item_within_drive_present?)]
-    property can_move_item_within_drive : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_move_item_within_drive_present : Bool = false
+    @[JSON::Field(key: "canMoveItemWithinDrive", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_move_item_within_drive : Bool? = nil
 
     # Deprecated - use canMoveItemWithinDrive instead.
-    @[JSON::Field(key: "canMoveItemWithinTeamDrive", type: Bool?, presence: true, ignore_serialize: can_move_item_within_team_drive.nil? && !can_move_item_within_team_drive_present?)]
-    property can_move_item_within_team_drive : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_move_item_within_team_drive_present : Bool = false
+    @[JSON::Field(key: "canMoveItemWithinTeamDrive", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_move_item_within_team_drive : Bool? = nil
 
     # Deprecated - use canMoveItemWithinDrive or canMoveItemOutOfDrive instead.
-    @[JSON::Field(key: "canMoveTeamDriveItem", type: Bool?, presence: true, ignore_serialize: can_move_team_drive_item.nil? && !can_move_team_drive_item_present?)]
-    property can_move_team_drive_item : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_move_team_drive_item_present : Bool = false
+    @[JSON::Field(key: "canMoveTeamDriveItem", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_move_team_drive_item : Bool? = nil
 
     # Whether the current user can read the shared drive to which this file belongs. Only populated for items in shared drives.
-    @[JSON::Field(key: "canReadDrive", type: Bool?, presence: true, ignore_serialize: can_read_drive.nil? && !can_read_drive_present?)]
-    property can_read_drive : Bool?
+    @[JSON::Field(key: "canReadDrive", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_read_drive : Bool? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? can_read_drive_present : Bool = false
+    # Whether the current user can read the labels on this file.
+    @[JSON::Field(key: "canReadLabels", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_read_labels : Bool? = nil
 
-    # Whether the current user can read the revisions resource of this file. For a shared drive item, whether revisions of non-folder descendants of this item, or this item itself if it is not a folder, can be read.
-    @[JSON::Field(key: "canReadRevisions", type: Bool?, presence: true, ignore_serialize: can_read_revisions.nil? && !can_read_revisions_present?)]
-    property can_read_revisions : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_read_revisions_present : Bool = false
+    # Whether the current user can read the revisions resource of this file. For a shared drive item, whether revisions of non-folder descendants of this item, or this item itself if it isn't a folder, can be read.
+    @[JSON::Field(key: "canReadRevisions", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_read_revisions : Bool? = nil
 
     # Deprecated - use canReadDrive instead.
-    @[JSON::Field(key: "canReadTeamDrive", type: Bool?, presence: true, ignore_serialize: can_read_team_drive.nil? && !can_read_team_drive_present?)]
-    property can_read_team_drive : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_read_team_drive_present : Bool = false
+    @[JSON::Field(key: "canReadTeamDrive", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_read_team_drive : Bool? = nil
 
     # Whether the current user can remove children from this folder. This is always false when the item is not a folder. For a folder in a shared drive, use canDeleteChildren or canTrashChildren instead.
-    @[JSON::Field(key: "canRemoveChildren", type: Bool?, presence: true, ignore_serialize: can_remove_children.nil? && !can_remove_children_present?)]
-    property can_remove_children : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_remove_children_present : Bool = false
+    @[JSON::Field(key: "canRemoveChildren", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_remove_children : Bool? = nil
 
     # Whether the current user can remove a parent from the item without adding another parent in the same request. Not populated for shared drive files.
-    @[JSON::Field(key: "canRemoveMyDriveParent", type: Bool?, presence: true, ignore_serialize: can_remove_my_drive_parent.nil? && !can_remove_my_drive_parent_present?)]
-    property can_remove_my_drive_parent : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_remove_my_drive_parent_present : Bool = false
+    @[JSON::Field(key: "canRemoveMyDriveParent", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_remove_my_drive_parent : Bool? = nil
 
     # Whether the current user can rename this file.
-    @[JSON::Field(key: "canRename", type: Bool?, presence: true, ignore_serialize: can_rename.nil? && !can_rename_present?)]
-    property can_rename : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_rename_present : Bool = false
+    @[JSON::Field(key: "canRename", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_rename : Bool? = nil
 
     # Whether the current user can modify the sharing settings for this file.
-    @[JSON::Field(key: "canShare", type: Bool?, presence: true, ignore_serialize: can_share.nil? && !can_share_present?)]
-    property can_share : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_share_present : Bool = false
+    @[JSON::Field(key: "canShare", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_share : Bool? = nil
 
     # Whether the current user can move this file to trash.
-    @[JSON::Field(key: "canTrash", type: Bool?, presence: true, ignore_serialize: can_trash.nil? && !can_trash_present?)]
-    property can_trash : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_trash_present : Bool = false
+    @[JSON::Field(key: "canTrash", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_trash : Bool? = nil
 
     # Whether the current user can trash children of this folder. This is false when the item is not a folder. Only populated for items in shared drives.
-    @[JSON::Field(key: "canTrashChildren", type: Bool?, presence: true, ignore_serialize: can_trash_children.nil? && !can_trash_children_present?)]
-    property can_trash_children : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_trash_children_present : Bool = false
+    @[JSON::Field(key: "canTrashChildren", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_trash_children : Bool? = nil
 
     # Whether the current user can restore this file from trash.
-    @[JSON::Field(key: "canUntrash", type: Bool?, presence: true, ignore_serialize: can_untrash.nil? && !can_untrash_present?)]
-    property can_untrash : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? can_untrash_present : Bool = false
+    @[JSON::Field(key: "canUntrash", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter can_untrash : Bool? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -293,6 +194,7 @@ module GoogleDrive
       @can_list_children : Bool? = nil,
       @can_modify_content : Bool? = nil,
       @can_modify_content_restriction : Bool? = nil,
+      @can_modify_labels : Bool? = nil,
       @can_move_children_out_of_drive : Bool? = nil,
       @can_move_children_out_of_team_drive : Bool? = nil,
       @can_move_children_within_drive : Bool? = nil,
@@ -304,6 +206,7 @@ module GoogleDrive
       @can_move_item_within_team_drive : Bool? = nil,
       @can_move_team_drive_item : Bool? = nil,
       @can_read_drive : Bool? = nil,
+      @can_read_labels : Bool? = nil,
       @can_read_revisions : Bool? = nil,
       @can_read_team_drive : Bool? = nil,
       @can_remove_children : Bool? = nil,
@@ -318,7 +221,7 @@ module GoogleDrive
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -326,20 +229,394 @@ module GoogleDrive
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_accept_ownership Object to be assigned
+    def can_accept_ownership=(can_accept_ownership : Bool?)
+      if can_accept_ownership.nil?
+        return @can_accept_ownership = nil
+      end
+      _can_accept_ownership = can_accept_ownership.not_nil!
+      @can_accept_ownership = _can_accept_ownership
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_add_children Object to be assigned
+    def can_add_children=(can_add_children : Bool?)
+      if can_add_children.nil?
+        return @can_add_children = nil
+      end
+      _can_add_children = can_add_children.not_nil!
+      @can_add_children = _can_add_children
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_add_folder_from_another_drive Object to be assigned
+    def can_add_folder_from_another_drive=(can_add_folder_from_another_drive : Bool?)
+      if can_add_folder_from_another_drive.nil?
+        return @can_add_folder_from_another_drive = nil
+      end
+      _can_add_folder_from_another_drive = can_add_folder_from_another_drive.not_nil!
+      @can_add_folder_from_another_drive = _can_add_folder_from_another_drive
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_add_my_drive_parent Object to be assigned
+    def can_add_my_drive_parent=(can_add_my_drive_parent : Bool?)
+      if can_add_my_drive_parent.nil?
+        return @can_add_my_drive_parent = nil
+      end
+      _can_add_my_drive_parent = can_add_my_drive_parent.not_nil!
+      @can_add_my_drive_parent = _can_add_my_drive_parent
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_change_copy_requires_writer_permission Object to be assigned
+    def can_change_copy_requires_writer_permission=(can_change_copy_requires_writer_permission : Bool?)
+      if can_change_copy_requires_writer_permission.nil?
+        return @can_change_copy_requires_writer_permission = nil
+      end
+      _can_change_copy_requires_writer_permission = can_change_copy_requires_writer_permission.not_nil!
+      @can_change_copy_requires_writer_permission = _can_change_copy_requires_writer_permission
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_change_security_update_enabled Object to be assigned
+    def can_change_security_update_enabled=(can_change_security_update_enabled : Bool?)
+      if can_change_security_update_enabled.nil?
+        return @can_change_security_update_enabled = nil
+      end
+      _can_change_security_update_enabled = can_change_security_update_enabled.not_nil!
+      @can_change_security_update_enabled = _can_change_security_update_enabled
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_change_viewers_can_copy_content Object to be assigned
+    def can_change_viewers_can_copy_content=(can_change_viewers_can_copy_content : Bool?)
+      if can_change_viewers_can_copy_content.nil?
+        return @can_change_viewers_can_copy_content = nil
+      end
+      _can_change_viewers_can_copy_content = can_change_viewers_can_copy_content.not_nil!
+      @can_change_viewers_can_copy_content = _can_change_viewers_can_copy_content
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_comment Object to be assigned
+    def can_comment=(can_comment : Bool?)
+      if can_comment.nil?
+        return @can_comment = nil
+      end
+      _can_comment = can_comment.not_nil!
+      @can_comment = _can_comment
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_copy Object to be assigned
+    def can_copy=(can_copy : Bool?)
+      if can_copy.nil?
+        return @can_copy = nil
+      end
+      _can_copy = can_copy.not_nil!
+      @can_copy = _can_copy
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_delete Object to be assigned
+    def can_delete=(can_delete : Bool?)
+      if can_delete.nil?
+        return @can_delete = nil
+      end
+      _can_delete = can_delete.not_nil!
+      @can_delete = _can_delete
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_delete_children Object to be assigned
+    def can_delete_children=(can_delete_children : Bool?)
+      if can_delete_children.nil?
+        return @can_delete_children = nil
+      end
+      _can_delete_children = can_delete_children.not_nil!
+      @can_delete_children = _can_delete_children
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_download Object to be assigned
+    def can_download=(can_download : Bool?)
+      if can_download.nil?
+        return @can_download = nil
+      end
+      _can_download = can_download.not_nil!
+      @can_download = _can_download
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_edit Object to be assigned
+    def can_edit=(can_edit : Bool?)
+      if can_edit.nil?
+        return @can_edit = nil
+      end
+      _can_edit = can_edit.not_nil!
+      @can_edit = _can_edit
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_list_children Object to be assigned
+    def can_list_children=(can_list_children : Bool?)
+      if can_list_children.nil?
+        return @can_list_children = nil
+      end
+      _can_list_children = can_list_children.not_nil!
+      @can_list_children = _can_list_children
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_modify_content Object to be assigned
+    def can_modify_content=(can_modify_content : Bool?)
+      if can_modify_content.nil?
+        return @can_modify_content = nil
+      end
+      _can_modify_content = can_modify_content.not_nil!
+      @can_modify_content = _can_modify_content
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_modify_content_restriction Object to be assigned
+    def can_modify_content_restriction=(can_modify_content_restriction : Bool?)
+      if can_modify_content_restriction.nil?
+        return @can_modify_content_restriction = nil
+      end
+      _can_modify_content_restriction = can_modify_content_restriction.not_nil!
+      @can_modify_content_restriction = _can_modify_content_restriction
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_modify_labels Object to be assigned
+    def can_modify_labels=(can_modify_labels : Bool?)
+      if can_modify_labels.nil?
+        return @can_modify_labels = nil
+      end
+      _can_modify_labels = can_modify_labels.not_nil!
+      @can_modify_labels = _can_modify_labels
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_move_children_out_of_drive Object to be assigned
+    def can_move_children_out_of_drive=(can_move_children_out_of_drive : Bool?)
+      if can_move_children_out_of_drive.nil?
+        return @can_move_children_out_of_drive = nil
+      end
+      _can_move_children_out_of_drive = can_move_children_out_of_drive.not_nil!
+      @can_move_children_out_of_drive = _can_move_children_out_of_drive
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_move_children_out_of_team_drive Object to be assigned
+    def can_move_children_out_of_team_drive=(can_move_children_out_of_team_drive : Bool?)
+      if can_move_children_out_of_team_drive.nil?
+        return @can_move_children_out_of_team_drive = nil
+      end
+      _can_move_children_out_of_team_drive = can_move_children_out_of_team_drive.not_nil!
+      @can_move_children_out_of_team_drive = _can_move_children_out_of_team_drive
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_move_children_within_drive Object to be assigned
+    def can_move_children_within_drive=(can_move_children_within_drive : Bool?)
+      if can_move_children_within_drive.nil?
+        return @can_move_children_within_drive = nil
+      end
+      _can_move_children_within_drive = can_move_children_within_drive.not_nil!
+      @can_move_children_within_drive = _can_move_children_within_drive
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_move_children_within_team_drive Object to be assigned
+    def can_move_children_within_team_drive=(can_move_children_within_team_drive : Bool?)
+      if can_move_children_within_team_drive.nil?
+        return @can_move_children_within_team_drive = nil
+      end
+      _can_move_children_within_team_drive = can_move_children_within_team_drive.not_nil!
+      @can_move_children_within_team_drive = _can_move_children_within_team_drive
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_move_item_into_team_drive Object to be assigned
+    def can_move_item_into_team_drive=(can_move_item_into_team_drive : Bool?)
+      if can_move_item_into_team_drive.nil?
+        return @can_move_item_into_team_drive = nil
+      end
+      _can_move_item_into_team_drive = can_move_item_into_team_drive.not_nil!
+      @can_move_item_into_team_drive = _can_move_item_into_team_drive
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_move_item_out_of_drive Object to be assigned
+    def can_move_item_out_of_drive=(can_move_item_out_of_drive : Bool?)
+      if can_move_item_out_of_drive.nil?
+        return @can_move_item_out_of_drive = nil
+      end
+      _can_move_item_out_of_drive = can_move_item_out_of_drive.not_nil!
+      @can_move_item_out_of_drive = _can_move_item_out_of_drive
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_move_item_out_of_team_drive Object to be assigned
+    def can_move_item_out_of_team_drive=(can_move_item_out_of_team_drive : Bool?)
+      if can_move_item_out_of_team_drive.nil?
+        return @can_move_item_out_of_team_drive = nil
+      end
+      _can_move_item_out_of_team_drive = can_move_item_out_of_team_drive.not_nil!
+      @can_move_item_out_of_team_drive = _can_move_item_out_of_team_drive
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_move_item_within_drive Object to be assigned
+    def can_move_item_within_drive=(can_move_item_within_drive : Bool?)
+      if can_move_item_within_drive.nil?
+        return @can_move_item_within_drive = nil
+      end
+      _can_move_item_within_drive = can_move_item_within_drive.not_nil!
+      @can_move_item_within_drive = _can_move_item_within_drive
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_move_item_within_team_drive Object to be assigned
+    def can_move_item_within_team_drive=(can_move_item_within_team_drive : Bool?)
+      if can_move_item_within_team_drive.nil?
+        return @can_move_item_within_team_drive = nil
+      end
+      _can_move_item_within_team_drive = can_move_item_within_team_drive.not_nil!
+      @can_move_item_within_team_drive = _can_move_item_within_team_drive
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_move_team_drive_item Object to be assigned
+    def can_move_team_drive_item=(can_move_team_drive_item : Bool?)
+      if can_move_team_drive_item.nil?
+        return @can_move_team_drive_item = nil
+      end
+      _can_move_team_drive_item = can_move_team_drive_item.not_nil!
+      @can_move_team_drive_item = _can_move_team_drive_item
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_read_drive Object to be assigned
+    def can_read_drive=(can_read_drive : Bool?)
+      if can_read_drive.nil?
+        return @can_read_drive = nil
+      end
+      _can_read_drive = can_read_drive.not_nil!
+      @can_read_drive = _can_read_drive
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_read_labels Object to be assigned
+    def can_read_labels=(can_read_labels : Bool?)
+      if can_read_labels.nil?
+        return @can_read_labels = nil
+      end
+      _can_read_labels = can_read_labels.not_nil!
+      @can_read_labels = _can_read_labels
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_read_revisions Object to be assigned
+    def can_read_revisions=(can_read_revisions : Bool?)
+      if can_read_revisions.nil?
+        return @can_read_revisions = nil
+      end
+      _can_read_revisions = can_read_revisions.not_nil!
+      @can_read_revisions = _can_read_revisions
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_read_team_drive Object to be assigned
+    def can_read_team_drive=(can_read_team_drive : Bool?)
+      if can_read_team_drive.nil?
+        return @can_read_team_drive = nil
+      end
+      _can_read_team_drive = can_read_team_drive.not_nil!
+      @can_read_team_drive = _can_read_team_drive
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_remove_children Object to be assigned
+    def can_remove_children=(can_remove_children : Bool?)
+      if can_remove_children.nil?
+        return @can_remove_children = nil
+      end
+      _can_remove_children = can_remove_children.not_nil!
+      @can_remove_children = _can_remove_children
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_remove_my_drive_parent Object to be assigned
+    def can_remove_my_drive_parent=(can_remove_my_drive_parent : Bool?)
+      if can_remove_my_drive_parent.nil?
+        return @can_remove_my_drive_parent = nil
+      end
+      _can_remove_my_drive_parent = can_remove_my_drive_parent.not_nil!
+      @can_remove_my_drive_parent = _can_remove_my_drive_parent
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_rename Object to be assigned
+    def can_rename=(can_rename : Bool?)
+      if can_rename.nil?
+        return @can_rename = nil
+      end
+      _can_rename = can_rename.not_nil!
+      @can_rename = _can_rename
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_share Object to be assigned
+    def can_share=(can_share : Bool?)
+      if can_share.nil?
+        return @can_share = nil
+      end
+      _can_share = can_share.not_nil!
+      @can_share = _can_share
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_trash Object to be assigned
+    def can_trash=(can_trash : Bool?)
+      if can_trash.nil?
+        return @can_trash = nil
+      end
+      _can_trash = can_trash.not_nil!
+      @can_trash = _can_trash
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_trash_children Object to be assigned
+    def can_trash_children=(can_trash_children : Bool?)
+      if can_trash_children.nil?
+        return @can_trash_children = nil
+      end
+      _can_trash_children = can_trash_children.not_nil!
+      @can_trash_children = _can_trash_children
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] can_untrash Object to be assigned
+    def can_untrash=(can_untrash : Bool?)
+      if can_untrash.nil?
+        return @can_untrash = nil
+      end
+      _can_untrash = can_untrash.not_nil!
+      @can_untrash = _can_untrash
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@can_accept_ownership, @can_accept_ownership_present, @can_add_children, @can_add_children_present, @can_add_folder_from_another_drive, @can_add_folder_from_another_drive_present, @can_add_my_drive_parent, @can_add_my_drive_parent_present, @can_change_copy_requires_writer_permission, @can_change_copy_requires_writer_permission_present, @can_change_security_update_enabled, @can_change_security_update_enabled_present, @can_change_viewers_can_copy_content, @can_change_viewers_can_copy_content_present, @can_comment, @can_comment_present, @can_copy, @can_copy_present, @can_delete, @can_delete_present, @can_delete_children, @can_delete_children_present, @can_download, @can_download_present, @can_edit, @can_edit_present, @can_list_children, @can_list_children_present, @can_modify_content, @can_modify_content_present, @can_modify_content_restriction, @can_modify_content_restriction_present, @can_move_children_out_of_drive, @can_move_children_out_of_drive_present, @can_move_children_out_of_team_drive, @can_move_children_out_of_team_drive_present, @can_move_children_within_drive, @can_move_children_within_drive_present, @can_move_children_within_team_drive, @can_move_children_within_team_drive_present, @can_move_item_into_team_drive, @can_move_item_into_team_drive_present, @can_move_item_out_of_drive, @can_move_item_out_of_drive_present, @can_move_item_out_of_team_drive, @can_move_item_out_of_team_drive_present, @can_move_item_within_drive, @can_move_item_within_drive_present, @can_move_item_within_team_drive, @can_move_item_within_team_drive_present, @can_move_team_drive_item, @can_move_team_drive_item_present, @can_read_drive, @can_read_drive_present, @can_read_revisions, @can_read_revisions_present, @can_read_team_drive, @can_read_team_drive_present, @can_remove_children, @can_remove_children_present, @can_remove_my_drive_parent, @can_remove_my_drive_parent_present, @can_rename, @can_rename_present, @can_share, @can_share_present, @can_trash, @can_trash_present, @can_trash_children, @can_trash_children_present, @can_untrash, @can_untrash_present)
+    def_equals_and_hash(@can_accept_ownership, @can_add_children, @can_add_folder_from_another_drive, @can_add_my_drive_parent, @can_change_copy_requires_writer_permission, @can_change_security_update_enabled, @can_change_viewers_can_copy_content, @can_comment, @can_copy, @can_delete, @can_delete_children, @can_download, @can_edit, @can_list_children, @can_modify_content, @can_modify_content_restriction, @can_modify_labels, @can_move_children_out_of_drive, @can_move_children_out_of_team_drive, @can_move_children_within_drive, @can_move_children_within_team_drive, @can_move_item_into_team_drive, @can_move_item_out_of_drive, @can_move_item_out_of_team_drive, @can_move_item_within_drive, @can_move_item_within_team_drive, @can_move_team_drive_item, @can_read_drive, @can_read_labels, @can_read_revisions, @can_read_team_drive, @can_remove_children, @can_remove_my_drive_parent, @can_rename, @can_share, @can_trash, @can_trash_children, @can_untrash)
   end
 end

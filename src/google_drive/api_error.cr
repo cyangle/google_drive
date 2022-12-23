@@ -26,8 +26,8 @@ module GoogleDrive
     # Override to_s to display a friendly error message
     def to_s
       msg = ""
-      msg = msg + "\nHTTP status code: #{code}" if @code
-      msg = msg + "\nResponse headers: #{response_headers}" if @response_headers
+      msg = msg + "\nHTTP status code: #{code}" if !@code.nil?
+      msg = msg + "\nResponse headers: #{response_headers}" if !@response_headers.nil?
       if @message.nil? || @message.to_s.empty?
         msg = msg + "\nError message: the server returns an error but the HTTP response body is empty."
       else

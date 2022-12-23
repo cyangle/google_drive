@@ -13,40 +13,29 @@ require "log"
 
 module GoogleDrive
   # A set of restrictions that apply to this shared drive or items inside this shared drive.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class DriveRestrictions
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Whether administrative privileges on this shared drive are required to modify restrictions.
-    @[JSON::Field(key: "adminManagedRestrictions", type: Bool?, presence: true, ignore_serialize: admin_managed_restrictions.nil? && !admin_managed_restrictions_present?)]
-    property admin_managed_restrictions : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? admin_managed_restrictions_present : Bool = false
+    @[JSON::Field(key: "adminManagedRestrictions", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter admin_managed_restrictions : Bool? = nil
 
     # Whether the options to copy, print, or download files inside this shared drive, should be disabled for readers and commenters. When this restriction is set to true, it will override the similarly named field to true for any file inside this shared drive.
-    @[JSON::Field(key: "copyRequiresWriterPermission", type: Bool?, presence: true, ignore_serialize: copy_requires_writer_permission.nil? && !copy_requires_writer_permission_present?)]
-    property copy_requires_writer_permission : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? copy_requires_writer_permission_present : Bool = false
+    @[JSON::Field(key: "copyRequiresWriterPermission", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter copy_requires_writer_permission : Bool? = nil
 
     # Whether access to this shared drive and items inside this shared drive is restricted to users of the domain to which this shared drive belongs. This restriction may be overridden by other sharing policies controlled outside of this shared drive.
-    @[JSON::Field(key: "domainUsersOnly", type: Bool?, presence: true, ignore_serialize: domain_users_only.nil? && !domain_users_only_present?)]
-    property domain_users_only : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? domain_users_only_present : Bool = false
+    @[JSON::Field(key: "domainUsersOnly", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter domain_users_only : Bool? = nil
 
     # Whether access to items inside this shared drive is restricted to its members.
-    @[JSON::Field(key: "driveMembersOnly", type: Bool?, presence: true, ignore_serialize: drive_members_only.nil? && !drive_members_only_present?)]
-    property drive_members_only : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? drive_members_only_present : Bool = false
+    @[JSON::Field(key: "driveMembersOnly", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter drive_members_only : Bool? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -62,7 +51,7 @@ module GoogleDrive
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -70,20 +59,54 @@ module GoogleDrive
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] admin_managed_restrictions Object to be assigned
+    def admin_managed_restrictions=(admin_managed_restrictions : Bool?)
+      if admin_managed_restrictions.nil?
+        return @admin_managed_restrictions = nil
+      end
+      _admin_managed_restrictions = admin_managed_restrictions.not_nil!
+      @admin_managed_restrictions = _admin_managed_restrictions
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] copy_requires_writer_permission Object to be assigned
+    def copy_requires_writer_permission=(copy_requires_writer_permission : Bool?)
+      if copy_requires_writer_permission.nil?
+        return @copy_requires_writer_permission = nil
+      end
+      _copy_requires_writer_permission = copy_requires_writer_permission.not_nil!
+      @copy_requires_writer_permission = _copy_requires_writer_permission
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] domain_users_only Object to be assigned
+    def domain_users_only=(domain_users_only : Bool?)
+      if domain_users_only.nil?
+        return @domain_users_only = nil
+      end
+      _domain_users_only = domain_users_only.not_nil!
+      @domain_users_only = _domain_users_only
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] drive_members_only Object to be assigned
+    def drive_members_only=(drive_members_only : Bool?)
+      if drive_members_only.nil?
+        return @drive_members_only = nil
+      end
+      _drive_members_only = drive_members_only.not_nil!
+      @drive_members_only = _drive_members_only
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@admin_managed_restrictions, @admin_managed_restrictions_present, @copy_requires_writer_permission, @copy_requires_writer_permission_present, @domain_users_only, @domain_users_only_present, @drive_members_only, @drive_members_only_present)
+    def_equals_and_hash(@admin_managed_restrictions, @copy_requires_writer_permission, @domain_users_only, @drive_members_only)
   end
 end

@@ -13,25 +13,20 @@ require "log"
 
 module GoogleDrive
   # Additional information about the content of the file. These fields are never populated in responses.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class FileContentHints
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
+    include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
-    # Text to be indexed for the file to improve fullText queries. This is limited to 128KB in length and may contain HTML elements.
-    @[JSON::Field(key: "indexableText", type: String?, presence: true, ignore_serialize: indexable_text.nil? && !indexable_text_present?)]
-    property indexable_text : String?
+    # Text to be indexed for the file to improve fullText queries. This is limited to 128 KB in length and may contain HTML elements. For more information, see Manage file metadata.
+    @[JSON::Field(key: "indexableText", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter indexable_text : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? indexable_text_present : Bool = false
-
-    @[JSON::Field(key: "thumbnail", type: FileContentHintsThumbnail?, presence: true, ignore_serialize: thumbnail.nil? && !thumbnail_present?)]
-    property thumbnail : FileContentHintsThumbnail?
-
-    @[JSON::Field(ignore: true)]
-    property? thumbnail_present : Bool = false
+    @[JSON::Field(key: "thumbnail", type: GoogleDrive::FileContentHintsThumbnail?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter thumbnail : GoogleDrive::FileContentHintsThumbnail? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -39,34 +34,56 @@ module GoogleDrive
       *,
       # Optional properties
       @indexable_text : String? = nil,
-      @thumbnail : FileContentHintsThumbnail? = nil
+      @thumbnail : GoogleDrive::FileContentHintsThumbnail? = nil
     )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
+      unless (_thumbnail = @thumbnail).nil?
+        invalid_properties.concat(_thumbnail.list_invalid_properties_for("thumbnail")) if _thumbnail.is_a?(OpenApi::Validatable)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      unless (_thumbnail = @thumbnail).nil?
+        return false if _thumbnail.is_a?(OpenApi::Validatable) && !_thumbnail.valid?
+      end
+
       true
     end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] indexable_text Object to be assigned
+    def indexable_text=(indexable_text : String?)
+      if indexable_text.nil?
+        return @indexable_text = nil
+      end
+      _indexable_text = indexable_text.not_nil!
+      @indexable_text = _indexable_text
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] thumbnail Object to be assigned
+    def thumbnail=(thumbnail : GoogleDrive::FileContentHintsThumbnail?)
+      if thumbnail.nil?
+        return @thumbnail = nil
+      end
+      _thumbnail = thumbnail.not_nil!
+      _thumbnail.validate if _thumbnail.is_a?(OpenApi::Validatable)
+      @thumbnail = _thumbnail
     end
 
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@indexable_text, @indexable_text_present, @thumbnail, @thumbnail_present)
+    def_equals_and_hash(@indexable_text, @thumbnail)
   end
 end
