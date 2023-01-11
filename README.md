@@ -40,6 +40,12 @@ First you need to require it.
 require "google_drive"
 ```
 
+Or require a specific api only.
+
+```crystal
+require "google_drive/api/files_api"
+```
+
 ### Configure client with google OAuth2 access token
 
 ```crystal

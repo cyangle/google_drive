@@ -191,7 +191,7 @@ module GoogleDrive
     end
 
     # Returns base URL for specified operation based on server settings
-    def base_url(operation = Nil)
+    def base_url(operation : String? = nil)
       # TODO revise below to support operation-level server setting
       # index = server_operation_index.fetch(operation, server_index)
       "#{scheme}://#{[host, base_path].join("/").gsub(/\/+/, "/")}".sub(/\/+\z/, "") # if index == Nil

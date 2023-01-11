@@ -70,7 +70,7 @@ module GoogleDrive
       (mime == "*/*") || JSON_MIME_REGEX.matches?(mime)
     end
 
-    def build_request_url(path : String, operation : String) : String
+    def build_request_url(path : String, operation : String?) : String
       # Add leading and trailing slashes to path
       path = "/#{path}".gsub(/\/+/, "/")
       @config.base_url(operation) + path
@@ -238,7 +238,7 @@ module GoogleDrive
     def build_api_request(
       http_method : Symbol,
       path : String,
-      operation : String,
+      operation : String? = nil,
       post_body : IO | String | Nil = nil,
       auth_names : Array(String) = Array(String).new,
       header_params : Hash(String, String) = Hash(String, String).new,
