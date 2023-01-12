@@ -11,6 +11,7 @@ require "../../core"
 
 require "../models/change_list"
 require "../models/channel"
+
 require "../models/start_page_token"
 
 module GoogleDrive

@@ -43,13 +43,3 @@ tasks:
         pattern: '(^\s+unless [^\s]+ = [^\s]+$\n^\s+end$|^\s+unless [^\s]+$\n^\s+end$)'
         new_value: ''
         multi_line: true
-      -
-        name: "Remove empty requires"
-        pattern: '^require "./"$\n'
-        new_value: ''
-        multi_line: true
-      -
-        name: "Remove empty model requires"
-        pattern: '^require "../models/"$\n'
-        new_value: ''
-        multi_line: true
