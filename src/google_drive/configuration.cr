@@ -66,7 +66,7 @@ module GoogleDrive
     # Default to false.
     #
     # @return [true, false]
-    property debugging : Bool
+    property? debugging : Bool
 
     # Defines the temporary folder to store downloaded files
     # (for API endpoints that have file response).
@@ -82,7 +82,7 @@ module GoogleDrive
     # Set this to false to skip client side validation in the operation.
     # Default to true.
     # @return [true, false]
-    property client_side_validation : Bool
+    property? client_side_validation : Bool
 
     # ## TLS/SSL setting
     # Set this to false to skip verifying SSL certificate when calling API from https server.
@@ -159,7 +159,7 @@ module GoogleDrive
     #   config.password = "xxx"
     # end
     # ```
-    def initialize
+    def initialize(&)
       initialize
       yield self
     end
@@ -170,7 +170,7 @@ module GoogleDrive
     end
 
     # Configure object with block.
-    def configure
+    def configure(&)
       yield self
     end
 
@@ -255,7 +255,7 @@ module GoogleDrive
 
       index = index_string.to_i
       # check array index out of bound
-      if (index < 0 || index >= servers.size)
+      if index < 0 || index >= servers.size
         raise ArgumentError.new("Invalid index #{index} when selecting the server. Must be less than #{servers.size}")
       end
 
@@ -267,7 +267,7 @@ module GoogleDrive
       # go through variable and assign a value
       server["variables"].each do |name, variable|
         if variables.has_key?(name)
-          if (!variable.has_key?("enum_values") || variable["enum_values"].includes?(variables[name]))
+          if !variable.has_key?("enum_values") || variable["enum_values"].includes?(variables[name])
             url.gsub! "{" + name.to_s + "}", variables[name]
           else
             raise ArgumentError.new("The variable `#{name}` in the server URL has invalid value #{variables[name]}. Must be #{variable["enum_values"]}.")

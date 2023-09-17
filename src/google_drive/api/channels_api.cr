@@ -15,7 +15,7 @@ module GoogleDrive
   class ChannelsApi
     property api_client : ApiClient
 
-    delegate client_side_validation, debugging, to: @api_client.config
+    delegate client_side_validation?, debugging?, to: @api_client.config
 
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
@@ -71,7 +71,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: ChannelsApi#stop\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -117,11 +117,11 @@ module GoogleDrive
       user_ip : String? = nil,
       channel : GoogleDrive::Channel? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: ChannelsApi.stop ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         unless (_alt = alt).nil?
           OpenApi::EnumValidator.validate("alt", _alt, DRIVE_CHANNELS_STOP_VALID_VALUES_FOR_ALT)
         end

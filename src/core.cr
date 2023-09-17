@@ -40,7 +40,7 @@ module GoogleDrive
   #   config.password = "xxx"
   # end
   # ```
-  def self.configure
+  def self.configure(&)
     yield Configuration.default
   end
 end

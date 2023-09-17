@@ -16,7 +16,7 @@ module GoogleDrive
   class PermissionsApi
     property api_client : ApiClient
 
-    delegate client_side_validation, debugging, to: @api_client.config
+    delegate client_side_validation?, debugging?, to: @api_client.config
 
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
@@ -108,7 +108,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: PermissionsApi#create\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -181,11 +181,11 @@ module GoogleDrive
       use_domain_admin_access : Bool? = nil,
       permission : GoogleDrive::Permission? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: PermissionsApi.create ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
 
         unless (_alt = alt).nil?
@@ -316,7 +316,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: PermissionsApi#delete\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -374,11 +374,11 @@ module GoogleDrive
       supports_team_drives : Bool? = nil,
       use_domain_admin_access : Bool? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: PermissionsApi.delete ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
 
         raise ArgumentError.new("\"permission_id\" is required and cannot be null") if permission_id.nil?
@@ -498,7 +498,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: PermissionsApi#get\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -556,11 +556,11 @@ module GoogleDrive
       supports_team_drives : Bool? = nil,
       use_domain_admin_access : Bool? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: PermissionsApi.get ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
 
         raise ArgumentError.new("\"permission_id\" is required and cannot be null") if permission_id.nil?
@@ -690,7 +690,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: PermissionsApi#list\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -756,11 +756,11 @@ module GoogleDrive
       supports_team_drives : Bool? = nil,
       use_domain_admin_access : Bool? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: PermissionsApi.list ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
 
         unless (_alt = alt).nil?
@@ -900,7 +900,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: PermissionsApi#update\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -967,11 +967,11 @@ module GoogleDrive
       use_domain_admin_access : Bool? = nil,
       permission : GoogleDrive::Permission? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: PermissionsApi.update ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
 
         raise ArgumentError.new("\"permission_id\" is required and cannot be null") if permission_id.nil?

@@ -22,7 +22,7 @@ module GoogleDrive
   class FilesApi
     property api_client : ApiClient
 
-    delegate client_side_validation, debugging, to: @api_client.config
+    delegate client_side_validation?, debugging?, to: @api_client.config
 
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
@@ -114,7 +114,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: FilesApi#copy\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -187,11 +187,11 @@ module GoogleDrive
       supports_team_drives : Bool? = nil,
       file : GoogleDrive::File? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: FilesApi.copy ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
 
         unless (_alt = alt).nil?
@@ -342,7 +342,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: FilesApi#create\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -415,11 +415,11 @@ module GoogleDrive
       use_content_as_indexable_text : Bool? = nil,
       file : GoogleDrive::File? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: FilesApi.create ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         unless (_alt = alt).nil?
           OpenApi::EnumValidator.validate("alt", _alt, DRIVE_FILES_CREATE_VALID_VALUES_FOR_ALT)
         end
@@ -545,7 +545,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: FilesApi#delete\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -600,11 +600,11 @@ module GoogleDrive
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: FilesApi.delete ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
 
         unless (_alt = alt).nil?
@@ -706,7 +706,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: FilesApi#empty_trash\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -752,11 +752,11 @@ module GoogleDrive
       user_ip : String? = nil,
       enforce_single_parent : Bool? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: FilesApi.empty_trash ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         unless (_alt = alt).nil?
           OpenApi::EnumValidator.validate("alt", _alt, DRIVE_FILES_EMPTY_TRASH_VALID_VALUES_FOR_ALT)
         end
@@ -858,7 +858,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: FilesApi#export\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -907,11 +907,11 @@ module GoogleDrive
       quota_user : String? = nil,
       user_ip : String? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: FilesApi.export ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
 
         raise ArgumentError.new("\"mime_type\" is required and cannot be null") if mime_type.nil?
@@ -1021,7 +1021,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: FilesApi#generate_ids\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -1075,11 +1075,11 @@ module GoogleDrive
       space : String? = nil,
       _type : String? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: FilesApi.generate_ids ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         unless (_alt = alt).nil?
           OpenApi::EnumValidator.validate("alt", _alt, DRIVE_FILES_GENERATE_IDS_VALID_VALUES_FOR_ALT)
         end
@@ -1206,7 +1206,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: FilesApi#get\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -1267,11 +1267,11 @@ module GoogleDrive
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: FilesApi.get ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
 
         unless (_alt = alt).nil?
@@ -1433,7 +1433,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: FilesApi#list\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -1524,11 +1524,11 @@ module GoogleDrive
       supports_team_drives : Bool? = nil,
       team_drive_id : String? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: FilesApi.list ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         unless (_alt = alt).nil?
           OpenApi::EnumValidator.validate("alt", _alt, DRIVE_FILES_LIST_VALID_VALUES_FOR_ALT)
         end
@@ -1659,7 +1659,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: FilesApi#list_labels\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -1713,11 +1713,11 @@ module GoogleDrive
       max_results : Int32? = nil,
       page_token : String? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: FilesApi.list_labels ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
 
         unless (_alt = alt).nil?
@@ -1829,7 +1829,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: FilesApi#modify_labels\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -1878,11 +1878,11 @@ module GoogleDrive
       user_ip : String? = nil,
       modify_labels_request : GoogleDrive::ModifyLabelsRequest? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: FilesApi.modify_labels ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
 
         unless (_alt = alt).nil?
@@ -2033,7 +2033,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: FilesApi#update\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -2112,11 +2112,11 @@ module GoogleDrive
       use_content_as_indexable_text : Bool? = nil,
       file : GoogleDrive::File? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: FilesApi.update ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
 
         unless (_alt = alt).nil?
@@ -2277,7 +2277,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: FilesApi#update_content\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -2357,11 +2357,11 @@ module GoogleDrive
       use_content_as_indexable_text : Bool? = nil,
       body : IO | String? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: FilesApi.update_content ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"upload_type\" is required and cannot be null") if upload_type.nil?
         unless (_upload_type = upload_type).nil?
           OpenApi::EnumValidator.validate("upload_type", _upload_type, DRIVE_FILES_UPDATE_CONTENT_VALID_VALUES_FOR_UPLOAD_TYPE)
@@ -2518,7 +2518,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: FilesApi#upload\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -2595,11 +2595,11 @@ module GoogleDrive
       media : IO | String? = nil,
       metadata : IO | String? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: FilesApi.upload ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"upload_type\" is required and cannot be null") if upload_type.nil?
         unless (_upload_type = upload_type).nil?
           OpenApi::EnumValidator.validate("upload_type", _upload_type, DRIVE_FILES_UPLOAD_VALID_VALUES_FOR_UPLOAD_TYPE)
@@ -2739,7 +2739,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: FilesApi#watch\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -2803,11 +2803,11 @@ module GoogleDrive
       supports_team_drives : Bool? = nil,
       channel : GoogleDrive::Channel? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: FilesApi.watch ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
 
         unless (_alt = alt).nil?

@@ -16,7 +16,7 @@ module GoogleDrive
   class DrivesApi
     property api_client : ApiClient
 
-    delegate client_side_validation, debugging, to: @api_client.config
+    delegate client_side_validation?, debugging?, to: @api_client.config
 
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
@@ -76,7 +76,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: DrivesApi#create\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -125,11 +125,11 @@ module GoogleDrive
       user_ip : String? = nil,
       drive : GoogleDrive::Drive? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: DrivesApi.create ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"request_id\" is required and cannot be null") if request_id.nil?
 
         unless (_alt = alt).nil?
@@ -245,7 +245,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: DrivesApi#delete\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -297,11 +297,11 @@ module GoogleDrive
       allow_item_deletion : Bool? = nil,
       use_domain_admin_access : Bool? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: DrivesApi.delete ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"drive_id\" is required and cannot be null") if drive_id.nil?
 
         unless (_alt = alt).nil?
@@ -406,7 +406,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: DrivesApi#get\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -455,11 +455,11 @@ module GoogleDrive
       user_ip : String? = nil,
       use_domain_admin_access : Bool? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: DrivesApi.get ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"drive_id\" is required and cannot be null") if drive_id.nil?
 
         unless (_alt = alt).nil?
@@ -561,7 +561,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: DrivesApi#hide\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -607,11 +607,11 @@ module GoogleDrive
       quota_user : String? = nil,
       user_ip : String? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: DrivesApi.hide ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"drive_id\" is required and cannot be null") if drive_id.nil?
 
         unless (_alt = alt).nil?
@@ -724,7 +724,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: DrivesApi#list\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -781,11 +781,11 @@ module GoogleDrive
       q : String? = nil,
       use_domain_admin_access : Bool? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: DrivesApi.list ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         unless (_alt = alt).nil?
           OpenApi::EnumValidator.validate("alt", _alt, DRIVE_DRIVES_LIST_VALID_VALUES_FOR_ALT)
         end
@@ -893,7 +893,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: DrivesApi#unhide\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -939,11 +939,11 @@ module GoogleDrive
       quota_user : String? = nil,
       user_ip : String? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: DrivesApi.unhide ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"drive_id\" is required and cannot be null") if drive_id.nil?
 
         unless (_alt = alt).nil?
@@ -1052,7 +1052,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: DrivesApi#update\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -1104,11 +1104,11 @@ module GoogleDrive
       use_domain_admin_access : Bool? = nil,
       drive : GoogleDrive::Drive? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: DrivesApi.update ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"drive_id\" is required and cannot be null") if drive_id.nil?
 
         unless (_alt = alt).nil?

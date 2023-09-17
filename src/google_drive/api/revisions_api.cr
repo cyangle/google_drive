@@ -16,7 +16,7 @@ module GoogleDrive
   class RevisionsApi
     property api_client : ApiClient
 
-    delegate client_side_validation, debugging, to: @api_client.config
+    delegate client_side_validation?, debugging?, to: @api_client.config
 
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
@@ -76,7 +76,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: RevisionsApi#delete\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -125,11 +125,11 @@ module GoogleDrive
       quota_user : String? = nil,
       user_ip : String? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: RevisionsApi.delete ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
 
         raise ArgumentError.new("\"revision_id\" is required and cannot be null") if revision_id.nil?
@@ -238,7 +238,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: RevisionsApi#get\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -290,11 +290,11 @@ module GoogleDrive
       user_ip : String? = nil,
       acknowledge_abuse : Bool? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: RevisionsApi.get ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
 
         raise ArgumentError.new("\"revision_id\" is required and cannot be null") if revision_id.nil?
@@ -406,7 +406,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: RevisionsApi#list\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -460,11 +460,11 @@ module GoogleDrive
       page_size : Int32? = nil,
       page_token : String? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: RevisionsApi.list ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
 
         unless (_alt = alt).nil?
@@ -580,7 +580,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: RevisionsApi#update\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -632,11 +632,11 @@ module GoogleDrive
       user_ip : String? = nil,
       revision : GoogleDrive::Revision? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: RevisionsApi.update ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
 
         raise ArgumentError.new("\"revision_id\" is required and cannot be null") if revision_id.nil?

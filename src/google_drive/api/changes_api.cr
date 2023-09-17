@@ -18,7 +18,7 @@ module GoogleDrive
   class ChangesApi
     property api_client : ApiClient
 
-    delegate client_side_validation, debugging, to: @api_client.config
+    delegate client_side_validation?, debugging?, to: @api_client.config
 
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
@@ -86,7 +86,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: ChangesApi#get_start_page_token\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -141,11 +141,11 @@ module GoogleDrive
       supports_team_drives : Bool? = nil,
       team_drive_id : String? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: ChangesApi.get_start_page_token ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         unless (_alt = alt).nil?
           OpenApi::EnumValidator.validate("alt", _alt, DRIVE_CHANGES_GET_START_PAGE_TOKEN_VALID_VALUES_FOR_ALT)
         end
@@ -300,7 +300,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: ChangesApi#list\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -387,11 +387,11 @@ module GoogleDrive
       supports_team_drives : Bool? = nil,
       team_drive_id : String? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: ChangesApi.list ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"page_token\" is required and cannot be null") if page_token.nil?
 
         unless (_alt = alt).nil?
@@ -567,7 +567,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: ChangesApi#watch\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -657,11 +657,11 @@ module GoogleDrive
       team_drive_id : String? = nil,
       channel : GoogleDrive::Channel? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: ChangesApi.watch ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"page_token\" is required and cannot be null") if page_token.nil?
 
         unless (_alt = alt).nil?

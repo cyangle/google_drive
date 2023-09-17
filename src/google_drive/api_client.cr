@@ -274,7 +274,7 @@ module GoogleDrive
         headers: header_params,
         cookies: cookie_params,
         form: form_or_body,
-        logging: @config.debugging,
+        logging: @config.debugging?,
         handle_errors: false,
         params_encoder: Crest::NestedParamsEncoder
       )
@@ -283,7 +283,7 @@ module GoogleDrive
     def execute_api_request(request : Crest::Request) : Tuple(String, Int32, Hash(String, Array(String) | String))
       response = request.execute
 
-      if @config.debugging
+      if @config.debugging?
         Log.debug { "HTTP response body ~BEGIN~\n#{response.body}\n~END~\n" }
       end
 

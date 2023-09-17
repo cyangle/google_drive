@@ -16,7 +16,7 @@ module GoogleDrive
   class CommentsApi
     property api_client : ApiClient
 
-    delegate client_side_validation, debugging, to: @api_client.config
+    delegate client_side_validation?, debugging?, to: @api_client.config
 
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
@@ -76,7 +76,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: CommentsApi#create\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -125,11 +125,11 @@ module GoogleDrive
       user_ip : String? = nil,
       comment : GoogleDrive::Comment? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: CommentsApi.create ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
 
         unless (_alt = alt).nil?
@@ -240,7 +240,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: CommentsApi#delete\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -289,11 +289,11 @@ module GoogleDrive
       quota_user : String? = nil,
       user_ip : String? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: CommentsApi.delete ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
 
         raise ArgumentError.new("\"comment_id\" is required and cannot be null") if comment_id.nil?
@@ -402,7 +402,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: CommentsApi#get\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -454,11 +454,11 @@ module GoogleDrive
       user_ip : String? = nil,
       include_deleted : Bool? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: CommentsApi.get ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
 
         raise ArgumentError.new("\"comment_id\" is required and cannot be null") if comment_id.nil?
@@ -578,7 +578,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: CommentsApi#list\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -638,11 +638,11 @@ module GoogleDrive
       page_token : String? = nil,
       start_modified_time : String? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: CommentsApi.list ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
 
         unless (_alt = alt).nil?
@@ -760,7 +760,7 @@ module GoogleDrive
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
-      if debugging
+      if debugging?
         Log.debug { "API called: CommentsApi#update\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -812,11 +812,11 @@ module GoogleDrive
       user_ip : String? = nil,
       comment : GoogleDrive::Comment? = nil
     ) : Crest::Request
-      if debugging
+      if debugging?
         Log.debug { "Calling API: CommentsApi.update ..." }
       end
 
-      if client_side_validation
+      if client_side_validation?
         raise ArgumentError.new("\"file_id\" is required and cannot be null") if file_id.nil?
 
         raise ArgumentError.new("\"comment_id\" is required and cannot be null") if comment_id.nil?
