@@ -148,7 +148,7 @@ module GoogleDrive
       post_body : IO | String | Nil = nil
 
       # auth_names
-      auth_names = ["Oauth2", "Oauth2c"]
+      auth_names = ["Oauth2c", "Oauth2"]
 
       @api_client.build_api_request(
         http_method: :"GET",

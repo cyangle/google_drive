@@ -172,7 +172,7 @@ module GoogleDrive
       post_body : IO | String | Nil = @api_client.encode(body: drive, content_type: header_params["Content-Type"]?) if !drive.nil?
 
       # auth_names
-      auth_names = ["Oauth2", "Oauth2c"]
+      auth_names = ["Oauth2c", "Oauth2"]
 
       @api_client.build_api_request(
         http_method: :"POST",
@@ -337,7 +337,7 @@ module GoogleDrive
       post_body : IO | String | Nil = nil
 
       # auth_names
-      auth_names = ["Oauth2", "Oauth2c"]
+      auth_names = ["Oauth2c", "Oauth2"]
 
       @api_client.build_api_request(
         http_method: :"DELETE",
@@ -496,7 +496,7 @@ module GoogleDrive
       post_body : IO | String | Nil = nil
 
       # auth_names
-      auth_names = ["Oauth2", "Oauth2c"]
+      auth_names = ["Oauth2c", "Oauth2"]
 
       @api_client.build_api_request(
         http_method: :"GET",
@@ -647,7 +647,7 @@ module GoogleDrive
       post_body : IO | String | Nil = nil
 
       # auth_names
-      auth_names = ["Oauth2", "Oauth2c"]
+      auth_names = ["Oauth2c", "Oauth2"]
 
       @api_client.build_api_request(
         http_method: :"POST",
@@ -828,7 +828,7 @@ module GoogleDrive
       post_body : IO | String | Nil = nil
 
       # auth_names
-      auth_names = ["Oauth2", "Oauth2c"]
+      auth_names = ["Oauth2c", "Oauth2"]
 
       @api_client.build_api_request(
         http_method: :"GET",
@@ -979,7 +979,7 @@ module GoogleDrive
       post_body : IO | String | Nil = nil
 
       # auth_names
-      auth_names = ["Oauth2", "Oauth2c"]
+      auth_names = ["Oauth2c", "Oauth2"]
 
       @api_client.build_api_request(
         http_method: :"POST",
@@ -1151,7 +1151,7 @@ module GoogleDrive
       post_body : IO | String | Nil = @api_client.encode(body: drive, content_type: header_params["Content-Type"]?) if !drive.nil?
 
       # auth_names
-      auth_names = ["Oauth2", "Oauth2c"]
+      auth_names = ["Oauth2c", "Oauth2"]
 
       @api_client.build_api_request(
         http_method: :"PATCH",

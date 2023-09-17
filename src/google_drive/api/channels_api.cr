@@ -159,7 +159,7 @@ module GoogleDrive
       post_body : IO | String | Nil = @api_client.encode(body: channel, content_type: header_params["Content-Type"]?) if !channel.nil?
 
       # auth_names
-      auth_names = ["Oauth2", "Oauth2c"]
+      auth_names = ["Oauth2c", "Oauth2"]
 
       @api_client.build_api_request(
         http_method: :"POST",

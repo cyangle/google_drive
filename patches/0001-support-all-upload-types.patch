@@ -27,4 +27,4 @@ index 816f0a9..e312623 100644
 +      post_body : IO | String | Nil = upload_type == "multipart" ? nil : media.not_nil!
 
        # auth_names
-       auth_names = ["Oauth2", "Oauth2c"]
+       auth_names = ["Oauth2c", "Oauth2"]

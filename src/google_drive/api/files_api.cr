@@ -241,7 +241,7 @@ module GoogleDrive
       post_body : IO | String | Nil = @api_client.encode(body: file, content_type: header_params["Content-Type"]?) if !file.nil?
 
       # auth_names
-      auth_names = ["Oauth2", "Oauth2c"]
+      auth_names = ["Oauth2c", "Oauth2"]
 
       @api_client.build_api_request(
         http_method: :"POST",
@@ -468,7 +468,7 @@ module GoogleDrive
       post_body : IO | String | Nil = @api_client.encode(body: file, content_type: header_params["Content-Type"]?) if !file.nil?
 
       # auth_names
-      auth_names = ["Oauth2", "Oauth2c"]
+      auth_names = ["Oauth2c", "Oauth2"]
 
       @api_client.build_api_request(
         http_method: :"POST",
@@ -641,7 +641,7 @@ module GoogleDrive
       post_body : IO | String | Nil = nil
 
       # auth_names
-      auth_names = ["Oauth2", "Oauth2c"]
+      auth_names = ["Oauth2c", "Oauth2"]
 
       @api_client.build_api_request(
         http_method: :"DELETE",
@@ -789,7 +789,7 @@ module GoogleDrive
       post_body : IO | String | Nil = nil
 
       # auth_names
-      auth_names = ["Oauth2", "Oauth2c"]
+      auth_names = ["Oauth2c", "Oauth2"]
 
       @api_client.build_api_request(
         http_method: :"DELETE",
@@ -948,7 +948,7 @@ module GoogleDrive
       post_body : IO | String | Nil = nil
 
       # auth_names
-      auth_names = ["Oauth2", "Oauth2c"]
+      auth_names = ["Oauth2c", "Oauth2"]
 
       @api_client.build_api_request(
         http_method: :"GET",
@@ -1121,7 +1121,7 @@ module GoogleDrive
       post_body : IO | String | Nil = nil
 
       # auth_names
-      auth_names = ["Oauth2", "Oauth2c"]
+      auth_names = ["Oauth2c", "Oauth2"]
 
       @api_client.build_api_request(
         http_method: :"GET",
@@ -1312,7 +1312,7 @@ module GoogleDrive
       post_body : IO | String | Nil = nil
 
       # auth_names
-      auth_names = ["Oauth2", "Oauth2c"]
+      auth_names = ["Oauth2c", "Oauth2"]
 
       @api_client.build_api_request(
         http_method: :"GET",
@@ -1586,7 +1586,7 @@ module GoogleDrive
       post_body : IO | String | Nil = nil
 
       # auth_names
-      auth_names = ["Oauth2", "Oauth2c"]
+      auth_names = ["Oauth2c", "Oauth2"]
 
       @api_client.build_api_request(
         http_method: :"GET",
@@ -1760,7 +1760,7 @@ module GoogleDrive
       post_body : IO | String | Nil = nil
 
       # auth_names
-      auth_names = ["Oauth2", "Oauth2c"]
+      auth_names = ["Oauth2c", "Oauth2"]
 
       @api_client.build_api_request(
         http_method: :"GET",
@@ -1924,7 +1924,7 @@ module GoogleDrive
       post_body : IO | String | Nil = @api_client.encode(body: modify_labels_request, content_type: header_params["Content-Type"]?) if !modify_labels_request.nil?
 
       # auth_names
-      auth_names = ["Oauth2", "Oauth2c"]
+      auth_names = ["Oauth2c", "Oauth2"]
 
       @api_client.build_api_request(
         http_method: :"POST",
@@ -2168,7 +2168,7 @@ module GoogleDrive
       post_body : IO | String | Nil = @api_client.encode(body: file, content_type: header_params["Content-Type"]?) if !file.nil?
 
       # auth_names
-      auth_names = ["Oauth2", "Oauth2c"]
+      auth_names = ["Oauth2c", "Oauth2"]
 
       @api_client.build_api_request(
         http_method: :"PATCH",
@@ -2413,7 +2413,7 @@ module GoogleDrive
       post_body : IO | String | Nil = body
 
       # auth_names
-      auth_names = ["Oauth2", "Oauth2c"]
+      auth_names = ["Oauth2c", "Oauth2"]
 
       @api_client.build_api_request(
         http_method: :"PATCH",
@@ -2650,7 +2650,7 @@ module GoogleDrive
       post_body : IO | String | Nil = upload_type == "multipart" ? nil : media.not_nil!
 
       # auth_names
-      auth_names = ["Oauth2", "Oauth2c"]
+      auth_names = ["Oauth2c", "Oauth2"]
 
       @api_client.build_api_request(
         http_method: :"POST",
@@ -2854,7 +2854,7 @@ module GoogleDrive
       post_body : IO | String | Nil = @api_client.encode(body: channel, content_type: header_params["Content-Type"]?) if !channel.nil?
 
       # auth_names
-      auth_names = ["Oauth2", "Oauth2c"]
+      auth_names = ["Oauth2c", "Oauth2"]
 
       @api_client.build_api_request(
         http_method: :"POST",
