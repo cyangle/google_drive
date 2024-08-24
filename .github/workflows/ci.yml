@@ -36,6 +36,8 @@ jobs:
     container:
       image: crystallang/crystal:${{ matrix.crystal_version }}
     steps:
+    - name: Install media-types
+      run: apt-get update && apt-get install media-types
     - uses: actions/checkout@v4
       with:
         submodules: 'true'
