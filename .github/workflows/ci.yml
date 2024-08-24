@@ -1,0 +1,47 @@
+name: Crystal CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+  - cron: "0 2 * * 1"
+
+jobs:
+  lint:
+    name: Check code format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download source
+        uses: actions/checkout@v4
+      - name: Install Crystal
+        uses: crystal-lang/install-crystal@v1
+        with:
+          crystal: latest
+      - name: Install dependencies
+        run: shards install
+      - name: Check formatting
+        run: crystal tool format --check
+      - name: Run ameba
+        run: ./bin/ameba
+
+  test:
+    name: Test with crystal ${{ matrix.crystal_version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        crystal_version: ['1.13', 'latest', 'nightly']
+    container:
+      image: crystallang/crystal:${{ matrix.crystal_version }}
+    steps:
+    - name: Install media-types
+      run: apt-get update && apt-get install media-types
+    - uses: actions/checkout@v4
+      with:
+        submodules: 'true'
+    - name: Install dependencies
+      run: shards install
+    - name: Run tests
+      run: crystal spec
