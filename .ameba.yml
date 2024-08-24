@@ -2,6 +2,8 @@ Excluded:
   - bin
   - lib
   - local
+Documentation/DocumentationAdmonition:
+  Enabled: false
 Lint/NotNil:
   Enabled: false
 Metrics/CyclomaticComplexity:

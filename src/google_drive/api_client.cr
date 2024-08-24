@@ -118,7 +118,7 @@ module GoogleDrive
     def select_header_accept(accepts : Array(String)) : String
       # return nil if accepts.nil? || accepts.empty?
       # use JSON when present, otherwise use all of the provided
-      json_accept : String? = accepts.find { |s| json_mime?(s) }
+      json_accept : String? = accepts.find { |value| json_mime?(value) }
       if json_accept.nil?
         accepts.join(",")
       else
@@ -133,7 +133,7 @@ module GoogleDrive
       # use application/json by default
       return "application/json" if content_types.empty?
       # use JSON when present, otherwise use the first one
-      json_content_type = content_types.find { |s| json_mime?(s) }
+      json_content_type = content_types.find { |value| json_mime?(value) }
       (json_content_type || content_types.first).not_nil!
     end
 
