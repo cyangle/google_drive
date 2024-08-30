@@ -39,6 +39,11 @@ tasks:
         new_value: ''
         multi_line: true
       -
+        name: "Remove empty if blocks"
+        pattern: '^\s+if [^\s]+$\n^\s+end$'
+        new_value: ''
+        multi_line: true
+      -
         name: "Remove empty unless blocks"
         pattern: '(^\s+unless [^\s]+ = [^\s]+$\n^\s+end$|^\s+unless [^\s]+$\n^\s+end$)'
         new_value: ''
