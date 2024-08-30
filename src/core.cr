@@ -18,9 +18,9 @@ require "uri"
 # Project files
 require "./ext/**"
 require "./validators/**"
-require "./google_drive/configuration.cr"
-require "./google_drive/api_error.cr"
-require "./google_drive/api_client.cr"
+require "./google_drive/configuration"
+require "./google_drive/api_error"
+require "./google_drive/api_client"
 
 module GoogleDrive
   Log = ::Log.for("GoogleDrive") # => Log for GoogleDrive source
