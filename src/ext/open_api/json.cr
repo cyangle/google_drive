@@ -30,5 +30,8 @@ module OpenApi
     def after_initialize
       raise JSON::ParseException.new("Validation failed: #{list_invalid_properties}", 0, 0) if !valid?
     end
+
+    # Defines a clone method that returns a copy of this object with all instance variables cloned (clone is in turn invoked on them).
+    def_clone
   end
 end
