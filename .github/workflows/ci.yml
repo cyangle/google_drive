@@ -12,6 +12,7 @@ jobs:
   lint:
     name: Check code format
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Download source
         uses: actions/checkout@v4
@@ -29,6 +30,7 @@ jobs:
   test:
     name: Test with crystal ${{ matrix.crystal_version }}
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
