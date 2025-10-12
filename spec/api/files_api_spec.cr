@@ -322,6 +322,7 @@ describe "FilesApi" do
           (file.name).should eq(file_meta.name)
         end
       end
+
       context "send metadata as File" do
         it "generates correct http request" do
           files_api = GoogleDrive::FilesApi.new
@@ -374,9 +375,10 @@ describe "FilesApi" do
       end
 
       it "uploads file successfully" do
+        file_path = "spec/fixtures/sample_files/simple_upload.csv"
         WebMock.stub(:post, "https://www.googleapis.com/upload/drive/v3/files?alt=json&uploadType=media")
           .with(
-            body: File.read("spec/fixtures/requests/files_api/simple_upload_body.txt"),
+            body: File.read(file_path),
             headers: {
               "Accept"        => "application/json",
               "Content-Type"  => "text/csv",
@@ -386,7 +388,7 @@ describe "FilesApi" do
         files_api = GoogleDrive::FilesApi.new
         file = files_api.upload(
           upload_type: "media",
-          media: File.open("spec/fixtures/sample_files/simple_upload.csv")
+          media: File.open(file_path)
         )
         (file.name).should eq("Untitled")
         (file.mime_type).should eq("text/csv")
