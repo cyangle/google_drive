@@ -73,7 +73,7 @@ module GoogleDrive
       @resource_id : String? = nil,
       @resource_uri : String? = nil,
       @token : String? = nil,
-      @_type : String? = nil
+      @_type : String? = nil,
     )
     end
 

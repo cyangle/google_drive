@@ -59,7 +59,7 @@ module GoogleDrive
       supports_team_drives : Bool? = nil,
       transfer_ownership : Bool? = nil,
       use_domain_admin_access : Bool? = nil,
-      permission : GoogleDrive::Permission? = nil
+      permission : GoogleDrive::Permission? = nil,
     ) : GoogleDrive::Permission
       data, _status_code, _headers = create_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, email_message: email_message, enforce_single_parent: enforce_single_parent, move_to_new_owners_root: move_to_new_owners_root, send_notification_email: send_notification_email, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, transfer_ownership: transfer_ownership, use_domain_admin_access: use_domain_admin_access, permission: permission)
       data
@@ -102,7 +102,7 @@ module GoogleDrive
       supports_team_drives : Bool? = nil,
       transfer_ownership : Bool? = nil,
       use_domain_admin_access : Bool? = nil,
-      permission : GoogleDrive::Permission? = nil
+      permission : GoogleDrive::Permission? = nil,
     ) : Tuple(GoogleDrive::Permission, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_create(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, email_message: email_message, enforce_single_parent: enforce_single_parent, move_to_new_owners_root: move_to_new_owners_root, send_notification_email: send_notification_email, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, transfer_ownership: transfer_ownership, use_domain_admin_access: use_domain_admin_access, permission: permission)
 
@@ -179,7 +179,7 @@ module GoogleDrive
       supports_team_drives : Bool? = nil,
       transfer_ownership : Bool? = nil,
       use_domain_admin_access : Bool? = nil,
-      permission : GoogleDrive::Permission? = nil
+      permission : GoogleDrive::Permission? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: PermissionsApi.create ..." }
@@ -277,7 +277,7 @@ module GoogleDrive
       user_ip : String? = nil,
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
-      use_domain_admin_access : Bool? = nil
+      use_domain_admin_access : Bool? = nil,
     ) : Nil
       delete_with_http_info(file_id: file_id, permission_id: permission_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_domain_admin_access: use_domain_admin_access)
       nil
@@ -310,7 +310,7 @@ module GoogleDrive
       user_ip : String? = nil,
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
-      use_domain_admin_access : Bool? = nil
+      use_domain_admin_access : Bool? = nil,
     ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete(file_id: file_id, permission_id: permission_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_domain_admin_access: use_domain_admin_access)
 
@@ -372,7 +372,7 @@ module GoogleDrive
       user_ip : String? = nil,
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
-      use_domain_admin_access : Bool? = nil
+      use_domain_admin_access : Bool? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: PermissionsApi.delete ..." }
@@ -459,7 +459,7 @@ module GoogleDrive
       user_ip : String? = nil,
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
-      use_domain_admin_access : Bool? = nil
+      use_domain_admin_access : Bool? = nil,
     ) : GoogleDrive::Permission
       data, _status_code, _headers = get_with_http_info(file_id: file_id, permission_id: permission_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_domain_admin_access: use_domain_admin_access)
       data
@@ -492,7 +492,7 @@ module GoogleDrive
       user_ip : String? = nil,
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
-      use_domain_admin_access : Bool? = nil
+      use_domain_admin_access : Bool? = nil,
     ) : Tuple(GoogleDrive::Permission, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get(file_id: file_id, permission_id: permission_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_domain_admin_access: use_domain_admin_access)
 
@@ -554,7 +554,7 @@ module GoogleDrive
       user_ip : String? = nil,
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
-      use_domain_admin_access : Bool? = nil
+      use_domain_admin_access : Bool? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: PermissionsApi.get ..." }
@@ -647,7 +647,7 @@ module GoogleDrive
       page_token : String? = nil,
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
-      use_domain_admin_access : Bool? = nil
+      use_domain_admin_access : Bool? = nil,
     ) : GoogleDrive::PermissionList
       data, _status_code, _headers = list_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, include_permissions_for_view: include_permissions_for_view, page_size: page_size, page_token: page_token, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_domain_admin_access: use_domain_admin_access)
       data
@@ -684,7 +684,7 @@ module GoogleDrive
       page_token : String? = nil,
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
-      use_domain_admin_access : Bool? = nil
+      use_domain_admin_access : Bool? = nil,
     ) : Tuple(GoogleDrive::PermissionList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_list(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, include_permissions_for_view: include_permissions_for_view, page_size: page_size, page_token: page_token, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_domain_admin_access: use_domain_admin_access)
 
@@ -754,7 +754,7 @@ module GoogleDrive
       page_token : String? = nil,
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
-      use_domain_admin_access : Bool? = nil
+      use_domain_admin_access : Bool? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: PermissionsApi.list ..." }
@@ -855,7 +855,7 @@ module GoogleDrive
       supports_team_drives : Bool? = nil,
       transfer_ownership : Bool? = nil,
       use_domain_admin_access : Bool? = nil,
-      permission : GoogleDrive::Permission? = nil
+      permission : GoogleDrive::Permission? = nil,
     ) : GoogleDrive::Permission
       data, _status_code, _headers = update_with_http_info(file_id: file_id, permission_id: permission_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, remove_expiration: remove_expiration, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, transfer_ownership: transfer_ownership, use_domain_admin_access: use_domain_admin_access, permission: permission)
       data
@@ -894,7 +894,7 @@ module GoogleDrive
       supports_team_drives : Bool? = nil,
       transfer_ownership : Bool? = nil,
       use_domain_admin_access : Bool? = nil,
-      permission : GoogleDrive::Permission? = nil
+      permission : GoogleDrive::Permission? = nil,
     ) : Tuple(GoogleDrive::Permission, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_update(file_id: file_id, permission_id: permission_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, remove_expiration: remove_expiration, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, transfer_ownership: transfer_ownership, use_domain_admin_access: use_domain_admin_access, permission: permission)
 
@@ -965,7 +965,7 @@ module GoogleDrive
       supports_team_drives : Bool? = nil,
       transfer_ownership : Bool? = nil,
       use_domain_admin_access : Bool? = nil,
-      permission : GoogleDrive::Permission? = nil
+      permission : GoogleDrive::Permission? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: PermissionsApi.update ..." }

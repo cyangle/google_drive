@@ -40,7 +40,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      channel : GoogleDrive::Channel? = nil
+      channel : GoogleDrive::Channel? = nil,
     ) : Nil
       stop_with_http_info(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, channel: channel)
       nil
@@ -65,7 +65,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      channel : GoogleDrive::Channel? = nil
+      channel : GoogleDrive::Channel? = nil,
     ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_stop(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, channel: channel)
 
@@ -115,7 +115,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      channel : GoogleDrive::Channel? = nil
+      channel : GoogleDrive::Channel? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: ChannelsApi.stop ..." }

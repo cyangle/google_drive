@@ -40,7 +40,7 @@ module GoogleDrive
       # Optional properties
       @kind : String? = "drive#permissionList",
       @next_page_token : String? = nil,
-      @permissions : Array(GoogleDrive::Permission)? = nil
+      @permissions : Array(GoogleDrive::Permission)? = nil,
     )
     end
 

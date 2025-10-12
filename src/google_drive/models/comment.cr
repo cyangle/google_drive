@@ -85,7 +85,7 @@ module GoogleDrive
       @modified_time : Time? = nil,
       @quoted_file_content : GoogleDrive::CommentQuotedFileContent? = nil,
       @replies : Array(GoogleDrive::Reply)? = nil,
-      @resolved : Bool? = nil
+      @resolved : Bool? = nil,
     )
     end
 

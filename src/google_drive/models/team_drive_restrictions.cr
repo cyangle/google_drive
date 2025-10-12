@@ -43,7 +43,7 @@ module GoogleDrive
       @admin_managed_restrictions : Bool? = nil,
       @copy_requires_writer_permission : Bool? = nil,
       @domain_users_only : Bool? = nil,
-      @team_members_only : Bool? = nil
+      @team_members_only : Bool? = nil,
     )
     end
 

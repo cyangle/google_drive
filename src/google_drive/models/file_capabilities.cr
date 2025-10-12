@@ -213,7 +213,7 @@ module GoogleDrive
       @can_share : Bool? = nil,
       @can_trash : Bool? = nil,
       @can_trash_children : Bool? = nil,
-      @can_untrash : Bool? = nil
+      @can_untrash : Bool? = nil,
     )
     end
 

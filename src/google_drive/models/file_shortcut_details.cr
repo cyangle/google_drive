@@ -38,7 +38,7 @@ module GoogleDrive
       # Optional properties
       @target_id : String? = nil,
       @target_mime_type : String? = nil,
-      @target_resource_key : String? = nil
+      @target_resource_key : String? = nil,
     )
     end
 

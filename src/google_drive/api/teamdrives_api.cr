@@ -43,7 +43,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      team_drive : GoogleDrive::TeamDrive? = nil
+      team_drive : GoogleDrive::TeamDrive? = nil,
     ) : GoogleDrive::TeamDrive
       data, _status_code, _headers = create_with_http_info(request_id: request_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, team_drive: team_drive)
       data
@@ -70,7 +70,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      team_drive : GoogleDrive::TeamDrive? = nil
+      team_drive : GoogleDrive::TeamDrive? = nil,
     ) : Tuple(GoogleDrive::TeamDrive, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_create(request_id: request_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, team_drive: team_drive)
 
@@ -123,7 +123,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      team_drive : GoogleDrive::TeamDrive? = nil
+      team_drive : GoogleDrive::TeamDrive? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: TeamdrivesApi.create ..." }
@@ -206,7 +206,7 @@ module GoogleDrive
       oauth_token : String? = nil,
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
-      user_ip : String? = nil
+      user_ip : String? = nil,
     ) : Nil
       delete_with_http_info(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
       nil
@@ -231,7 +231,7 @@ module GoogleDrive
       oauth_token : String? = nil,
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
-      user_ip : String? = nil
+      user_ip : String? = nil,
     ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
 
@@ -281,7 +281,7 @@ module GoogleDrive
       oauth_token : String? = nil,
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
-      user_ip : String? = nil
+      user_ip : String? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: TeamdrivesApi.delete ..." }
@@ -357,7 +357,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      use_domain_admin_access : Bool? = nil
+      use_domain_admin_access : Bool? = nil,
     ) : GoogleDrive::TeamDrive
       data, _status_code, _headers = get_with_http_info(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access)
       data
@@ -384,7 +384,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      use_domain_admin_access : Bool? = nil
+      use_domain_admin_access : Bool? = nil,
     ) : Tuple(GoogleDrive::TeamDrive, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access)
 
@@ -437,7 +437,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      use_domain_admin_access : Bool? = nil
+      use_domain_admin_access : Bool? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: TeamdrivesApi.get ..." }
@@ -520,7 +520,7 @@ module GoogleDrive
       page_size : Int32? = nil,
       page_token : String? = nil,
       q : String? = nil,
-      use_domain_admin_access : Bool? = nil
+      use_domain_admin_access : Bool? = nil,
     ) : GoogleDrive::TeamDriveList
       data, _status_code, _headers = list_with_http_info(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token, q: q, use_domain_admin_access: use_domain_admin_access)
       data
@@ -551,7 +551,7 @@ module GoogleDrive
       page_size : Int32? = nil,
       page_token : String? = nil,
       q : String? = nil,
-      use_domain_admin_access : Bool? = nil
+      use_domain_admin_access : Bool? = nil,
     ) : Tuple(GoogleDrive::TeamDriveList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_list(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token, q: q, use_domain_admin_access: use_domain_admin_access)
 
@@ -612,7 +612,7 @@ module GoogleDrive
       page_size : Int32? = nil,
       page_token : String? = nil,
       q : String? = nil,
-      use_domain_admin_access : Bool? = nil
+      use_domain_admin_access : Bool? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: TeamdrivesApi.list ..." }
@@ -699,7 +699,7 @@ module GoogleDrive
       quota_user : String? = nil,
       user_ip : String? = nil,
       use_domain_admin_access : Bool? = nil,
-      team_drive : GoogleDrive::TeamDrive? = nil
+      team_drive : GoogleDrive::TeamDrive? = nil,
     ) : GoogleDrive::TeamDrive
       data, _status_code, _headers = update_with_http_info(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access, team_drive: team_drive)
       data
@@ -728,7 +728,7 @@ module GoogleDrive
       quota_user : String? = nil,
       user_ip : String? = nil,
       use_domain_admin_access : Bool? = nil,
-      team_drive : GoogleDrive::TeamDrive? = nil
+      team_drive : GoogleDrive::TeamDrive? = nil,
     ) : Tuple(GoogleDrive::TeamDrive, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_update(team_drive_id: team_drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access, team_drive: team_drive)
 
@@ -784,7 +784,7 @@ module GoogleDrive
       quota_user : String? = nil,
       user_ip : String? = nil,
       use_domain_admin_access : Bool? = nil,
-      team_drive : GoogleDrive::TeamDrive? = nil
+      team_drive : GoogleDrive::TeamDrive? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: TeamdrivesApi.update ..." }

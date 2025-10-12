@@ -45,7 +45,7 @@ module GoogleDrive
       @fields : Hash(String, GoogleDrive::LabelField)? = nil,
       @id : String? = nil,
       @kind : String? = "drive#label",
-      @revision_id : String? = nil
+      @revision_id : String? = nil,
     )
     end
 

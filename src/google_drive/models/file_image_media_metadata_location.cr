@@ -38,7 +38,7 @@ module GoogleDrive
       # Optional properties
       @altitude : Float64? = nil,
       @latitude : Float64? = nil,
-      @longitude : Float64? = nil
+      @longitude : Float64? = nil,
     )
     end
 

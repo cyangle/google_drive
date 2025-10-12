@@ -37,7 +37,7 @@ module GoogleDrive
       # Optional properties
       @background_image_link : String? = nil,
       @color_rgb : String? = nil,
-      @id : String? = nil
+      @id : String? = nil,
     )
     end
 

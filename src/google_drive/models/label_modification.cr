@@ -45,7 +45,7 @@ module GoogleDrive
       @field_modifications : Array(GoogleDrive::LabelFieldModification)? = nil,
       @kind : String? = "drive#labelModification",
       @label_id : String? = nil,
-      @remove_label : Bool? = nil
+      @remove_label : Bool? = nil,
     )
     end
 

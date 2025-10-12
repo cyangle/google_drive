@@ -40,7 +40,7 @@ module GoogleDrive
       # Optional properties
       @drives : Array(GoogleDrive::Drive)? = nil,
       @kind : String? = "drive#driveList",
-      @next_page_token : String? = nil
+      @next_page_token : String? = nil,
     )
     end
 

@@ -45,7 +45,7 @@ module GoogleDrive
       @files : Array(GoogleDrive::File)? = nil,
       @incomplete_search : Bool? = nil,
       @kind : String? = "drive#fileList",
-      @next_page_token : String? = nil
+      @next_page_token : String? = nil,
     )
     end
 

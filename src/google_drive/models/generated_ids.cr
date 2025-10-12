@@ -38,7 +38,7 @@ module GoogleDrive
       # Optional properties
       @ids : Array(String)? = nil,
       @kind : String? = "drive#generatedIds",
-      @space : String? = nil
+      @space : String? = nil,
     )
     end
 

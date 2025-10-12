@@ -32,7 +32,7 @@ module GoogleDrive
       *,
       # Optional properties
       @kind : String? = "drive#startPageToken",
-      @start_page_token : String? = nil
+      @start_page_token : String? = nil,
     )
     end
 

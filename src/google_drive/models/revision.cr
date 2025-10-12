@@ -94,7 +94,7 @@ module GoogleDrive
       @published : Bool? = nil,
       @published_link : String? = nil,
       @published_outside_domain : Bool? = nil,
-      @size : String? = nil
+      @size : String? = nil,
     )
     end
 

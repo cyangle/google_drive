@@ -101,7 +101,7 @@ module GoogleDrive
       @role : String? = nil,
       @team_drive_permission_details : Array(GoogleDrive::PermissionTeamDrivePermissionDetailsInner)? = nil,
       @_type : String? = nil,
-      @view : String? = nil
+      @view : String? = nil,
     )
     end
 

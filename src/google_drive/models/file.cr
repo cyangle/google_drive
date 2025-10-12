@@ -334,7 +334,7 @@ module GoogleDrive
       @viewers_can_copy_content : Bool? = nil,
       @web_content_link : String? = nil,
       @web_view_link : String? = nil,
-      @writers_can_share : Bool? = nil
+      @writers_can_share : Bool? = nil,
     )
     end
 

@@ -40,7 +40,7 @@ module GoogleDrive
       # Optional properties
       @comments : Array(GoogleDrive::Comment)? = nil,
       @kind : String? = "drive#commentList",
-      @next_page_token : String? = nil
+      @next_page_token : String? = nil,
     )
     end
 

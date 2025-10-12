@@ -21,6 +21,6 @@ development_dependencies:
   post_process:
     github: cyangle/post_process
     version: ~> 0.2.2
-  vcr:
-    github: spoved/vcr.cr
-    version: ~> 0.5.3
+  webmock:
+    github: manastech/webmock.cr
+    version: ~> 0.14.0

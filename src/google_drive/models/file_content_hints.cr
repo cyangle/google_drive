@@ -34,7 +34,7 @@ module GoogleDrive
       *,
       # Optional properties
       @indexable_text : String? = nil,
-      @thumbnail : GoogleDrive::FileContentHintsThumbnail? = nil
+      @thumbnail : GoogleDrive::FileContentHintsThumbnail? = nil,
     )
     end
 

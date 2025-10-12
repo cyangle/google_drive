@@ -35,7 +35,7 @@ module GoogleDrive
       *,
       # Optional properties
       @kind : String? = "drive#modifyLabelsResponse",
-      @modified_labels : Array(GoogleDrive::Label)? = nil
+      @modified_labels : Array(GoogleDrive::Label)? = nil,
     )
     end
 

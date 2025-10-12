@@ -45,7 +45,7 @@ module GoogleDrive
       @changes : Array(GoogleDrive::Change)? = nil,
       @kind : String? = "drive#changeList",
       @new_start_page_token : String? = nil,
-      @next_page_token : String? = nil
+      @next_page_token : String? = nil,
     )
     end
 

@@ -79,7 +79,7 @@ module GoogleDrive
       @name : String? = nil,
       @org_unit_id : String? = nil,
       @restrictions : GoogleDrive::TeamDriveRestrictions? = nil,
-      @theme_id : String? = nil
+      @theme_id : String? = nil,
     )
     end
 

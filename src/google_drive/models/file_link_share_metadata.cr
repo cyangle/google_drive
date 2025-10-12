@@ -33,7 +33,7 @@ module GoogleDrive
       *,
       # Optional properties
       @security_update_eligible : Bool? = nil,
-      @security_update_enabled : Bool? = nil
+      @security_update_enabled : Bool? = nil,
     )
     end
 

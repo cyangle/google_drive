@@ -129,7 +129,7 @@ module GoogleDrive
       @subject_distance : Int32? = nil,
       @time : String? = nil,
       @white_balance : String? = nil,
-      @width : Int32? = nil
+      @width : Int32? = nil,
     )
     end
 

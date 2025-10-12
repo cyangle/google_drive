@@ -38,7 +38,7 @@ module GoogleDrive
       # Optional properties
       @duration_millis : String? = nil,
       @height : Int32? = nil,
-      @width : Int32? = nil
+      @width : Int32? = nil,
     )
     end
 

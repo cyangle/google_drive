@@ -43,7 +43,7 @@ module GoogleDrive
       @id : String? = nil,
       @width : Float32? = nil,
       @x_coordinate : Float32? = nil,
-      @y_coordinate : Float32? = nil
+      @y_coordinate : Float32? = nil,
     )
     end
 

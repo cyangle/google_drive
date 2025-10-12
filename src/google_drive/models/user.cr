@@ -53,7 +53,7 @@ module GoogleDrive
       @kind : String? = "drive#user",
       @me : Bool? = nil,
       @permission_id : String? = nil,
-      @photo_link : String? = nil
+      @photo_link : String? = nil,
     )
     end
 

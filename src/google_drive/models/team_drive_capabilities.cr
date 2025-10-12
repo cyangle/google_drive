@@ -123,7 +123,7 @@ module GoogleDrive
       @can_rename_team_drive : Bool? = nil,
       @can_reset_team_drive_restrictions : Bool? = nil,
       @can_share : Bool? = nil,
-      @can_trash_children : Bool? = nil
+      @can_trash_children : Bool? = nil,
     )
     end
 

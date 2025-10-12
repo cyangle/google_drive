@@ -42,7 +42,7 @@ module GoogleDrive
       @inherited : Bool? = nil,
       @inherited_from : String? = nil,
       @role : String? = nil,
-      @team_drive_permission_type : String? = nil
+      @team_drive_permission_type : String? = nil,
     )
     end
 

@@ -69,7 +69,7 @@ module GoogleDrive
       @html_content : String? = nil,
       @id : String? = nil,
       @kind : String? = "drive#reply",
-      @modified_time : Time? = nil
+      @modified_time : Time? = nil,
     )
     end
 

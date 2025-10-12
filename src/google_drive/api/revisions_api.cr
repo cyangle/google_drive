@@ -43,7 +43,7 @@ module GoogleDrive
       oauth_token : String? = nil,
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
-      user_ip : String? = nil
+      user_ip : String? = nil,
     ) : Nil
       delete_with_http_info(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
       nil
@@ -70,7 +70,7 @@ module GoogleDrive
       oauth_token : String? = nil,
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
-      user_ip : String? = nil
+      user_ip : String? = nil,
     ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
 
@@ -123,7 +123,7 @@ module GoogleDrive
       oauth_token : String? = nil,
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
-      user_ip : String? = nil
+      user_ip : String? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: RevisionsApi.delete ..." }
@@ -203,7 +203,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      acknowledge_abuse : Bool? = nil
+      acknowledge_abuse : Bool? = nil,
     ) : GoogleDrive::Revision
       data, _status_code, _headers = get_with_http_info(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse)
       data
@@ -232,7 +232,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      acknowledge_abuse : Bool? = nil
+      acknowledge_abuse : Bool? = nil,
     ) : Tuple(GoogleDrive::Revision, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse)
 
@@ -288,7 +288,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      acknowledge_abuse : Bool? = nil
+      acknowledge_abuse : Bool? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: RevisionsApi.get ..." }
@@ -371,7 +371,7 @@ module GoogleDrive
       quota_user : String? = nil,
       user_ip : String? = nil,
       page_size : Int32? = nil,
-      page_token : String? = nil
+      page_token : String? = nil,
     ) : GoogleDrive::RevisionList
       data, _status_code, _headers = list_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token)
       data
@@ -400,7 +400,7 @@ module GoogleDrive
       quota_user : String? = nil,
       user_ip : String? = nil,
       page_size : Int32? = nil,
-      page_token : String? = nil
+      page_token : String? = nil,
     ) : Tuple(GoogleDrive::RevisionList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_list(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token)
 
@@ -458,7 +458,7 @@ module GoogleDrive
       quota_user : String? = nil,
       user_ip : String? = nil,
       page_size : Int32? = nil,
-      page_token : String? = nil
+      page_token : String? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: RevisionsApi.list ..." }
@@ -545,7 +545,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      revision : GoogleDrive::Revision? = nil
+      revision : GoogleDrive::Revision? = nil,
     ) : GoogleDrive::Revision
       data, _status_code, _headers = update_with_http_info(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, revision: revision)
       data
@@ -574,7 +574,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      revision : GoogleDrive::Revision? = nil
+      revision : GoogleDrive::Revision? = nil,
     ) : Tuple(GoogleDrive::Revision, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_update(file_id: file_id, revision_id: revision_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, revision: revision)
 
@@ -630,7 +630,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      revision : GoogleDrive::Revision? = nil
+      revision : GoogleDrive::Revision? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: RevisionsApi.update ..." }

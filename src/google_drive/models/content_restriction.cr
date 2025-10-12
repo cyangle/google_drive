@@ -49,7 +49,7 @@ module GoogleDrive
       @reason : String? = nil,
       @restricting_user : GoogleDrive::User? = nil,
       @restriction_time : Time? = nil,
-      @_type : String? = nil
+      @_type : String? = nil,
     )
     end
 

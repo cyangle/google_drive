@@ -33,7 +33,17 @@ describe "AboutApi" do
   # @return [About]
   describe "drive_about_get test" do
     it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      WebMock.stub(:get, /drive\/v3\/about/).to_return(
+        body: "{\"kind\":\"drive#about\",\"user\":{\"displayName\":\"Test User\"}}",
+        status: 200,
+        headers: {"Content-Type" => "application/json"}
+      )
+
+      api_instance = GoogleDrive::AboutApi.new
+      result = api_instance.get
+      result.should be_a(GoogleDrive::About)
+      result.user.should_not be_nil
+      result.user.not_nil!.display_name.should eq("Test User")
     end
   end
 end

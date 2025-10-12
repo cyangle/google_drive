@@ -9,6 +9,6 @@
 
 # load modules
 require "spec"
-require "vcr"
+require "webmock"
 require "../src/google_drive"
 require "./support/**"

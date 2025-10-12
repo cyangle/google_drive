@@ -63,7 +63,7 @@ module GoogleDrive
       @set_selection_values : Array(String)? = nil,
       @set_text_values : Array(String)? = nil,
       @set_user_values : Array(String)? = nil,
-      @unset_values : Bool? = nil
+      @unset_values : Bool? = nil,
     )
     end
 

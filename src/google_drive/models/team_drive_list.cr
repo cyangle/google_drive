@@ -40,7 +40,7 @@ module GoogleDrive
       # Optional properties
       @kind : String? = "drive#teamDriveList",
       @next_page_token : String? = nil,
-      @team_drives : Array(GoogleDrive::TeamDrive)? = nil
+      @team_drives : Array(GoogleDrive::TeamDrive)? = nil,
     )
     end
 

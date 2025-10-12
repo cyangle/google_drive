@@ -38,7 +38,7 @@ module GoogleDrive
       oauth_token : String? = nil,
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
-      user_ip : String? = nil
+      user_ip : String? = nil,
     ) : GoogleDrive::About
       data, _status_code, _headers = get_with_http_info(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
       data
@@ -61,7 +61,7 @@ module GoogleDrive
       oauth_token : String? = nil,
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
-      user_ip : String? = nil
+      user_ip : String? = nil,
     ) : Tuple(GoogleDrive::About, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
 
@@ -108,7 +108,7 @@ module GoogleDrive
       oauth_token : String? = nil,
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
-      user_ip : String? = nil
+      user_ip : String? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: AboutApi.get ..." }

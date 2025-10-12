@@ -40,7 +40,7 @@ module GoogleDrive
       # Optional properties
       @kind : String? = "drive#replyList",
       @next_page_token : String? = nil,
-      @replies : Array(GoogleDrive::Reply)? = nil
+      @replies : Array(GoogleDrive::Reply)? = nil,
     )
     end
 

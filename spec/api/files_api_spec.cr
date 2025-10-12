@@ -297,25 +297,29 @@ describe "FilesApi" do
             metadata: IO::Memory.new(file_meta.to_json),
             media: File.open("spec/fixtures/sample_files/hello.txt")
           )
-          secured_request = VCR.filter_sensitive_data!(request.http_request)
-          (secured_request.to_json).should eq(Helpers.compact_json("spec/fixtures/requests/files_api/multipart_upload_with_io.json"))
+          secured_request = request.http_request
+          expected = Helpers.compact_json("spec/fixtures/requests/files_api/multipart_upload_with_io.json").gsub(
+            "/upload/drive/v3/files?alt=json&uploadType=multipart",
+            "https://www.googleapis.com/upload/drive/v3/files?alt=json&uploadType=multipart"
+          )
+          (secured_request.to_json).should eq(expected)
         end
 
         it "uploads file successfully" do
-          load_cassette("drive_files_upload") do
-            files_api = GoogleDrive::FilesApi.new
-            file_meta = GoogleDrive::File.new(
-              name: "hello.txt",
-              mime_type: "text/plain",
-              parents: ["appDataFolder"]
-            )
-            file = files_api.upload(
-              upload_type: "multipart",
-              metadata: IO::Memory.new(file_meta.to_json),
-              media: File.open("spec/fixtures/sample_files/hello.txt")
-            )
-            (file.name).should eq(file_meta.name)
-          end
+          WebMock.stub(:post, "https://www.googleapis.com/upload/drive/v3/files?alt=json&uploadType=multipart")
+            .to_return(body: Helpers.compact_json("spec/fixtures/requests/files_api/multipart_upload_with_io_response.json"))
+          files_api = GoogleDrive::FilesApi.new
+          file_meta = GoogleDrive::File.new(
+            name: "hello.txt",
+            mime_type: "text/plain",
+            parents: ["appDataFolder"]
+          )
+          file = files_api.upload(
+            upload_type: "multipart",
+            metadata: IO::Memory.new(file_meta.to_json),
+            media: File.open("spec/fixtures/sample_files/hello.txt")
+          )
+          (file.name).should eq(file_meta.name)
         end
       end
       context "send metadata as File" do
@@ -326,26 +330,30 @@ describe "FilesApi" do
             metadata: File.open("spec/fixtures/sample_files/metadata.json"),
             media: File.open("spec/fixtures/sample_files/hello.txt")
           )
-          secured_request = VCR.filter_sensitive_data!(request.http_request)
-          (secured_request.to_json).should eq(Helpers.compact_json("spec/fixtures/requests/files_api/multipart_upload_with_file.json"))
+          secured_request = request.http_request
+          expected = Helpers.compact_json("spec/fixtures/requests/files_api/multipart_upload_with_file.json").gsub(
+            "/upload/drive/v3/files?alt=json&uploadType=multipart",
+            "https://www.googleapis.com/upload/drive/v3/files?alt=json&uploadType=multipart"
+          )
+          (secured_request.to_json).should eq(expected)
         end
 
         it "uploads file successfully" do
-          load_cassette("drive_files_upload") do
-            files_api = GoogleDrive::FilesApi.new
-            file_meta = GoogleDrive::File.new(
-              name: "hello.txt",
-              mime_type: "text/plain",
-              parents: ["appDataFolder"]
-            )
-            (File.read("spec/fixtures/sample_files/metadata.json")).should eq(file_meta.to_json)
-            file = files_api.upload(
-              upload_type: "multipart",
-              metadata: File.open("spec/fixtures/sample_files/metadata.json"),
-              media: File.open("spec/fixtures/sample_files/hello.txt")
-            )
-            (file.name).should eq(file_meta.name)
-          end
+          WebMock.stub(:post, "https://www.googleapis.com/upload/drive/v3/files?alt=json&uploadType=multipart")
+            .to_return(body: Helpers.compact_json("spec/fixtures/requests/files_api/multipart_upload_with_file_response.json"))
+          files_api = GoogleDrive::FilesApi.new
+          file_meta = GoogleDrive::File.new(
+            name: "hello.txt",
+            mime_type: "text/plain",
+            parents: ["appDataFolder"]
+          )
+          (File.read("spec/fixtures/sample_files/metadata.json")).should eq(file_meta.to_json)
+          file = files_api.upload(
+            upload_type: "multipart",
+            metadata: File.open("spec/fixtures/sample_files/metadata.json"),
+            media: File.open("spec/fixtures/sample_files/hello.txt")
+          )
+          (file.name).should eq(file_meta.name)
         end
       end
     end
@@ -357,20 +365,31 @@ describe "FilesApi" do
           upload_type: "media",
           media: File.open("spec/fixtures/sample_files/simple_upload.csv")
         )
-        secured_request = VCR.filter_sensitive_data!(request.http_request)
-        (secured_request.to_json).should eq(Helpers.compact_json("spec/fixtures/requests/files_api/simple_upload.json"))
+        secured_request = request.http_request
+        expected = Helpers.compact_json("spec/fixtures/requests/files_api/simple_upload.json").gsub(
+          "/upload/drive/v3/files?alt=json&uploadType=media",
+          "https://www.googleapis.com/upload/drive/v3/files?alt=json&uploadType=media"
+        )
+        (secured_request.to_json).should eq(expected)
       end
 
       it "uploads file successfully" do
-        load_cassette("drive_files_upload") do
-          files_api = GoogleDrive::FilesApi.new
-          file = files_api.upload(
-            upload_type: "media",
-            media: File.open("spec/fixtures/sample_files/simple_upload.csv")
-          )
-          (file.name).should eq("Untitled")
-          (file.mime_type).should eq("text/csv")
-        end
+        WebMock.stub(:post, "https://www.googleapis.com/upload/drive/v3/files?alt=json&uploadType=media")
+          .with(
+            body: File.read("spec/fixtures/requests/files_api/simple_upload_body.txt"),
+            headers: {
+              "Accept"        => "application/json",
+              "Content-Type"  => "text/csv",
+              "Authorization" => "Bearer test_token",
+            }
+          ).to_return(body: Helpers.compact_json("spec/fixtures/requests/files_api/simple_upload_response.json"))
+        files_api = GoogleDrive::FilesApi.new
+        file = files_api.upload(
+          upload_type: "media",
+          media: File.open("spec/fixtures/sample_files/simple_upload.csv")
+        )
+        (file.name).should eq("Untitled")
+        (file.mime_type).should eq("text/csv")
       end
     end
 

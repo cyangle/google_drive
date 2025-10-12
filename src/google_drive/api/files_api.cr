@@ -65,7 +65,7 @@ module GoogleDrive
       ocr_language : String? = nil,
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
-      file : GoogleDrive::File? = nil
+      file : GoogleDrive::File? = nil,
     ) : GoogleDrive::File
       data, _status_code, _headers = copy_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, file: file)
       data
@@ -108,7 +108,7 @@ module GoogleDrive
       ocr_language : String? = nil,
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
-      file : GoogleDrive::File? = nil
+      file : GoogleDrive::File? = nil,
     ) : Tuple(GoogleDrive::File, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_copy(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, file: file)
 
@@ -185,7 +185,7 @@ module GoogleDrive
       ocr_language : String? = nil,
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
-      file : GoogleDrive::File? = nil
+      file : GoogleDrive::File? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: FilesApi.copy ..." }
@@ -293,7 +293,7 @@ module GoogleDrive
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
       use_content_as_indexable_text : Bool? = nil,
-      file : GoogleDrive::File? = nil
+      file : GoogleDrive::File? = nil,
     ) : GoogleDrive::File
       data, _status_code, _headers = create_with_http_info(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file)
       data
@@ -336,7 +336,7 @@ module GoogleDrive
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
       use_content_as_indexable_text : Bool? = nil,
-      file : GoogleDrive::File? = nil
+      file : GoogleDrive::File? = nil,
     ) : Tuple(GoogleDrive::File, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_create(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file)
 
@@ -413,7 +413,7 @@ module GoogleDrive
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
       use_content_as_indexable_text : Bool? = nil,
-      file : GoogleDrive::File? = nil
+      file : GoogleDrive::File? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: FilesApi.create ..." }
@@ -508,7 +508,7 @@ module GoogleDrive
       user_ip : String? = nil,
       enforce_single_parent : Bool? = nil,
       supports_all_drives : Bool? = nil,
-      supports_team_drives : Bool? = nil
+      supports_team_drives : Bool? = nil,
     ) : Nil
       delete_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives)
       nil
@@ -539,7 +539,7 @@ module GoogleDrive
       user_ip : String? = nil,
       enforce_single_parent : Bool? = nil,
       supports_all_drives : Bool? = nil,
-      supports_team_drives : Bool? = nil
+      supports_team_drives : Bool? = nil,
     ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives)
 
@@ -598,7 +598,7 @@ module GoogleDrive
       user_ip : String? = nil,
       enforce_single_parent : Bool? = nil,
       supports_all_drives : Bool? = nil,
-      supports_team_drives : Bool? = nil
+      supports_team_drives : Bool? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: FilesApi.delete ..." }
@@ -675,7 +675,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      enforce_single_parent : Bool? = nil
+      enforce_single_parent : Bool? = nil,
     ) : Nil
       empty_trash_with_http_info(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent)
       nil
@@ -700,7 +700,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      enforce_single_parent : Bool? = nil
+      enforce_single_parent : Bool? = nil,
     ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_empty_trash(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent)
 
@@ -750,7 +750,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      enforce_single_parent : Bool? = nil
+      enforce_single_parent : Bool? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: FilesApi.empty_trash ..." }
@@ -825,7 +825,7 @@ module GoogleDrive
       oauth_token : String? = nil,
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
-      user_ip : String? = nil
+      user_ip : String? = nil,
     ) : Nil
       export_with_http_info(file_id: file_id, mime_type: mime_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
       nil
@@ -852,7 +852,7 @@ module GoogleDrive
       oauth_token : String? = nil,
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
-      user_ip : String? = nil
+      user_ip : String? = nil,
     ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_export(file_id: file_id, mime_type: mime_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
 
@@ -905,7 +905,7 @@ module GoogleDrive
       oauth_token : String? = nil,
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
-      user_ip : String? = nil
+      user_ip : String? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: FilesApi.export ..." }
@@ -986,7 +986,7 @@ module GoogleDrive
       user_ip : String? = nil,
       count : Int32? = nil,
       space : String? = nil,
-      _type : String? = nil
+      _type : String? = nil,
     ) : GoogleDrive::GeneratedIds
       data, _status_code, _headers = generate_ids_with_http_info(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, count: count, space: space, _type: _type)
       data
@@ -1015,7 +1015,7 @@ module GoogleDrive
       user_ip : String? = nil,
       count : Int32? = nil,
       space : String? = nil,
-      _type : String? = nil
+      _type : String? = nil,
     ) : Tuple(GoogleDrive::GeneratedIds, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_generate_ids(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, count: count, space: space, _type: _type)
 
@@ -1073,7 +1073,7 @@ module GoogleDrive
       user_ip : String? = nil,
       count : Int32? = nil,
       space : String? = nil,
-      _type : String? = nil
+      _type : String? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: FilesApi.generate_ids ..." }
@@ -1165,7 +1165,7 @@ module GoogleDrive
       include_labels : String? = nil,
       include_permissions_for_view : String? = nil,
       supports_all_drives : Bool? = nil,
-      supports_team_drives : Bool? = nil
+      supports_team_drives : Bool? = nil,
     ) : GoogleDrive::File
       data, _status_code, _headers = get_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives)
       data
@@ -1200,7 +1200,7 @@ module GoogleDrive
       include_labels : String? = nil,
       include_permissions_for_view : String? = nil,
       supports_all_drives : Bool? = nil,
-      supports_team_drives : Bool? = nil
+      supports_team_drives : Bool? = nil,
     ) : Tuple(GoogleDrive::File, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives)
 
@@ -1265,7 +1265,7 @@ module GoogleDrive
       include_labels : String? = nil,
       include_permissions_for_view : String? = nil,
       supports_all_drives : Bool? = nil,
-      supports_team_drives : Bool? = nil
+      supports_team_drives : Bool? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: FilesApi.get ..." }
@@ -1374,7 +1374,7 @@ module GoogleDrive
       spaces : String? = nil,
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
-      team_drive_id : String? = nil
+      team_drive_id : String? = nil,
     ) : GoogleDrive::FileList
       data, _status_code, _headers = list_with_http_info(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, corpora: corpora, corpus: corpus, drive_id: drive_id, include_items_from_all_drives: include_items_from_all_drives, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, include_team_drive_items: include_team_drive_items, order_by: order_by, page_size: page_size, page_token: page_token, q: q, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
       data
@@ -1427,7 +1427,7 @@ module GoogleDrive
       spaces : String? = nil,
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
-      team_drive_id : String? = nil
+      team_drive_id : String? = nil,
     ) : Tuple(GoogleDrive::FileList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_list(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, corpora: corpora, corpus: corpus, drive_id: drive_id, include_items_from_all_drives: include_items_from_all_drives, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, include_team_drive_items: include_team_drive_items, order_by: order_by, page_size: page_size, page_token: page_token, q: q, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
 
@@ -1522,7 +1522,7 @@ module GoogleDrive
       spaces : String? = nil,
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
-      team_drive_id : String? = nil
+      team_drive_id : String? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: FilesApi.list ..." }
@@ -1624,7 +1624,7 @@ module GoogleDrive
       quota_user : String? = nil,
       user_ip : String? = nil,
       max_results : Int32? = nil,
-      page_token : String? = nil
+      page_token : String? = nil,
     ) : GoogleDrive::LabelList
       data, _status_code, _headers = list_labels_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, max_results: max_results, page_token: page_token)
       data
@@ -1653,7 +1653,7 @@ module GoogleDrive
       quota_user : String? = nil,
       user_ip : String? = nil,
       max_results : Int32? = nil,
-      page_token : String? = nil
+      page_token : String? = nil,
     ) : Tuple(GoogleDrive::LabelList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_list_labels(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, max_results: max_results, page_token: page_token)
 
@@ -1711,7 +1711,7 @@ module GoogleDrive
       quota_user : String? = nil,
       user_ip : String? = nil,
       max_results : Int32? = nil,
-      page_token : String? = nil
+      page_token : String? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: FilesApi.list_labels ..." }
@@ -1796,7 +1796,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      modify_labels_request : GoogleDrive::ModifyLabelsRequest? = nil
+      modify_labels_request : GoogleDrive::ModifyLabelsRequest? = nil,
     ) : GoogleDrive::ModifyLabelsResponse
       data, _status_code, _headers = modify_labels_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, modify_labels_request: modify_labels_request)
       data
@@ -1823,7 +1823,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      modify_labels_request : GoogleDrive::ModifyLabelsRequest? = nil
+      modify_labels_request : GoogleDrive::ModifyLabelsRequest? = nil,
     ) : Tuple(GoogleDrive::ModifyLabelsResponse, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_modify_labels(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, modify_labels_request: modify_labels_request)
 
@@ -1876,7 +1876,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      modify_labels_request : GoogleDrive::ModifyLabelsRequest? = nil
+      modify_labels_request : GoogleDrive::ModifyLabelsRequest? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: FilesApi.modify_labels ..." }
@@ -1980,7 +1980,7 @@ module GoogleDrive
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
       use_content_as_indexable_text : Bool? = nil,
-      file : GoogleDrive::File? = nil
+      file : GoogleDrive::File? = nil,
     ) : GoogleDrive::File
       data, _status_code, _headers = update_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file)
       data
@@ -2027,7 +2027,7 @@ module GoogleDrive
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
       use_content_as_indexable_text : Bool? = nil,
-      file : GoogleDrive::File? = nil
+      file : GoogleDrive::File? = nil,
     ) : Tuple(GoogleDrive::File, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_update(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, file: file)
 
@@ -2110,7 +2110,7 @@ module GoogleDrive
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
       use_content_as_indexable_text : Bool? = nil,
-      file : GoogleDrive::File? = nil
+      file : GoogleDrive::File? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: FilesApi.update ..." }
@@ -2224,7 +2224,7 @@ module GoogleDrive
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
       use_content_as_indexable_text : Bool? = nil,
-      body : IO | String? = nil
+      body : IO | String? = nil,
     ) : GoogleDrive::File
       data, _status_code, _headers = update_content_with_http_info(upload_type: upload_type, file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, body: body)
       data
@@ -2271,7 +2271,7 @@ module GoogleDrive
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
       use_content_as_indexable_text : Bool? = nil,
-      body : IO | String? = nil
+      body : IO | String? = nil,
     ) : Tuple(GoogleDrive::File, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_update_content(upload_type: upload_type, file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, add_parents: add_parents, enforce_single_parent: enforce_single_parent, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, remove_parents: remove_parents, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, body: body)
 
@@ -2355,7 +2355,7 @@ module GoogleDrive
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
       use_content_as_indexable_text : Bool? = nil,
-      body : IO | String? = nil
+      body : IO | String? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: FilesApi.update_content ..." }
@@ -2467,7 +2467,7 @@ module GoogleDrive
       supports_team_drives : Bool? = nil,
       use_content_as_indexable_text : Bool? = nil,
       media : IO | String? = nil,
-      metadata : IO | String? = nil
+      metadata : IO | String? = nil,
     ) : GoogleDrive::File
       data, _status_code, _headers = upload_with_http_info(upload_type: upload_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, media: media, metadata: metadata)
       data
@@ -2512,7 +2512,7 @@ module GoogleDrive
       supports_team_drives : Bool? = nil,
       use_content_as_indexable_text : Bool? = nil,
       media : IO | String? = nil,
-      metadata : IO | String? = nil
+      metadata : IO | String? = nil,
     ) : Tuple(GoogleDrive::File, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_upload(upload_type: upload_type, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, enforce_single_parent: enforce_single_parent, ignore_default_visibility: ignore_default_visibility, include_permissions_for_view: include_permissions_for_view, keep_revision_forever: keep_revision_forever, ocr_language: ocr_language, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, use_content_as_indexable_text: use_content_as_indexable_text, media: media, metadata: metadata)
 
@@ -2593,7 +2593,7 @@ module GoogleDrive
       supports_team_drives : Bool? = nil,
       use_content_as_indexable_text : Bool? = nil,
       media : IO | String? = nil,
-      metadata : IO | String? = nil
+      metadata : IO | String? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: FilesApi.upload ..." }
@@ -2696,7 +2696,7 @@ module GoogleDrive
       include_permissions_for_view : String? = nil,
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
-      channel : GoogleDrive::Channel? = nil
+      channel : GoogleDrive::Channel? = nil,
     ) : GoogleDrive::Channel
       data, _status_code, _headers = watch_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, channel: channel)
       data
@@ -2733,7 +2733,7 @@ module GoogleDrive
       include_permissions_for_view : String? = nil,
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
-      channel : GoogleDrive::Channel? = nil
+      channel : GoogleDrive::Channel? = nil,
     ) : Tuple(GoogleDrive::Channel, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_watch(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, acknowledge_abuse: acknowledge_abuse, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, channel: channel)
 
@@ -2801,7 +2801,7 @@ module GoogleDrive
       include_permissions_for_view : String? = nil,
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
-      channel : GoogleDrive::Channel? = nil
+      channel : GoogleDrive::Channel? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: FilesApi.watch ..." }

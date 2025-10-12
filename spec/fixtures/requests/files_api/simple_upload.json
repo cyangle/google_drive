@@ -5,7 +5,7 @@
   "headers": {
     "Accept": ["application/json"],
     "Content-Type": ["text/csv"],
-    "Authorization": ["<Authorization>"]
+    "Authorization": ["Bearer test_token"]
   },
   "body": "id,name\n1,crystal\n",
   "query_params": { "alt": "json", "uploadType": "media" }

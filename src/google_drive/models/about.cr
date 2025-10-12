@@ -91,7 +91,7 @@ module GoogleDrive
       @max_upload_size : String? = nil,
       @storage_quota : GoogleDrive::AboutStorageQuota? = nil,
       @team_drive_themes : Array(GoogleDrive::AboutTeamDriveThemesInner)? = nil,
-      @user : GoogleDrive::User? = nil
+      @user : GoogleDrive::User? = nil,
     )
     end
 

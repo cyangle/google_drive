@@ -79,7 +79,7 @@ module GoogleDrive
       @team_drive : GoogleDrive::TeamDrive? = nil,
       @team_drive_id : String? = nil,
       @time : Time? = nil,
-      @_type : String? = nil
+      @_type : String? = nil,
     )
     end
 

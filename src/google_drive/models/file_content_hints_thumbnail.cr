@@ -33,7 +33,7 @@ module GoogleDrive
       *,
       # Optional properties
       @image : String? = nil,
-      @mime_type : String? = nil
+      @mime_type : String? = nil,
     )
     end
 

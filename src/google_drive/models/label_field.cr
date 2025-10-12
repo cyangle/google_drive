@@ -65,7 +65,7 @@ module GoogleDrive
       @selection : Array(String)? = nil,
       @text : Array(String)? = nil,
       @user : Array(GoogleDrive::User)? = nil,
-      @value_type : String? = nil
+      @value_type : String? = nil,
     )
     end
 

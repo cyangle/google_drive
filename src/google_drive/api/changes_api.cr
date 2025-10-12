@@ -49,7 +49,7 @@ module GoogleDrive
       drive_id : String? = nil,
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
-      team_drive_id : String? = nil
+      team_drive_id : String? = nil,
     ) : GoogleDrive::StartPageToken
       data, _status_code, _headers = get_start_page_token_with_http_info(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
       data
@@ -80,7 +80,7 @@ module GoogleDrive
       drive_id : String? = nil,
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
-      team_drive_id : String? = nil
+      team_drive_id : String? = nil,
     ) : Tuple(GoogleDrive::StartPageToken, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_start_page_token(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
 
@@ -139,7 +139,7 @@ module GoogleDrive
       drive_id : String? = nil,
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
-      team_drive_id : String? = nil
+      team_drive_id : String? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: ChangesApi.get_start_page_token ..." }
@@ -243,7 +243,7 @@ module GoogleDrive
       spaces : String? = nil,
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
-      team_drive_id : String? = nil
+      team_drive_id : String? = nil,
     ) : GoogleDrive::ChangeList
       data, _status_code, _headers = list_with_http_info(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
       data
@@ -294,7 +294,7 @@ module GoogleDrive
       spaces : String? = nil,
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
-      team_drive_id : String? = nil
+      team_drive_id : String? = nil,
     ) : Tuple(GoogleDrive::ChangeList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_list(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id)
 
@@ -385,7 +385,7 @@ module GoogleDrive
       spaces : String? = nil,
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
-      team_drive_id : String? = nil
+      team_drive_id : String? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: ChangesApi.list ..." }
@@ -508,7 +508,7 @@ module GoogleDrive
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
       team_drive_id : String? = nil,
-      channel : GoogleDrive::Channel? = nil
+      channel : GoogleDrive::Channel? = nil,
     ) : GoogleDrive::Channel
       data, _status_code, _headers = watch_with_http_info(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id, channel: channel)
       data
@@ -561,7 +561,7 @@ module GoogleDrive
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
       team_drive_id : String? = nil,
-      channel : GoogleDrive::Channel? = nil
+      channel : GoogleDrive::Channel? = nil,
     ) : Tuple(GoogleDrive::Channel, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_watch(page_token: page_token, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive_id: drive_id, include_corpus_removals: include_corpus_removals, include_items_from_all_drives: include_items_from_all_drives, include_labels: include_labels, include_permissions_for_view: include_permissions_for_view, include_removed: include_removed, include_team_drive_items: include_team_drive_items, page_size: page_size, restrict_to_my_drive: restrict_to_my_drive, spaces: spaces, supports_all_drives: supports_all_drives, supports_team_drives: supports_team_drives, team_drive_id: team_drive_id, channel: channel)
 
@@ -655,7 +655,7 @@ module GoogleDrive
       supports_all_drives : Bool? = nil,
       supports_team_drives : Bool? = nil,
       team_drive_id : String? = nil,
-      channel : GoogleDrive::Channel? = nil
+      channel : GoogleDrive::Channel? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: ChangesApi.watch ..." }

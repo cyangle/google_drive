@@ -43,7 +43,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      comment : GoogleDrive::Comment? = nil
+      comment : GoogleDrive::Comment? = nil,
     ) : GoogleDrive::Comment
       data, _status_code, _headers = create_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, comment: comment)
       data
@@ -70,7 +70,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      comment : GoogleDrive::Comment? = nil
+      comment : GoogleDrive::Comment? = nil,
     ) : Tuple(GoogleDrive::Comment, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_create(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, comment: comment)
 
@@ -123,7 +123,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      comment : GoogleDrive::Comment? = nil
+      comment : GoogleDrive::Comment? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: CommentsApi.create ..." }
@@ -207,7 +207,7 @@ module GoogleDrive
       oauth_token : String? = nil,
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
-      user_ip : String? = nil
+      user_ip : String? = nil,
     ) : Nil
       delete_with_http_info(file_id: file_id, comment_id: comment_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
       nil
@@ -234,7 +234,7 @@ module GoogleDrive
       oauth_token : String? = nil,
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
-      user_ip : String? = nil
+      user_ip : String? = nil,
     ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete(file_id: file_id, comment_id: comment_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
 
@@ -287,7 +287,7 @@ module GoogleDrive
       oauth_token : String? = nil,
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
-      user_ip : String? = nil
+      user_ip : String? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: CommentsApi.delete ..." }
@@ -367,7 +367,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      include_deleted : Bool? = nil
+      include_deleted : Bool? = nil,
     ) : GoogleDrive::Comment
       data, _status_code, _headers = get_with_http_info(file_id: file_id, comment_id: comment_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, include_deleted: include_deleted)
       data
@@ -396,7 +396,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      include_deleted : Bool? = nil
+      include_deleted : Bool? = nil,
     ) : Tuple(GoogleDrive::Comment, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get(file_id: file_id, comment_id: comment_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, include_deleted: include_deleted)
 
@@ -452,7 +452,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      include_deleted : Bool? = nil
+      include_deleted : Bool? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: CommentsApi.get ..." }
@@ -539,7 +539,7 @@ module GoogleDrive
       include_deleted : Bool? = nil,
       page_size : Int32? = nil,
       page_token : String? = nil,
-      start_modified_time : String? = nil
+      start_modified_time : String? = nil,
     ) : GoogleDrive::CommentList
       data, _status_code, _headers = list_with_http_info(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, include_deleted: include_deleted, page_size: page_size, page_token: page_token, start_modified_time: start_modified_time)
       data
@@ -572,7 +572,7 @@ module GoogleDrive
       include_deleted : Bool? = nil,
       page_size : Int32? = nil,
       page_token : String? = nil,
-      start_modified_time : String? = nil
+      start_modified_time : String? = nil,
     ) : Tuple(GoogleDrive::CommentList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_list(file_id: file_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, include_deleted: include_deleted, page_size: page_size, page_token: page_token, start_modified_time: start_modified_time)
 
@@ -636,7 +636,7 @@ module GoogleDrive
       include_deleted : Bool? = nil,
       page_size : Int32? = nil,
       page_token : String? = nil,
-      start_modified_time : String? = nil
+      start_modified_time : String? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: CommentsApi.list ..." }
@@ -725,7 +725,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      comment : GoogleDrive::Comment? = nil
+      comment : GoogleDrive::Comment? = nil,
     ) : GoogleDrive::Comment
       data, _status_code, _headers = update_with_http_info(file_id: file_id, comment_id: comment_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, comment: comment)
       data
@@ -754,7 +754,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      comment : GoogleDrive::Comment? = nil
+      comment : GoogleDrive::Comment? = nil,
     ) : Tuple(GoogleDrive::Comment, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_update(file_id: file_id, comment_id: comment_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, comment: comment)
 
@@ -810,7 +810,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      comment : GoogleDrive::Comment? = nil
+      comment : GoogleDrive::Comment? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: CommentsApi.update ..." }

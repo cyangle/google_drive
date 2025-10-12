@@ -43,7 +43,7 @@ module GoogleDrive
       @limit : String? = nil,
       @usage : String? = nil,
       @usage_in_drive : String? = nil,
-      @usage_in_drive_trash : String? = nil
+      @usage_in_drive_trash : String? = nil,
     )
     end
 

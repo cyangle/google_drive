@@ -43,7 +43,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      drive : GoogleDrive::Drive? = nil
+      drive : GoogleDrive::Drive? = nil,
     ) : GoogleDrive::Drive
       data, _status_code, _headers = create_with_http_info(request_id: request_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive: drive)
       data
@@ -70,7 +70,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      drive : GoogleDrive::Drive? = nil
+      drive : GoogleDrive::Drive? = nil,
     ) : Tuple(GoogleDrive::Drive, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_create(request_id: request_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, drive: drive)
 
@@ -123,7 +123,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      drive : GoogleDrive::Drive? = nil
+      drive : GoogleDrive::Drive? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: DrivesApi.create ..." }
@@ -210,7 +210,7 @@ module GoogleDrive
       quota_user : String? = nil,
       user_ip : String? = nil,
       allow_item_deletion : Bool? = nil,
-      use_domain_admin_access : Bool? = nil
+      use_domain_admin_access : Bool? = nil,
     ) : Nil
       delete_with_http_info(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, allow_item_deletion: allow_item_deletion, use_domain_admin_access: use_domain_admin_access)
       nil
@@ -239,7 +239,7 @@ module GoogleDrive
       quota_user : String? = nil,
       user_ip : String? = nil,
       allow_item_deletion : Bool? = nil,
-      use_domain_admin_access : Bool? = nil
+      use_domain_admin_access : Bool? = nil,
     ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, allow_item_deletion: allow_item_deletion, use_domain_admin_access: use_domain_admin_access)
 
@@ -295,7 +295,7 @@ module GoogleDrive
       quota_user : String? = nil,
       user_ip : String? = nil,
       allow_item_deletion : Bool? = nil,
-      use_domain_admin_access : Bool? = nil
+      use_domain_admin_access : Bool? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: DrivesApi.delete ..." }
@@ -373,7 +373,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      use_domain_admin_access : Bool? = nil
+      use_domain_admin_access : Bool? = nil,
     ) : GoogleDrive::Drive
       data, _status_code, _headers = get_with_http_info(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access)
       data
@@ -400,7 +400,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      use_domain_admin_access : Bool? = nil
+      use_domain_admin_access : Bool? = nil,
     ) : Tuple(GoogleDrive::Drive, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access)
 
@@ -453,7 +453,7 @@ module GoogleDrive
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
       user_ip : String? = nil,
-      use_domain_admin_access : Bool? = nil
+      use_domain_admin_access : Bool? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: DrivesApi.get ..." }
@@ -530,7 +530,7 @@ module GoogleDrive
       oauth_token : String? = nil,
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
-      user_ip : String? = nil
+      user_ip : String? = nil,
     ) : GoogleDrive::Drive
       data, _status_code, _headers = hide_with_http_info(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
       data
@@ -555,7 +555,7 @@ module GoogleDrive
       oauth_token : String? = nil,
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
-      user_ip : String? = nil
+      user_ip : String? = nil,
     ) : Tuple(GoogleDrive::Drive, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_hide(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
 
@@ -605,7 +605,7 @@ module GoogleDrive
       oauth_token : String? = nil,
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
-      user_ip : String? = nil
+      user_ip : String? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: DrivesApi.hide ..." }
@@ -687,7 +687,7 @@ module GoogleDrive
       page_size : Int32? = nil,
       page_token : String? = nil,
       q : String? = nil,
-      use_domain_admin_access : Bool? = nil
+      use_domain_admin_access : Bool? = nil,
     ) : GoogleDrive::DriveList
       data, _status_code, _headers = list_with_http_info(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token, q: q, use_domain_admin_access: use_domain_admin_access)
       data
@@ -718,7 +718,7 @@ module GoogleDrive
       page_size : Int32? = nil,
       page_token : String? = nil,
       q : String? = nil,
-      use_domain_admin_access : Bool? = nil
+      use_domain_admin_access : Bool? = nil,
     ) : Tuple(GoogleDrive::DriveList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_list(alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, page_size: page_size, page_token: page_token, q: q, use_domain_admin_access: use_domain_admin_access)
 
@@ -779,7 +779,7 @@ module GoogleDrive
       page_size : Int32? = nil,
       page_token : String? = nil,
       q : String? = nil,
-      use_domain_admin_access : Bool? = nil
+      use_domain_admin_access : Bool? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: DrivesApi.list ..." }
@@ -862,7 +862,7 @@ module GoogleDrive
       oauth_token : String? = nil,
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
-      user_ip : String? = nil
+      user_ip : String? = nil,
     ) : GoogleDrive::Drive
       data, _status_code, _headers = unhide_with_http_info(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
       data
@@ -887,7 +887,7 @@ module GoogleDrive
       oauth_token : String? = nil,
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
-      user_ip : String? = nil
+      user_ip : String? = nil,
     ) : Tuple(GoogleDrive::Drive, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_unhide(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip)
 
@@ -937,7 +937,7 @@ module GoogleDrive
       oauth_token : String? = nil,
       pretty_print : Bool? = nil,
       quota_user : String? = nil,
-      user_ip : String? = nil
+      user_ip : String? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: DrivesApi.unhide ..." }
@@ -1017,7 +1017,7 @@ module GoogleDrive
       quota_user : String? = nil,
       user_ip : String? = nil,
       use_domain_admin_access : Bool? = nil,
-      drive : GoogleDrive::Drive? = nil
+      drive : GoogleDrive::Drive? = nil,
     ) : GoogleDrive::Drive
       data, _status_code, _headers = update_with_http_info(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access, drive: drive)
       data
@@ -1046,7 +1046,7 @@ module GoogleDrive
       quota_user : String? = nil,
       user_ip : String? = nil,
       use_domain_admin_access : Bool? = nil,
-      drive : GoogleDrive::Drive? = nil
+      drive : GoogleDrive::Drive? = nil,
     ) : Tuple(GoogleDrive::Drive, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_update(drive_id: drive_id, alt: alt, fields: fields, key: key, oauth_token: oauth_token, pretty_print: pretty_print, quota_user: quota_user, user_ip: user_ip, use_domain_admin_access: use_domain_admin_access, drive: drive)
 
@@ -1102,7 +1102,7 @@ module GoogleDrive
       quota_user : String? = nil,
       user_ip : String? = nil,
       use_domain_admin_access : Bool? = nil,
-      drive : GoogleDrive::Drive? = nil
+      drive : GoogleDrive::Drive? = nil,
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: DrivesApi.update ..." }

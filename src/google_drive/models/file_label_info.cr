@@ -30,7 +30,7 @@ module GoogleDrive
     def initialize(
       *,
       # Optional properties
-      @labels : Array(GoogleDrive::Label)? = nil
+      @labels : Array(GoogleDrive::Label)? = nil,
     )
     end
 

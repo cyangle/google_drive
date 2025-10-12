@@ -40,7 +40,7 @@ module GoogleDrive
       # Optional properties
       @kind : String? = "drive#revisionList",
       @next_page_token : String? = nil,
-      @revisions : Array(GoogleDrive::Revision)? = nil
+      @revisions : Array(GoogleDrive::Revision)? = nil,
     )
     end
 

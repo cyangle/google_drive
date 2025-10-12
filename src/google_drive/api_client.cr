@@ -50,7 +50,7 @@ module GoogleDrive
       @config = Configuration.default,
       @default_url_encoder = Crest::ZeroEnumeratedFlatParamsEncoder,
       @default_headers = Hash(String, String).new,
-      @default_cookies = Hash(String, String).new
+      @default_cookies = Hash(String, String).new,
     )
     end
 
@@ -85,7 +85,7 @@ module GoogleDrive
       header_params : Hash(String, String),
       cookie_params : Hash(String, String),
       query_params : Hash(String, (String | Array(String) | JSON::Any)),
-      auth_names : Array(String)
+      auth_names : Array(String),
     ) : Nil
       auth_names.each do |auth_name|
         auth_setting = @config.auth_settings[auth_name]
@@ -216,7 +216,7 @@ module GoogleDrive
     def encode(
       body : Hash | Array | OpenApi::Json | JSON::Any,
       content_type : String? = nil,
-      url_encoder : Crest::ParamsEncoder.class | Nil = nil
+      url_encoder : Crest::ParamsEncoder.class | Nil = nil,
     ) : String
       # Encode body to json string
       return body.to_json if content_type.nil? || json_mime?(content_type.not_nil!)
@@ -244,7 +244,7 @@ module GoogleDrive
       header_params : Hash(String, String) = Hash(String, String).new,
       cookie_params : Hash(String, String) = Hash(String, String).new,
       query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new,
-      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil,
     ) : Crest::Request
       # ssl_options = {
       #   "ca_file" => @config.ssl_ca_file,
