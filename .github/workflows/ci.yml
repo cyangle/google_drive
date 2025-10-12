@@ -2,11 +2,12 @@ name: Crystal CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
   schedule:
-  - cron: "0 2 * * 1"
+    - cron: "0 2 1 * *"
+  workflow_dispatch:
 
 jobs:
   lint:
@@ -34,16 +35,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        crystal_version: ['1.13', 'latest', 'nightly']
+        crystal_version: ["1.13", "latest", "nightly"]
     container:
       image: crystallang/crystal:${{ matrix.crystal_version }}
     steps:
-    - name: Install media-types
-      run: apt-get update && apt-get install media-types
-    - uses: actions/checkout@v4
-      with:
-        submodules: 'true'
-    - name: Install dependencies
-      run: shards install
-    - name: Run tests
-      run: crystal spec
+      - name: Install media-types
+        run: apt-get update && apt-get install media-types
+      - uses: actions/checkout@v4
+        with:
+          submodules: "true"
+      - name: Install dependencies
+        run: shards install
+      - name: Run tests
+        run: crystal spec
