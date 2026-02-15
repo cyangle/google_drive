@@ -8,6 +8,7 @@
 #
 
 require "log"
+require "uri"
 require "./configuration"
 require "./api_error"
 
@@ -222,7 +223,7 @@ module GoogleDrive
       return body.to_json if content_type.nil? || json_mime?(content_type.not_nil!)
 
       # Assume content_type is application/x-www-form-urlencoded
-      raise ArgumentError.new("Can not secrialize Array into url encoded string, must be a Hash") if body.is_a?(Array)
+      raise ArgumentError.new("Can not serialize Array into url encoded string, must be a Hash") if body.is_a?(Array)
 
       # Crest::ParamsEncoder doesn't support encoding OpenApi::Json objects
       # So we convert body to JSON::Any first
@@ -247,12 +248,52 @@ module GoogleDrive
       form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil,
     ) : Crest::Request
       # ssl_options = {
-      #   "ca_file" => @config.ssl_ca_file,
-      #   "verify" => @config.ssl_verify,
-      #   "verify_mode" => @config.ssl_verify_mode,
-      #   "client_cert" => @config.ssl_client_cert,
-      #   "client_key" => @config.ssl_client_key
+      #   "ca_file" => @config.ssl_ca_cert,
+      #   "verify" => @config.verify_ssl?,
+      #   "verify_mode" => @config.verify_ssl?,
+      #   "client_cert" => @config.cert_file,
+      #   "client_key" => @config.key_file
       # }
+      tls : OpenSSL::SSL::Context::Client | Nil = nil
+
+      # Only configure custom SSL context if verification is disabled or custom certificates are provided.
+      # Otherwise, use the default secure settings (tls = nil).
+      if !@config.verify_ssl? || @config.ssl_ca_cert || @config.cert_file || @config.key_file
+        context = OpenSSL::SSL::Context::Client.new
+
+        if @config.verify_ssl?
+          context.verify_mode = OpenSSL::SSL::VerifyMode::PEER
+        else
+          context.verify_mode = OpenSSL::SSL::VerifyMode::NONE
+        end
+
+        if ca_cert = @config.ssl_ca_cert
+          context.ca_certificates = ca_cert
+        end
+
+        if cert_file = @config.cert_file
+          context.certificate_chain = cert_file
+        end
+
+        if key_file = @config.key_file
+          context.private_key = key_file
+        end
+
+        tls = context
+      end
+
+      p_addr : String? = nil
+      p_port : Int32? = nil
+      p_user : String? = nil
+      p_pass : String? = nil
+
+      if proxy_url = @config.proxy_url
+        uri = URI.parse(proxy_url)
+        p_addr = uri.host
+        p_port = uri.port
+        p_user = uri.user
+        p_pass = uri.password
+      end
 
       update_params_for_auth! header_params, cookie_params, query_params, auth_names
       header_params.merge!(default_headers)
@@ -274,9 +315,17 @@ module GoogleDrive
         headers: header_params,
         cookies: cookie_params,
         form: form_or_body,
+        p_addr: p_addr,
+        p_port: p_port,
+        p_user: p_user,
+        p_pass: p_pass,
         logging: @config.debugging?,
         handle_errors: false,
-        params_encoder: Crest::NestedParamsEncoder
+        params_encoder: Crest::NestedParamsEncoder,
+        tls: tls,
+        connect_timeout: @config.connect_timeout,
+        read_timeout: @config.read_timeout,
+        write_timeout: @config.timeout
       )
     end
 

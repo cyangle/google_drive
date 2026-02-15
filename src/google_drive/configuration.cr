@@ -68,6 +68,11 @@ module GoogleDrive
     # @return [true, false]
     property? debugging : Bool
 
+    # Defines the proxy url.
+    #
+    # @return [String]
+    property proxy_url : String?
+
     # Defines the temporary folder to store downloaded files
     # (for API endpoints that have file response).
     # Default to use `Tempfile`.
@@ -76,8 +81,16 @@ module GoogleDrive
     property temp_folder_path : String?
 
     # The time limit for HTTP request in seconds.
-    # Default to 0 (never times out).
+    # Default to 60.
     property timeout : Int32
+
+    # The time limit for connection in seconds.
+    # Default to 60.
+    property connect_timeout : Int32
+
+    # The time limit for reading in seconds.
+    # Default to 60.
+    property read_timeout : Int32
 
     # Set this to false to skip client side validation in the operation.
     # Default to true.
@@ -91,7 +104,7 @@ module GoogleDrive
     # @note Do NOT set it to false in production code, otherwise you would face multiple types of cryptographic attacks.
     #
     # @return [true, false]
-    # TODO attr_accessor :verify_ssl
+    property? verify_ssl : Bool
 
     # ## TLS/SSL setting
     # Set this to false to skip verifying SSL host name
@@ -100,7 +113,7 @@ module GoogleDrive
     # @note Do NOT set it to false in production code, otherwise you would face multiple types of cryptographic attacks.
     #
     # @return [true, false]
-    # TODO attr_accessor :verify_ssl_host
+    property? verify_ssl_host : Bool
 
     # ## TLS/SSL setting
     # Set this to customize the certificate file to verify the peer.
@@ -109,15 +122,15 @@ module GoogleDrive
     #
     # @see The `cainfo` option of Typhoeus, `--cert` option of libcurl. Related source code:
     # https://github.com/typhoeus/typhoeus/blob/master/lib/typhoeus/easy_factory.rb#L145
-    # TODO attr_accessor :ssl_ca_cert
+    property ssl_ca_cert : String?
 
     # ## TLS/SSL setting
     # Client certificate file (for client certificate)
-    # TODO attr_accessor :cert_file
+    property cert_file : String?
 
     # ## TLS/SSL setting
     # Client private key file (for client certificate)
-    # TODO attr_accessor :key_file
+    property key_file : String?
 
     # Set this to customize parameters encoding of array parameter with multi collectionFormat.
     # Default to Nil.
@@ -137,17 +150,20 @@ module GoogleDrive
       @server_operation_variables = {} of String => String
       @api_key = {} of String => String
       @api_key_prefix = {} of String => String
-      @timeout = 0
+      @timeout = 60
+      @connect_timeout = 60
+      @read_timeout = 60
       @client_side_validation = true
       @verify_ssl = true
       @verify_ssl_host = true
-      # @params_encoding = nil
-      # @cert_file = nil
-      # @key_file = nil
+      @ssl_ca_cert = nil
+      @cert_file = nil
+      @key_file = nil
       @debugging = false
       @username = nil
       @password = nil
       @access_token = nil
+      @proxy_url = nil
       @temp_folder_path = nil
     end
 
